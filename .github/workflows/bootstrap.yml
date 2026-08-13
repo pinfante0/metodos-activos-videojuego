@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Obtener repositorio
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - name: Integrar evidencia local
         shell: bash
         run: |
