@@ -1,7 +1,6 @@
 # Prueba de publicación M3
 
-Estado: **en ejecución**. Este documento se cerrará con URL, fecha, revisión y resultado observado
-en navegador real para GitHub Pages y PLATEA.
+Estado: **completado**. La misma salida mínima se ha comprobado en GitHub Pages y PLATEA.
 
 ## Artefactos reproducibles
 
@@ -23,4 +22,31 @@ en navegador real para GitHub Pages y PLATEA.
 
 ## Registro de verificación
 
-Pendiente de completar después de las publicaciones reales.
+### GitHub Pages
+
+- Repositorio público: <https://github.com/pinfante0/metodos-activos-videojuego>.
+- URL publicada: <https://pinfante0.github.io/metodos-activos-videojuego/>.
+- Fecha de comprobación: 13 de agosto de 2026.
+- Revisión desplegada: `c6cabb61124d71bc1898ecb3c9930a3779622605`.
+- Ejecución reproducible: `Publicar prueba M3 en GitHub Pages #3`, completada correctamente en
+  28 segundos; el propio flujo volvió a validar los datos y ejecutó las 13 pruebas.
+- Resultado en navegador real: carga correcta bajo subruta, sin desbordamiento horizontal;
+  `#/caso/m3-contract-probe` abre directamente y conserva la vista tras recargar.
+- Alcance observado: pantalla técnica de M3, sin tutorial ni caso jugable, conforme a la parada
+  deliberada de esta fase.
+
+### PLATEA
+
+- Paquete preparado: `release/el-aula-de-los-dos-minutos-m3-platea.zip`.
+- Recurso comprobado: <https://platea.ujaen.es/pluginfile.php/717147/mod_resource/content/1/index.html#/prueba-publicacion>.
+- Fecha de comprobación: 13 de agosto de 2026.
+- Protocolo: el profesor cargó el paquete en el espacio que eligió; Codex no entró en la edición
+  del curso ni modificó materiales y se limitó a observar el recurso ya abierto.
+- Resultado: los cuatro indicadores aparecen correctos; el destino es `platea`, la base es `./` y
+  el almacenamiento local está disponible.
+- Navegación: `#/caso/m3-contract-probe` abre correctamente, no presenta desbordamiento horizontal
+  y conserva la misma vista después de una recarga. La pantalla se devolvió a
+  `#/prueba-publicacion` al terminar.
+
+Con ambas publicaciones observadas y los contratos comprobados, se supera la puerta de salida de
+M3 sin haber construido todavía el tutorial ni el caso jugable.

@@ -21,10 +21,14 @@ un núcleo de diseño, prueba y revisión de microclases de dos minutos.
 - Campaña de 84 minutos y ruta de clase de 25-28: `docs/mapa_campana_m2.md`.
 - Tutorial y caso piloto Orff-Keetman + PME/Green: `docs/caso_piloto_m2.md`.
 
-M2 está terminada sin implementación. La siguiente fase es **M3 — Arquitectura, contratos y prueba
-de publicación**: inicializar el repositorio independiente, traducir el diseño aprobado a contratos
-comprobables y verificar una aplicación mínima en GitHub Pages y PLATEA sin construir todavía el
-juego completo.
+M3 está completada y se mantiene deliberadamente en una aplicación técnica mínima. El repositorio
+independiente, la arquitectura, los contratos y las publicaciones en GitHub Pages y PLATEA están
+comprobados. El tutorial y el caso jugable no se han construido: corresponden al corte vertical
+gris de M4.
+
+- Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
+- Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.
+- Evidencia de publicación: `docs/prueba_publicacion_m3.md`.
 
 El artículo de Vasil y Dockan (2023) disponible en `material/` ya fundamenta el puente del caso
 piloto. Queda pendiente incorporarlo a la bibliografía de la presentación y la guía cuando se abra
