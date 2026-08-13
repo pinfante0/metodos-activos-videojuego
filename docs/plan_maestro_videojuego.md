@@ -299,6 +299,10 @@ Tareas:
 Puerta de salida: aplicación mínima reproducible en ambos destinos y contratos comprobados. No se
 construye aún el juego completo.
 
+Estado: **en curso**. Repositorio, arquitectura, contratos y GitHub Pages comprobados el 13 de
+agosto de 2026. La puerta permanece cerrada hasta verificar en PLATEA el paquete cargado por el
+profesor. Véase `docs/prueba_publicacion_m3.md`.
+
 ### M4 — Corte vertical gris
 
 Modelo: GPT-5.6 Sol, razonamiento alto.

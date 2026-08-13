@@ -1,7 +1,7 @@
 # Prueba de publicación M3
 
-Estado: **en ejecución**. Este documento se cerrará con URL, fecha, revisión y resultado observado
-en navegador real para GitHub Pages y PLATEA.
+Estado: **en ejecución; GitHub Pages verificado y PLATEA pendiente de comprobación**. Este
+documento se cerrará cuando la misma salida mínima se haya observado también en PLATEA.
 
 ## Artefactos reproducibles
 
@@ -23,4 +23,22 @@ en navegador real para GitHub Pages y PLATEA.
 
 ## Registro de verificación
 
-Pendiente de completar después de las publicaciones reales.
+### GitHub Pages
+
+- Repositorio público: <https://github.com/pinfante0/metodos-activos-videojuego>.
+- URL publicada: <https://pinfante0.github.io/metodos-activos-videojuego/>.
+- Fecha de comprobación: 13 de agosto de 2026.
+- Revisión desplegada: `c6cabb61124d71bc1898ecb3c9930a3779622605`.
+- Ejecución reproducible: `Publicar prueba M3 en GitHub Pages #3`, completada correctamente en
+  28 segundos; el propio flujo volvió a validar los datos y ejecutó las 13 pruebas.
+- Resultado en navegador real: carga correcta bajo subruta, sin desbordamiento horizontal;
+  `#/caso/m3-contract-probe` abre directamente y conserva la vista tras recargar.
+- Alcance observado: pantalla técnica de M3, sin tutorial ni caso jugable, conforme a la parada
+  deliberada de esta fase.
+
+### PLATEA
+
+- Paquete preparado: `release/el-aula-de-los-dos-minutos-m3-platea.zip`.
+- La carga la realiza el profesor en el espacio que elija. Codex no accede, edita ni publica
+  material del curso.
+- Pendiente: URL o ubicación elegida, fecha y resultado observado tras la carga del profesor.
