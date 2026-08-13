@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "inaccessible-audio",
+      "kind": "voice",
+      "status": "prototype",
+      "file": "audio/inaccessible.ogg",
+      "decorative": false,
+      "containsSpeech": true,
+      "containsEssentialSound": true,
+      "source": {
+        "origin": "licensed",
+        "creator": "Autor sin documentar",
+        "license": "Licencia sin procedencia",
+        "attribution": "Incompleta"
+      },
+      "alternatives": {}
+    }
+  ]
+}

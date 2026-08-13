@@ -1,0 +1,28 @@
+{
+  "name": "el-aula-de-los-dos-minutos",
+  "private": true,
+  "version": "0.0.0-m3",
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:pages": "cross-env VITE_DEPLOY_TARGET=github-pages pnpm build",
+    "build:platea": "cross-env VITE_DEPLOY_TARGET=platea pnpm build && node scripts/package-platea.mjs",
+    "check": "pnpm validate:content && pnpm test && pnpm build && pnpm build:platea",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "validate:content": "vitest run tests/contracts.test.ts --reporter=verbose"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "cross-env": "^10.1.0",
+    "fflate": "^0.8.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10"
+  }
+}

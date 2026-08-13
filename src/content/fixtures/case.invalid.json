@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "invalid-score-case",
+  "slug": "invalid-score-case",
+  "status": "contract-probe",
+  "title": "Contraejemplo: puntuación universal",
+  "durationMinutes": 2,
+  "modes": ["home"],
+  "learningObjective": "Este dato debe ser rechazado.",
+  "approachIds": ["orff-keetman"],
+  "stableQuestions": ["entry-point", "student-action-agency"],
+  "lenses": ["inclusion-accessibility", "evidence-context"],
+  "characterIds": [],
+  "pedagogy": {
+    "allowMultipleDefensible": false,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "missing-scene",
+  "scenes": [],
+  "actions": [],
+  "incidents": [],
+  "consequences": [],
+  "journalFields": ["objective"],
+  "globalScore": 100
+}

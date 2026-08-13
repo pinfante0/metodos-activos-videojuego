@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "probe-signal",
+      "kind": "audio",
+      "status": "planned",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": true,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "Pendiente de fijar antes de producción",
+        "attribution": "Recurso técnico provisional; no producido en M3"
+      },
+      "alternatives": {
+        "textEquivalent": "La señal cambia.",
+        "visualEquivalent": "Un marcador visible cambia al mismo tiempo."
+      }
+    },
+    {
+      "id": "probe-motion",
+      "kind": "animation",
+      "status": "planned",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "Pendiente de fijar antes de producción",
+        "attribution": "Recurso técnico provisional; no producido en M3"
+      },
+      "alternatives": {
+        "altText": "La vista cambia de un estado técnico a otro.",
+        "reducedMotionFallback": "Sustituir la transición por un cambio instantáneo."
+      }
+    }
+  ]
+}
