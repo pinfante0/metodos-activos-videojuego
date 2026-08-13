@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "m3-contract-probe",
+  "slug": "m3-contract-probe",
+  "status": "contract-probe",
+  "title": "Sonda técnica M3 (no es un caso jugable)",
+  "durationMinutes": 2,
+  "modes": ["class", "home"],
+  "learningObjective": "Comprobar referencias y estados del contrato sin impartir contenido.",
+  "approachIds": ["orff-keetman", "green-pme"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": [
+    "inclusion-accessibility",
+    "agency-creativity",
+    "evidence-context"
+  ],
+  "characterIds": ["ines", "leo"],
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "probe-observation",
+  "scenes": [
+    {
+      "id": "probe-observation",
+      "kind": "observation",
+      "title": "Comprobar entrada",
+      "introduction": "Texto técnico provisional.",
+      "resourceIds": ["probe-signal"],
+      "prompt": "Selecciona la transición técnica.",
+      "actionIds": ["continue-probe"]
+    },
+    {
+      "id": "probe-design",
+      "kind": "design",
+      "title": "Comprobar montador",
+      "introduction": "La interfaz jugable se construirá en M4.",
+      "resourceIds": [],
+      "prompt": "Valida las ranuras previstas.",
+      "actionIds": ["assemble-probe"],
+      "slots": ["entry", "musical-action", "mediation-support", "evidence"]
+    },
+    {
+      "id": "probe-consequence",
+      "kind": "consequence",
+      "title": "Comprobar consecuencia",
+      "introduction": "La consecuencia describe posibilidades, no diagnósticos.",
+      "resourceIds": ["probe-motion"],
+      "consequenceIds": ["probe-assembled"]
+    },
+    {
+      "id": "probe-incident",
+      "kind": "incident",
+      "title": "Comprobar incidente",
+      "introduction": "El incidente revela una condición ya prevista.",
+      "resourceIds": [],
+      "incidentId": "probe-access-incident"
+    },
+    {
+      "id": "probe-revision",
+      "kind": "revision",
+      "title": "Comprobar revisión",
+      "introduction": "Dos revisiones mantienen prioridades distintas.",
+      "resourceIds": [],
+      "prompt": "Elige una revisión defendible.",
+      "actionIds": ["revise-structure", "revise-support"]
+    },
+    {
+      "id": "probe-justification",
+      "kind": "justification",
+      "title": "Comprobar gramática",
+      "introduction": "La frase se construye mediante elecciones estructuradas.",
+      "resourceIds": [],
+      "grammarOptions": {
+        "objective": ["objective-probe"],
+        "principleAction": ["principle-probe"],
+        "conditionRisk": ["risk-probe"],
+        "adaptation": ["adaptation-probe"],
+        "evidence": ["evidence-probe"]
+      }
+    },
+    {
+      "id": "probe-reflection",
+      "kind": "reflection",
+      "title": "Comprobar bitácora",
+      "introduction": "Solo se guarda razonamiento local, sin identidad ni calificación.",
+      "resourceIds": [],
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "continue-probe",
+      "label": "Continuar la sonda",
+      "principleIds": ["observe-before-name"],
+      "consequenceId": "probe-started",
+      "tags": ["technical"]
+    },
+    {
+      "id": "assemble-probe",
+      "label": "Validar cuatro ranuras",
+      "principleIds": ["objective-action-evidence"],
+      "consequenceId": "probe-assembled",
+      "tags": ["technical"]
+    },
+    {
+      "id": "revise-structure",
+      "label": "Priorizar estructura común",
+      "principleIds": ["structured-participation"],
+      "consequenceId": "probe-structure-revised",
+      "tags": ["defensible"]
+    },
+    {
+      "id": "revise-support",
+      "label": "Priorizar apoyo bajo demanda",
+      "principleIds": ["strategic-support"],
+      "consequenceId": "probe-support-revised",
+      "tags": ["defensible"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "probe-access-incident",
+      "constraintFamily": "sensory-access-load",
+      "reveal": "La señal no debe depender de un único canal.",
+      "revisionActionIds": ["revise-structure", "revise-support"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "probe-started",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "La navegación avanza.",
+        "agency": "La selección queda registrada en estado efímero.",
+        "barrier": "Aún no se ha comprobado una señal alternativa.",
+        "evidence": "La ruta siguiente existe."
+      },
+      "feedback": {
+        "supports": "La entrada enlaza una acción con una consecuencia.",
+        "tension": "Todavía falta probar accesibilidad y persistencia.",
+        "possibleRepair": "Continúa la sonda de contratos.",
+        "observableEvidence": "Comprueba que la ruta y el estado sobreviven al cambio de vista."
+      },
+      "nextSceneId": "probe-design"
+    },
+    {
+      "id": "probe-assembled",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Las cuatro ranuras tienen contrato.",
+        "agency": "Las acciones pueden tener prioridades distintas.",
+        "barrier": "Una referencia rota impediría validar el caso.",
+        "evidence": "Todas las referencias resuelven."
+      },
+      "feedback": {
+        "supports": "El contrato separa escena, acción y consecuencia.",
+        "tension": "La interacción final sigue aplazada a M4.",
+        "possibleRepair": "Conserva el contrato y cambia solo los datos de autoría.",
+        "observableEvidence": "El validador acepta la sonda y rechaza los contraejemplos."
+      },
+      "nextSceneId": "probe-incident"
+    },
+    {
+      "id": "probe-structure-revised",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La revisión conserva la finalidad.",
+        "agency": "La estructura reparte decisiones.",
+        "barrier": "La pauta puede resultar mecánica.",
+        "evidence": "La prioridad queda explícita."
+      },
+      "feedback": {
+        "supports": "La revisión hace visible una prioridad.",
+        "tension": "Una regla no garantiza por sí sola participación significativa.",
+        "possibleRepair": "Contrasta la pauta con las aportaciones observadas.",
+        "observableEvidence": "Comprueba qué decisiones se mantienen y por qué."
+      },
+      "nextSceneId": "probe-justification"
+    },
+    {
+      "id": "probe-support-revised",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La revisión conserva la finalidad.",
+        "agency": "El apoyo aparece cuando hace falta.",
+        "barrier": "Exige observación fina.",
+        "evidence": "La prioridad queda explícita."
+      },
+      "feedback": {
+        "supports": "La revisión mantiene autonomía con apoyo estratégico.",
+        "tension": "Intervenir tarde puede dejar voces fuera.",
+        "possibleRepair": "Define señales observables para intervenir.",
+        "observableEvidence": "Comprueba cuándo una ayuda permite volver a decidir."
+      },
+      "nextSceneId": "probe-justification"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ]
+}
