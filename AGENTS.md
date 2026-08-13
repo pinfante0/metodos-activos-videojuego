@@ -157,10 +157,9 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   prueba, revisión y justificación.
 - M2 ha formalizado el bucle, la matriz de cobertura, las rutas de clase y casa, la gramática de
   decisiones, personajes funcionales, bitácora, un tutorial y un caso piloto completo.
-- La fase actual es **M3 — Arquitectura, contratos y prueba de publicación**. El repositorio
-  independiente, la arquitectura, los contratos y GitHub Pages están comprobados. Falta observar
-  en PLATEA el paquete que cargará el profesor; hasta entonces no se supera la puerta de salida ni
-  se inicia el tutorial o el caso jugable de M4.
+- M3 está completada: repositorio independiente, arquitectura, contratos, GitHub Pages y PLATEA
+  están comprobados. La siguiente fase es **M4 — Corte vertical gris**: implementar el tutorial de
+  detective y un caso completo sin arte definitivo, manteniendo el contenido separado del motor.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

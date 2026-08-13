@@ -1,7 +1,6 @@
 # Prueba de publicación M3
 
-Estado: **en ejecución; GitHub Pages verificado y PLATEA pendiente de comprobación**. Este
-documento se cerrará cuando la misma salida mínima se haya observado también en PLATEA.
+Estado: **completado**. La misma salida mínima se ha comprobado en GitHub Pages y PLATEA.
 
 ## Artefactos reproducibles
 
@@ -39,6 +38,15 @@ documento se cerrará cuando la misma salida mínima se haya observado también 
 ### PLATEA
 
 - Paquete preparado: `release/el-aula-de-los-dos-minutos-m3-platea.zip`.
-- La carga la realiza el profesor en el espacio que elija. Codex no accede, edita ni publica
-  material del curso.
-- Pendiente: URL o ubicación elegida, fecha y resultado observado tras la carga del profesor.
+- Recurso comprobado: <https://platea.ujaen.es/pluginfile.php/717147/mod_resource/content/1/index.html#/prueba-publicacion>.
+- Fecha de comprobación: 13 de agosto de 2026.
+- Protocolo: el profesor cargó el paquete en el espacio que eligió; Codex no entró en la edición
+  del curso ni modificó materiales y se limitó a observar el recurso ya abierto.
+- Resultado: los cuatro indicadores aparecen correctos; el destino es `platea`, la base es `./` y
+  el almacenamiento local está disponible.
+- Navegación: `#/caso/m3-contract-probe` abre correctamente, no presenta desbordamiento horizontal
+  y conserva la misma vista después de una recarga. La pantalla se devolvió a
+  `#/prueba-publicacion` al terminar.
+
+Con ambas publicaciones observadas y los contratos comprobados, se supera la puerta de salida de
+M3 sin haber construido todavía el tutorial ni el caso jugable.
