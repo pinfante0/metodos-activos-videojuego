@@ -1,0 +1,26 @@
+name: Importar repositorio local validado
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener repositorio temporal
+        uses: actions/checkout@v4
+
+      - name: Incorporar el historial local sin sobrescribirlo
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch ./metodos-m3.bundle main:refs/remotes/local/main
+          git merge --allow-unrelated-histories -s ours --no-commit refs/remotes/local/main
+          git rm -r --ignore-unmatch .
+          git checkout refs/remotes/local/main -- .
+          git add -A
+          git commit -m "Integra el repositorio local validado de M3"
+          git push origin main
