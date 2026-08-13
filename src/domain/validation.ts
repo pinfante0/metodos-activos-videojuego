@@ -110,6 +110,16 @@ export function validateCaseDefinition(
   });
 
   value.scenes.forEach((scene, sceneIndex) => {
+    if (scene.nextSceneId) {
+      const issue = missingReference(
+        sceneIds,
+        scene.nextSceneId,
+        `scenes.${sceneIndex}.nextSceneId`,
+        "una escena",
+      );
+      if (issue) issues.push(issue);
+    }
+
     scene.resourceIds.forEach((resourceId, resourceIndex) => {
       if (resourceIds.size === 0) return;
       const issue = missingReference(
@@ -142,6 +152,24 @@ export function validateCaseDefinition(
         );
         if (issue) issues.push(issue);
       });
+      scene.rules?.forEach((rule, ruleIndex) => {
+        const issue = missingReference(
+          consequenceIds,
+          rule.consequenceId,
+          `scenes.${sceneIndex}.rules.${ruleIndex}.consequenceId`,
+          "una consecuencia",
+        );
+        if (issue) issues.push(issue);
+      });
+      if (scene.fallbackConsequenceId) {
+        const issue = missingReference(
+          consequenceIds,
+          scene.fallbackConsequenceId,
+          `scenes.${sceneIndex}.fallbackConsequenceId`,
+          "una consecuencia",
+        );
+        if (issue) issues.push(issue);
+      }
     }
     if (scene.kind === "incident") {
       const issue = missingReference(
@@ -202,6 +230,48 @@ export function validateCaseDefinition(
         path: "journalFields",
         message: `Falta el campo obligatorio ${field}`,
       });
+    }
+  }
+
+  if (value.status !== "contract-probe" && !value.journalTemplate) {
+    issues.push({
+      code: "missing-journal-template",
+      path: "journalTemplate",
+      message: "Un recorrido jugable necesita textos de bitácora derivados del contenido",
+    });
+  }
+
+  if (value.journalTemplate) {
+    const grammarKeys = new Set([
+      "objective",
+      "principleAction",
+      "conditionRisk",
+      "adaptation",
+      "evidence",
+    ]);
+    const choiceSceneIds = new Set(
+      value.scenes
+        .filter(
+          (scene) =>
+            scene.kind === "observation" ||
+            scene.kind === "design" ||
+            scene.kind === "revision",
+        )
+        .map((scene) => scene.id),
+    );
+    for (const [field, template] of Object.entries(value.journalTemplate)) {
+      for (const match of template.matchAll(/\{\{(action|grammar):([a-zA-Z0-9-]+)\}\}/g)) {
+        const [, kind, id] = match;
+        if (!kind || !id) continue;
+        const valid = kind === "action" ? choiceSceneIds.has(id) : grammarKeys.has(id);
+        if (!valid) {
+          issues.push({
+            code: "broken-template-reference",
+            path: `journalTemplate.${field}`,
+            message: `La plantilla referencia ${kind}:${id}, que no existe en este caso`,
+          });
+        }
+      }
     }
   }
 

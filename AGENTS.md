@@ -157,9 +157,12 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   prueba, revisión y justificación.
 - M2 ha formalizado el bucle, la matriz de cobertura, las rutas de clase y casa, la gramática de
   decisiones, personajes funcionales, bitácora, un tutorial y un caso piloto completo.
-- M3 está completada: repositorio independiente, arquitectura, contratos, GitHub Pages y PLATEA
-  están comprobados. La siguiente fase es **M4 — Corte vertical gris**: implementar el tutorial de
-  detective y un caso completo sin arte definitivo, manteniendo el contenido separado del motor.
+- M4 está completada: tutorial y caso piloto funcionan de principio a fin con incidente, revisión,
+  retroalimentación, justificación y bitácora; ratón, teclado, táctil y tamaños objetivo están
+  comprobados. El contenido jugable está separado del intérprete. La siguiente fase es **M5 —
+  Dirección visual, sonora y de experiencia**; no se ha anticipado ninguna de sus decisiones.
+- `docs/corte_vertical_m4.md` registra el alcance, las pruebas, la puerta de salida y los asuntos
+  aplazados del corte gris.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

@@ -7,7 +7,7 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const distDirectory = resolve(projectRoot, "dist");
 const releaseDirectory = resolve(projectRoot, "release");
-const outputFile = resolve(releaseDirectory, "el-aula-de-los-dos-minutos-m3-platea.zip");
+const outputFile = resolve(releaseDirectory, "el-aula-de-los-dos-minutos-m4-platea.zip");
 
 async function listFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -42,7 +42,7 @@ const fileElements = paths
   .map((path) => `      <file href="${escapeXml(path)}"/>`)
   .join("\n");
 const manifest = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="METODOS-M3" version="1.0"
+<manifest identifier="METODOS-M4" version="1.0"
   xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p1.xsd">
@@ -50,16 +50,16 @@ const manifest = `<?xml version="1.0" encoding="UTF-8"?>
     <schema>IMS Content</schema>
     <schemaversion>1.1</schemaversion>
   </metadata>
-  <organizations default="ORG-M3">
-    <organization identifier="ORG-M3">
-      <title>El aula de los dos minutos · prueba M3</title>
-      <item identifier="ITEM-M3" identifierref="RESOURCE-M3">
-        <title>Prueba técnica M3</title>
+  <organizations default="ORG-M4">
+    <organization identifier="ORG-M4">
+      <title>El aula de los dos minutos · corte vertical M4</title>
+      <item identifier="ITEM-M4" identifierref="RESOURCE-M4">
+        <title>Tutorial y caso completo</title>
       </item>
     </organization>
   </organizations>
   <resources>
-    <resource identifier="RESOURCE-M3" type="webcontent" href="index.html">
+    <resource identifier="RESOURCE-M4" type="webcontent" href="index.html">
 ${fileElements}
     </resource>
   </resources>

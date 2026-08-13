@@ -1,7 +1,7 @@
 {
   "name": "el-aula-de-los-dos-minutos",
   "private": true,
-  "version": "0.0.0-m3",
+  "version": "0.0.0-m4",
   "type": "module",
   "packageManager": "pnpm@11.19.0",
   "scripts": {
@@ -12,7 +12,7 @@
     "check": "pnpm validate:content && pnpm test && pnpm build && pnpm build:platea",
     "preview": "vite preview",
     "test": "vitest run",
-    "validate:content": "vitest run tests/contracts.test.ts --reporter=verbose"
+    "validate:content": "vitest run tests/contracts.test.ts tests/playable-content.test.ts --reporter=verbose"
   },
   "dependencies": {
     "zod": "^4.4.3"

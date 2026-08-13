@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 1,
+  "id": "el-arreglo-que-no-escucha-a-todos",
+  "slug": "el-arreglo-que-no-escucha-a-todos",
+  "status": "reviewed",
+  "title": "El arreglo que no escucha a todos",
+  "experienceType": "case",
+  "durationMinutes": 12,
+  "modes": ["class", "home"],
+  "learningObjective": "Reconocer y reproducir de oído un riff de dos compases y crear una variación que conserve un rasgo reconocible dentro de una forma compartida.",
+  "approachIds": ["orff-keetman", "green-pme"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "notation-theory-improvisation-creation",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "cultural-relevance", "agency-creativity", "evidence-context"],
+  "characterIds": ["ines", "leo", "amina", "mara", "oscar", "julia"],
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "pilot-brief",
+  "scenes": [
+    {
+      "id": "pilot-brief",
+      "kind": "observation",
+      "title": "Lee el aula antes de diseñar",
+      "introduction": "5.º de Primaria. Hay un dispositivo docente y un altavoz, tres instrumentos de láminas, pequeña percusión, voz, cuerpo, superficies y papel. El riff dispone de representación visual del pulso y la forma. El grupo elige entre fragmentos previamente revisados por letra, tesitura, contexto y uso escolar. Las entradas no pueden depender solo del audio y la secuencia debe anticiparse.",
+      "resourceIds": [],
+      "prompt": "¿Qué decisión docente del encargo conviene conservar durante todo el caso?",
+      "actionIds": ["brief-mediated-choice", "brief-free-choice", "brief-instruments-only"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "pilot-entry",
+      "kind": "design",
+      "title": "Momento 1 · abre una puerta al riff",
+      "introduction": "Elige una entrada que permita reconocer el riff antes de crear con él.",
+      "resourceIds": [],
+      "prompt": "¿Cómo comienza la microclase?",
+      "actionIds": ["entry-recording-choice", "entry-body-voice", "entry-score-first"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "pilot-process",
+      "slots": ["entry", "mediation-support"]
+    },
+    {
+      "id": "pilot-process",
+      "kind": "design",
+      "title": "Momento 2 · convierte el modelo en creación",
+      "introduction": "Decide qué hace cada pareja después de reconocer el riff.",
+      "resourceIds": [],
+      "prompt": "¿Qué proceso organiza la variación?",
+      "actionIds": ["process-imitate-explore-vary", "process-closed-copy", "process-free-explore"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "pilot-evidence",
+      "slots": ["musical-action"]
+    },
+    {
+      "id": "pilot-evidence",
+      "kind": "design",
+      "title": "Momento 3 · decide qué observar",
+      "introduction": "El cierre debe mostrar reconocimiento, creación y una decisión explicable.",
+      "resourceIds": [],
+      "prompt": "¿Qué evidencia cerrará la microclase?",
+      "actionIds": ["evidence-rondo-explain", "evidence-perfect-take", "evidence-taste-vote"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "pilot-first-consequence",
+      "slots": ["evidence"]
+    },
+    {
+      "id": "pilot-first-consequence",
+      "kind": "consequence",
+      "title": "Primera prueba · mira el conjunto, no una nota",
+      "introduction": "La consecuencia combina tus tres elecciones y devuelve aprendizaje, agencia, barrera y evidencia. Describe una posibilidad pedagógica, no un diagnóstico del grupo.",
+      "resourceIds": [],
+      "consequenceIds": ["outcome-coherent", "outcome-copy", "outcome-unrelated", "outcome-weak-evidence"],
+      "rules": [
+        {
+          "requiredTags": ["entry-defensible", "creative-process", "strong-evidence"],
+          "consequenceId": "outcome-coherent"
+        },
+        {
+          "requiredTags": ["closed-copy"],
+          "consequenceId": "outcome-copy"
+        },
+        {
+          "requiredTags": ["unbounded-exploration"],
+          "consequenceId": "outcome-unrelated"
+        },
+        {
+          "requiredTags": ["weak-evidence"],
+          "consequenceId": "outcome-weak-evidence"
+        }
+      ],
+      "fallbackConsequenceId": "outcome-weak-evidence"
+    },
+    {
+      "id": "pilot-incident",
+      "kind": "incident",
+      "title": "Incidente · la autoría no se está repartiendo",
+      "introduction": "La primera prueba revela una relación de grupo que antes no era visible. No es una discapacidad ni un fallo personal.",
+      "resourceIds": [],
+      "nextSceneId": "pilot-revision",
+      "incidentId": "incident-authorship"
+    },
+    {
+      "id": "pilot-revision",
+      "kind": "revision",
+      "title": "Revisa sin apropiarte del arreglo",
+      "introduction": "Mantén una decisión fundamentada de tu diseño y cambia la organización de la autoría.",
+      "resourceIds": [],
+      "prompt": "¿Cuándo y cómo intervienes?",
+      "actionIds": ["revision-rotating-decisions", "revision-affinity-contract", "revision-no-intervention", "revision-dictate-equal-parts"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "pilot-justification",
+      "kind": "justification",
+      "title": "Construye una defensa completa",
+      "introduction": "No hace falta escribir texto libre. Elige una pieza en cada hueco y comprueba que objetivo, principio, riesgo, adaptación y evidencia forman una sola decisión.",
+      "resourceIds": [],
+      "nextSceneId": "pilot-reflection",
+      "grammarOptions": {
+        "objective": [
+          {"id": "objective-riff", "label": "reconocer y variar un riff dentro de una forma compartida"}
+        ],
+        "principleAction": [
+          {"id": "principle-recording-create", "label": "escucha e imitación desde una grabación y un proceso de exploración-creación"},
+          {"id": "principle-body-transfer", "label": "cuerpo y voz como acceso común antes de transferir y variar"}
+        ],
+        "conditionRisk": [
+          {"id": "risk-affinity-hierarchy", "label": "los grupos de afinidad pueden apoyar el ensayo, pero también concentrar decisiones"},
+          {"id": "risk-rotation-mechanical", "label": "la rotación abre la autoría, aunque puede volverse mecánica si no se escuchan las aportaciones"}
+        ],
+        "adaptation": [
+          {"id": "adapt-visible-contributions", "label": "una forma de distribuir y hacer visibles las aportaciones por vías equivalentes"},
+          {"id": "adapt-two-proposals", "label": "probar dos propuestas, abrir cambios de grupo e intervenir cuando una voz queda anulada"}
+        ],
+        "evidence": [
+          {"id": "evidence-shared-arrangement", "label": "si el arreglo conserva el riff y contiene decisiones explicadas por varias personas"}
+        ]
+      }
+    },
+    {
+      "id": "pilot-reflection",
+      "kind": "reflection",
+      "title": "La bitácora conserva lo que mantuviste y lo que cambiaste",
+      "introduction": "Revisa la entrada antes de guardarla. Podrás copiarla o imprimirla; permanece en este navegador y no se envía ni califica.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "brief-mediated-choice",
+      "label": "Conservar la preselección mediada, la señal visual y las vías instrumentales y no instrumentales.",
+      "principleIds": ["mediated-choice", "multimodal-access"],
+      "consequenceId": "feedback-brief-mediated",
+      "tags": ["continue"]
+    },
+    {
+      "id": "brief-free-choice",
+      "label": "Dejar cualquier canción y toda la organización al grupo para maximizar la autonomía.",
+      "principleIds": ["unstructured-autonomy"],
+      "consequenceId": "feedback-brief-free",
+      "tags": ["retry"]
+    },
+    {
+      "id": "brief-instruments-only",
+      "label": "Reservar las decisiones principales para quien ya toca los instrumentos disponibles.",
+      "principleIds": ["experience-as-authority"],
+      "consequenceId": "feedback-brief-instruments",
+      "tags": ["retry"]
+    },
+    {
+      "id": "entry-recording-choice",
+      "label": "Escuchar el bucle, elegir un fragmento preseleccionado, localizar el riff con la señal visual y probarlo por aproximaciones.",
+      "principleIds": ["aural-learning", "mediated-choice", "peer-approximation"],
+      "consequenceId": "choice-recording",
+      "tags": ["entry-defensible", "green-pme", "recording"]
+    },
+    {
+      "id": "entry-body-voice",
+      "label": "Representar el contorno con gesto o movimiento, decirlo o cantarlo y después elegir cómo transferirlo.",
+      "principleIds": ["embodied-model", "integrated-transfer"],
+      "consequenceId": "choice-body-voice",
+      "tags": ["entry-defensible", "orff-keetman", "common-access"]
+    },
+    {
+      "id": "entry-score-first",
+      "label": "Escribir el riff, explicar sus valores y asignar instrumentos antes de escucharlo completo.",
+      "principleIds": ["symbol-before-experience"],
+      "consequenceId": "choice-score-first",
+      "tags": ["entry-incoherent", "notation-first"]
+    },
+    {
+      "id": "process-imitate-explore-vary",
+      "label": "Imitar → explorar → variar: conservar comienzo o contorno y cambiar timbre, final o ritmo.",
+      "principleIds": ["model-explore-create", "recognisable-constraint"],
+      "consequenceId": "choice-creative-process",
+      "tags": ["creative-process", "orff-keetman", "authorship"]
+    },
+    {
+      "id": "process-closed-copy",
+      "label": "Copiar una orquestación cerrada con una parte fija para cada pareja.",
+      "principleIds": ["closed-copy"],
+      "consequenceId": "choice-closed-copy",
+      "tags": ["closed-copy"]
+    },
+    {
+      "id": "process-free-explore",
+      "label": "Explorar cualquier material sin una restricción común y juntar después las propuestas.",
+      "principleIds": ["unbounded-exploration"],
+      "consequenceId": "choice-free-explore",
+      "tags": ["unbounded-exploration"]
+    },
+    {
+      "id": "evidence-rondo-explain",
+      "label": "Interpretar un rondó con riff recurrente y explicar qué rasgo conservó cada variación.",
+      "principleIds": ["shared-form", "explain-musical-choice"],
+      "consequenceId": "choice-rondo",
+      "tags": ["strong-evidence", "shared-form"]
+    },
+    {
+      "id": "evidence-perfect-take",
+      "label": "Repetir hasta que todo coincida con la grabación.",
+      "principleIds": ["precision-copy"],
+      "consequenceId": "choice-perfect-take",
+      "tags": ["weak-evidence"]
+    },
+    {
+      "id": "evidence-taste-vote",
+      "label": "Votar la variación que más gusta al grupo.",
+      "principleIds": ["preference-not-evidence"],
+      "consequenceId": "choice-taste-vote",
+      "tags": ["weak-evidence"]
+    },
+    {
+      "id": "revision-rotating-decisions",
+      "label": "Reorganizar grupos y rotar tres decisiones: qué conservar, qué transformar y cómo presentar; también rota el control de las señales.",
+      "principleIds": ["distributed-authorship", "equivalent-expression"],
+      "consequenceId": "revision-rotating-outcome",
+      "tags": ["defensible", "revision-r1"]
+    },
+    {
+      "id": "revision-affinity-contract",
+      "label": "Mantener afinidades con vía de cambio, probar dos propuestas y explicar una idea descartada; apoyar solo cuando haga falta.",
+      "principleIds": ["peer-negotiation", "strategic-support"],
+      "consequenceId": "revision-affinity-outcome",
+      "tags": ["defensible", "revision-r2"]
+    },
+    {
+      "id": "revision-no-intervention",
+      "label": "No intervenir porque aprender informalmente significa autonomía completa.",
+      "principleIds": ["teacher-disappears"],
+      "consequenceId": "revision-no-intervention-outcome",
+      "tags": ["incoherent", "retry"]
+    },
+    {
+      "id": "revision-dictate-equal-parts",
+      "label": "Quitar toda elección y dictar una parte igual a cada persona.",
+      "principleIds": ["equality-without-authorship"],
+      "consequenceId": "revision-dictate-outcome",
+      "tags": ["incoherent", "retry"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "incident-authorship",
+      "constraintFamily": "experience-roles",
+      "reveal": "Al elegir libremente, parte del grupo se reúne con amistades. Óscar controla el instrumento y decide los cambios; Mara propone un ritmo, pero queda relegada a sostener el pulso. Dos personas no encuentran pareja de inmediato y la señal visual se activa tarde.",
+      "revisionActionIds": ["revision-rotating-decisions", "revision-affinity-contract", "revision-no-intervention", "revision-dictate-equal-parts"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "feedback-brief-mediated",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "El objetivo permanece visible.", "agency": "La elección se realiza dentro de una preselección explicada.", "barrier": "Una sola señal o recurso aún podría concentrar el acceso.", "evidence": "El encargo ofrece varias vías para escuchar, responder y decidir."},
+      "feedback": {"supports": "La mediación hace posible una elección significativa y revisa condiciones reales.", "tension": "Preseleccionar no equivale a elección totalmente libre.", "possibleRepair": "Explica el criterio y permite proponer futuras alternativas.", "observableEvidence": "Comprueba quién puede acceder a la señal y tomar una decisión musical."},
+      "nextSceneId": "pilot-entry"
+    },
+    {
+      "id": "feedback-brief-free",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "La elección puede aumentar cercanía con el repertorio.", "agency": "El alumnado concentra muchas decisiones iniciales.", "barrier": "Letra, tesitura, contexto, acceso y jerarquías quedan sin mediación.", "evidence": "No se sabe aún si la elección permite cumplir el objetivo."},
+      "feedback": {"supports": "Has protegido la elección del alumnado.", "tension": "Autonomía no significa ausencia docente.", "possibleRepair": "Conserva elección dentro de criterios visibles y apoyos accesibles.", "observableEvidence": "Mira quién elige, quién queda fuera y si el fragmento permite reconocer el riff."},
+      "nextSceneId": "pilot-brief"
+    },
+    {
+      "id": "feedback-brief-instruments",
+      "rating": "incoherent-with-brief",
+      "observables": {"learning": "La experiencia instrumental podría acelerar alguna ejecución.", "agency": "Quien ya toca concentraría las decisiones.", "barrier": "Confunde experiencia previa con autoridad y el instrumento con el enfoque.", "evidence": "La participación del resto no permitiría observar el objetivo."},
+      "feedback": {"supports": "Reconoces que hay recursos y experiencias desiguales.", "tension": "Los instrumentos no definen el proceso ni justifican excluir decisiones.", "possibleRepair": "Ofrece voz, cuerpo, objetos, instrumentos y papel con valor musical equivalente.", "observableEvidence": "Comprueba si distintas aportaciones transforman el arreglo."},
+      "nextSceneId": "pilot-brief"
+    },
+    {
+      "id": "choice-recording", "rating": "coherent-defensible", "observables": {"learning": "El riff se localiza por escucha y aproximaciones.", "agency": "El grupo elige un fragmento mediado.", "barrier": "El audio aislado no basta.", "evidence": "La señal visual acompaña el reconocimiento."},
+      "feedback": {"supports": "Favorece elección y aprendizaje de oído.", "tension": "Depende de acceso al dispositivo y mediación del repertorio.", "possibleRepair": "Mantén la representación visual y turnos de control.", "observableEvidence": "Comprueba si reconocen el riff sin depender de una partitura."}, "nextSceneId": "pilot-process"
+    },
+    {
+      "id": "choice-body-voice", "rating": "coherent-defensible", "observables": {"learning": "El contorno se experimenta antes de transferirse.", "agency": "Cada persona elige una vía de representación.", "barrier": "El modelo docente puede dominar si no se abre la exploración.", "evidence": "El grupo conserva el contorno al cambiar de medio."},
+      "feedback": {"supports": "Crea un acceso común con cuerpo y voz.", "tension": "La elección de repertorio queda menos central.", "possibleRepair": "Abre después decisiones de transferencia y variación.", "observableEvidence": "Comprueba qué rasgo permanece reconocible."}, "nextSceneId": "pilot-process"
+    },
+    {
+      "id": "choice-score-first", "rating": "incoherent-with-brief", "observables": {"learning": "La notación puede aclarar valores.", "agency": "La docente asigna antes de escuchar.", "barrier": "El símbolo precede a la experiencia de oído pedida.", "evidence": "Leer correctamente no prueba reconocimiento auditivo."},
+      "feedback": {"supports": "La notación podría servir más tarde como apoyo.", "tension": "Contradice la puerta de entrada del encargo.", "possibleRepair": "Haz sonar y experimentar el riff antes de simbolizar.", "observableEvidence": "Comprueba si pueden reconocerlo y reproducirlo de oído."}, "nextSceneId": "pilot-process"
+    },
+    {
+      "id": "choice-creative-process", "rating": "coherent-defensible", "observables": {"learning": "La restricción convierte exploración en variación.", "agency": "Cada pareja modifica un rasgo.", "barrier": "La autoría interna aún no se ha observado.", "evidence": "La variación conserva comienzo o contorno."},
+      "feedback": {"supports": "El modelo abre exploración y creación.", "tension": "Una pareja puede concentrar decisiones.", "possibleRepair": "Haz visibles las aportaciones y la negociación.", "observableEvidence": "Comprueba qué decisión propia conserva el arreglo."}, "nextSceneId": "pilot-evidence"
+    },
+    {
+      "id": "choice-closed-copy", "rating": "defensible-needs-revision", "observables": {"learning": "Puede mejorar la ejecución del modelo.", "agency": "Las partes llegan cerradas.", "barrier": "La autoría desaparece.", "evidence": "Solo se observa precisión de copia."},
+      "feedback": {"supports": "La estructura facilita coordinarse.", "tension": "No permite crear una variación propia.", "possibleRepair": "Abre al menos una transformación musical real.", "observableEvidence": "Comprueba qué cambió cada pareja y por qué."}, "nextSceneId": "pilot-evidence"
+    },
+    {
+      "id": "choice-free-explore", "rating": "defensible-needs-revision", "observables": {"learning": "Aparecen materiales diversos.", "agency": "La exploración es amplia.", "barrier": "No hay rasgo común que permita reconocer variación.", "evidence": "No se puede relacionar el resultado con el riff."},
+      "feedback": {"supports": "Abre decisiones musicales.", "tension": "Libertad sin restricción borra el objetivo.", "possibleRepair": "Pide conservar comienzo, contorno o ritmo.", "observableEvidence": "Comprueba si otra persona reconoce la relación."}, "nextSceneId": "pilot-evidence"
+    },
+    {
+      "id": "choice-rondo", "rating": "coherent-defensible", "observables": {"learning": "La forma relaciona riff y variaciones.", "agency": "Las parejas explican una decisión.", "barrier": "Explicar no garantiza por sí solo autoría distribuida.", "evidence": "Se oye el rasgo conservado y se justifica."},
+      "feedback": {"supports": "Produce evidencia de reconocimiento, forma y creación.", "tension": "Falta observar el reparto de decisiones.", "possibleRepair": "Pregunta qué aportación se mantuvo o revisó.", "observableEvidence": "Comprueba el rasgo conservado y quién puede explicarlo."}, "nextSceneId": "pilot-first-consequence"
+    },
+    {
+      "id": "choice-perfect-take", "rating": "defensible-needs-revision", "observables": {"learning": "Se practica precisión de copia.", "agency": "El modelo fija el resultado.", "barrier": "La variación y su explicación quedan fuera.", "evidence": "Coincidir con la grabación cubre solo parte del objetivo."},
+      "feedback": {"supports": "Puede afinar una ejecución.", "tension": "Una toma perfecta no demuestra creación.", "possibleRepair": "Incluye una variación reconocible y explicada.", "observableEvidence": "Mira qué se conserva y qué se transforma."}, "nextSceneId": "pilot-first-consequence"
+    },
+    {
+      "id": "choice-taste-vote", "rating": "incoherent-with-brief", "observables": {"learning": "Aparecen preferencias.", "agency": "El grupo participa en una elección.", "barrier": "El gusto sustituye a la evidencia musical.", "evidence": "La votación no prueba reconocimiento ni variación."},
+      "feedback": {"supports": "Puede abrir conversación sobre preferencias.", "tension": "Gustar más no equivale a aprender el objetivo.", "possibleRepair": "Pide identificar el rasgo conservado.", "observableEvidence": "Comprueba reconocimiento, forma y explicación."}, "nextSceneId": "pilot-first-consequence"
+    },
+    {
+      "id": "outcome-coherent", "rating": "coherent-defensible", "observables": {"learning": "Varias parejas reproducen el riff y crean variaciones reconocibles.", "agency": "Hay elección, tanteo y transformación musical.", "barrier": "Todavía no sabemos cómo se distribuyen las decisiones dentro de cada pareja.", "evidence": "La forma y las explicaciones conectan original y variaciones."},
+      "feedback": {"supports": "La entrada accesible, la restricción creativa y el cierre sostienen el objetivo.", "tension": "La organización por pares puede ocultar jerarquías.", "possibleRepair": "Observa quién propone, prueba, decide y controla las señales.", "observableEvidence": "Mira si varias personas pueden explicar aportaciones que el arreglo conserva."}, "nextSceneId": "pilot-incident"
+    },
+    {
+      "id": "outcome-copy", "rating": "defensible-needs-revision", "observables": {"learning": "El grupo ejecuta un modelo reconocible.", "agency": "La orquestación cerrada concentra las decisiones en la docente.", "barrier": "No aparece autoría musical real.", "evidence": "La copia cubre solo reproducción, no variación."},
+      "feedback": {"supports": "La estructura permite coordinar un riff.", "tension": "El proceso contradice la creación pedida.", "possibleRepair": "Abre una transformación limitada y explicable.", "observableEvidence": "Comprueba qué decisión musical aporta cada pareja."}, "nextSceneId": "pilot-incident"
+    },
+    {
+      "id": "outcome-unrelated", "rating": "defensible-needs-revision", "observables": {"learning": "Surgen ideas sonoras variadas.", "agency": "Las parejas exploran con libertad.", "barrier": "Las propuestas dejan de relacionarse con el riff.", "evidence": "No se reconoce qué se ha conservado."},
+      "feedback": {"supports": "La exploración abre creatividad.", "tension": "Sin una restricción, no produce la variación solicitada.", "possibleRepair": "Conserva comienzo, contorno o ritmo como regla común.", "observableEvidence": "Comprueba si una escucha externa reconoce el parentesco."}, "nextSceneId": "pilot-incident"
+    },
+    {
+      "id": "outcome-weak-evidence", "rating": "defensible-needs-revision", "observables": {"learning": "Parte del riff puede reproducirse.", "agency": "Hay decisiones, aunque el cierre no las hace legibles.", "barrier": "La evidencia elegida observa gusto o copia, no todo el objetivo.", "evidence": "Falta una variación reconocible acompañada de explicación."},
+      "feedback": {"supports": "El diseño contiene una puerta aprovechable.", "tension": "El cierre no permite valorar reconocimiento, creación y decisión.", "possibleRepair": "Usa una forma compartida y señala el rasgo conservado.", "observableEvidence": "Mira si el grupo puede mostrar y explicar la variación."}, "nextSceneId": "pilot-incident"
+    },
+    {
+      "id": "revision-rotating-outcome", "rating": "coherent-defensible", "observables": {"learning": "El arreglo conserva el riff y revisa aportaciones.", "agency": "Cada persona introduce o defiende una decisión.", "barrier": "La rotación puede volverse mecánica.", "evidence": "Varias aportaciones sobreviven o se revisan con razones."},
+      "feedback": {"supports": "Redistribuir decisiones abre acceso y autoría inmediatos.", "tension": "Reduce parte de la elección de grupo y una regla no garantiza escucha.", "possibleRepair": "Contrasta la rotación con las ideas realmente incorporadas.", "observableEvidence": "Comprueba qué propuestas transforma el arreglo y por qué."}, "nextSceneId": "pilot-justification"
+    },
+    {
+      "id": "revision-affinity-outcome", "rating": "coherent-defensible", "observables": {"learning": "Las parejas prueban, comparan y justifican propuestas.", "agency": "Se conserva afinidad con vías para entrar o cambiar.", "barrier": "Exige observación fina; la regla formal no garantiza equidad.", "evidence": "El grupo explica una idea elegida y otra descartada."},
+      "feedback": {"supports": "Mantener afinidades puede sostener confianza y autonomía.", "tension": "Algunas voces pueden seguir sin entrar.", "possibleRepair": "Intervén cuando la autonomía deja de ser aprendible o inclusiva.", "observableEvidence": "Comprueba qué aportaciones se prueban antes de elegir."}, "nextSceneId": "pilot-justification"
+    },
+    {
+      "id": "revision-no-intervention-outcome", "rating": "incoherent-with-brief", "observables": {"learning": "Algunos grupos podrían avanzar solos.", "agency": "Las jerarquías existentes deciden quién participa.", "barrier": "Confunde autonomía con desaparición docente.", "evidence": "No se hacen visibles aportaciones anuladas ni accesos tardíos."},
+      "feedback": {"supports": "Intentas conservar el aprendizaje entre pares.", "tension": "No intervenir permite que la jerarquía decida quién aprende.", "possibleRepair": "Elige una intervención que devuelva decisiones al grupo.", "observableEvidence": "Mira quién propone, prueba y explica una idea."}, "nextSceneId": "pilot-revision"
+    },
+    {
+      "id": "revision-dictate-outcome", "rating": "incoherent-with-brief", "observables": {"learning": "El reparto puede parecer ordenado.", "agency": "Toda decisión musical vuelve a la docente.", "barrier": "Igualdad de parte no equivale a participación significativa.", "evidence": "No se observa negociación ni autoría."},
+      "feedback": {"supports": "Buscas que nadie quede sin tarea.", "tension": "Borras elección, recorrido personal y creación.", "possibleRepair": "Estructura quién decide sin dictar qué debe resultar.", "observableEvidence": "Comprueba si cada persona aporta una decisión que transforma el arreglo."}, "nextSceneId": "pilot-revision"
+    }
+  ],
+  "journalFields": ["objective", "first-decision", "maintained-decision", "revised-decision", "trigger", "condition-risk", "adaptation", "observable-evidence", "defensible-alternative", "final-grammar"],
+  "journalTemplate": {
+    "objective": "Reconocer, reproducir y variar un riff dentro de una forma compartida.",
+    "first-decision": "Entrada: {{action:pilot-entry}} Proceso: {{action:pilot-process}} Evidencia: {{action:pilot-evidence}}",
+    "maintained-decision": "Mantengo esta puerta de entrada: {{action:pilot-entry}}",
+    "revised-decision": "Tras el incidente, reviso la organización: {{action:pilot-revision}}",
+    "trigger": "Las parejas no repartían la autoría: algunas voces, controles y accesos quedaban concentrados o llegaban tarde.",
+    "condition-risk": "{{grammar:conditionRisk}}",
+    "adaptation": "{{grammar:adaptation}}",
+    "observable-evidence": "{{grammar:evidence}}",
+    "defensible-alternative": "La revisión no elegida también es defendible: una prioriza redistribución inmediata; la otra, afinidad y autorregulación con vigilancia docente.",
+    "final-grammar": "Para {{grammar:objective}}, uso {{grammar:principleAction}} porque {{grammar:conditionRisk}}; incorporo {{grammar:adaptation}} y comprobaré {{grammar:evidence}}."
+  },
+  "completion": {
+    "eyebrow": "Corte vertical completado",
+    "title": "Has diseñado, probado, revisado y defendido",
+    "body": "La decisión queda en tu bitácora local. Este corte termina aquí: todavía no abre la campaña completa ni adopta arte definitivo.",
+    "nextLabel": "Abrir la bitácora",
+    "nextRoute": "#/bitacora"
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "id": "mucho-hacer-poco-aprender",
+  "slug": "mucho-hacer-poco-aprender",
+  "status": "reviewed",
+  "title": "Mucho hacer, poco aprender",
+  "experienceType": "tutorial",
+  "durationMinutes": 5,
+  "modes": ["class", "home"],
+  "learningObjective": "Distinguir actividad, decisión y evidencia de comprensión musical.",
+  "approachIds": ["dalcroze"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "agency-creativity", "evidence-context"],
+  "characterIds": ["leo"],
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "tutorial-observation",
+  "scenes": [
+    {
+      "id": "tutorial-observation",
+      "kind": "observation",
+      "title": "Busca el indicio que permite juzgar el aprendizaje",
+      "introduction": "La docente quiere que el grupo reconozca el final de una frase rítmica. Durante treinta segundos suena una base: todos agitan pañuelos y se mueven libremente. Leo participa con gestos de brazos desde su sitio. Al terminar, la docente celebra la energía y cambia de actividad.",
+      "resourceIds": [],
+      "prompt": "¿Qué indicio conecta mejor la escena con el objetivo musical?",
+      "actionIds": ["observe-movement", "observe-choice", "observe-missing-evidence"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "tutorial-repair",
+      "kind": "design",
+      "title": "Repara una sola variable",
+      "introduction": "Conserva la actividad corporal, pero haz que permita observar el final de frase sin imponer una única forma de moverse.",
+      "resourceIds": [],
+      "prompt": "¿Qué cambio mínimo introducirías?",
+      "actionIds": ["repair-phrase-response", "repair-four-steps", "repair-more-colours"],
+      "feedbackMode": "immediate",
+      "slots": ["musical-action", "evidence"]
+    },
+    {
+      "id": "tutorial-reveal",
+      "kind": "consequence",
+      "title": "La función aparece antes que el nombre",
+      "introduction": "Cuerpo y escucha pueden ser una puerta Dalcroze, pero moverse no basta para definir la escena. La acción necesita una relación musical y una evidencia observable.",
+      "resourceIds": [],
+      "nextSceneId": "tutorial-reflection",
+      "consequenceIds": ["tutorial-principle-revealed"]
+    },
+    {
+      "id": "tutorial-reflection",
+      "kind": "reflection",
+      "title": "Tu primera nota de detective",
+      "introduction": "La bitácora conserva el razonamiento, no una puntuación. Revisa qué indicio utilizaste y qué cambió la reparación.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "observe-movement",
+      "label": "Todo el grupo está en movimiento.",
+      "principleIds": ["activity-is-not-evidence"],
+      "consequenceId": "feedback-movement",
+      "tags": ["retry"]
+    },
+    {
+      "id": "observe-choice",
+      "label": "Cada persona elige cómo mover el pañuelo.",
+      "principleIds": ["agency-needs-purpose"],
+      "consequenceId": "feedback-choice",
+      "tags": ["retry"]
+    },
+    {
+      "id": "observe-missing-evidence",
+      "label": "No hay una acción ligada al final de frase ni una comprobación posterior.",
+      "principleIds": ["objective-action-evidence"],
+      "consequenceId": "feedback-missing-evidence",
+      "tags": ["continue"]
+    },
+    {
+      "id": "repair-phrase-response",
+      "label": "Al final de cada frase, transformar el gesto o congelar una forma y explicar la señal percibida.",
+      "principleIds": ["embodied-listening", "equivalent-response"],
+      "consequenceId": "feedback-repair-phrase",
+      "tags": ["defensible", "accessible"]
+    },
+    {
+      "id": "repair-four-steps",
+      "label": "Dar exactamente cuatro pasos y levantar el pañuelo a la vez.",
+      "principleIds": ["shared-structure"],
+      "consequenceId": "feedback-repair-steps",
+      "tags": ["defensible", "needs-revision"]
+    },
+    {
+      "id": "repair-more-colours",
+      "label": "Añadir pañuelos de más colores y repetir la base.",
+      "principleIds": ["material-without-principle"],
+      "consequenceId": "feedback-repair-colours",
+      "tags": ["incoherent"]
+    }
+  ],
+  "incidents": [],
+  "consequences": [
+    {
+      "id": "feedback-movement",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "La escena muestra actividad intensa.",
+        "agency": "Hay formas distintas de moverse.",
+        "barrier": "La acción no se relaciona todavía con el final de frase.",
+        "evidence": "No se puede inferir qué ha reconocido el grupo."
+      },
+      "feedback": {
+        "supports": "Has descrito una acción visible.",
+        "tension": "Movimiento no equivale por sí solo a comprensión musical.",
+        "possibleRepair": "Busca una relación entre la acción y el objetivo.",
+        "observableEvidence": "Comprueba qué cambia justo cuando termina la frase."
+      },
+      "nextSceneId": "tutorial-observation"
+    },
+    {
+      "id": "feedback-choice",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Existe una decisión expresiva.",
+        "agency": "Cada persona decide cómo mover el pañuelo.",
+        "barrier": "La decisión no está orientada al objetivo de frase.",
+        "evidence": "La libertad de movimiento no muestra todavía reconocimiento."
+      },
+      "feedback": {
+        "supports": "Has detectado una decisión real del alumnado.",
+        "tension": "Agencia no significa automáticamente aprendizaje del objetivo.",
+        "possibleRepair": "Busca el indicio que conecta objetivo y evidencia.",
+        "observableEvidence": "Mira si la acción responde a una señal musical concreta."
+      },
+      "nextSceneId": "tutorial-observation"
+    },
+    {
+      "id": "feedback-missing-evidence",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El objetivo exige reconocer un final de frase.",
+        "agency": "La escena permite decisiones expresivas, pero no orientadas.",
+        "barrier": "Falta una acción vinculada a la señal musical.",
+        "evidence": "No hay comprobación del reconocimiento."
+      },
+      "feedback": {
+        "supports": "Este indicio conecta el objetivo con algo que todavía no puede observarse.",
+        "tension": "La energía del grupo puede ocultar la ausencia de evidencia.",
+        "possibleRepair": "Cambia una sola variable de la acción.",
+        "observableEvidence": "Haz visible una respuesta al final de frase."
+      },
+      "nextSceneId": "tutorial-repair"
+    },
+    {
+      "id": "feedback-repair-phrase",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Varias respuestas coinciden con los finales de frase.",
+        "agency": "El grupo elige entre gesto, forma o desplazamiento.",
+        "barrier": "Una única señal sonora aún podría necesitar apoyo visual.",
+        "evidence": "El grupo anticipa el cambio y explica la señal."
+      },
+      "feedback": {
+        "supports": "Mantienes la actividad corporal y ahora permite observar una relación musical.",
+        "tension": "Una coincidencia aislada no basta para afirmar un aprendizaje estable.",
+        "possibleRepair": "Repite con otra frase y ofrece señal visual equivalente.",
+        "observableEvidence": "Comprueba si anticipan y explican el cambio."
+      },
+      "nextSceneId": "tutorial-reveal"
+    },
+    {
+      "id": "feedback-repair-steps",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El grupo entra junto y sigue una estructura.",
+        "agency": "La respuesta queda muy dirigida.",
+        "barrier": "Puede seguirse la cuenta o el modelo visual sin reconocer la frase.",
+        "evidence": "La coordinación no distingue qué señal musical se comprendió."
+      },
+      "feedback": {
+        "supports": "La estructura ayuda a entrar juntos.",
+        "tension": "Deja poca evidencia de reconocimiento de la frase.",
+        "possibleRepair": "Retira gradualmente el modelo y permite respuestas equivalentes.",
+        "observableEvidence": "Comprueba si responden sin copiar la cuenta."
+      },
+      "nextSceneId": "tutorial-reveal"
+    },
+    {
+      "id": "feedback-repair-colours",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El objetivo musical no cambia.",
+        "agency": "Se conserva la misma elección de movimiento.",
+        "barrier": "El atractivo del material sustituye a la reparación.",
+        "evidence": "Sigue sin observarse el final de frase."
+      },
+      "feedback": {
+        "supports": "El material puede renovar la atención.",
+        "tension": "El principio y la evidencia no han cambiado.",
+        "possibleRepair": "Vincula una respuesta corporal a la frase.",
+        "observableEvidence": "Mira si el grupo anticipa un final, no si usa más colores."
+      },
+      "nextSceneId": "tutorial-reveal"
+    },
+    {
+      "id": "tutorial-principle-revealed",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La respuesta corporal se vincula a una relación musical.",
+        "agency": "Existen gestos y desplazamientos equivalentes.",
+        "barrier": "Moverse sin finalidad seguiría siendo insuficiente.",
+        "evidence": "El grupo anticipa y explica el final de frase."
+      },
+      "feedback": {
+        "supports": "La función reconocida ayuda a entender una puerta Dalcroze.",
+        "tension": "El nombre no convierte cualquier movimiento en ese enfoque.",
+        "possibleRepair": "Mantén siempre visible la relación entre acción y objetivo.",
+        "observableEvidence": "Comprueba anticipación, ajuste y explicación."
+      },
+      "nextSceneId": "tutorial-reflection"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ],
+  "journalTemplate": {
+    "objective": "Reconocer el final de una frase rítmica.",
+    "first-decision": "Indicio elegido: {{action:tutorial-observation}}",
+    "maintained-decision": "Mantengo la actividad corporal y la posibilidad de responder de formas distintas.",
+    "revised-decision": "Reparación: {{action:tutorial-repair}}",
+    "trigger": "La escena tenía mucha actividad, pero no hacía visible la comprensión del final de frase.",
+    "condition-risk": "Confundir movimiento o elección expresiva con aprendizaje musical.",
+    "adaptation": "Permitir gesto, forma o desplazamiento como respuestas equivalentes y acompañar la señal sonora visualmente.",
+    "observable-evidence": "El grupo anticipa el final de frase y explica qué señal percibió.",
+    "defensible-alternative": "Una pauta común puede ayudar a coordinarse si después se retira el modelo y se comprueba la escucha.",
+    "final-grammar": "Para reconocer el final de frase, uso una respuesta corporal vinculada a una señal musical; permito gestos y desplazamientos equivalentes y comprobaré si el grupo anticipa y explica el cambio."
+  },
+  "completion": {
+    "eyebrow": "Tutorial completado",
+    "title": "Ya distingues actividad de evidencia",
+    "body": "Ahora aplicarás el mismo lenguaje a un caso con tres decisiones, una prueba, un incidente y una revisión.",
+    "nextLabel": "Continuar al caso completo",
+    "nextRoute": "#/caso/el-arreglo-que-no-escucha-a-todos"
+  }
+}

@@ -21,6 +21,16 @@ const FeedbackSchema = z
   })
   .strict();
 
+const GrammarOptionSchema = z.union([
+  IdentifierSchema,
+  z
+    .object({
+      id: IdentifierSchema,
+      label: z.string().min(1),
+    })
+    .strict(),
+]);
+
 export const ConsequenceSchema = z
   .object({
     id: IdentifierSchema,
@@ -71,11 +81,13 @@ const BaseSceneSchema = z.object({
   title: z.string().min(1),
   introduction: z.string().min(1),
   resourceIds: z.array(IdentifierSchema),
+  nextSceneId: IdentifierSchema.nullable().optional(),
 });
 
 const ChoiceSceneFields = {
   prompt: z.string().min(1),
   actionIds: z.array(IdentifierSchema).min(1),
+  feedbackMode: z.enum(["immediate", "deferred"]).default("immediate"),
 };
 
 export const SceneSchema = z.discriminatedUnion("kind", [
@@ -93,6 +105,17 @@ export const SceneSchema = z.discriminatedUnion("kind", [
   BaseSceneSchema.extend({
     kind: z.literal("consequence"),
     consequenceIds: z.array(IdentifierSchema).min(1),
+    rules: z
+      .array(
+        z
+          .object({
+            requiredTags: z.array(IdentifierSchema).min(1),
+            consequenceId: IdentifierSchema,
+          })
+          .strict(),
+      )
+      .optional(),
+    fallbackConsequenceId: IdentifierSchema.optional(),
   }).strict(),
   BaseSceneSchema.extend({
     kind: z.literal("incident"),
@@ -106,11 +129,11 @@ export const SceneSchema = z.discriminatedUnion("kind", [
     kind: z.literal("justification"),
     grammarOptions: z
       .object({
-        objective: z.array(IdentifierSchema).min(1),
-        principleAction: z.array(IdentifierSchema).min(1),
-        conditionRisk: z.array(IdentifierSchema).min(1),
-        adaptation: z.array(IdentifierSchema).min(1),
-        evidence: z.array(IdentifierSchema).min(1),
+        objective: z.array(GrammarOptionSchema).min(1),
+        principleAction: z.array(GrammarOptionSchema).min(1),
+        conditionRisk: z.array(GrammarOptionSchema).min(1),
+        adaptation: z.array(GrammarOptionSchema).min(1),
+        evidence: z.array(GrammarOptionSchema).min(1),
       })
       .strict(),
   }).strict(),
@@ -140,6 +163,7 @@ export const CaseDefinitionSchema = z
     slug: IdentifierSchema,
     status: z.enum(["contract-probe", "draft", "reviewed", "published"]),
     title: z.string().min(1),
+    experienceType: z.enum(["tutorial", "case", "probe"]).default("case"),
     durationMinutes: z.number().int().min(1).max(20),
     modes: z.array(z.enum(["class", "home"])).min(1),
     learningObjective: z.string().min(1),
@@ -160,6 +184,17 @@ export const CaseDefinitionSchema = z
     incidents: z.array(IncidentSchema),
     consequences: z.array(ConsequenceSchema).min(1),
     journalFields: z.array(JournalFieldSchema).min(1),
+    journalTemplate: z.record(JournalFieldSchema, z.string().min(1)).optional(),
+    completion: z
+      .object({
+        eyebrow: z.string().min(1),
+        title: z.string().min(1),
+        body: z.string().min(1),
+        nextLabel: z.string().min(1),
+        nextRoute: z.string().regex(/^#\//),
+      })
+      .strict()
+      .optional(),
   })
   .strict();
 
@@ -168,3 +203,4 @@ export type Scene = z.infer<typeof SceneSchema>;
 export type Action = z.infer<typeof ActionSchema>;
 export type Incident = z.infer<typeof IncidentSchema>;
 export type Consequence = z.infer<typeof ConsequenceSchema>;
+export type JournalField = z.infer<typeof JournalFieldSchema>;

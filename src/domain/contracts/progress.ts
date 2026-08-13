@@ -39,6 +39,7 @@ export const ProgressSchema = z
   .strict();
 
 export type Progress = z.infer<typeof ProgressSchema>;
+export type JournalEntry = z.infer<typeof JournalEntrySchema>;
 
 export function createEmptyProgress(now: string): Progress {
   return {

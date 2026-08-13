@@ -21,10 +21,17 @@ un núcleo de diseño, prueba y revisión de microclases de dos minutos.
 - Campaña de 84 minutos y ruta de clase de 25-28: `docs/mapa_campana_m2.md`.
 - Tutorial y caso piloto Orff-Keetman + PME/Green: `docs/caso_piloto_m2.md`.
 
-M3 está completada y se mantiene deliberadamente en una aplicación técnica mínima. El repositorio
-independiente, la arquitectura, los contratos y las publicaciones en GitHub Pages y PLATEA están
-comprobados. El tutorial y el caso jugable no se han construido: corresponden al corte vertical
-gris de M4.
+M4 está completada localmente. El corte gris implementa el tutorial «Mucho hacer, poco aprender» y
+el caso «El arreglo que no escucha a todos» de principio a fin, con incidente, revisión,
+retroalimentación, justificación y bitácora. Los datos pedagógicos están separados del intérprete de
+escenas y se han comprobado ratón, teclado, táctil y cinco tamaños objetivo.
+
+- Evidencia del corte y límites: `docs/corte_vertical_m4.md`.
+- Contenido jugable: `src/content/playable/`.
+- Intérprete común: `src/app/game-session.ts` y `src/app/render-app.ts`.
+
+La fase se detiene antes de M5: no hay dirección visual o sonora aprobada ni arte definitivo, y no
+se ha construido la campaña completa.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

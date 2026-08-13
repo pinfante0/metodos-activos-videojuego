@@ -1,8 +1,8 @@
 # Plan maestro del tercer videojuego
 
-Estado: **M2 aprobado tras auditoría final** el 13 de agosto de 2026. Este documento fija las
-decisiones de alcance y la secuencia de trabajo. El diseño pedagógico y jugable está documentado;
-todavía no se han inicializado arquitectura, contratos ni código.
+Estado: **M4 completado y comprobado localmente** el 13 de agosto de 2026. Este documento fija las
+decisiones de alcance y la secuencia de trabajo. El corte vertical gris implementa el tutorial y el
+caso piloto aprobados sin adelantar la dirección visual ni la campaña completa.
 
 El nombre de trabajo es **El aula de los dos minutos**. Tanto el nombre como la identidad visual
 podrán cambiar durante M5 sin alterar la propuesta pedagógica aprobada.
@@ -316,6 +316,11 @@ Tareas:
 
 Puerta de salida: recorrido jugable de principio a fin en móvil y ordenador, con una duración y una
 comprensión iniciales aceptables.
+
+Estado: **completado; puerta de salida superada el 13 de agosto de 2026**. Tutorial y caso piloto
+funcionan de principio a fin con incidente, revisión, retroalimentación, justificación y bitácora.
+Se han comprobado ratón, teclado, táctil y cinco tamaños objetivo. El contenido jugable reside en
+JSON validado y puede cambiar sin reescribir el intérprete. Véase `docs/corte_vertical_m4.md`.
 
 ### M5 — Dirección visual, sonora y de experiencia
 
