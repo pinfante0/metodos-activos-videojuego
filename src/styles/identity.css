@@ -166,6 +166,41 @@ h1, h2 { font-weight: 800; }
 
 .game-screen > .grammar-preview { min-height: 0; flex-shrink: 1; }
 
+/*
+ * El montaje es el bloque de repaso de M6 y se comporta como los tres anteriores: encoge al hueco
+ * disponible y se desplaza por dentro, con foco, nombre accesible y flechas. Cuatro decisiones con
+ * su texto completo no caben en 360 × 640, y encogerlas rompería la regla 5.
+ */
+.game-screen > .assembly-review {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex-shrink: 1;
+  overflow-y: auto;
+}
+
+.game-screen > .incident {
+  min-height: 0;
+  flex-shrink: 1;
+  overflow-y: auto;
+}
+
+.assembly-review:focus-visible,
+.incident:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: -3px; }
+
+/*
+ * El aviso de ruta de prueba ocupa altura que la pantalla de juego no tenía prevista.
+ *
+ * No basta con anular su altura mínima: `max-height: 100%` se calcula sobre la altura completa de
+ * `main`, de modo que el aviso y la pantalla sumaban más que el hueco disponible y la página se
+ * desplazaba justo lo que mide el aviso. Lo detectó la propia medición al recorrer los estados
+ * difíciles por primera vez. Con `main` como columna flexible, la pantalla recibe exactamente el
+ * espacio que queda y sus bloques de repaso encogen dentro, igual que en el resto del juego.
+ */
+main:has(.test-banner) { display: flex; flex-direction: column; }
+main:has(.test-banner) > .test-banner { flex: 0 0 auto; }
+main:has(.test-banner) > .game-screen { flex: 1 1 auto; min-height: 0; max-height: none; }
+
 /* El panel es el único elemento flexible que puede encoger: ocupa el hueco que quede. */
 .disclosure__panel:not([hidden]) {
   display: block;

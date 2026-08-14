@@ -7,7 +7,19 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const distDirectory = resolve(projectRoot, "dist");
 const releaseDirectory = resolve(projectRoot, "release");
-const outputFile = resolve(releaseDirectory, "el-aula-de-los-dos-minutos-m5-platea.zip");
+
+/*
+ * La fase se lee de `package.json` en lugar de escribirse aquí. Estaba puesta a mano y llegó a M6
+ * diciendo todavía «m5»: un nombre de paquete equivocado es difícil de detectar y fácil de repartir.
+ */
+const packageJson = JSON.parse(
+  await readFile(resolve(projectRoot, "package.json"), "utf8"),
+);
+const PHASE = (packageJson.version.split("-").pop() ?? "sin-fase").toUpperCase();
+const outputFile = resolve(
+  releaseDirectory,
+  `el-aula-de-los-dos-minutos-${PHASE.toLowerCase()}-platea.zip`,
+);
 
 async function listFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -42,7 +54,7 @@ const fileElements = paths
   .map((path) => `      <file href="${escapeXml(path)}"/>`)
   .join("\n");
 const manifest = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="METODOS-M5" version="1.0"
+<manifest identifier="METODOS-${PHASE}" version="1.0"
   xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p1.xsd">
@@ -50,16 +62,16 @@ const manifest = `<?xml version="1.0" encoding="UTF-8"?>
     <schema>IMS Content</schema>
     <schemaversion>1.1</schemaversion>
   </metadata>
-  <organizations default="ORG-M5">
-    <organization identifier="ORG-M5">
-      <title>El aula de los dos minutos · corte vertical con identidad M5</title>
-      <item identifier="ITEM-M5" identifierref="RESOURCE-M5">
-        <title>Tutorial y caso completo</title>
+  <organizations default="ORG-${PHASE}">
+    <organization identifier="ORG-${PHASE}">
+      <title>El aula de los dos minutos · ${PHASE}</title>
+      <item identifier="ITEM-${PHASE}" identifierref="RESOURCE-${PHASE}">
+        <title>Campaña, tutorial y caso completo</title>
       </item>
     </organization>
   </organizations>
   <resources>
-    <resource identifier="RESOURCE-M5" type="webcontent" href="index.html">
+    <resource identifier="RESOURCE-${PHASE}" type="webcontent" href="index.html">
 ${fileElements}
     </resource>
   </resources>

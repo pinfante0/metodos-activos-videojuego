@@ -238,6 +238,11 @@
         "possibleRepair": "Mantén siempre visible la relación entre acción y objetivo.",
         "observableEvidence": "Comprueba anticipación, ajuste y explicación."
       },
+      "participation": {
+        "roles": [
+          {"characterId": "leo", "role": "decides", "note": "Admitir gesto, forma o desplazamiento como respuestas equivalentes le deja decidir cómo marca el final de frase, sin rebajar el objetivo musical."}
+        ]
+      },
       "nextSceneId": "tutorial-reflection"
     }
   ],

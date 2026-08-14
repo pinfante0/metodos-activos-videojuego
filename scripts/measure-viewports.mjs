@@ -1,18 +1,31 @@
 /**
- * Medición reproducible de los cinco tamaños objetivo con la identidad fijada en M5.
+ * Medición reproducible de los cinco tamaños objetivo.
  *
  * Sirve `dist/` en un puerto local, conduce Chrome sin interfaz por el protocolo de DevTools y
- * recorre el tutorial y el caso piloto **hasta su pantalla de cierre**, por un camino explícito.
- * En cada pantalla mide desbordamiento horizontal, desplazamiento vertical y el menor lado de todo
- * control interactivo visible, **con los desplegables cerrados y abiertos**.
+ * recorre **los recorridos declarados en `src/content/playable/walkthroughs.json`** hasta su
+ * pantalla de cierre. En cada pantalla mide desbordamiento horizontal, desplazamiento vertical y el
+ * menor lado de todo control interactivo visible, **con los desplegables cerrados y abiertos**.
  *
  * Comprueba la regla 6 de `docs/decision_producto_m5.md`: ninguna pantalla de acción puede
- * desplazarse, en ningún estado. Las páginas de referencia —bitácora general, diagnóstico— quedan
- * excluidas. Si algo se desplaza, el arnés **falla con código de salida 1**.
+ * desplazarse, en ningún estado. Las páginas de referencia —campaña, bitácora, diagnóstico— quedan
+ * excluidas de esa regla, pero se miden igual. Si algo se desplaza, el arnés **falla con código de
+ * salida 1**.
  *
  * Comprueba también que todo bloque con desplazamiento interno real sea alcanzable con el
  * tabulador, tenga nombre accesible expuesto en el árbol de accesibilidad, muestre foco visible y
  * se pueda desplazar con el teclado.
+ *
+ * ## Qué cambió en M6
+ *
+ * En M5 los dos recorridos y sus identificadores de acción estaban escritos dentro de este archivo.
+ * Con una campaña de nueve unidades eso no se sostiene: cada caso nuevo obligaría a editar el
+ * arnés, y un caso que dejara de ofrecer una decisión pasaría por otro camino sin avisar. Ahora:
+ *
+ * - los recorridos son un dato, compartido con `tests/walkthroughs.test.ts`, que los ejecuta sobre
+ *   la sesión pura. Uno demuestra la lógica y el otro, la pantalla;
+ * - las rutas de prueba de los estados difíciles se descubren leyendo `#/pruebas`, de modo que
+ *   añadir un estado lo incorpora a la medición sin tocar este archivo;
+ * - una acción se consume al usarse, lo que permite describir un reintento sin girar en vacío.
  *
  * Tres garantías impiden que una avería se disfrace de éxito:
  *
@@ -29,6 +42,7 @@
  *   pnpm build
  *   pnpm measure:viewports                 # tres pasadas, resumen en Markdown
  *   pnpm measure:viewports --runs=1        # una sola pasada
+ *   pnpm measure:viewports --all-viewports # los cinco tamaños en todos los recorridos
  *   pnpm measure:viewports --allow-scroll  # informa del desplazamiento sin fallar
  *   pnpm measure:viewports --out=docs/x.md # además escribe el resumen a un archivo
  *
@@ -36,7 +50,7 @@
  */
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
-import { existsSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { extname, join, normalize, resolve } from "node:path";
@@ -68,29 +82,38 @@ const VIEWPORTS = [
   { name: "1440 × 900", width: 1440, height: 900 },
 ];
 
+const REFERENCE_VIEWPORT = VIEWPORTS[3];
+
 /**
- * Camino explícito por identificador de acción. En el tutorial, `observe-movement` y
- * `observe-choice` devuelven a la propia escena de observación: sólo `observe-missing-evidence`
- * avanza. Si el contenido cambiara y ninguna de estas acciones estuviera disponible, el recorrido
- * falla en lugar de improvisar.
+ * Recorridos declarados: la misma fuente que ejecuta `tests/walkthroughs.test.ts`.
+ *
+ * Si el contenido cambiara y una acción prevista dejara de ofrecerse, el recorrido falla en lugar
+ * de improvisar otro camino. Cada acción se consume al usarse, de modo que un recorrido puede
+ * describir un reintento —elegir una opción que devuelve a la misma escena y después otra— sin
+ * girar en vacío.
  */
-const CASE_ROUTES = [
-  {
-    name: "tutorial",
-    hash: "#/caso/mucho-hacer-poco-aprender",
-    actions: ["observe-missing-evidence", "repair-phrase-response"],
-  },
-  {
-    name: "caso piloto",
-    hash: "#/caso/el-arreglo-que-no-escucha-a-todos",
-    actions: [
-      "brief-mediated-choice",
-      "entry-recording-choice",
-      "process-imitate-explore-vary",
-      "evidence-rondo-explain",
-      "revision-rotating-decisions",
-    ],
-  },
+const CATALOGUE = JSON.parse(
+  readFileSync(resolve("src/content/playable/walkthroughs.json"), "utf8"),
+);
+
+const WALKS = CATALOGUE.walkthroughs.map((walk) => ({
+  name: walk.name,
+  hash: walk.startSceneId
+    ? `#/caso/${walk.caseSlug}/${walk.startSceneId}`
+    : `#/caso/${walk.caseSlug}`,
+  actions: walk.actions ?? [],
+  viewports:
+    args.has("all-viewports") || walk.viewportCoverage === "all" ? VIEWPORTS : [REFERENCE_VIEWPORT],
+}));
+
+/** Páginas de referencia y navegación. Pueden desplazarse, pero no desbordar ni encoger un control. */
+const STATIC_ROUTES = [
+  { name: "portada", hash: "#/" },
+  { name: "campaña", hash: "#/campana" },
+  { name: "ruta de clase", hash: "#/ruta/clase" },
+  { name: "bitácora", hash: "#/bitacora" },
+  { name: "diagnóstico", hash: "#/prueba-publicacion" },
+  { name: "índice de pruebas", hash: "#/pruebas" },
 ];
 
 const IDENTITY = "aula-laboratorio";
@@ -98,9 +121,11 @@ const PROGRESS_KEY = "metodos.progress.v1";
 
 /** Bloques que declaran desplazamiento interno propio y deben ser accesibles con teclado. */
 const SCROLLABLE_BLOCKS = [
-  { selector: "#panel-razonamiento", label: "reparación y observables" },
+  { selector: "#panel-razonamiento", label: "reparación, observables y reparto" },
   { selector: ".grammar-preview", label: "justificación en construcción" },
   { selector: "#panel-bitacora", label: "vista previa de la bitácora" },
+  { selector: "#panel-montaje", label: "montaje de la microclase" },
+  { selector: "#panel-incidente", label: "relato del incidente" },
 ];
 
 const CHROME_CANDIDATES = [
@@ -172,7 +197,12 @@ const restoreDetails = `(() => {
   return true;
 })()`;
 
-function advanceScript(actions) {
+/**
+ * Un paso del recorrido. `remaining` son las acciones aún sin consumir: quien llama retira la que
+ * se haya usado, que es lo que permite describir un reintento sin repetir la misma elección para
+ * siempre.
+ */
+function advanceScript(remaining) {
   return `(() => {
   const q = (s) => document.querySelector(s);
   if (q('.completion')) return 'fin';
@@ -186,13 +216,13 @@ function advanceScript(actions) {
     return 'bloqueado: la justificación sigue deshabilitada';
   }
   const finish = q('[data-finish-case]'); if (finish) { finish.click(); return 'cierre'; }
-  const planned = ${JSON.stringify(actions)};
+  const planned = ${JSON.stringify(remaining)};
   for (const id of planned) {
     const choice = document.querySelector('.choice[data-action-id="' + id + '"]');
     if (choice) { choice.click(); return 'decisión ' + id; }
   }
   const offered = [...document.querySelectorAll('.choice')].map((c) => c.dataset.actionId);
-  if (offered.length) return 'bloqueado: ninguna acción prevista entre ' + offered.join(', ');
+  if (offered.length) return 'bloqueado: ninguna acción prevista sigue disponible entre ' + offered.join(', ');
   return 'bloqueado: no hay ningún control que pulsar';
 })()`;
 }
@@ -396,85 +426,150 @@ async function inspectScrollable(driver, block) {
   return results;
 }
 
-async function runPass(base, cdp, passIndex, collectAccessibility) {
+/** Descubre las rutas de prueba leyendo el índice: añadir un estado no obliga a tocar este archivo. */
+async function discoverTestRoutes(driver) {
+  await driver.load("#/pruebas");
+  const found = JSON.parse(await driver.evaluate(`JSON.stringify(
+    [...document.querySelectorAll('a[href^="#/prueba/"]')].map((a) => ({ hash: a.getAttribute('href'), name: a.textContent.trim() })),
+  )`));
+  if (found.length === 0) {
+    throw new Error("El índice `#/pruebas` no publica ninguna ruta de prueba: la medición se quedaría sin estados difíciles.");
+  }
+  return found;
+}
+
+/** Mide una pantalla con los desplegables cerrados y después abiertos, y la deja como estaba. */
+async function measureScreen(evaluate, collect) {
+  for (const state of ["cerrado", "abierto"]) {
+    if (state === "abierto") {
+      const count = await evaluate(setDetails(true));
+      if (count === 0) continue;
+    }
+    collect(JSON.parse(await evaluate(MEASURE)), state);
+  }
+  await evaluate(restoreDetails);
+}
+
+/** Acumulador de una tanda de medidas. Separar tandas es lo que hace comparable una pasada. */
+function makeTally() {
+  return { findings: [], horizontal: 0, minTarget: Infinity, screens: 0 };
+}
+
+function collectInto(tally, prefix) {
+  return (measurement, state) => {
+    if (measurement.minSide !== null) tally.minTarget = Math.min(tally.minTarget, measurement.minSide);
+    if (measurement.hOverflow > 1) tally.horizontal += 1;
+    if (measurement.isAction && measurement.mainScroll > 1) {
+      tally.findings.push({ key: `${prefix}|${measurement.title}|detalle ${state}`, value: measurement.mainScroll });
+    }
+  };
+}
+
+function summarise(tally) {
+  const worst = new Map();
+  for (const finding of tally.findings) {
+    worst.set(finding.key, Math.max(worst.get(finding.key) ?? 0, finding.value));
+  }
+  return {
+    worst, horizontal: tally.horizontal, screens: tally.screens,
+    minTarget: tally.minTarget === Infinity ? null : tally.minTarget,
+  };
+}
+
+/**
+ * `deepPass` sólo se activa en la primera pasada. Sus medidas van a una tanda propia: mezclarlas
+ * con las de los recorridos haría que las pasadas dejaran de ser comparables entre sí y la
+ * comprobación de reproducibilidad fallara siempre.
+ */
+async function runPass(base, cdp, passIndex, deepPass) {
   const driver = makeDriver(base, cdp, `pasada${passIndex}`);
   const { send, evaluate, load } = driver;
-  const findings = [];
+  const walkTally = makeTally();
+  const stateTally = makeTally();
   const accessibility = [];
-  let minTarget = Infinity;
-  let horizontal = 0;
-  let screensVisited = 0;
 
-  for (const route of CASE_ROUTES) {
-    for (const viewport of VIEWPORTS) {
-      await send("Emulation.setDeviceMetricsOverride", {
-        width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false,
-      });
+  const setViewport = (viewport) => send("Emulation.setDeviceMetricsOverride", {
+    width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false,
+  });
+
+  for (const walk of WALKS) {
+    for (const viewport of walk.viewports) {
+      await setViewport(viewport);
       await load("#/");
       await evaluate(`localStorage.removeItem(${JSON.stringify(PROGRESS_KEY)}); true`);
-      await load(route.hash);
+      await load(walk.hash);
 
       // Sin esta aserción, una navegación que no confirme mide el documento anterior en silencio.
       const applied = await evaluate(`document.documentElement.dataset.identity`);
       if (applied !== IDENTITY) {
-        throw new Error(`Identidad no aplicada en ${route.name} · ${viewport.name}: se esperaba ${IDENTITY} y el documento declara ${applied}`);
+        throw new Error(`Identidad no aplicada en ${walk.name} · ${viewport.name}: se esperaba ${IDENTITY} y el documento declara ${applied}`);
       }
 
-      const advance = advanceScript(route.actions);
+      const remaining = [...walk.actions];
       let finished = false;
       let steps = 0;
 
       while (steps < MAX_STEPS && !finished) {
         steps += 1;
-        screensVisited += 1;
+        walkTally.screens += 1;
 
-        for (const state of ["cerrado", "abierto"]) {
-          if (state === "abierto") {
-            const count = await evaluate(setDetails(true));
-            if (count === 0) continue;
-          }
-          const measurement = JSON.parse(await evaluate(MEASURE));
-          if (measurement.minSide !== null) minTarget = Math.min(minTarget, measurement.minSide);
-          if (measurement.hOverflow > 1) horizontal += 1;
-          if (measurement.isAction && measurement.mainScroll > 1) {
-            findings.push({
-              key: `${route.name}|${viewport.name}|${measurement.title}|detalle ${state}`,
-              value: measurement.mainScroll,
-            });
-          }
-        }
-        // Los bloques se inspeccionan con los desplegables abiertos: dentro de un `details`
-        // cerrado nada es enfocable ni tiene nombre expuesto, de modo que medirlo ahí no
-        // comprobaría nada.
-        if (collectAccessibility && viewport.width === 360 && viewport.height === 640) {
+        await measureScreen(evaluate, collectInto(walkTally, `${walk.name}|${viewport.name}`));
+
+        // Los bloques se inspeccionan con los desplegables abiertos: cerrados no son enfocables ni
+        // tienen nombre expuesto, de modo que medirlos ahí no comprobaría nada.
+        if (deepPass && viewport.width === 360 && viewport.height === 640) {
           await evaluate(setDetails(true));
           for (const block of SCROLLABLE_BLOCKS) {
             accessibility.push(...await inspectScrollable(driver, block));
           }
+          await evaluate(restoreDetails);
         }
-        await evaluate(restoreDetails);
 
-        const moved = await evaluate(advance);
+        const moved = await evaluate(advanceScript(remaining));
         if (moved === "fin") { finished = true; break; }
         if (typeof moved === "string" && moved.startsWith("bloqueado")) {
           const title = await evaluate(`(document.querySelector('main h1') || {}).textContent || '(sin h1)'`);
-          throw new Error(`Recorrido detenido en ${route.name} · ${viewport.name}, pantalla «${title.trim()}»: ${moved}`);
+          throw new Error(`Recorrido detenido en ${walk.name} · ${viewport.name}, pantalla «${title.trim()}»: ${moved}`);
+        }
+        if (typeof moved === "string" && moved.startsWith("decisión ")) {
+          const used = moved.slice("decisión ".length);
+          const index = remaining.indexOf(used);
+          if (index >= 0) remaining.splice(index, 1);
         }
         await new Promise((done) => setTimeout(done, 40));
       }
 
       if (!finished) {
         const title = await evaluate(`(document.querySelector('main h1') || {}).textContent || '(sin h1)'`);
-        throw new Error(`El recorrido de ${route.name} · ${viewport.name} agotó ${MAX_STEPS} pasos sin llegar al cierre; se quedó en «${title.trim()}»`);
+        throw new Error(`El recorrido ${walk.name} · ${viewport.name} agotó ${MAX_STEPS} pasos sin llegar al cierre; se quedó en «${title.trim()}»`);
       }
     }
   }
 
-  const worst = new Map();
-  for (const finding of findings) {
-    worst.set(finding.key, Math.max(worst.get(finding.key) ?? 0, finding.value));
+  /*
+   * Páginas de referencia y estados difíciles: una pantalla cada uno, en los cinco tamaños. No se
+   * recorren porque no tienen recorrido; lo que hay que comprobar es que caben, que no desbordan y
+   * que ningún control encoge por debajo del objetivo táctil.
+   */
+  let routesMeasured = 0;
+  if (deepPass) {
+    const testRoutes = await discoverTestRoutes(driver);
+    routesMeasured = STATIC_ROUTES.length + testRoutes.length;
+    for (const route of [...STATIC_ROUTES, ...testRoutes]) {
+      for (const viewport of VIEWPORTS) {
+        await setViewport(viewport);
+        await load(route.hash);
+        stateTally.screens += 1;
+        await measureScreen(evaluate, collectInto(stateTally, `${route.name}|${viewport.name}`));
+      }
+    }
   }
-  return { horizontal, minTarget: minTarget === Infinity ? null : minTarget, worst, screensVisited, accessibility };
+
+  return {
+    walk: summarise(walkTally),
+    states: deepPass ? { ...summarise(stateTally), routesMeasured } : undefined,
+    accessibility,
+  };
 }
 
 /** Comprobaciones que no dependen del tamaño y basta ejecutar una vez. */
@@ -485,9 +580,10 @@ async function verifyInteraction(base, cdp) {
   await send("Emulation.setDeviceMetricsOverride", { width: 1366, height: 768, deviceScaleFactor: 1, mobile: false });
   const checks = [];
 
+  const interactive = WALKS.find((walk) => walk.actions.length > 0) ?? WALKS[0];
   await load("#/");
   await evaluate(`localStorage.removeItem(${JSON.stringify(PROGRESS_KEY)}); true`);
-  await load(CASE_ROUTES[1].hash);
+  await load(interactive.hash);
   await key("1", "Digit1", 49);
   checks.push({
     name: "Teclado: el atajo numérico toma la decisión",
@@ -509,7 +605,7 @@ async function verifyInteraction(base, cdp) {
     localStorage.setItem(${JSON.stringify(PROGRESS_KEY)}, JSON.stringify(progress));
     return true;
   })()`);
-  await load(CASE_ROUTES[1].hash);
+  await load(interactive.hash);
   await key("1", "Digit1", 49);
   const caption = await evaluate(`(document.querySelector('.sound-caption') || {}).textContent || ''`);
   checks.push({
@@ -539,33 +635,46 @@ async function verifyInteraction(base, cdp) {
   return checks;
 }
 
+function scrollTable(title, worst, passes) {
+  const keys = [...worst.keys()].sort();
+  if (keys.length === 0) return [`- ${title}: **ninguno**, en ningún tamaño ni estado.`];
+  const lines = ["", `| ${title} | Tamaño | Pantalla | Estado | Desplazamiento |`, "| --- | --- | --- | --- | ---: |"];
+  for (const key of keys) {
+    const [walk, viewport, screen, state] = key.split("|");
+    const values = passes.map((pass) => pass.worst.get(key) ?? 0);
+    const shown = new Set(values).size === 1 ? `${values[0]} px` : `${values.join(" / ")} px (inestable)`;
+    lines.push(`| ${walk} | ${viewport} | ${screen} | ${state} | ${shown} |`);
+  }
+  return lines;
+}
+
 function renderReport(passes, checks, accessibility) {
-  const keys = [...new Set(passes.flatMap((pass) => [...pass.worst.keys()]))].sort();
-  const stable = keys.every((key) => new Set(passes.map((pass) => pass.worst.get(key) ?? 0)).size === 1)
-    && new Set(passes.map((pass) => pass.horizontal)).size === 1
-    && new Set(passes.map((pass) => pass.minTarget)).size === 1
-    && new Set(passes.map((pass) => pass.screensVisited)).size === 1;
+  const walks = passes.map((pass) => pass.walk);
+  const keys = [...new Set(walks.flatMap((pass) => [...pass.worst.keys()]))].sort();
+  const stable = keys.every((key) => new Set(walks.map((pass) => pass.worst.get(key) ?? 0)).size === 1)
+    && new Set(walks.map((pass) => pass.horizontal)).size === 1
+    && new Set(walks.map((pass) => pass.minTarget)).size === 1
+    && new Set(walks.map((pass) => pass.screens)).size === 1;
+
+  const states = passes[0].states;
+  const walkLoads = WALKS.reduce((sum, walk) => sum + walk.viewports.length, 0);
+  const minTarget = Math.min(walks[0].minTarget ?? Infinity, states?.minTarget ?? Infinity);
+  const horizontal = walks[0].horizontal + (states?.horizontal ?? 0);
 
   const lines = [];
   lines.push(`Pasadas ejecutadas: ${passes.length}.`);
   lines.push(`Resultados idénticos en todas las pasadas: **${stable ? "sí" : "NO"}**.`);
   lines.push("");
-  lines.push(`- Recorridos completados hasta su pantalla de cierre: ${CASE_ROUTES.length} × ${VIEWPORTS.length} = ${CASE_ROUTES.length * VIEWPORTS.length}.`);
-  lines.push(`- Pantallas medidas por pasada: ${passes[0].screensVisited}, cada una con los desplegables cerrados y abiertos.`);
-  lines.push(`- Desbordamiento horizontal: ${passes[0].horizontal === 0 ? "ninguno" : `${passes[0].horizontal} pantallas`}.`);
-  lines.push(`- Objetivo táctil mínimo: ${passes[0].minTarget} px.`);
-  if (keys.length === 0) {
-    lines.push("- Desplazamiento vertical en pantallas de acción: **ninguno**, en ningún tamaño ni estado.");
-  } else {
-    lines.push("");
-    lines.push("| Recorrido | Tamaño | Pantalla de acción | Estado | Desplazamiento |");
-    lines.push("| --- | --- | --- | --- | ---: |");
-    for (const key of keys) {
-      const [walk, viewport, screen, state] = key.split("|");
-      const values = passes.map((pass) => pass.worst.get(key) ?? 0);
-      const shown = new Set(values).size === 1 ? `${values[0]} px` : `${values.join(" / ")} px (inestable)`;
-      lines.push(`| ${walk} | ${viewport} | ${screen} | ${state} | ${shown} |`);
-    }
+  lines.push(`- Recorridos declarados: ${WALKS.length}, completados hasta su pantalla de cierre en ${walkLoads} combinaciones de recorrido y tamaño.`);
+  lines.push(`- Pantallas de recorrido medidas por pasada: ${walks[0].screens}, cada una con los desplegables cerrados y abiertos.`);
+  if (states) {
+    lines.push(`- Páginas de referencia y estados difíciles: ${states.routesMeasured} rutas × ${VIEWPORTS.length} tamaños = ${states.screens} pantallas, medidas una vez.`);
+  }
+  lines.push(`- Desbordamiento horizontal: ${horizontal === 0 ? "ninguno" : `${horizontal} pantallas`}.`);
+  lines.push(`- Objetivo táctil mínimo: ${minTarget === Infinity ? "sin datos" : `${minTarget} px`}.`);
+  lines.push(...scrollTable("Desplazamiento en pantallas de acción · recorridos", new Map([...walks[0].worst]), walks));
+  if (states) {
+    lines.push(...scrollTable("Desplazamiento en pantallas de acción · estados difíciles", states.worst, [states]));
   }
 
   const table = (title, rows) => {
@@ -576,7 +685,7 @@ function renderReport(passes, checks, accessibility) {
   lines.push(...table("Comprobación de interacción", checks));
   lines.push(...table("Bloque con desplazamiento interno · 360 × 640", accessibility));
 
-  const clean = keys.length === 0 && passes[0].horizontal === 0;
+  const clean = keys.length === 0 && horizontal === 0 && (states?.worst.size ?? 0) === 0;
   return { report: lines.join("\n"), stable, clean };
 }
 
@@ -585,7 +694,7 @@ const watchdog = setTimeout(() => {
   process.exit(1);
 }, GLOBAL_TIMEOUT_MS);
 
-const profile = mkdtempSync(join(tmpdir(), "medicion-m5-"));
+const profile = mkdtempSync(join(tmpdir(), "medicion-"));
 const { server, base } = await startServer();
 const cdp = await connect(findChrome(), profile);
 let failure;
@@ -609,11 +718,11 @@ try {
   console.log(report);
   if (OUT) {
     const header = [
-      "# Salida reproducible de `pnpm measure:viewports --runs=3`",
+      `# Salida reproducible de \`pnpm measure:viewports --runs=${RUNS}\``,
       "",
       "Generada por el propio arnés. **No se edita a mano**: se regenera con",
-      "`pnpm measure:viewports --runs=3 --out=docs/medicion_tamanos_m5_salida.md`.",
-      "El procedimiento y la interpretación están en `docs/medicion_tamanos_m5.md`.",
+      `\`pnpm measure:viewports --runs=${RUNS} --out=${OUT}\`.`,
+      "El procedimiento y la interpretación están en `docs/comprobaciones_m6.md`.",
       "",
       "",
     ].join("\n");
@@ -630,6 +739,8 @@ try {
     failure = new Error("No se inspeccionó ningún bloque con desplazamiento interno: la comprobación no llegó a ejecutarse.");
   }
   if (!stable) failure = new Error("Las pasadas no coinciden: la medición no es reproducible.");
+  // Decir en voz alta que ha pasado: el silencio no distingue «correcto» de «no llegó a ejecutarse».
+  if (!failure) console.log("\nTodas las comprobaciones pasan.");
 } catch (error) {
   failure = error;
 } finally {

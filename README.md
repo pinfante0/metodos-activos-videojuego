@@ -33,16 +33,32 @@ escenas y se han comprobado ratón, teclado, táctil y cinco tamaños objetivo.
 M5 está completada. La identidad es **Aula-laboratorio escénica**: escenario oscuro y cálido
 concentrado en la banda experiencial, superficies de lectura claras y de alto contraste, paneles de
 razonamiento con la claridad funcional de la Consola, y seis señales sonoras breves que cifran el
-estado en un intervalo con timbre de cuerpo, madera y láminas. **No hay arte definitivo ni
-personajes**: eso es M8, y los personajes dependen además de una ampliación del contenido que
-pertenece a M6. Tampoco hay campaña completa.
+estado en un intervalo con timbre de cuerpo, madera y láminas.
 
 - Cierre de la dirección y criterios de la comparación: `docs/direcciones_m5.md`.
 - Reglas de composición vinculantes: `docs/decision_producto_m5.md`.
 - Contrato de recursos y procedencia: `docs/contrato_recursos_m5.md`.
 - Identidad aplicada: `src/app/identity/` y `src/styles/identity.css`.
-- Medición de los cinco tamaños objetivo: `pnpm measure:viewports`, documentada en
-  `docs/medicion_tamanos_m5.md`. Requiere Chrome o Edge instalados.
+
+M6 está completada. Los sistemas centrales funcionan de principio a fin: campaña declarada de nueve
+unidades, navegación y enlaces directos —incluido el enlace a una escena concreta—, montador de
+microclases, motor determinista de consecuencias e incidentes, revisión, progreso, audio, bitácora
+con resumen y trece rutas de prueba de estados difíciles.
+
+**El contrato de contenido se ha ampliado para declarar participación y reparto**, que era la
+condición previa para que existan personajes: cada resultado de diseño o de revisión declara qué
+papel permite a cada persona del aula, y tres salvaguardas de M2 impiden que alguien se convierta en
+la barrera permanente de un caso o quede reducido a ejecutar.
+
+**Sigue sin haber arte definitivo ni personajes dibujados** —eso es M8— y siete de las nueve unidades
+siguen sin contenido: son M7A y M7B.
+
+- Cierre de la fase y encargos a M7 y M8: `docs/sistemas_centrales_m6.md`.
+- Qué demuestra cada comprobación: `docs/comprobaciones_m6.md`.
+- Campaña y reparto compartido: `src/content/campaign/`.
+- Recorridos declarados: `src/content/playable/walkthroughs.json`.
+- Medición de los cinco tamaños objetivo: `pnpm measure:viewports`. Requiere Chrome o Edge
+  instalados; su salida verificada está en `docs/medicion_tamanos_m6_salida.md`.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

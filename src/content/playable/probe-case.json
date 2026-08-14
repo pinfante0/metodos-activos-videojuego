@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "banco-de-mecanicas-m6",
+  "slug": "banco-de-mecanicas",
+  "status": "draft",
+  "title": "Banco de mecánicas · la frase que no se ve",
+  "experienceType": "probe",
+  "durationMinutes": 6,
+  "modes": ["home"],
+  "learningObjective": "Reconocer el final de una frase rítmica cuando la señal no puede depender solo del oído.",
+  "approachIds": ["dalcroze"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "agency-creativity", "evidence-context"],
+  "characterIds": ["ines", "leo", "julia"],
+  "assembly": {
+    "title": "Microclase de dos minutos",
+    "summary": "Apertura, acción musical, apoyo y cierre que produce evidencia.",
+    "slots": [
+      {"id": "slot-apertura", "kind": "entry", "label": "Apertura", "sceneId": "probe-entry"},
+      {"id": "slot-accion", "kind": "musical-action", "label": "Acción musical", "sceneId": "probe-action"},
+      {"id": "slot-apoyo", "kind": "mediation-support", "label": "Mediación y apoyo", "sceneId": "probe-support"},
+      {"id": "slot-cierre", "kind": "evidence", "label": "Cierre y evidencia", "sceneId": "probe-evidence"}
+    ]
+  },
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "probe-brief",
+  "scenes": [
+    {
+      "id": "probe-brief",
+      "kind": "observation",
+      "title": "Lee el encargo antes de montar",
+      "introduction": "Contenido provisional de M6: este recorrido existe para ejercitar el sistema, no para enseñar un enfoque nuevo. Reutiliza el objetivo del tutorial ya aprobado. El aula dispone de espacio, superficies, voz y cuerpo; hay una señal visual y una vibratoria disponibles. Inés no puede depender de una consigna solo sonora, Leo participa sin desplazarse y Julia necesita saber cuándo cambia cada cosa.",
+      "resourceIds": [],
+      "prompt": "¿Qué condición del encargo conviene conservar durante todo el montaje?",
+      "actionIds": ["probe-brief-multimodal", "probe-brief-sound-only"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "probe-entry",
+      "kind": "design",
+      "title": "Hueco 1 · abre la sesión",
+      "introduction": "La apertura debe hacer perceptible el final de frase antes de pedir nada.",
+      "resourceIds": [],
+      "prompt": "¿Cómo empieza la microclase?",
+      "actionIds": ["probe-entry-signal", "probe-entry-audio-only"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "probe-action",
+      "slots": ["entry"],
+      "assemblySlotId": "slot-apertura"
+    },
+    {
+      "id": "probe-action",
+      "kind": "design",
+      "title": "Hueco 2 · la acción musical",
+      "introduction": "La acción debe permitir responder al final de frase de más de una manera.",
+      "resourceIds": [],
+      "prompt": "¿Qué hace el grupo cuando termina la frase?",
+      "actionIds": ["probe-action-equivalent", "probe-action-single-form"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "probe-support",
+      "slots": ["musical-action"],
+      "assemblySlotId": "slot-accion"
+    },
+    {
+      "id": "probe-support",
+      "kind": "design",
+      "title": "Hueco 3 · quién sostiene la señal",
+      "introduction": "Alguien tiene que marcar el cambio. Decidir quién es una decisión docente, no un detalle.",
+      "resourceIds": [],
+      "prompt": "¿Cómo se organiza el apoyo?",
+      "actionIds": ["probe-support-shared", "probe-support-teacher-only"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "probe-evidence",
+      "slots": ["mediation-support"],
+      "assemblySlotId": "slot-apoyo"
+    },
+    {
+      "id": "probe-evidence",
+      "kind": "design",
+      "title": "Hueco 4 · qué se podrá observar",
+      "introduction": "El cierre decide qué sabrás al terminar los dos minutos.",
+      "resourceIds": [],
+      "prompt": "¿Qué evidencia cierra la microclase?",
+      "actionIds": ["probe-evidence-anticipation", "probe-evidence-applause"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "probe-assembly",
+      "slots": ["evidence"],
+      "assemblySlotId": "slot-cierre"
+    },
+    {
+      "id": "probe-assembly",
+      "kind": "assembly-review",
+      "title": "Tu microclase montada",
+      "introduction": "Los cuatro huecos ya forman una sola pieza. Léela entera antes de probarla.",
+      "resourceIds": [],
+      "nextSceneId": "probe-consequence",
+      "testLabel": "Probar la microclase"
+    },
+    {
+      "id": "probe-consequence",
+      "kind": "consequence",
+      "title": "Primera prueba",
+      "introduction": "El resultado combina los cuatro huecos. Describe una posibilidad pedagógica, no un diagnóstico del grupo.",
+      "resourceIds": [],
+      "consequenceIds": [
+        "probe-outcome-shared",
+        "probe-outcome-teacher-led",
+        "probe-outcome-inaccessible",
+        "probe-outcome-weak"
+      ],
+      "rules": [
+        {
+          "requiredTags": ["entry-multimodal", "action-equivalent", "evidence-strong"],
+          "forbiddenTags": ["support-centralised"],
+          "consequenceId": "probe-outcome-shared"
+        },
+        {
+          "requiredTags": ["entry-multimodal", "action-equivalent", "evidence-strong"],
+          "consequenceId": "probe-outcome-teacher-led"
+        },
+        {
+          "requiredTags": ["entry-audio-only"],
+          "consequenceId": "probe-outcome-inaccessible"
+        },
+        {
+          "requiredTags": ["evidence-weak"],
+          "consequenceId": "probe-outcome-weak"
+        }
+      ],
+      "fallbackConsequenceId": "probe-outcome-weak"
+    },
+    {
+      "id": "probe-incident",
+      "kind": "incident",
+      "title": "Incidente · cambia una condición",
+      "introduction": "La primera prueba deja ver algo que el diseño no había previsto. La tensión pertenece a la organización del aula.",
+      "resourceIds": [],
+      "nextSceneId": "probe-revision",
+      "incidentIds": ["probe-incident-access", "probe-incident-time"],
+      "rules": [
+        {
+          "requiredTags": ["entry-audio-only"],
+          "incidentId": "probe-incident-access"
+        }
+      ],
+      "fallbackIncidentId": "probe-incident-time"
+    },
+    {
+      "id": "probe-revision",
+      "kind": "revision",
+      "title": "Revisa una sola cosa",
+      "introduction": "Mantén una decisión fundamentada del montaje y cambia únicamente la que el incidente ha puesto en duda.",
+      "resourceIds": [],
+      "prompt": "¿Qué revisas?",
+      "actionIds": ["probe-revision-equivalent-signal", "probe-revision-rotate-control", "probe-revision-drop-objective"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "probe-justification",
+      "kind": "justification",
+      "title": "Defiende el montaje",
+      "introduction": "Elige una pieza en cada hueco y comprueba que objetivo, principio, riesgo, adaptación y evidencia forman una sola decisión.",
+      "resourceIds": [],
+      "nextSceneId": "probe-reflection",
+      "grammarOptions": {
+        "objective": [
+          {"id": "probe-objective", "label": "reconocer el final de una frase rítmica"}
+        ],
+        "principleAction": [
+          {"id": "probe-principle-embodied", "label": "una respuesta corporal vinculada a una señal musical"},
+          {"id": "probe-principle-multimodal", "label": "una señal perceptible por más de una vía antes de pedir la respuesta"}
+        ],
+        "conditionRisk": [
+          {"id": "probe-risk-audio", "label": "una consigna solo sonora deja fuera a quien no puede seguirla"},
+          {"id": "probe-risk-control", "label": "concentrar el control de la señal convierte al resto en ejecutantes"}
+        ],
+        "adaptation": [
+          {"id": "probe-adapt-equivalents", "label": "gesto, forma o desplazamiento como respuestas equivalentes"},
+          {"id": "probe-adapt-rotation", "label": "turnos para marcar el cambio y aviso previo de cada transición"}
+        ],
+        "evidence": [
+          {"id": "probe-evidence-sentence", "label": "si el grupo anticipa el final y explica qué señal percibió"}
+        ]
+      }
+    },
+    {
+      "id": "probe-reflection",
+      "kind": "reflection",
+      "title": "Cierra el banco de mecánicas",
+      "introduction": "La entrada se guarda igual que la de cualquier caso: en este navegador, sin nota y sin envío.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "probe-brief-multimodal",
+      "label": "Conservar señal visual y vibratoria junto a la sonora, y respuestas equivalentes.",
+      "principleIds": ["multimodal-access"],
+      "consequenceId": "probe-feedback-multimodal",
+      "tags": ["continue"]
+    },
+    {
+      "id": "probe-brief-sound-only",
+      "label": "Bastará con la señal sonora: así todos escuchan lo mismo.",
+      "principleIds": ["single-channel"],
+      "consequenceId": "probe-feedback-sound-only",
+      "tags": ["retry"]
+    },
+    {
+      "id": "probe-entry-signal",
+      "label": "Sonar la frase con señal visual y vibratoria del cambio, sin pedir respuesta todavía.",
+      "principleIds": ["perceive-before-respond", "multimodal-access"],
+      "consequenceId": "probe-choice-entry-signal",
+      "tags": ["entry-multimodal"]
+    },
+    {
+      "id": "probe-entry-audio-only",
+      "label": "Sonar la frase y pedir que levanten la mano al terminar.",
+      "principleIds": ["single-channel"],
+      "consequenceId": "probe-choice-entry-audio",
+      "tags": ["entry-audio-only"]
+    },
+    {
+      "id": "probe-action-equivalent",
+      "label": "Transformar el gesto, congelar una forma o cambiar de sitio: tres respuestas equivalentes.",
+      "principleIds": ["equivalent-response"],
+      "consequenceId": "probe-choice-action-equivalent",
+      "tags": ["action-equivalent"]
+    },
+    {
+      "id": "probe-action-single-form",
+      "label": "Dar exactamente cuatro pasos y parar a la vez.",
+      "principleIds": ["shared-structure"],
+      "consequenceId": "probe-choice-action-single",
+      "tags": ["action-single-form"]
+    },
+    {
+      "id": "probe-support-shared",
+      "label": "El control de la señal rota por turnos entre el grupo.",
+      "principleIds": ["distributed-authorship"],
+      "consequenceId": "probe-choice-support-shared",
+      "tags": ["support-shared"]
+    },
+    {
+      "id": "probe-support-teacher-only",
+      "label": "La docente marca siempre el cambio para que no haya dudas.",
+      "principleIds": ["centralised-cue"],
+      "consequenceId": "probe-choice-support-teacher",
+      "tags": ["support-centralised"]
+    },
+    {
+      "id": "probe-evidence-anticipation",
+      "label": "Anticipar el final en una frase nueva y explicar qué señal se percibió.",
+      "principleIds": ["explain-musical-choice"],
+      "consequenceId": "probe-choice-evidence-anticipation",
+      "tags": ["evidence-strong"]
+    },
+    {
+      "id": "probe-evidence-applause",
+      "label": "Aplaudir al final para celebrar la actividad.",
+      "principleIds": ["activity-is-not-evidence"],
+      "consequenceId": "probe-choice-evidence-applause",
+      "tags": ["evidence-weak"]
+    },
+    {
+      "id": "probe-revision-equivalent-signal",
+      "label": "Añadir una segunda vía de percepción del cambio y mantener las respuestas equivalentes.",
+      "principleIds": ["multimodal-access", "equivalent-response"],
+      "consequenceId": "probe-revision-signal-outcome",
+      "tags": ["defensible", "revision-signal"]
+    },
+    {
+      "id": "probe-revision-rotate-control",
+      "label": "Repartir por turnos quién marca el cambio y anunciar cada transición antes de que ocurra.",
+      "principleIds": ["distributed-authorship", "predictable-transitions"],
+      "consequenceId": "probe-revision-rotation-outcome",
+      "tags": ["defensible", "revision-rotation"]
+    },
+    {
+      "id": "probe-revision-drop-objective",
+      "label": "Dejar la frase y poner una canción que guste para recuperar el ambiente.",
+      "principleIds": ["material-without-principle"],
+      "consequenceId": "probe-revision-dropped-outcome",
+      "tags": ["incoherent", "retry"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "probe-incident-access",
+      "constraintFamily": "sensory-access-load",
+      "reveal": "La señal llega solo por el aire: Inés responde medio compás tarde, copiando a quien tiene al lado, y no puede saber si acertó. Julia deja de participar cuando dos frases se encadenan sin aviso.",
+      "revisionActionIds": ["probe-revision-equivalent-signal", "probe-revision-rotate-control", "probe-revision-drop-objective"]
+    },
+    {
+      "id": "probe-incident-time",
+      "constraintFamily": "time",
+      "reveal": "La sesión anterior se alarga y quedan noventa segundos. Hay que elegir qué momento del montaje se sostiene entero y cuál se recorta sin perder la evidencia.",
+      "revisionActionIds": ["probe-revision-equivalent-signal", "probe-revision-rotate-control", "probe-revision-drop-objective"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "probe-feedback-multimodal",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "El objetivo sigue siendo reconocer el final de frase.", "agency": "Se conservan varias formas de responder.", "barrier": "Tener las señales disponibles no significa todavía haberlas repartido.", "evidence": "El encargo permite observar la respuesta por más de una vía."},
+      "feedback": {"supports": "Mantienes accesible la información que hace posible la tarea.", "tension": "Una señal disponible puede seguir dependiendo de quien la controla.", "possibleRepair": "Decide también quién marca el cambio.", "observableEvidence": "Comprueba quién puede percibir la señal sin mirar a nadie."},
+      "nextSceneId": "probe-entry"
+    },
+    {
+      "id": "probe-feedback-sound-only",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "Escuchar en común puede unificar la referencia.", "agency": "La respuesta queda igual para todo el grupo.", "barrier": "Una única vía sensorial excluye antes de que nadie lo note.", "evidence": "Responder tarde no distingue quién no percibió de quién no comprendió."},
+      "feedback": {"supports": "Buscas una referencia compartida por todo el grupo.", "tension": "Compartir el canal no es lo mismo que compartir el acceso.", "possibleRepair": "Acompaña la señal sonora con una visual o vibratoria equivalente.", "observableEvidence": "Mira quién responde a la señal y quién copia al de al lado."},
+      "nextSceneId": "probe-brief"
+    },
+    {
+      "id": "probe-choice-entry-signal",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "La frase se percibe antes de pedir respuesta.", "agency": "Nadie tiene que actuar sin haber percibido.", "barrier": "Percibir no garantiza reconocer sin repetición.", "evidence": "Se puede observar quién sigue la señal."},
+      "feedback": {"supports": "Separa percibir de responder.", "tension": "Una sola escucha puede no bastar.", "possibleRepair": "Repite con otra frase antes de cerrar.", "observableEvidence": "Comprueba si anticipan el cambio en la segunda vuelta."},
+      "nextSceneId": "probe-action"
+    },
+    {
+      "id": "probe-choice-entry-audio",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "La tarea queda clara para quien la oye.", "agency": "La respuesta es única para todo el grupo.", "barrier": "La consigna depende de un solo canal.", "evidence": "Levantar la mano tarde no distingue percepción de comprensión."},
+      "feedback": {"supports": "Pide una respuesta observable desde el primer momento.", "tension": "Deja el acceso en manos de una sola vía.", "possibleRepair": "Duplica la señal antes de pedir la respuesta.", "observableEvidence": "Mira quién responde a la música y quién a sus compañeros."},
+      "nextSceneId": "probe-action"
+    },
+    {
+      "id": "probe-choice-action-equivalent",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "La respuesta se vincula al final de frase.", "agency": "Cada persona elige cómo responder.", "barrier": "Las tres vías deben valer igual, también al observarlas.", "evidence": "El cambio de gesto coincide con el final."},
+      "feedback": {"supports": "Conserva la finalidad musical abriendo la forma de responder.", "tension": "Equivalente no significa idéntico: hay que mirar las tres.", "possibleRepair": "Nombra las tres vías como igualmente válidas al proponerlas.", "observableEvidence": "Comprueba si las tres respuestas caen en el mismo punto."},
+      "nextSceneId": "probe-support"
+    },
+    {
+      "id": "probe-choice-action-single",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "El grupo entra junto.", "agency": "La respuesta queda muy dirigida.", "barrier": "Puede seguirse la cuenta sin reconocer la frase.", "evidence": "La coordinación no distingue qué se comprendió."},
+      "feedback": {"supports": "Una pauta común ayuda a coordinarse.", "tension": "Contar no es reconocer.", "possibleRepair": "Retira la cuenta y deja la señal musical sola.", "observableEvidence": "Comprueba si responden cuando la frase cambia de duración."},
+      "nextSceneId": "probe-support"
+    },
+    {
+      "id": "probe-choice-support-shared",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "Marcar el cambio obliga a anticiparlo.", "agency": "El control circula por el grupo.", "barrier": "Un turno mal repartido deja a alguien sin marcar nunca.", "evidence": "Quien marca demuestra que ha reconocido el final."},
+      "feedback": {"supports": "Convierte el apoyo en una tarea musical repartida.", "tension": "Rotar no garantiza que todos los turnos ocurran.", "possibleRepair": "Comprueba que el turno llega a todo el mundo.", "observableEvidence": "Mira quién ha marcado el cambio al menos una vez."},
+      "nextSceneId": "probe-evidence"
+    },
+    {
+      "id": "probe-choice-support-teacher",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "La señal es fiable y constante.", "agency": "La decisión de cuándo cambia queda fuera del grupo.", "barrier": "Nadie más practica anticipar el final.", "evidence": "Solo se observa la reacción, nunca la anticipación."},
+      "feedback": {"supports": "Una señal constante da seguridad al empezar.", "tension": "Reaccionar a tiempo no prueba que se reconozca la frase.", "possibleRepair": "Cede el control cuando la señal ya sea reconocible.", "observableEvidence": "Comprueba si alguien se adelanta a tu señal."},
+      "nextSceneId": "probe-evidence"
+    },
+    {
+      "id": "probe-choice-evidence-anticipation",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "Anticipar exige haber reconocido la estructura.", "agency": "Explicar la señal es una decisión propia.", "barrier": "Explicar con palabras no es igual de accesible para todos.", "evidence": "Anticipación y explicación se observan a la vez."},
+      "feedback": {"supports": "Produce evidencia de reconocimiento, no de actividad.", "tension": "La explicación verbal puede convertirse en otra barrera.", "possibleRepair": "Admite señalar, representar o decir.", "observableEvidence": "Comprueba si aciertan en una frase que no habían oído."},
+      "nextSceneId": "probe-assembly"
+    },
+    {
+      "id": "probe-choice-evidence-applause",
+      "rating": "incoherent-with-brief",
+      "observables": {"learning": "El objetivo musical no cambia.", "agency": "El aplauso no contiene ninguna decisión.", "barrier": "La celebración sustituye a la comprobación.", "evidence": "No queda nada observable sobre el final de frase."},
+      "feedback": {"supports": "Cerrar reconociendo el trabajo del grupo tiene valor.", "tension": "El cierre no permite saber si alguien reconoció la frase.", "possibleRepair": "Añade una comprobación breve antes de celebrar.", "observableEvidence": "Mira si podrías decir quién anticipó el final."},
+      "nextSceneId": "probe-assembly"
+    },
+    {
+      "id": "probe-outcome-shared",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "La mayoría anticipa el final en una frase nueva.", "agency": "Percibir, responder y marcar el cambio están repartidos.", "barrier": "Los turnos de señal aún dependen de que la sesión llegue hasta el final.", "evidence": "Coinciden la respuesta y la explicación de la señal."},
+      "feedback": {"supports": "Acceso, respuesta equivalente y cierre observable se sostienen entre sí.", "tension": "El montaje depende de que haya tiempo para todos los turnos.", "possibleRepair": "Prevé qué turno se conserva si la sesión se acorta.", "observableEvidence": "Comprueba quién marcó el cambio y quién lo anticipó."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal vibratoria le llega a la vez que a los demás y su turno de marcarla también."},
+          {"characterId": "leo", "role": "decides", "note": "Elige transformar el gesto en lugar de desplazarse, sin que el objetivo cambie."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone avisar la transición antes de cada frase nueva."}
+        ]
+      },
+      "nextSceneId": "probe-incident"
+    },
+    {
+      "id": "probe-outcome-teacher-led",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "El grupo responde a tiempo con la señal docente.", "agency": "Nadie decide cuándo cambia la frase.", "barrier": "La anticipación no llega a practicarse.", "evidence": "Se observa reacción, no reconocimiento."},
+      "feedback": {"supports": "La accesibilidad y la respuesta equivalente sí se sostienen.", "tension": "Con el control concentrado, el cierre mide reacción y no anticipación.", "possibleRepair": "Cede el control de la señal cuando ya sea reconocible.", "observableEvidence": "Mira si alguien se adelanta a tu señal sin equivocarse."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Percibe la señal a tiempo, pero nunca le toca marcarla."},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "julia", "role": "supports", "note": "La señal constante hace previsible la sesión y ese es todo su papel."}
+        ]
+      },
+      "nextSceneId": "probe-incident"
+    },
+    {
+      "id": "probe-outcome-inaccessible",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "Parte del grupo reconoce el final.", "agency": "Responder depende de haber podido percibir.", "barrier": "La información llega por un solo canal.", "evidence": "La respuesta tardía no distingue percepción de comprensión."},
+      "feedback": {"supports": "La actividad tiene una finalidad musical clara.", "tension": "El acceso decide quién puede siquiera intentarlo.", "possibleRepair": "Duplica la vía por la que se percibe el cambio.", "observableEvidence": "Comprueba quién responde a la música y quién a sus compañeros."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "La única señal viaja por el aire: no hay ninguna vía prevista para que perciba el cambio."},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "julia", "role": "performs"}
+        ]
+      },
+      "nextSceneId": "probe-incident"
+    },
+    {
+      "id": "probe-outcome-weak",
+      "rating": "defensible-needs-revision",
+      "observables": {"learning": "Puede haber reconocimiento, pero no queda registrado.", "agency": "Hay decisiones que el cierre no recoge.", "barrier": "El cierre elegido no observa el objetivo.", "evidence": "Al terminar no se sabe quién anticipó el final."},
+      "feedback": {"supports": "El montaje conserva una puerta de entrada aprovechable.", "tension": "Sin comprobación, el trabajo hecho no puede leerse.", "possibleRepair": "Cambia solo el cierre y conserva el resto.", "observableEvidence": "Mira si podrías nombrar a alguien que anticipó el cambio."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs"},
+          {"characterId": "leo", "role": "proposes", "note": "Propone una respuesta corporal que el cierre no llega a hacer visible."},
+          {"characterId": "julia", "role": "performs"}
+        ]
+      },
+      "nextSceneId": "probe-incident"
+    },
+    {
+      "id": "probe-revision-signal-outcome",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "El cambio vuelve a ser perceptible para todo el grupo.", "agency": "Se conservan las respuestas equivalentes.", "barrier": "Duplicar la señal no reparte todavía quién la controla.", "evidence": "La respuesta deja de llegar media frase tarde."},
+      "feedback": {"supports": "Repara el acceso sin tocar la finalidad musical.", "tension": "Quien marca el cambio sigue siendo siempre la misma persona.", "possibleRepair": "Reparte después el control de la señal.", "observableEvidence": "Comprueba si la respuesta coincide con el final y no con el vecino."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "proposes", "note": "Propone qué vía visual funciona mejor desde su sitio."},
+          {"characterId": "leo", "role": "decides"},
+          {"characterId": "julia", "role": "performs"}
+        ]
+      },
+      "nextSceneId": "probe-justification"
+    },
+    {
+      "id": "probe-revision-rotation-outcome",
+      "rating": "coherent-defensible",
+      "observables": {"learning": "Marcar el cambio obliga a anticiparlo.", "agency": "El control de la señal circula.", "barrier": "El turno se reparte, pero la vía de percepción sigue siendo una.", "evidence": "Quien marca demuestra reconocimiento antes de que suene el final."},
+      "feedback": {"supports": "Convierte el apoyo en tarea musical y anticipa las transiciones.", "tension": "Repartir el turno no arregla por sí solo el acceso a la señal.", "possibleRepair": "Comprueba que quien marca puede percibir el cambio.", "observableEvidence": "Mira si el turno llega a todo el mundo y con qué señal cuenta."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Puede marcar el turno, pero necesita que alguien le confirme el momento."},
+          {"characterId": "leo", "role": "decides"},
+          {"characterId": "julia", "role": "decides", "note": "Anunciar la transición antes de que ocurra es exactamente su aportación."}
+        ]
+      },
+      "nextSceneId": "probe-justification"
+    },
+    {
+      "id": "probe-revision-dropped-outcome",
+      "rating": "incoherent-with-brief",
+      "observables": {"learning": "El objetivo musical desaparece.", "agency": "Escuchar una canción no contiene ninguna decisión.", "barrier": "El problema de acceso sigue intacto, ahora sin tarea.", "evidence": "No queda nada que observar sobre el final de frase."},
+      "feedback": {"supports": "Cuidar el ambiente del grupo es una preocupación legítima.", "tension": "Cambiar de actividad no repara lo que no funcionaba.", "possibleRepair": "Conserva el objetivo y cambia solo la vía de acceso.", "observableEvidence": "Comprueba si al terminar sabrías quién reconoce el final."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "La actividad nueva sigue apoyándose solo en el oído y ya ni siquiera pide una respuesta."},
+          {"characterId": "leo", "role": "supports"},
+          {"characterId": "julia", "role": "supports"}
+        ]
+      },
+      "nextSceneId": "probe-revision"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ],
+  "journalTemplate": {
+    "objective": "Reconocer el final de una frase rítmica sin depender de una sola vía sensorial.",
+    "first-decision": "Apertura: {{action:probe-entry}} Acción: {{action:probe-action}} Apoyo: {{action:probe-support}} Cierre: {{action:probe-evidence}}",
+    "maintained-decision": "Mantengo esta apertura: {{action:probe-entry}}",
+    "revised-decision": "Tras el incidente, reviso: {{action:probe-revision}}",
+    "trigger": "El incidente mostró que una condición del aula que el montaje daba por resuelta no lo estaba.",
+    "condition-risk": "{{grammar:conditionRisk}}",
+    "adaptation": "{{grammar:adaptation}}",
+    "observable-evidence": "{{grammar:evidence}}",
+    "defensible-alternative": "La otra revisión también es defendible: una repara el acceso a la señal y la otra reparte quién la controla.",
+    "final-grammar": "Para {{grammar:objective}}, uso {{grammar:principleAction}} porque {{grammar:conditionRisk}}; incorporo {{grammar:adaptation}} y comprobaré {{grammar:evidence}}."
+  },
+  "completion": {
+    "eyebrow": "Banco de mecánicas completado",
+    "title": "El sistema ha recorrido todos sus estados",
+    "body": "Montador de cuatro huecos, reglas con etiquetas excluidas, dos incidentes, revisión, justificación y bitácora. Este recorrido es contenido provisional de M6 y no forma parte de la campaña.",
+    "nextLabel": "Volver a las rutas de prueba",
+    "nextRoute": "#/pruebas"
+  }
+}

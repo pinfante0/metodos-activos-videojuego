@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "characters": [
+    {
+      "id": "ines",
+      "name": "Inés",
+      "contributes": "Detecta cambios rítmicos mediante señales visuales y vibración; propone formas de representar el pulso.",
+      "conditions": "Tiene pérdida auditiva: la información solo sonora puede quedarle inaccesible.",
+      "safeguard": "No se presupone una única forma de oír ni se la convierte en auditora de toda la accesibilidad del aula."
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "contributes": "Aporta ideas de percusión corporal, voz y producción; cuestiona que moverse signifique desplazarse.",
+      "conditions": "Usa silla de ruedas: algunas consignas espaciales requieren equivalentes expresivos.",
+      "safeguard": "No toda escena en la que participa trata de movilidad, y el objetivo musical no se rebaja."
+    },
+    {
+      "id": "amina",
+      "name": "Amina",
+      "contributes": "Conecta repertorio, usos y fuentes; puede señalar que una etiqueta cultural es imprecisa.",
+      "conditions": "No debe cargar con la representación de una cultura ni validar repertorios por identidad.",
+      "safeguard": "Documentar las fuentes y mediar el repertorio es responsabilidad docente, nunca suya."
+    },
+    {
+      "id": "mara",
+      "name": "Mara",
+      "contributes": "Aprende con rapidez escuchando y produciendo con tecnología; propone recorridos personales.",
+      "conditions": "Tiene poca formación instrumental formal y puede quedar fuera si el grupo confunde experiencia con autoridad.",
+      "safeguard": "Sus prácticas musicales cuentan como conocimiento, sin romantizar la tecnología."
+    },
+    {
+      "id": "oscar",
+      "name": "Óscar",
+      "contributes": "Lee música y toca el piano; ayuda a modelar y a organizar.",
+      "conditions": "Su experiencia puede concentrar decisiones o convertirlo en ayudante docente permanente.",
+      "safeguard": "La competencia no justifica dominar el grupo: también le toca explorar y escuchar."
+    },
+    {
+      "id": "julia",
+      "name": "Julia",
+      "contributes": "Formula preguntas precisas y detecta saturación sonora; propone anticipar las transiciones.",
+      "conditions": "Los cambios inesperados, el volumen alto o las consignas ambiguas pueden impedirle participar.",
+      "safeguard": "Se ofrecen previsión, control y alternativas sin asociar necesidad de estructura con falta de creatividad."
+    }
+  ]
+}

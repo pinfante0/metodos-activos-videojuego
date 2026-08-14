@@ -150,9 +150,18 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `docs/decision_producto_m5.md`: las ocho reglas de composición y los encargos a M6, M7C y M10.
 - `docs/contrato_recursos_m5.md`: contrato de recursos, presupuesto y procedencia, con registro
   ejecutable en `src/content/identity/resources.json`.
-- `docs/medicion_tamanos_m5.md` y `scripts/measure-viewports.mjs`: arnés reproducible de los cinco
-  tamaños objetivo y su resultado verificado. Se ejecuta con `pnpm measure:viewports` y requiere
-  Chrome o Edge instalados. No forma parte de la identidad y debe conservarse.
+- `docs/sistemas_centrales_m6.md`: cierre de M6. Campaña, montador, motor determinista, rutas de
+  prueba y **la ampliación del contrato de contenido para declarar participación y reparto**.
+- `docs/comprobaciones_m6.md`: qué demuestra cada comprobación y cómo se ejecuta. Sustituye, para el
+  arnés de navegador, al procedimiento de `docs/medicion_tamanos_m5.md`, que se conserva como
+  registro histórico.
+- `scripts/measure-viewports.mjs`: arnés reproducible de los cinco tamaños objetivo, generalizado en
+  M6 a los recorridos declarados y a las rutas de prueba. Se ejecuta con `pnpm measure:viewports` y
+  requiere Chrome o Edge instalados. Debe conservarse.
+- `src/content/campaign/`: campaña y reparto compartido. Editar `campaign.json` es la única edición
+  necesaria para reordenar o ampliar la secuencia.
+- `src/content/playable/walkthroughs.json`: recorridos declarados. Los ejecutan las pruebas sobre la
+  sesión pura y el arnés sobre Chrome real, desde una sola fuente.
 - `README.md`: resumen breve del estado.
 - `tmp/`: fuentes de construcción y materiales de verificación; no son entregables finales.
 
@@ -180,14 +189,27 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - La identidad vive en `src/app/identity/`, `src/styles/identity.css` y
   `src/content/identity/resources.json`. El escenario oscuro se concentra en la banda experiencial;
   toda superficie con lectura extensa es clara y de alto contraste.
-- **No hay arte definitivo.** Todo lo visible es tipografía, color, retícula y una silueta trazada;
-  todo lo audible está sintetizado. Eso es M8. Tampoco hay personajes: dibujarlos exigiría que el
-  contenido declarase participación y reparto, lo que pertenece a M6.
-- La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños y
-  con los desplegables cerrados y abiertos, incluidas la justificación y la bitácora del caso, que ya
-  fallaban en M4. Los bloques que se desplazan por dentro son accesibles con teclado.
-  `pnpm measure:viewports` recorre ambos casos hasta su cierre y falla con código 1 si la regla se
-  rompe, si un recorrido no termina o si algo se bloquea.
+- **M6 está completada.** Campaña, navegación y enlaces directos generalizados; montador de
+  microclases; motor determinista de consecuencias e incidentes; incidentes, revisión, progreso,
+  audio y bitácora integrados; trece rutas de prueba de estados difíciles y comprobaciones
+  automatizadas. Véase `docs/sistemas_centrales_m6.md`.
+- **El contrato de contenido se ha ampliado para declarar participación y reparto.** Todo caso con
+  reparto debe declarar, en cada consecuencia que el juego presente como resultado de un diseño o de
+  una revisión, qué papel permite ese resultado a cada persona. Tres salvaguardas de M2 son ahora
+  comprobaciones: nadie puede quedar sin vía en todos los resultados de un caso, nadie puede quedar
+  reducido a ejecutar en todo el caso y no existe ningún campo numérico por persona. Un caso que las
+  incumpla **no valida**.
+- **No hay arte definitivo ni personajes dibujados.** Todo lo visible es tipografía, color, retícula
+  y una silueta trazada; todo lo audible está sintetizado. Eso es M8, que ya dispone del dato que le
+  faltaba para dibujar a quién favorece una decisión sin inventarlo.
+- **El progreso orienta y no bloquea.** Ningún contrato tiene campo de desbloqueo ni puntuación.
+  Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
+  `#/caso/<slug>/<escena>`.
+- La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
+  los desplegables cerrados y abiertos, en los diez recorridos declarados y en las trece rutas de
+  prueba. Los cinco bloques que se desplazan por dentro son accesibles con teclado.
+  `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
+  algo se bloquea o si las pasadas no coinciden.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

@@ -18,6 +18,30 @@
   ],
   "lenses": ["inclusion-accessibility", "cultural-relevance", "agency-creativity", "evidence-context"],
   "characterIds": ["ines", "leo", "amina", "mara", "oscar", "julia"],
+  "assembly": {
+    "title": "Microclase de dos minutos",
+    "summary": "Apertura, acción musical y cierre que produce evidencia.",
+    "slots": [
+      {
+        "id": "slot-entrada",
+        "kind": "entry",
+        "label": "Apertura",
+        "sceneId": "pilot-entry"
+      },
+      {
+        "id": "slot-accion",
+        "kind": "musical-action",
+        "label": "Acción musical",
+        "sceneId": "pilot-process"
+      },
+      {
+        "id": "slot-evidencia",
+        "kind": "evidence",
+        "label": "Cierre y evidencia",
+        "sceneId": "pilot-evidence"
+      }
+    ]
+  },
   "pedagogy": {
     "allowMultipleDefensible": true,
     "avoidsUniversalWinner": true,
@@ -45,7 +69,8 @@
       "actionIds": ["entry-recording-choice", "entry-body-voice", "entry-score-first"],
       "feedbackMode": "deferred",
       "nextSceneId": "pilot-process",
-      "slots": ["entry", "mediation-support"]
+      "slots": ["entry", "mediation-support"],
+      "assemblySlotId": "slot-entrada"
     },
     {
       "id": "pilot-process",
@@ -57,7 +82,8 @@
       "actionIds": ["process-imitate-explore-vary", "process-closed-copy", "process-free-explore"],
       "feedbackMode": "deferred",
       "nextSceneId": "pilot-evidence",
-      "slots": ["musical-action"]
+      "slots": ["musical-action"],
+      "assemblySlotId": "slot-accion"
     },
     {
       "id": "pilot-evidence",
@@ -68,8 +94,18 @@
       "prompt": "¿Qué evidencia cerrará la microclase?",
       "actionIds": ["evidence-rondo-explain", "evidence-perfect-take", "evidence-taste-vote"],
       "feedbackMode": "deferred",
+      "nextSceneId": "pilot-assembly",
+      "slots": ["evidence"],
+      "assemblySlotId": "slot-evidencia"
+    },
+    {
+      "id": "pilot-assembly",
+      "kind": "assembly-review",
+      "title": "Tu microclase montada",
+      "introduction": "Los tres momentos ya forman una sola pieza. Léela como la leería quien entra en el aula: qué abre la sesión, qué decide el alumnado y qué se podrá observar al terminar.",
+      "resourceIds": [],
       "nextSceneId": "pilot-first-consequence",
-      "slots": ["evidence"]
+      "testLabel": "Probar la microclase"
     },
     {
       "id": "pilot-first-consequence",
@@ -348,35 +384,123 @@
     },
     {
       "id": "outcome-coherent", "rating": "coherent-defensible", "observables": {"learning": "Varias parejas reproducen el riff y crean variaciones reconocibles.", "agency": "Hay elección, tanteo y transformación musical.", "barrier": "Todavía no sabemos cómo se distribuyen las decisiones dentro de cada pareja.", "evidence": "La forma y las explicaciones conectan original y variaciones."},
-      "feedback": {"supports": "La entrada accesible, la restricción creativa y el cierre sostienen el objetivo.", "tension": "La organización por pares puede ocultar jerarquías.", "possibleRepair": "Observa quién propone, prueba, decide y controla las señales.", "observableEvidence": "Mira si varias personas pueden explicar aportaciones que el arreglo conserva."}, "nextSceneId": "pilot-incident"
+      "feedback": {"supports": "La entrada accesible, la restricción creativa y el cierre sostienen el objetivo.", "tension": "La organización por pares puede ocultar jerarquías.", "possibleRepair": "Observa quién propone, prueba, decide y controla las señales.", "observableEvidence": "Mira si varias personas pueden explicar aportaciones que el arreglo conserva."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "proposes", "note": "La representación visual del pulso forma parte del material, y propone cómo marcarla."},
+          {"characterId": "leo", "role": "decides", "note": "Decide con percusión corporal y voz qué rasgo conserva su variación."},
+          {"characterId": "amina", "role": "proposes", "note": "Relaciona el fragmento elegido con su uso y su procedencia."},
+          {"characterId": "mara", "role": "performs", "note": "Su propuesta de timbre aún no ha llegado a probarse dentro de su pareja."},
+          {"characterId": "oscar", "role": "decides"},
+          {"characterId": "julia", "role": "proposes", "note": "Propone anunciar la transición entre el riff y cada variación."}
+        ]
+      },
+      "nextSceneId": "pilot-incident"
     },
     {
       "id": "outcome-copy", "rating": "defensible-needs-revision", "observables": {"learning": "El grupo ejecuta un modelo reconocible.", "agency": "La orquestación cerrada concentra las decisiones en la docente.", "barrier": "No aparece autoría musical real.", "evidence": "La copia cubre solo reproducción, no variación."},
-      "feedback": {"supports": "La estructura permite coordinar un riff.", "tension": "El proceso contradice la creación pedida.", "possibleRepair": "Abre una transformación limitada y explicable.", "observableEvidence": "Comprueba qué decisión musical aporta cada pareja."}, "nextSceneId": "pilot-incident"
+      "feedback": {"supports": "La estructura permite coordinar un riff.", "tension": "El proceso contradice la creación pedida.", "possibleRepair": "Abre una transformación limitada y explicable.", "observableEvidence": "Comprueba qué decisión musical aporta cada pareja."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs"},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "amina", "role": "performs"},
+          {"characterId": "mara", "role": "performs"},
+          {"characterId": "oscar", "role": "performs", "note": "Ni siquiera quien más experiencia tiene decide nada: la parte llega cerrada."},
+          {"characterId": "julia", "role": "supports", "note": "La estructura fija hace previsible la sesión, pero no le abre ninguna decisión musical."}
+        ]
+      },
+      "nextSceneId": "pilot-incident"
     },
     {
       "id": "outcome-unrelated", "rating": "defensible-needs-revision", "observables": {"learning": "Surgen ideas sonoras variadas.", "agency": "Las parejas exploran con libertad.", "barrier": "Las propuestas dejan de relacionarse con el riff.", "evidence": "No se reconoce qué se ha conservado."},
-      "feedback": {"supports": "La exploración abre creatividad.", "tension": "Sin una restricción, no produce la variación solicitada.", "possibleRepair": "Conserva comienzo, contorno o ritmo como regla común.", "observableEvidence": "Comprueba si una escucha externa reconoce el parentesco."}, "nextSceneId": "pilot-incident"
+      "feedback": {"supports": "La exploración abre creatividad.", "tension": "Sin una restricción, no produce la variación solicitada.", "possibleRepair": "Conserva comienzo, contorno o ritmo como regla común.", "observableEvidence": "Comprueba si una escucha externa reconoce el parentesco."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Sin rasgo común ni señal compartida, la exploración simultánea deja de ofrecerle una vía para seguir lo que ocurre."},
+          {"characterId": "leo", "role": "decides"},
+          {"characterId": "amina", "role": "proposes"},
+          {"characterId": "mara", "role": "decides"},
+          {"characterId": "oscar", "role": "decides"},
+          {"characterId": "julia", "role": "no-route", "note": "Todas las parejas exploran a la vez: el volumen se vuelve imprevisible y ninguna transición se anuncia."}
+        ]
+      },
+      "nextSceneId": "pilot-incident"
     },
     {
       "id": "outcome-weak-evidence", "rating": "defensible-needs-revision", "observables": {"learning": "Parte del riff puede reproducirse.", "agency": "Hay decisiones, aunque el cierre no las hace legibles.", "barrier": "La evidencia elegida observa gusto o copia, no todo el objetivo.", "evidence": "Falta una variación reconocible acompañada de explicación."},
-      "feedback": {"supports": "El diseño contiene una puerta aprovechable.", "tension": "El cierre no permite valorar reconocimiento, creación y decisión.", "possibleRepair": "Usa una forma compartida y señala el rasgo conservado.", "observableEvidence": "Mira si el grupo puede mostrar y explicar la variación."}, "nextSceneId": "pilot-incident"
+      "feedback": {"supports": "El diseño contiene una puerta aprovechable.", "tension": "El cierre no permite valorar reconocimiento, creación y decisión.", "possibleRepair": "Usa una forma compartida y señala el rasgo conservado.", "observableEvidence": "Mira si el grupo puede mostrar y explicar la variación."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs"},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "amina", "role": "supports"},
+          {"characterId": "mara", "role": "proposes", "note": "Propone una variación que el cierre elegido no llega a hacer audible."},
+          {"characterId": "oscar", "role": "decides"},
+          {"characterId": "julia", "role": "performs"}
+        ]
+      },
+      "nextSceneId": "pilot-incident"
     },
     {
       "id": "revision-rotating-outcome", "rating": "coherent-defensible", "observables": {"learning": "El arreglo conserva el riff y revisa aportaciones.", "agency": "Cada persona introduce o defiende una decisión.", "barrier": "La rotación puede volverse mecánica.", "evidence": "Varias aportaciones sobreviven o se revisan con razones."},
-      "feedback": {"supports": "Redistribuir decisiones abre acceso y autoría inmediatos.", "tension": "Reduce parte de la elección de grupo y una regla no garantiza escucha.", "possibleRepair": "Contrasta la rotación con las ideas realmente incorporadas.", "observableEvidence": "Comprueba qué propuestas transforma el arreglo y por qué."}, "nextSceneId": "pilot-justification"
+      "feedback": {"supports": "Redistribuir decisiones abre acceso y autoría inmediatos.", "tension": "Reduce parte de la elección de grupo y una regla no garantiza escucha.", "possibleRepair": "Contrasta la rotación con las ideas realmente incorporadas.", "observableEvidence": "Comprueba qué propuestas transforma el arreglo y por qué."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El control de la señal también rota: le llega su turno de marcarla."},
+          {"characterId": "leo", "role": "decides"},
+          {"characterId": "amina", "role": "decides"},
+          {"characterId": "mara", "role": "decides", "note": "Su turno le da la decisión de qué transformar, no solo la de sostener el pulso."},
+          {"characterId": "oscar", "role": "proposes", "note": "Su turno de decidir ya ha pasado: ahora propone y escucha, que también le corresponde."},
+          {"characterId": "julia", "role": "decides", "note": "Decide cómo se presenta, que es la parte donde puede anticipar las transiciones."}
+        ]
+      },
+      "nextSceneId": "pilot-justification"
     },
     {
       "id": "revision-affinity-outcome", "rating": "coherent-defensible", "observables": {"learning": "Las parejas prueban, comparan y justifican propuestas.", "agency": "Se conserva afinidad con vías para entrar o cambiar.", "barrier": "Exige observación fina; la regla formal no garantiza equidad.", "evidence": "El grupo explica una idea elegida y otra descartada."},
-      "feedback": {"supports": "Mantener afinidades puede sostener confianza y autonomía.", "tension": "Algunas voces pueden seguir sin entrar.", "possibleRepair": "Intervén cuando la autonomía deja de ser aprendible o inclusiva.", "observableEvidence": "Comprueba qué aportaciones se prueban antes de elegir."}, "nextSceneId": "pilot-justification"
+      "feedback": {"supports": "Mantener afinidades puede sostener confianza y autonomía.", "tension": "Algunas voces pueden seguir sin entrar.", "possibleRepair": "Intervén cuando la autonomía deja de ser aprendible o inclusiva.", "observableEvidence": "Comprueba qué aportaciones se prueban antes de elegir."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "proposes"},
+          {"characterId": "leo", "role": "proposes"},
+          {"characterId": "amina", "role": "decides"},
+          {"characterId": "mara", "role": "decides", "note": "Probar dos propuestas obliga a que la suya suene antes de descartarse."},
+          {"characterId": "oscar", "role": "decides"},
+          {"characterId": "julia", "role": "supports", "note": "La vía de cambio de grupo existe, pero entrar en uno ya formado sigue dependiendo de que alguien la abra."}
+        ]
+      },
+      "nextSceneId": "pilot-justification"
     },
     {
       "id": "revision-no-intervention-outcome", "rating": "incoherent-with-brief", "observables": {"learning": "Algunos grupos podrían avanzar solos.", "agency": "Las jerarquías existentes deciden quién participa.", "barrier": "Confunde autonomía con desaparición docente.", "evidence": "No se hacen visibles aportaciones anuladas ni accesos tardíos."},
-      "feedback": {"supports": "Intentas conservar el aprendizaje entre pares.", "tension": "No intervenir permite que la jerarquía decida quién aprende.", "possibleRepair": "Elige una intervención que devuelva decisiones al grupo.", "observableEvidence": "Mira quién propone, prueba y explica una idea."}, "nextSceneId": "pilot-revision"
+      "feedback": {"supports": "Intentas conservar el aprendizaje entre pares.", "tension": "No intervenir permite que la jerarquía decida quién aprende.", "possibleRepair": "Elige una intervención que devuelva decisiones al grupo.", "observableEvidence": "Mira quién propone, prueba y explica una idea."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Nadie corrige el retraso de la señal visual porque no se ha organizado quién la controla."},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "amina", "role": "performs"},
+          {"characterId": "mara", "role": "no-route", "note": "Su propuesta rítmica sigue sin probarse y no hay ninguna vía prevista para devolverle la decisión."},
+          {"characterId": "oscar", "role": "decides"},
+          {"characterId": "julia", "role": "no-route", "note": "Las transiciones siguen sin anunciarse y no existe forma acordada de pedir que se regule el volumen."}
+        ]
+      },
+      "nextSceneId": "pilot-revision"
     },
     {
       "id": "revision-dictate-outcome", "rating": "incoherent-with-brief", "observables": {"learning": "El reparto puede parecer ordenado.", "agency": "Toda decisión musical vuelve a la docente.", "barrier": "Igualdad de parte no equivale a participación significativa.", "evidence": "No se observa negociación ni autoría."},
-      "feedback": {"supports": "Buscas que nadie quede sin tarea.", "tension": "Borras elección, recorrido personal y creación.", "possibleRepair": "Estructura quién decide sin dictar qué debe resultar.", "observableEvidence": "Comprueba si cada persona aporta una decisión que transforma el arreglo."}, "nextSceneId": "pilot-revision"
+      "feedback": {"supports": "Buscas que nadie quede sin tarea.", "tension": "Borras elección, recorrido personal y creación.", "possibleRepair": "Estructura quién decide sin dictar qué debe resultar.", "observableEvidence": "Comprueba si cada persona aporta una decisión que transforma el arreglo."},
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs"},
+          {"characterId": "leo", "role": "performs"},
+          {"characterId": "amina", "role": "performs"},
+          {"characterId": "mara", "role": "performs"},
+          {"characterId": "oscar", "role": "performs"},
+          {"characterId": "julia", "role": "performs", "note": "Todas las partes están repartidas y ninguna incluye una decisión musical."}
+        ]
+      },
+      "nextSceneId": "pilot-revision"
     }
   ],
   "journalFields": ["objective", "first-decision", "maintained-decision", "revised-decision", "trigger", "condition-risk", "adaptation", "observable-evidence", "defensible-alternative", "final-grammar"],

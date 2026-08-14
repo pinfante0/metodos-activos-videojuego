@@ -1,22 +1,7 @@
-import pilotCaseData from "./pilot-case.json";
-import tutorialData from "./tutorial.json";
-import { validateCaseDefinition } from "../../domain/validation";
-import type { CaseDefinition } from "../../domain/contracts";
-
-function validatedCase(input: unknown): CaseDefinition {
-  const result = validateCaseDefinition(input);
-  if (!result.ok) {
-    throw new Error(
-      `Contenido jugable inválido:\n${result.issues
-        .map((issue) => `${issue.path}: ${issue.message}`)
-        .join("\n")}`,
-    );
-  }
-  return result.value;
-}
-
-export const playableCases = [validatedCase(tutorialData), validatedCase(pilotCaseData)];
-
-export function findPlayableCase(slug: string): CaseDefinition | undefined {
-  return playableCases.find((caseDefinition) => caseDefinition.slug === slug);
-}
+/**
+ * El registro de contenido pasó a `src/content/index.ts` en M6, porque ya no sólo hay casos
+ * jugables: hay campaña, reparto compartido y recorridos declarados, y todos se validan
+ * cruzadamente. Este archivo se conserva como puerta de entrada estable para lo que ya importaba
+ * los casos por esta ruta.
+ */
+export { findPlayableCase, playableCases } from "../index";

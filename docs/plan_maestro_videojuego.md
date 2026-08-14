@@ -1,9 +1,9 @@
 # Plan maestro del tercer videojuego
 
-Estado: **M5 completada el 14 de agosto de 2026; M6 es la fase siguiente**. M4 quedó completado y
-comprobado localmente el 13 de agosto de 2026. Este documento fija las decisiones de alcance y la
-secuencia de trabajo. El corte vertical implementa el tutorial y el caso piloto aprobados, con la
-identidad **Aula-laboratorio escénica** ya aplicada; no hay campaña ni arte definitivo.
+Estado: **M6 completada el 14 de agosto de 2026; M7A es la fase siguiente**. Este documento fija las
+decisiones de alcance y la secuencia de trabajo. Los sistemas centrales funcionan de principio a fin
+con la identidad **Aula-laboratorio escénica** aplicada y con dos de las nueve unidades escritas;
+no hay arte definitivo.
 
 El nombre de trabajo es **El aula de los dos minutos** y se conserva. La identidad visual quedó
 fijada en M5 sin alterar la propuesta pedagógica aprobada.
@@ -379,18 +379,6 @@ Límites que M5 deja abiertos y no debe dar por resueltos quien continúe:
 Los contratos de M3, el contenido jugable de M4 y `game-session.ts` siguen intactos; `render-app.ts`
 y la hoja base se han modificado para aplicar la identidad y las reglas de composición.
 
-M6 puede abrirse en un chat nuevo. La frase exacta es:
-
-> **M6 — Sistemas centrales.** Trabaja únicamente en `Metodos/`. Lee `AGENTS.md`,
-> `docs/plan_maestro_videojuego.md`, `docs/decision_producto_m5.md`, `docs/direcciones_m5.md` y los
-> entregables M2-M5 pertinentes. Usa `docs/revision_tema_8.md` como fuente pedagógica canónica.
-> Generaliza campaña, navegación y enlaces directos; construye el montador de microclases y el
-> sistema determinista de consecuencias; integra incidentes, revisión, progreso, audio y bitácora;
-> crea rutas de prueba para los estados difíciles y automatiza las comprobaciones. Respeta las ocho
-> reglas de composición de M5 y decide explícitamente si el contrato de contenido se amplía para
-> declarar participación y reparto, que es la condición previa para que existan personajes. No
-> produzcas arte definitivo de M8 y detente en la puerta de salida de M6.
-
 ### M6 — Sistemas centrales
 
 Modelo: GPT-5.6 Sol, razonamiento alto.
@@ -406,6 +394,51 @@ Tareas:
 Puerta de salida: todas las mecánicas funcionan con contenido provisional y poseen pruebas antes
 de cargar la campaña completa.
 
+Estado: **completada el 14 de agosto de 2026. Puerta de salida superada.** Véase
+`docs/sistemas_centrales_m6.md`.
+
+**Decisión explícita que M5 dejó pendiente: el contrato de contenido se amplía para declarar
+participación y reparto.** Era la condición previa para que existan personajes. Un reparto compartido
+en `src/content/campaign/cast.json` y un bloque `participation` obligatorio en toda consecuencia que
+el juego presente como resultado de un diseño o de una revisión. Las tres salvaguardas de M2 dejan de
+ser buenas intenciones y pasan a impedir que el contenido valide: nadie puede quedar sin vía en todos
+los resultados de un caso, nadie puede quedar reducido a ejecutar en todo el caso, y el esquema no
+admite ningún número por persona. La ampliación **no habilita arte**: entrega el dato y su lectura
+accesible para que M8 pueda dibujar a quién favorece una decisión sin inventarlo.
+
+La campaña es un dato validado —nueve unidades, dos con contenido y siete anunciadas como pendientes
+de M7— del que se derivan portada, mapa `#/campana`, ruta presencial, unidad recomendada y
+comprobaciones. El progreso orienta y no bloquea: no existe ningún campo de desbloqueo ni ninguna
+puntuación en ningún contrato.
+
+Comprobaciones: **161 pruebas en once archivos**, compilación estricta, paquete PLATEA regenerado y
+`pnpm measure:viewports --runs=3` con diez recorridos declarados completados hasta su cierre, sin
+desbordamiento horizontal, sin ninguna pantalla de acción desplazada en los cinco tamaños objetivo y
+con objetivo táctil mínimo de 44 px, idéntico en las tres pasadas. Procedimiento en
+`docs/comprobaciones_m6.md` y salida literal en `docs/medicion_tamanos_m6_salida.md`.
+
+Límites que M6 deja abiertos y no debe dar por resueltos quien continúe:
+
+- **Siete de las nueve unidades no tienen contenido.** Son M7A y M7B.
+- **No hay arte definitivo ni personajes dibujados.** Sigue siendo M8. La banda de escena continúa
+  siendo la silueta constante y decorativa de M5, con sus seis pruebas estructurales intactas.
+- **Los tiempos siguen siendo hipótesis de diseño** y el recorte editorial sigue pendiente: M7C.
+- En 360 × 640 los cinco bloques de repaso se desplazan por dentro de su recuadro. Ningún texto se
+  ha encogido y los cinco son accesibles con teclado. Conviene observarlo en el piloto de M10.
+
+M7A puede abrirse en un chat nuevo. La frase exacta es:
+
+> **M7A — Contenido histórico.** Trabaja únicamente en `Metodos/`. Lee `AGENTS.md`,
+> `docs/plan_maestro_videojuego.md`, `docs/sistemas_centrales_m6.md`, `docs/decision_producto_m5.md`
+> y los entregables M2 pertinentes. Usa `docs/revision_tema_8.md` como fuente pedagógica canónica.
+> Produce los casos de Dalcroze, Kodály, Orff-Keetman y Suzuki e integra Willems y Martenot con el
+> peso complementario acordado; declara en cada caso el reparto y la participación de cada resultado
+> de diseño y de revisión, al menos un incidente que obligue a revisar y un recorrido declarado por
+> cada rama que merezca comprobarse. Comprueba rigor, condiciones, límites, adaptaciones y
+> alternativas, valida los datos y juega todas las ramas. Respeta las ocho reglas de composición de
+> M5. No produzcas arte definitivo de M8, no escribas el contenido contemporáneo de M7B y detente en
+> la puerta de salida de M7A.
+
 ### M7A — Contenido histórico
 
 Modelo integrador: GPT-5.6 Sol, razonamiento alto. GPT-5.6 Terra, razonamiento alto, podrá elaborar
@@ -415,8 +448,10 @@ Tareas:
 
 - producir casos de Dalcroze, Kodály, Orff-Keetman y Suzuki;
 - integrar Willems y Martenot con el peso complementario acordado;
+- declarar en cada caso el reparto y la participación de cada resultado de diseño y de revisión, sin
+  lo cual el caso no valida (ampliación de contrato decidida en M6);
 - comprobar rigor, condiciones, límites, adaptaciones y alternativas;
-- validar los datos y jugar todas las ramas.
+- validar los datos y jugar todas las ramas mediante recorridos declarados.
 
 Puerta de salida: lote histórico validado técnica y pedagógicamente, sin recuperar errores de
 materiales antiguos.

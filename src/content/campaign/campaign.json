@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "id": "el-aula-de-los-dos-minutos",
+  "title": "El aula de los dos minutos",
+  "homeMinutes": { "min": 60, "max": 90 },
+  "units": [
+    {
+      "id": "tutorial-0",
+      "order": 1,
+      "kind": "tutorial",
+      "title": "Mucho hacer, poco aprender",
+      "focus": "«Activo» no equivale a estar ocupado, moverse o decidirlo todo.",
+      "operation": "Observar y marcar indicios.",
+      "minutes": 4,
+      "approachIds": ["dalcroze"],
+      "caseSlug": "mucho-hacer-poco-aprender",
+      "status": "playable"
+    },
+    {
+      "id": "tutorial-1",
+      "order": 2,
+      "kind": "tutorial",
+      "title": "El material intruso",
+      "focus": "Cuerpo, voz y experiencia antes del símbolo; material y técnica no son enfoques.",
+      "operation": "Reparar una variable y predecir.",
+      "minutes": 7,
+      "approachIds": ["orff-keetman", "kodaly"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "caso-2",
+      "order": 3,
+      "kind": "case",
+      "title": "Una frase, dos entradas",
+      "focus": "Dalcroze y Kodály: cuerpo y escucha frente a voz y oído interno; de la experiencia al símbolo.",
+      "operation": "Comparar dos soluciones defendibles.",
+      "minutes": 8,
+      "approachIds": ["dalcroze", "kodaly"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "caso-3",
+      "order": 4,
+      "kind": "case",
+      "title": "Del modelo a una forma propia",
+      "focus": "Orff-Keetman, con Willems y Martenot como lentes complementarias de audición, gesto y atención.",
+      "operation": "Montar tres momentos.",
+      "minutes": 10,
+      "approachIds": ["orff-keetman", "willems", "martenot"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "caso-4",
+      "order": 5,
+      "kind": "case",
+      "title": "Un entorno que no todos tienen",
+      "focus": "Suzuki: escucha, imitación y pequeños pasos en su ecosistema; transferencia parcial al aula generalista.",
+      "operation": "Separar principio y condiciones de transferencia.",
+      "minutes": 9,
+      "approachIds": ["suzuki"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "caso-5",
+      "order": 6,
+      "kind": "case",
+      "title": "Escuchar también el contexto",
+      "focus": "Campbell y World Music Pedagogy: aprendizaje musical culturalmente situado y mediación de la fuente.",
+      "operation": "Mediar repertorio, fuente y adaptación.",
+      "minutes": 11,
+      "approachIds": ["campbell-wmp"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "caso-6",
+      "order": 7,
+      "kind": "case",
+      "title": "El arreglo que no escucha a todos",
+      "focus": "Green y la educación musical popular junto a Orff-Keetman como combinación razonada, no como equivalencia.",
+      "operation": "Distribuir agencia e intervenir estratégicamente.",
+      "minutes": 12,
+      "approachIds": ["green-pme", "orff-keetman"],
+      "caseSlug": "el-arreglo-que-no-escucha-a-todos",
+      "status": "playable"
+    },
+    {
+      "id": "caso-7",
+      "order": 8,
+      "kind": "case",
+      "title": "¿Qué dice este lugar?",
+      "focus": "Schafer como conexión con la escucha del entorno; Gordon como cápsula breve sobre patrones y audiation.",
+      "operation": "Interpretar evidencia situada.",
+      "minutes": 9,
+      "approachIds": ["schafer", "gordon"],
+      "caseSlug": null,
+      "status": "planned"
+    },
+    {
+      "id": "final",
+      "order": 9,
+      "kind": "final",
+      "title": "Dos minutos bajo presión",
+      "focus": "Síntesis de dos principios compatibles elegidos por su función, no por acumular etiquetas.",
+      "operation": "Combinar, revisar y defender sin ayuda directa.",
+      "minutes": 14,
+      "approachIds": ["orff-keetman", "green-pme", "dalcroze", "kodaly"],
+      "caseSlug": null,
+      "status": "planned"
+    }
+  ],
+  "classRoute": {
+    "minMinutes": 25,
+    "maxMinutes": 28,
+    "segments": [
+      {
+        "id": "reconocer",
+        "label": "Reconocer",
+        "unitId": "tutorial-0",
+        "minMinutes": 4,
+        "maxMinutes": 5,
+        "pairAdjustment": "Una persona marca indicios y la otra exige una evidencia; después intercambian el papel.",
+        "conversation": "¿Hay aprendizaje musical o solo actividad?"
+      },
+      {
+        "id": "reparar",
+        "label": "Reparar",
+        "unitId": "tutorial-1",
+        "minMinutes": 7,
+        "maxMinutes": 8,
+        "pairAdjustment": "Las cinco preguntas estables quedan visibles y hay una pista opcional.",
+        "conversation": "¿Qué cambiarías sin perder la finalidad musical?"
+      },
+      {
+        "id": "disenar-revisar",
+        "label": "Diseñar y revisar",
+        "unitId": "caso-6",
+        "minMinutes": 11,
+        "maxMinutes": 12,
+        "pairAdjustment": "Se conservan dos rutas iniciales y dos revisiones defendibles; se omite una comparación secundaria.",
+        "conversation": "¿Cuándo debe intervenir el docente para sostener agencia e inclusión?"
+      },
+      {
+        "id": "cerrar",
+        "label": "Cerrar",
+        "unitId": null,
+        "minMinutes": 3,
+        "maxMinutes": 3,
+        "pairAdjustment": "La pareja acuerda qué mantuvo, qué revisó y qué observaría en un aula real.",
+        "conversation": "¿Por qué la otra pareja podría elegir distinto?"
+      }
+    ]
+  }
+}

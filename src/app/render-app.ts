@@ -1,19 +1,30 @@
 import validCase from "../content/fixtures/case.valid.json";
+import invalidCase from "../content/fixtures/case.invalid.json";
 import validResources from "../content/fixtures/resources.valid.json";
 import identityResources from "../content/identity/resources.json";
-import { findPlayableCase, playableCases } from "../content/playable";
-import type { CaseDefinition, Consequence, JournalEntry, Progress, Scene } from "../domain/contracts";
+import {
+  campaign, campaignUnits, cast, findCharacter, findPlayableCase, findUnitByCaseSlug,
+  outsideCampaignCases, playableCases, walkthroughs,
+} from "../content";
+import type {
+  CampaignUnit, CaseDefinition, Consequence, JournalEntry, Participation, ParticipationRole,
+  Progress, Scene,
+} from "../domain/contracts";
 import { validateCaseDefinition, validateResourceInventory } from "../domain/validation";
-import { createProgressRepository, type ProgressRepository, type StorageMode } from "../infrastructure/progress-repository";
+import { createProgressRepository, MemoryStorage, type ProgressRepository, type StorageMode } from "../infrastructure/progress-repository";
+import {
+  attemptsFor, journalSummary, unitState, withCompletedCase, type UnitState,
+} from "./campaign-progress";
 import { findCue, IDENTITY_NAME, type SoundCueId } from "./identity/identity";
 import { createSoundSketch } from "./identity/sound";
 import { stageBand } from "./identity/stage";
 import {
-  advanceFromInformationalScene, buildJournalEntry, consequenceForScene,
-  continueFromFeedback, createGameSession, grammarComplete, grammarSentence,
+  advanceFromInformationalScene, assemblyPieces, buildJournalEntry, consequenceForScene,
+  continueFromFeedback, createGameSession, grammarComplete, grammarSentence, incidentForScene,
   sceneFor, selectAction, selectGrammar, type GameSession, type GrammarKey,
 } from "./game-session";
 import { parseHash, type AppRoute } from "./router";
+import { findTestState, seedJournalEntries, TEST_STATES, type TestState } from "./test-states";
 
 interface TechnicalState {
   contractValid: boolean;
@@ -47,6 +58,25 @@ const RATING_LABELS: Record<Consequence["rating"], string> = {
   "incoherent-with-brief": "Incoherente con el encargo",
 };
 
+/**
+ * Etiquetas de las vías de participación. Describen qué permite el diseño en ese momento, nunca a
+ * la persona: por eso ninguna nombra una capacidad, y «sin vía» señala el diseño que la produce.
+ */
+const ROLE_LABELS: Record<ParticipationRole, string> = {
+  decides: "Decide",
+  proposes: "Propone",
+  performs: "Interpreta",
+  supports: "Apoya",
+  "no-route": "Sin vía",
+};
+
+const UNIT_STATE_LABELS: Record<UnitState, string> = {
+  completed: "Completada",
+  recommended: "Te toca",
+  available: "Disponible",
+  planned: "Pendiente · M7",
+};
+
 function storageFromBrowser(): Storage | undefined {
   try { return window.localStorage; } catch { return undefined; }
 }
@@ -61,7 +91,10 @@ function makeTechnicalState(repository: ProgressRepository): TechnicalState {
   return {
     contractValid: probe.ok, resourcesValid: resources.ok,
     identityResourcesValid: identity.ok,
-    playableContentValid: playableCases.length === 2, storageMode: repository.mode,
+    // El registro de contenido valida campaña, reparto, casos y recorridos al importarse: si algo
+    // no cumpliera su contrato, la aplicación no llegaría hasta aquí.
+    playableContentValid: playableCases.length > 0 && campaignUnits.length > 0,
+    storageMode: repository.mode,
     deploymentTarget: import.meta.env.VITE_DEPLOY_TARGET ?? "portable",
     baseUrl: import.meta.env.BASE_URL, buildId: import.meta.env.VITE_BUILD_ID ?? "local",
     commitSha: import.meta.env.VITE_COMMIT_SHA ?? "sin-commit",
@@ -108,15 +141,40 @@ function disclosure(options: {
 }
 
 /**
+ * Reparto de la participación.
+ *
+ * Es la ampliación de contrato decidida en M6 hecha visible. Cada fila procede de un dato escrito
+ * por la autoría en la consecuencia: nada aquí se deduce del estado cualitativo ni del recuento de
+ * personajes. Sin este dato ninguna imagen podría mostrar a quién favorece una decisión sin
+ * inventarlo, que es exactamente lo que M5 dejó anotado como límite.
+ *
+ * Va dentro del mismo desplegable que los observables, y no en uno propio, porque un segundo botón
+ * en la pantalla de consecuencia la haría desplazarse en 360 × 640 y la regla 6 no admite excepciones.
+ */
+function participationPanel(participation: Participation): string {
+  const rows = participation.roles.map((entry) => {
+    const character = findCharacter(entry.characterId);
+    const note = entry.note ? `<small>${esc(entry.note)}</small>` : "";
+    return `<li class="participation__row participation__row--${entry.role}"><span class="participation__role">${ROLE_LABELS[entry.role]}</span><span><strong>${esc(character?.name ?? entry.characterId)}</strong>${note}</span></li>`;
+  }).join("");
+  return `<div class="participation"><h3 class="participation__title">Quién participa y cómo</h3><ul class="participation__list">${rows}</ul></div>`;
+}
+
+/**
  * Regla de composición 3: la explicación pedagógica completa sigue estando entera, pero se pide.
  * Regla 4: nada de lo que hay aquí aparece ya en la pantalla.
  */
 function consequenceDetails(consequence: Consequence): string {
+  const participation = consequence.participation ? participationPanel(consequence.participation) : "";
   return disclosure({
     id: "panel-razonamiento",
     className: "reasoning",
-    toggleLabel: "Ver reparación y los cuatro observables",
-    regionLabel: "Reparación y los cuatro observables",
+    toggleLabel: consequence.participation
+      ? "Ver reparación, observables y reparto"
+      : "Ver reparación y los cuatro observables",
+    regionLabel: consequence.participation
+      ? "Reparación, observables y reparto de la participación"
+      : "Reparación y los cuatro observables",
     expanded: false,
     body: `<dl class="reasoning__grid">
     <div><dt>Podrías reparar</dt><dd>${esc(consequence.feedback.possibleRepair)}</dd></div>
@@ -124,13 +182,36 @@ function consequenceDetails(consequence: Consequence): string {
     <div><dt>Aprendizaje</dt><dd>${esc(consequence.observables.learning)}</dd></div>
     <div><dt>Agencia</dt><dd>${esc(consequence.observables.agency)}</dd></div>
     <div><dt>Barrera</dt><dd>${esc(consequence.observables.barrier)}</dd></div>
-    <div><dt>Evidencia</dt><dd>${esc(consequence.observables.evidence)}</dd></div></dl>`,
+    <div><dt>Evidencia</dt><dd>${esc(consequence.observables.evidence)}</dd></div></dl>${participation}`,
   });
+}
+
+function sceneKindLabel(caseDefinition: CaseDefinition): string {
+  if (caseDefinition.experienceType === "tutorial") return "Detective de aula";
+  if (caseDefinition.experienceType === "probe") return "Banco de mecánicas · contenido provisional";
+  return findUnitByCaseSlug(caseDefinition.slug)?.title ?? "Caso completo";
 }
 
 function sceneHeader(caseDefinition: CaseDefinition, scene: Scene): string {
   const index = caseDefinition.scenes.findIndex((candidate) => candidate.id === scene.id) + 1;
-  return `<div class="scene-heading"><div><p class="eyebrow">${caseDefinition.experienceType === "tutorial" ? "Detective de aula" : "Caso completo"} · paso ${index} de ${caseDefinition.scenes.length}</p><h1 tabindex="-1">${esc(scene.title)}</h1></div><progress value="${index}" max="${caseDefinition.scenes.length}" aria-label="Progreso del recorrido">${index}/${caseDefinition.scenes.length}</progress></div>`;
+  return `<div class="scene-heading"><div><p class="eyebrow">${esc(sceneKindLabel(caseDefinition))} · paso ${index} de ${caseDefinition.scenes.length}</p><h1 tabindex="-1">${esc(scene.title)}</h1></div><progress value="${index}" max="${caseDefinition.scenes.length}" aria-label="Progreso del recorrido">${index}/${caseDefinition.scenes.length}</progress></div>`;
+}
+
+/**
+ * Tira del montador.
+ *
+ * Marca estado, nunca premio: dice qué hueco está resuelto y cuál no, sin repetir el texto de la
+ * decisión, que vive entero en la pantalla de montaje. Así la regla 4 se cumple y la tira ocupa una
+ * línea en lugar de tres párrafos.
+ */
+function assemblyStrip(caseDefinition: CaseDefinition, session: GameSession, activeSlotId?: string): string {
+  if (!caseDefinition.assembly) return "";
+  const pieces = assemblyPieces(caseDefinition, session);
+  const chips = pieces.map((piece) => {
+    const state = piece.actionId ? "elegido" : piece.slot.id === activeSlotId ? "actual" : "pendiente";
+    return `<li class="assembly-strip__chip" data-state="${state}">${esc(piece.slot.label)}<span class="assembly-strip__state"> · ${state}</span></li>`;
+  }).join("");
+  return `<nav class="assembly-strip" aria-label="${esc(caseDefinition.assembly.title)}"><ol>${chips}</ol></nav>`;
 }
 
 function choiceScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "observation" | "design" | "revision" }>, session: GameSession): string {
@@ -139,11 +220,27 @@ function choiceScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kin
     if (!consequence) throw new Error("No se encontró la retroalimentación");
     return `${sceneHeader(caseDefinition, scene)}${stageBand(consequence.rating)}${feedbackCard(consequence)}${consequenceDetails(consequence)}<div class="scene-actions"><button class="primary" type="button" data-continue-feedback>${consequence.nextSceneId === scene.id ? "Probar otra lectura" : "Continuar"}</button></div>`;
   }
+  const strip = scene.kind === "design" ? assemblyStrip(caseDefinition, session, scene.assemblySlotId) : "";
   const choices = scene.actionIds.map((actionId, index) => {
     const action = caseDefinition.actions.find((item) => item.id === actionId);
     return action ? `<button class="choice" type="button" data-action-id="${action.id}"><span class="choice__key" aria-hidden="true">${index + 1}</span><span>${esc(action.label)}</span></button>` : "";
   }).join("");
-  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><fieldset class="choice-list"><legend>${esc(scene.prompt)}</legend>${choices}</fieldset>`;
+  return `${sceneHeader(caseDefinition, scene)}${strip}<p class="scene-intro">${esc(scene.introduction)}</p><fieldset class="choice-list"><legend>${esc(scene.prompt)}</legend>${choices}</fieldset>`;
+}
+
+/**
+ * Pantalla de montaje: la microclase entera, una sola vez y con una sola tarea, que es probarla.
+ *
+ * El bloque se desplaza por dentro y es alcanzable con el tabulador, como los demás bloques de
+ * repaso: cuatro decisiones con su texto completo no caben en 360 × 640, y encogerlas rompería la
+ * regla 5.
+ */
+function assemblyReviewScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "assembly-review" }>, session: GameSession): string {
+  const pieces = assemblyPieces(caseDefinition, session);
+  const rows = pieces.map((piece) => `<div><dt>${esc(piece.slot.label)}</dt><dd>${piece.label ? esc(piece.label) : "<em>Sin decidir todavía.</em>"}</dd></div>`).join("");
+  return `${sceneHeader(caseDefinition, scene)}${assemblyStrip(caseDefinition, session)}<p class="scene-intro">${esc(scene.introduction)}</p>
+    <div class="assembly-review" id="panel-montaje" role="region" tabindex="0" aria-label="Montaje de la microclase"><dl>${rows}</dl></div>
+    <div class="scene-actions"><button class="primary" type="button" data-advance-info>${esc(scene.testLabel)}</button></div>`;
 }
 
 function consequenceScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "consequence" }>, session: GameSession): string {
@@ -152,10 +249,15 @@ function consequenceScene(caseDefinition: CaseDefinition, scene: Extract<Scene, 
     <div class="scene-actions"><button class="primary" type="button" data-advance-info>Continuar</button></div>`;
 }
 
-function incidentScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "incident" }>): string {
-  const incident = caseDefinition.incidents.find((item) => item.id === scene.incidentId);
-  if (!incident) throw new Error("Incidente inexistente");
-  return `${sceneHeader(caseDefinition, scene)}${stageBand("incident")}<p class="scene-intro">${esc(scene.introduction)}</p><blockquote class="incident"><p>${esc(incident.reveal)}</p></blockquote><p class="quiet">La tensión pertenece a la organización del aula; ninguna persona funciona como problema o giro sorpresa.</p><div class="scene-actions"><button class="primary" type="button" data-advance-info>Revisar el diseño</button></div>`;
+function incidentScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "incident" }>, session: GameSession): string {
+  const incident = incidentForScene(caseDefinition, scene, session);
+  /*
+   * El relato del incidente se comporta como los demás bloques de repaso: encoge al hueco
+   * disponible y se desplaza por dentro, con foco, nombre accesible y flechas. No es una precaución
+   * teórica: los incidentes de M7A y M7B serán más largos que este, y encoger su texto rompería la
+   * regla 5. La medición encontró el primer desbordamiento en 360 × 640.
+   */
+  return `${sceneHeader(caseDefinition, scene)}${stageBand("incident")}<p class="scene-intro">${esc(scene.introduction)}</p><blockquote class="incident" id="panel-incidente" role="region" tabindex="0" aria-label="Qué revela el incidente"><p>${esc(incident.reveal)}</p></blockquote><p class="quiet">La tensión pertenece a la organización del aula; ninguna persona funciona como problema o giro sorpresa.</p><div class="scene-actions"><button class="primary" type="button" data-advance-info>Revisar el diseño</button></div>`;
 }
 
 function grammarOptions(scene: Extract<Scene, { kind: "justification" }>, session: GameSession): string {
@@ -199,39 +301,110 @@ function gameView(caseDefinition: CaseDefinition, session: GameSession): string 
   const scene = sceneFor(caseDefinition, session);
   switch (scene.kind) {
     case "observation": case "design": case "revision": return choiceScene(caseDefinition, scene, session);
+    case "assembly-review": return assemblyReviewScene(caseDefinition, scene, session);
     case "consequence": return consequenceScene(caseDefinition, scene, session);
-    case "incident": return incidentScene(caseDefinition, scene);
+    case "incident": return incidentScene(caseDefinition, scene, session);
     case "justification": return justificationScene(caseDefinition, scene, session);
     case "reflection": return reflectionScene(caseDefinition, scene, session);
   }
 }
 
+function caseTitleFor(caseId: string): string {
+  return playableCases.find((item) => item.id === caseId)?.title ?? caseId;
+}
+
 function journalText(entries: JournalEntry[]): string {
   return entries.map((entry) => {
-    const title = playableCases.find((item) => item.id === entry.caseId)?.title ?? entry.caseId;
+    const title = caseTitleFor(entry.caseId);
     return `${title}\n${(Object.keys(JOURNAL_LABELS) as Array<keyof typeof JOURNAL_LABELS>).map((property) => `${JOURNAL_LABELS[property]}: ${entry[property]}`).join("\n")}`;
   }).join("\n\n");
 }
 
+/**
+ * Resumen final de la bitácora, con los campos de `docs/biblia_juego_m2.md`, apartado 11.
+ * Selecciona; no puntúa, no ordena y no compara con nadie.
+ */
+function journalSummaryView(progress: Progress): string {
+  if (progress.journal.length === 0) return "";
+  const summary = journalSummary(progress);
+  const rows = [
+    ["Casos recorridos", summary.caseTitles.join(" · ")],
+    ["Principios combinados", summary.approachIds.join(" · ")],
+    ["Decisión mantenida", summary.maintained],
+    ["Decisión revisada", summary.revised],
+    ["Tensión detectada", summary.tension],
+    ["Evidencia que te llevas", summary.evidence],
+  ].filter((row): row is [string, string] => Boolean(row[1]));
+  return `<section class="journal-summary" aria-labelledby="summary-title"><h2 id="summary-title">Lo que te llevas</h2><dl>${rows.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl></section>`;
+}
+
 function journalView(progress: Progress, storageMode: StorageMode): string {
   const entries = progress.journal.map((entry) => {
-    const title = playableCases.find((item) => item.id === entry.caseId)?.title ?? entry.caseId;
-    return `<article class="journal-entry"><h2>${esc(title)}</h2><dl>${journalDefinition(entry)}</dl></article>`;
+    return `<article class="journal-entry"><h2>${esc(caseTitleFor(entry.caseId))}</h2><dl>${journalDefinition(entry)}</dl></article>`;
   }).join("");
-  return `<section class="reference-page" aria-labelledby="journal-title"><p class="eyebrow">Bitácora local · ${storageMode === "persistent" ? "guardada en este navegador" : "memoria temporal"}</p><h1 id="journal-title" tabindex="-1">Decisiones, revisiones y evidencias</h1><p>No contiene identidad, nota ni envío automático.</p>${entries || '<div class="notice"><strong>Aún no hay entradas.</strong><p>Completa el tutorial o el caso para guardar tu razonamiento.</p></div>'}<div class="actions"><button class="primary" type="button" data-copy-journal ${entries ? "" : "disabled"}>Copiar bitácora</button><button class="secondary" type="button" data-print-journal ${entries ? "" : "disabled"}>Imprimir</button><a class="text-link" href="#/">Volver</a></div><p class="copy-status" role="status"></p></section>`;
+  return `<section class="reference-page" aria-labelledby="journal-title"><p class="eyebrow">Bitácora local · ${storageMode === "persistent" ? "guardada en este navegador" : "memoria temporal"}</p><h1 id="journal-title" tabindex="-1">Decisiones, revisiones y evidencias</h1><p>No contiene identidad, nota ni envío automático.</p>${journalSummaryView(progress)}${entries || '<div class="notice"><strong>Aún no hay entradas.</strong><p>Completa una unidad de la campaña para guardar tu razonamiento.</p></div>'}<div class="actions"><button class="primary" type="button" data-copy-journal ${entries ? "" : "disabled"}>Copiar bitácora</button><button class="secondary" type="button" data-print-journal ${entries ? "" : "disabled"}>Imprimir</button><a class="text-link" href="#/campana">Volver a la campaña</a></div><p class="copy-status" role="status"></p></section>`;
 }
 
 function settingsPanel(progress: Progress, storageMode: StorageMode): string {
   return `<aside class="settings-panel" aria-labelledby="settings-title"><div><p class="eyebrow">Accesibilidad</p><h2 id="settings-title" tabindex="-1">Sonido y movimiento</h2></div><label class="toggle"><input type="checkbox" data-setting="muted" ${progress.settings.muted ? "checked" : ""}><span>Silenciar todo</span></label><label><span>Volumen</span><input type="range" min="0" max="1" step="0.1" value="${progress.settings.volume}" data-setting="volume"></label><label class="toggle"><input type="checkbox" data-setting="reducedMotion" ${progress.settings.reducedMotion ? "checked" : ""}><span>Reducir movimiento</span></label><p class="quiet">Las seis señales sonoras son un boceto sintetizado, no recursos definitivos. Su equivalente textual aparece siempre abajo a la izquierda, incluso con el sonido silenciado. No hay música de fondo en ningún momento.</p><p class="quiet">Progreso: ${storageMode === "persistent" ? "persistente en este navegador" : "temporal; el navegador bloquea el almacenamiento"}.</p><div class="actions"><button class="secondary" type="button" data-close-settings>Cerrar</button></div></aside>`;
 }
 
+function unitHref(unit: CampaignUnit): string | undefined {
+  return unit.caseSlug ? `#/caso/${encodeURIComponent(unit.caseSlug)}` : undefined;
+}
+
 function homeView(progress: Progress): string {
-  const completed = progress.completedCaseIds.includes("mucho-hacer-poco-aprender");
-  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M5 · identidad fijada</p><h1 id="home-title" tabindex="-1">Observa, diseña y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia. Después resolverás un caso completo con tres decisiones, una prueba, un incidente y una revisión.</p><div class="actions"><a class="button" href="#/caso/mucho-hacer-poco-aprender">${completed ? "Repetir tutorial" : "Comenzar tutorial"}</a><a class="text-link" href="#/caso/el-arreglo-que-no-escucha-a-todos">Abrir directamente el caso</a></div><div class="grey-note" role="note"><strong>Identidad ${esc(IDENTITY_NAME)}, arte definitivo pendiente.</strong> La dirección visual, sonora y de experiencia quedó fijada en M5. Las ilustraciones, los personajes y el sonido grabado se producen en M8; la campaña completa, en M6 y M7.</div></section>`;
+  const recommended = campaignUnits.find((unit) => unitState(unit, progress) === "recommended");
+  const target = recommended ?? campaignUnits.find((unit) => unit.status === "playable");
+  const href = target ? unitHref(target) : undefined;
+  const playable = campaignUnits.filter((unit) => unit.status === "playable").length;
+  const label = target && attemptsFor(target, progress) > 0 ? "Repetir" : "Continuar";
+  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M6 · sistemas centrales</p><h1 id="home-title" tabindex="-1">Observa, monta y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia. Después montarás una microclase de dos minutos, la probarás, afrontarás un incidente y defenderás lo que decidas.</p><div class="actions">${href && target ? `<a class="button" href="${href}">${label}: ${esc(target.title)}</a>` : ""}<a class="text-link" href="#/campana">Ver la campaña</a></div><div class="grey-note" role="note"><strong>Sistema completo, campaña a medias.</strong> Las mecánicas funcionan de principio a fin con ${playable} de las ${campaignUnits.length} unidades escritas; el resto se escribe en M7A y M7B. Las ilustraciones, los personajes dibujados y el sonido grabado son M8.</div></section>`;
+}
+
+function campaignView(progress: Progress): string {
+  const rows = campaignUnits.map((unit) => {
+    const state = unitState(unit, progress);
+    const href = unitHref(unit);
+    const attempts = attemptsFor(unit, progress);
+    const action = href
+      ? `<a class="text-link" href="${href}">${state === "completed" ? "Repetir" : "Abrir"}</a>`
+      : `<span class="quiet">Se escribe en M7</span>`;
+    return `<li class="unit" data-state="${state}"><p class="unit__state">${UNIT_STATE_LABELS[state]}${attempts > 0 ? ` · ${attempts} ${attempts === 1 ? "intento" : "intentos"}` : ""}</p><h2>${unit.order}. ${esc(unit.title)}</h2><p class="unit__focus">${esc(unit.focus)}</p><p class="quiet">${esc(unit.operation)} · ${unit.minutes} min</p>${action}</li>`;
+  }).join("");
+  const total = campaignUnits.reduce((sum, unit) => sum + unit.minutes, 0);
+  return `<section class="reference-page" aria-labelledby="campaign-title"><p class="eyebrow">Campaña · ${total} minutos previstos</p><h1 id="campaign-title" tabindex="-1">${esc(campaign.title)}</h1><p>Cualquier unidad con contenido se abre por enlace directo sin completar las anteriores: la secuencia orienta y no bloquea. No hay puntos ni niveles.</p><ol class="unit-list">${rows}</ol><div class="actions"><a class="text-link" href="#/ruta/clase">Ruta presencial</a><a class="text-link" href="#/bitacora">Bitácora</a></div></section>`;
+}
+
+function classRouteView(): string {
+  const rows = campaign.classRoute.segments.map((segment) => {
+    const unit = segment.unitId ? campaignUnits.find((item) => item.id === segment.unitId) : undefined;
+    const href = unit ? unitHref(unit) : undefined;
+    return `<article class="segment"><p class="eyebrow">${segment.minMinutes}-${segment.maxMinutes} min</p><h2>${esc(segment.label)}</h2><p>${esc(segment.pairAdjustment)}</p><p class="quiet">Conversación buscada: ${esc(segment.conversation)}</p>${href ? `<a class="text-link" href="${href}">Abrir ${esc(unit?.title ?? "")}</a>` : `<p class="quiet">${unit ? "Se escribe en M7." : "Cierre compartido, fuera del juego."}</p>`}</article>`;
+  }).join("");
+  return `<section class="reference-page" aria-labelledby="class-title"><p class="eyebrow">Ruta presencial · ${campaign.classRoute.minMinutes}-${campaign.classRoute.maxMinutes} minutos por parejas</p><h1 id="class-title" tabindex="-1">Cuatro tramos que comparten sistema con la campaña</h1><p>La ruta no duplica contenido: abre las mismas unidades con un ajuste para parejas. M7C equilibrará los tiempos con datos de uso, no con estimaciones.</p><div class="segment-list">${rows}</div><p><a class="text-link" href="#/campana">Ver la campaña completa</a></p></section>`;
 }
 
 function technicalView(state: TechnicalState): string {
-  return `<section class="reference-page" aria-labelledby="proof-title"><p class="eyebrow">Diagnóstico reproducible</p><h1 id="proof-title" tabindex="-1">Estado técnico del corte</h1><ul class="status-list">${statusItem("Contratos M3", state.contractValid, "La sonda técnica sigue siendo válida")}${statusItem("Contenido M4", state.playableContentValid, "Tutorial y caso validados al cargar")}${statusItem("Inventario audiovisual", state.resourcesValid, "Las alternativas siguen siendo exigibles")}${statusItem("Registro de procedencia M5", state.identityResourcesValid, "Ocho recursos de identidad con origen, licencia y alternativa")}${statusItem("Ruta portátil", state.baseUrl === "./", `Base compilada: ${state.baseUrl}`)}</ul><dl class="build-data"><div><dt>Destino</dt><dd>${esc(state.deploymentTarget)}</dd></div><div><dt>Identidad</dt><dd>${esc(IDENTITY_NAME)}</dd></div><div><dt>Compilación</dt><dd>${esc(state.buildId)}</dd></div><div><dt>Revisión</dt><dd>${esc(state.commitSha.slice(0, 12))}</dd></div></dl><p><a class="text-link" href="#/">Volver al corte</a></p></section>`;
+  return `<section class="reference-page" aria-labelledby="proof-title"><p class="eyebrow">Diagnóstico reproducible</p><h1 id="proof-title" tabindex="-1">Estado técnico del sistema</h1><ul class="status-list">${statusItem("Contratos M3", state.contractValid, "La sonda técnica sigue siendo válida")}${statusItem("Contenido jugable", state.playableContentValid, `${playableCases.length} casos y ${campaignUnits.length} unidades validados al cargar`)}${statusItem("Reparto compartido M6", cast.characters.length > 0, `${cast.characters.length} personajes con rasgo funcional, condición y salvaguarda`)}${statusItem("Recorridos declarados M6", walkthroughs.length > 0, `${walkthroughs.length} rutas de prueba con resultado esperado`)}${statusItem("Inventario audiovisual", state.resourcesValid, "Las alternativas siguen siendo exigibles")}${statusItem("Registro de procedencia M5", state.identityResourcesValid, "Ocho recursos de identidad con origen, licencia y alternativa")}${statusItem("Ruta portátil", state.baseUrl === "./", `Base compilada: ${state.baseUrl}`)}</ul><dl class="build-data"><div><dt>Destino</dt><dd>${esc(state.deploymentTarget)}</dd></div><div><dt>Identidad</dt><dd>${esc(IDENTITY_NAME)}</dd></div><div><dt>Compilación</dt><dd>${esc(state.buildId)}</dd></div><div><dt>Revisión</dt><dd>${esc(state.commitSha.slice(0, 12))}</dd></div></dl><div class="actions"><a class="text-link" href="#/pruebas">Rutas de prueba</a><a class="text-link" href="#/">Volver al inicio</a></div></section>`;
+}
+
+function testIndexView(): string {
+  const rows = TEST_STATES.map((state) => `<li class="unit"><h2><a href="#/prueba/${encodeURIComponent(state.id)}">${esc(state.name)}</a></h2><p class="quiet">${esc(state.purpose)}</p></li>`).join("");
+  const extra = outsideCampaignCases.map((item) => `<li><a class="text-link" href="#/caso/${encodeURIComponent(item.slug)}">${esc(item.title)}</a></li>`).join("");
+  return `<section class="reference-page" aria-labelledby="tests-title"><p class="eyebrow">Rutas de prueba · ${TEST_STATES.length} estados difíciles</p><h1 id="tests-title" tabindex="-1">Los estados a los que casi nunca se llega jugando</h1><p>No desbloquean nada ni alteran el progreso guardado. <code>pnpm measure:viewports</code> los recorre midiendo lo mismo que en el resto del juego.</p><ol class="unit-list">${rows}</ol><h2>Contenido fuera de la campaña</h2><ul class="plain-list">${extra}</ul><p><a class="text-link" href="#/prueba-publicacion">Diagnóstico técnico</a></p></section>`;
+}
+
+function invalidContentView(): string {
+  const result = validateCaseDefinition(invalidCase);
+  const rows = result.ok
+    ? '<li class="status status--fallo"><span aria-hidden="true">×</span><span><strong>El caso inválido ha validado</strong><small>El validador ha dejado de detectar el contrato roto</small></span></li>'
+    : result.issues.map((issue) => `<li class="status status--fallo"><span aria-hidden="true">×</span><span><strong>${esc(issue.code)}</strong><small>${esc(issue.path)}: ${esc(issue.message)}</small></span></li>`).join("");
+  return `<section class="reference-page" aria-labelledby="invalid-title"><p class="eyebrow">Ruta de prueba · contenido inválido</p><h1 id="invalid-title" tabindex="-1">Lo que dice el validador cuando el contrato se rompe</h1><p>Ejecutado sobre <code>src/content/fixtures/case.invalid.json</code>, roto a propósito. Los mensajes deben servir a quien escribe contenido, no solo a quien escribe código.</p><ul class="status-list">${rows}</ul><p><a class="text-link" href="#/pruebas">Volver a las rutas de prueba</a></p></section>`;
+}
+
+function testStateFrame(state: TestState, body: string): string {
+  return `<p class="test-banner" role="note">Ruta de prueba · ${esc(state.name)}. <a class="text-link" href="#/pruebas">Volver</a></p>${body}`;
 }
 
 /** Señal sonora que corresponde al estado actual, o ninguna si el estado no la tiene. */
@@ -249,25 +422,36 @@ function cueForState(caseDefinition: CaseDefinition, session: GameSession): Soun
   return undefined;
 }
 
-function routeContent(route: AppRoute, state: TechnicalState, progress: Progress, sessions: Map<string, GameSession>): string {
-  switch (route.name) {
-    case "home": return homeView(progress);
-    case "publication-proof": return technicalView(state);
-    case "case": {
-      const item = findPlayableCase(route.slug);
-      if (!item) return `<section><p class="eyebrow">Acceso directo</p><h1 tabindex="-1">Caso no disponible en este corte</h1><p><code>${esc(route.slug)}</code></p><p>Este corte contiene únicamente el tutorial y el caso piloto aprobado. La campaña completa pertenece a fases posteriores.</p><p><a class="text-link" href="#/">Volver</a></p></section>`;
-      const session = sessions.get(item.id) ?? createGameSession(item);
-      sessions.set(item.id, session);
-      return `<section class="game-screen" data-case-id="${item.id}">${gameView(item, session)}</section>`;
-    }
-    case "class-route": return `<section class="reference-page"><p class="eyebrow">Ruta presencial · alcance actual</p><h1 tabindex="-1">Dos recorridos compartidos, todavía sin campaña</h1><p>La ruta definitiva de 25–28 minutos se equilibrará en M7C. Aquí puedes abrir los mismos datos que usa la ruta doméstica.</p><div class="actions"><a class="button" href="#/caso/mucho-hacer-poco-aprender">Tutorial</a><a class="text-link" href="#/caso/el-arreglo-que-no-escucha-a-todos">Caso completo</a></div></section>`;
-    case "journal": return journalView(progress, state.storageMode);
-    case "not-found": return `<section><p class="eyebrow">Ruta no encontrada</p><h1 tabindex="-1">Este enlace no forma parte del contrato</h1><p><code>${esc(route.requested)}</code></p><p><a class="text-link" href="#/">Ir al inicio</a></p></section>`;
-  }
-}
-
 function randomAttemptId(): string {
   return globalThis.crypto?.randomUUID?.() ?? "00000000-0000-4000-8000-000000000001";
+}
+
+/** Contexto de juego resuelto desde la ruta: vale igual para un caso y para una ruta de prueba. */
+interface CaseContext {
+  item: CaseDefinition;
+  key: string;
+  sceneId?: string;
+  selectedActions?: Record<string, string>;
+  completed?: boolean;
+}
+
+function caseContextFor(route: AppRoute): CaseContext | undefined {
+  if (route.name === "case") {
+    const item = findPlayableCase(route.slug);
+    return item ? { item, key: item.id, sceneId: route.sceneId } : undefined;
+  }
+  if (route.name === "test-state") {
+    const state = findTestState(route.id);
+    if (state?.kind !== "case") return undefined;
+    const item = findPlayableCase(state.caseSlug);
+    return item
+      ? {
+          item, key: `prueba:${state.id}`, sceneId: state.sceneId,
+          selectedActions: state.selectedActions, completed: state.completed,
+        }
+      : undefined;
+  }
+  return undefined;
 }
 
 export function mountApp(root: HTMLElement): void {
@@ -284,6 +468,26 @@ export function mountApp(root: HTMLElement): void {
   let progress = repository.load();
   let settingsOpen = false;
   let lastCueKey = "";
+  /*
+   * Un enlace directo a una escena se aplica **una sola vez**. El fragmento no cambia mientras se
+   * juega dentro del caso, de modo que volver a leerlo en cada repintado devolvería el recorrido a
+   * la escena del enlace y sería imposible avanzar.
+   */
+  const appliedDeepLinks = new Set<string>();
+
+  const sessionFor = (context: CaseContext): GameSession => {
+    const existing = sessions.get(context.key);
+    const deepLink = `${context.key}|${context.sceneId ?? ""}`;
+    if (existing && (!context.sceneId || appliedDeepLinks.has(deepLink))) return existing;
+    appliedDeepLinks.add(deepLink);
+    const fresh: GameSession = {
+      ...createGameSession(context.item, context.sceneId),
+      selectedActions: { ...(context.selectedActions ?? {}) },
+      completed: context.completed ?? false,
+    };
+    sessions.set(context.key, fresh);
+    return fresh;
+  };
 
   const playCue = (cue: SoundCueId) => {
     const spec = findCue(cue);
@@ -294,21 +498,72 @@ export function mountApp(root: HTMLElement): void {
 
   /** Cada estado del recorrido suena como mucho una vez, aunque la pantalla se repinte. */
   const announceState = (route: AppRoute) => {
-    if (route.name !== "case") return;
-    const item = findPlayableCase(route.slug);
-    const session = item ? sessions.get(item.id) : undefined;
-    if (!item || !session) return;
-    const key = `${item.id}|${session.sceneId}|${session.feedbackConsequenceId ?? ""}|${session.completed}`;
+    const context = caseContextFor(route);
+    if (!context) return;
+    const session = sessions.get(context.key);
+    if (!session) return;
+    const key = `${context.key}|${session.sceneId}|${session.feedbackConsequenceId ?? ""}|${session.completed}`;
     if (key === lastCueKey) return;
     lastCueKey = key;
-    const cue = cueForState(item, session);
+    const cue = cueForState(context.item, session);
     if (cue) playCue(cue);
+  };
+
+  const testStateContent = (stateId: string): string => {
+    const testState = findTestState(stateId);
+    if (!testState) {
+      return `<section><p class="eyebrow">Ruta de prueba</p><h1 tabindex="-1">No hay ningún estado con ese identificador</h1><p><code>${esc(stateId)}</code></p><p><a class="text-link" href="#/pruebas">Ver los estados disponibles</a></p></section>`;
+    }
+    switch (testState.kind) {
+      case "case": {
+        const context = caseContextFor({ name: "test-state", id: stateId });
+        if (!context) return testStateFrame(testState, "<section><p>El caso de este estado ya no existe.</p></section>");
+        return testStateFrame(testState, `<section class="game-screen" data-case-id="${context.item.id}">${gameView(context.item, sessionFor(context))}</section>`);
+      }
+      case "journal": {
+        const seeded: Progress = testState.seed === "full"
+          ? { ...progress, journal: seedJournalEntries() }
+          : { ...progress, journal: [] };
+        return testStateFrame(testState, journalView(seeded, state.storageMode));
+      }
+      case "storage-denied": {
+        // Un repositorio en memoria reproduce exactamente la degradación, sin tocar lo guardado.
+        const denied = createProgressRepository(new MemoryStorage());
+        return testStateFrame(testState, journalView(denied.load(), denied.mode));
+      }
+      case "invalid-content":
+        return testStateFrame(testState, invalidContentView());
+      case "hash":
+        return testStateFrame(testState, `<section><p class="eyebrow">Estado difícil</p><h1 tabindex="-1">Abre el enlace para verlo</h1><p><a class="button" href="${testState.hash}">${esc(testState.hash)}</a></p><p class="quiet">${esc(testState.purpose)}</p></section>`);
+    }
+  };
+
+  const routeContent = (route: AppRoute): string => {
+    switch (route.name) {
+      case "home": return homeView(progress);
+      case "campaign": return campaignView(progress);
+      case "publication-proof": return technicalView(state);
+      case "test-index": return testIndexView();
+      case "test-state": return testStateContent(route.id);
+      case "case": {
+        const context = caseContextFor(route);
+        if (!context) {
+          const unit = campaignUnits.find((candidate) => candidate.caseSlug === route.slug);
+          return `<section><p class="eyebrow">Acceso directo</p><h1 tabindex="-1">Esta unidad todavía no tiene contenido</h1><p><code>${esc(route.slug)}</code></p><p>${unit ? "La unidad existe en la campaña y se escribe en M7." : "El enlace no corresponde a ninguna unidad de la campaña."} Puedes abrir cualquier otra desde el mapa.</p><p><a class="text-link" href="#/campana">Ver la campaña</a></p></section>`;
+        }
+        return `<section class="game-screen" data-case-id="${context.item.id}">${gameView(context.item, sessionFor(context))}</section>`;
+      }
+      case "class-route": return classRouteView();
+      case "journal": return journalView(progress, state.storageMode);
+      case "not-found": return `<section><p class="eyebrow">Ruta no encontrada</p><h1 tabindex="-1">Este enlace no forma parte del contrato</h1><p><code>${esc(route.requested)}</code></p><p><a class="text-link" href="#/">Ir al inicio</a></p></section>`;
+    }
   };
 
   const render = (focusMain = false) => {
     const route = parseHash(window.location.hash);
+    const content = routeContent(route);
     announceState(route);
-    root.innerHTML = `<header class="site-header"><a class="brand" href="#/" aria-label="Inicio de El aula de los dos minutos"><span class="brand__mark" aria-hidden="true">02′</span><span>El aula de los dos minutos</span></a><nav aria-label="Utilidades"><a href="#/bitacora">Bitácora</a><button type="button" data-open-settings>Ajustes</button></nav></header><main id="contenido" tabindex="-1">${routeContent(route, state, progress, sessions)}</main><footer><p>M5 · ${esc(IDENTITY_NAME)} · sin cuentas, analítica ni arte definitivo</p><a href="#/prueba-publicacion">Diagnóstico</a></footer>${settingsOpen ? settingsPanel(progress, state.storageMode) : ""}`;
+    root.innerHTML = `<header class="site-header"><a class="brand" href="#/" aria-label="Inicio de El aula de los dos minutos"><span class="brand__mark" aria-hidden="true">02′</span><span>El aula de los dos minutos</span></a><nav aria-label="Utilidades"><a href="#/campana">Campaña</a><a href="#/bitacora">Bitácora</a><button type="button" data-open-settings>Ajustes</button></nav></header><main id="contenido" tabindex="-1">${content}</main><footer><p>M6 · ${esc(IDENTITY_NAME)} · sin cuentas, analítica ni arte definitivo</p><a href="#/prueba-publicacion">Diagnóstico</a></footer>${settingsOpen ? settingsPanel(progress, state.storageMode) : ""}`;
     document.title = "El aula de los dos minutos";
     document.documentElement.dataset.appReady = "true";
     document.documentElement.dataset.identity = "aula-laboratorio";
@@ -319,15 +574,18 @@ export function mountApp(root: HTMLElement): void {
   root.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
     const route = parseHash(window.location.hash);
-    const item = route.name === "case" ? findPlayableCase(route.slug) : undefined;
-    const session = item ? sessions.get(item.id) : undefined;
-    const scene = item && session ? sceneFor(item, session) : undefined;
+    const context = caseContextFor(route);
+    const item = context?.item;
+    const session = context ? sessions.get(context.key) : undefined;
+    const scene = item && session && !session.completed ? sceneFor(item, session) : undefined;
+    const store = (next: GameSession) => { if (context) sessions.set(context.key, next); };
+
     const actionButton = target.closest<HTMLButtonElement>("[data-action-id]");
     if (actionButton && item && session && scene && (scene.kind === "observation" || scene.kind === "design" || scene.kind === "revision")) {
       // Con retroalimentación diferida no hay consecuencia inmediata que suene: la señal
       // confirma que la decisión quedó registrada.
       if (scene.feedbackMode === "deferred") playCue("decision");
-      sessions.set(item.id, selectAction(item, session, scene, actionButton.dataset.actionId ?? "")); render(true); return;
+      store(selectAction(item, session, scene, actionButton.dataset.actionId ?? "")); render(true); return;
     }
     // El revelado progresivo no cambia el estado del juego: se conmuta en el sitio, sin repintar,
     // de modo que el foco y la posición de lectura se conservan.
@@ -342,25 +600,23 @@ export function mountApp(root: HTMLElement): void {
       return;
     }
     if (target.closest("[data-continue-feedback]") && item && session) {
-      sessions.set(item.id, continueFromFeedback(item, session)); render(true); return;
+      store(continueFromFeedback(item, session)); render(true); return;
     }
-    if (target.closest("[data-advance-info]") && item && session && scene && (scene.kind === "consequence" || scene.kind === "incident")) {
-      sessions.set(item.id, advanceFromInformationalScene(item, session, scene)); render(true); return;
+    if (target.closest("[data-advance-info]") && item && session && scene && (scene.kind === "consequence" || scene.kind === "incident" || scene.kind === "assembly-review")) {
+      store(advanceFromInformationalScene(item, session, scene)); render(true); return;
     }
     if (target.closest("[data-advance-justification]") && item && session && scene?.kind === "justification" && grammarComplete(session)) {
-      sessions.set(item.id, { ...session, sceneId: scene.nextSceneId ?? session.sceneId }); render(true); return;
+      store({ ...session, sceneId: scene.nextSceneId ?? session.sceneId }); render(true); return;
     }
     if (target.closest("[data-finish-case]") && item && session) {
       const now = new Date().toISOString();
       const entry = buildJournalEntry(item, session, now, randomAttemptId());
-      progress = { ...progress, updatedAt: now,
-        completedCaseIds: [...new Set([...progress.completedCaseIds, item.id])],
-        attemptsByCase: { ...progress.attemptsByCase, [item.id]: (progress.attemptsByCase[item.id] ?? 0) + 1 },
-        journal: [...progress.journal, entry],
-        recommendedNextCaseId: item.experienceType === "tutorial" ? "el-arreglo-que-no-escucha-a-todos" : null };
-      repository.save(progress); sessions.set(item.id, { ...session, completed: true }); render(true); return;
+      progress = withCompletedCase(progress, item.id, entry, now);
+      repository.save(progress); store({ ...session, completed: true }); render(true); return;
     }
-    if (target.closest("[data-restart-case]") && item) { sessions.set(item.id, createGameSession(item)); render(true); return; }
+    if (target.closest("[data-restart-case]") && item && context) {
+      sessions.set(context.key, createGameSession(item)); render(true); return;
+    }
     if (target.closest("[data-open-settings]")) { settingsOpen = true; render(); root.querySelector<HTMLElement>(".settings-panel h2")?.focus(); return; }
     if (target.closest("[data-close-settings]")) { settingsOpen = false; render(); root.querySelector<HTMLElement>("[data-open-settings]")?.focus(); return; }
     if (target.closest("[data-copy-journal]")) {
@@ -376,10 +632,10 @@ export function mountApp(root: HTMLElement): void {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
     const grammarKey = target.dataset.grammarKey as GrammarKey | undefined;
     const route = parseHash(window.location.hash);
-    const item = route.name === "case" ? findPlayableCase(route.slug) : undefined;
-    const session = item ? sessions.get(item.id) : undefined;
-    if (grammarKey && item && session) {
-      sessions.set(item.id, selectGrammar(session, grammarKey, target.value)); render();
+    const context = caseContextFor(route);
+    const session = context ? sessions.get(context.key) : undefined;
+    if (grammarKey && context && session) {
+      sessions.set(context.key, selectGrammar(session, grammarKey, target.value)); render();
       root.querySelector<HTMLSelectElement>(`[data-grammar-key="${grammarKey}"]`)?.focus(); return;
     }
     const setting = target.dataset.setting as "muted" | "volume" | "reducedMotion" | undefined;
@@ -399,17 +655,16 @@ export function mountApp(root: HTMLElement): void {
     if (!/^[1-9]$/.test(event.key) || settingsOpen) return;
     const target = event.target as HTMLElement;
     if (target.matches("input, select, textarea")) return;
-    const route = parseHash(window.location.hash);
-    const item = route.name === "case" ? findPlayableCase(route.slug) : undefined;
-    const session = item ? sessions.get(item.id) : undefined;
-    const scene = item && session ? sceneFor(item, session) : undefined;
-    if (!item || !session || !scene || session.feedbackConsequenceId) return;
+    const context = caseContextFor(parseHash(window.location.hash));
+    const session = context ? sessions.get(context.key) : undefined;
+    if (!context || !session || session.completed || session.feedbackConsequenceId) return;
+    const scene = sceneFor(context.item, session);
     if (scene.kind !== "observation" && scene.kind !== "design" && scene.kind !== "revision") return;
     const actionId = scene.actionIds[Number(event.key) - 1];
     if (!actionId) return;
     event.preventDefault();
     if (scene.feedbackMode === "deferred") playCue("decision");
-    sessions.set(item.id, selectAction(item, session, scene, actionId));
+    sessions.set(context.key, selectAction(context.item, session, scene, actionId));
     render(true);
   });
 

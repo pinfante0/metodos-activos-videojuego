@@ -1,7 +1,7 @@
 {
   "name": "el-aula-de-los-dos-minutos",
   "private": true,
-  "version": "0.0.0-m5",
+  "version": "0.0.0-m6",
   "type": "module",
   "packageManager": "pnpm@11.19.0",
   "scripts": {
@@ -13,7 +13,7 @@
     "measure:viewports": "node scripts/measure-viewports.mjs",
     "preview": "vite preview",
     "test": "vitest run",
-    "validate:content": "vitest run tests/contracts.test.ts tests/playable-content.test.ts --reporter=verbose"
+    "validate:content": "vitest run tests/contracts.test.ts tests/playable-content.test.ts tests/campaign.test.ts tests/cast-participation.test.ts tests/consequence-engine.test.ts tests/assembly.test.ts tests/walkthroughs.test.ts tests/test-states.test.ts --reporter=verbose"
   },
   "dependencies": {
     "zod": "^4.4.3"

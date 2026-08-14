@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "walkthroughs": [
+    {
+      "id": "tutorial-completo",
+      "caseSlug": "mucho-hacer-poco-aprender",
+      "name": "Tutorial · camino corto",
+      "purpose": "El recorrido mínimo del tutorial: el indicio que avanza y la reparación coherente.",
+      "actions": ["observe-missing-evidence", "repair-phrase-response"],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": ["feedback-missing-evidence", "feedback-repair-phrase", "tutorial-principle-revealed"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-reintento",
+      "caseSlug": "mucho-hacer-poco-aprender",
+      "name": "Tutorial · con reintento",
+      "purpose": "Un indicio que devuelve a la propia escena de observación. Es el estado en el que el arnés de M5 giraba en vacío sin avisar.",
+      "actions": ["observe-movement", "observe-missing-evidence", "repair-four-steps"],
+      "expect": {
+        "consequenceIds": ["feedback-movement", "feedback-missing-evidence", "feedback-repair-steps"],
+        "completes": true
+      }
+    },
+    {
+      "id": "piloto-coherente",
+      "caseSlug": "el-arreglo-que-no-escucha-a-todos",
+      "name": "Caso 6 · montaje coherente",
+      "purpose": "Las tres decisiones que activan la primera regla, el incidente de autoría y la revisión por rotación.",
+      "actions": [
+        "brief-mediated-choice",
+        "entry-recording-choice",
+        "process-imitate-explore-vary",
+        "evidence-rondo-explain",
+        "revision-rotating-decisions"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": ["outcome-coherent", "revision-rotating-outcome"],
+        "incidentIds": ["incident-authorship"],
+        "completes": true
+      }
+    },
+    {
+      "id": "piloto-copia-cerrada",
+      "caseSlug": "el-arreglo-que-no-escucha-a-todos",
+      "name": "Caso 6 · copia cerrada",
+      "purpose": "Un montaje defendible sin autoría: comprueba la segunda regla y el reparto sin ninguna decisión musical.",
+      "actions": [
+        "brief-mediated-choice",
+        "entry-body-voice",
+        "process-closed-copy",
+        "evidence-perfect-take",
+        "revision-affinity-contract"
+      ],
+      "expect": {
+        "consequenceIds": ["outcome-copy", "revision-affinity-outcome"],
+        "completes": true
+      }
+    },
+    {
+      "id": "piloto-dos-reintentos",
+      "caseSlug": "el-arreglo-que-no-escucha-a-todos",
+      "name": "Caso 6 · reintento en el encargo y en la revisión",
+      "purpose": "Dos bucles de reintento en el mismo recorrido y el resultado sin restricción común.",
+      "actions": [
+        "brief-free-choice",
+        "brief-mediated-choice",
+        "entry-score-first",
+        "process-free-explore",
+        "evidence-taste-vote",
+        "revision-no-intervention",
+        "revision-rotating-decisions"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "feedback-brief-free",
+          "outcome-unrelated",
+          "revision-no-intervention-outcome",
+          "revision-rotating-outcome"
+        ],
+        "completes": true
+      }
+    },
+    {
+      "id": "piloto-enlace-directo",
+      "caseSlug": "el-arreglo-que-no-escucha-a-todos",
+      "name": "Caso 6 · enlace directo a la justificación",
+      "purpose": "Entrar por el medio sin haber decidido nada: la bitácora debe seguir siendo legible y declarar los huecos en lugar de inventarlos.",
+      "startSceneId": "pilot-justification",
+      "actions": [],
+      "viewportCoverage": "all",
+      "expect": { "completes": true }
+    },
+    {
+      "id": "banco-completo",
+      "caseSlug": "banco-de-mecanicas",
+      "name": "Banco · cuatro huecos y turno repartido",
+      "purpose": "El montador completo, el incidente de reserva y la revisión por rotación.",
+      "actions": [
+        "probe-brief-multimodal",
+        "probe-entry-signal",
+        "probe-action-equivalent",
+        "probe-support-shared",
+        "probe-evidence-anticipation",
+        "probe-revision-rotate-control"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": ["probe-outcome-shared", "probe-revision-rotation-outcome"],
+        "incidentIds": ["probe-incident-time"],
+        "completes": true
+      }
+    },
+    {
+      "id": "banco-etiqueta-excluida",
+      "caseSlug": "banco-de-mecanicas",
+      "name": "Banco · etiqueta excluida",
+      "purpose": "Dos reglas con las mismas etiquetas exigidas: sólo `forbiddenTags` las distingue. Sin ella el resultado dependería del orden en que se escribieran las acciones.",
+      "actions": [
+        "probe-brief-multimodal",
+        "probe-entry-signal",
+        "probe-action-equivalent",
+        "probe-support-teacher-only",
+        "probe-evidence-anticipation",
+        "probe-revision-rotate-control"
+      ],
+      "expect": {
+        "consequenceIds": ["probe-outcome-teacher-led"],
+        "incidentIds": ["probe-incident-time"],
+        "completes": true
+      }
+    },
+    {
+      "id": "banco-acceso",
+      "caseSlug": "banco-de-mecanicas",
+      "name": "Banco · incidente por acceso y revisión incoherente",
+      "purpose": "La regla de incidente selecciona el de acceso sensorial; la revisión incoherente devuelve a la misma escena antes de aceptar una reparación.",
+      "actions": [
+        "probe-brief-sound-only",
+        "probe-brief-multimodal",
+        "probe-entry-audio-only",
+        "probe-action-equivalent",
+        "probe-support-teacher-only",
+        "probe-evidence-anticipation",
+        "probe-revision-drop-objective",
+        "probe-revision-equivalent-signal"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": [
+          "probe-feedback-sound-only",
+          "probe-outcome-inaccessible",
+          "probe-revision-dropped-outcome",
+          "probe-revision-signal-outcome"
+        ],
+        "incidentIds": ["probe-incident-access"],
+        "completes": true
+      }
+    },
+    {
+      "id": "banco-cierre-debil",
+      "caseSlug": "banco-de-mecanicas",
+      "name": "Banco · cierre que no observa nada",
+      "purpose": "Un montaje accesible con un cierre que no permite leer el aprendizaje: el resultado de reserva.",
+      "actions": [
+        "probe-brief-multimodal",
+        "probe-entry-signal",
+        "probe-action-equivalent",
+        "probe-support-shared",
+        "probe-evidence-applause",
+        "probe-revision-equivalent-signal"
+      ],
+      "expect": {
+        "consequenceIds": ["probe-outcome-weak", "probe-revision-signal-outcome"],
+        "completes": true
+      }
+    }
+  ]
+}

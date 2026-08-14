@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ParticipationSchema } from "./cast";
 import {
   ApproachIdSchema,
   ContemporaryLensSchema,
@@ -44,6 +45,13 @@ export const ConsequenceSchema = z
       })
       .strict(),
     feedback: FeedbackSchema,
+    /**
+     * Reparto de la participación que este resultado hace posible. Ampliación de M6: es lo que
+     * convierte «ver a quién favorece una decisión» en un dato y no en una ilustración inventada.
+     * Es obligatoria en los resultados de prueba y de revisión de un caso con reparto; lo exige
+     * `validateCaseDefinition`, no el esquema, porque depende de cómo se use la consecuencia.
+     */
+    participation: ParticipationSchema.optional(),
     nextSceneId: IdentifierSchema.nullable(),
   })
   .strict();
@@ -76,6 +84,31 @@ export const IncidentSchema = z
   })
   .strict();
 
+/**
+ * Selección determinista por etiquetas, compartida por consecuencias e incidentes.
+ *
+ * Una regla se cumple cuando **todas** sus etiquetas exigidas están presentes y **ninguna** de sus
+ * etiquetas excluidas lo está. Gana la primera regla cumplida en orden de declaración, y si no se
+ * cumple ninguna se usa el resultado de reserva. El orden de declaración es la prioridad: se lee en
+ * el archivo, no depende de cuántas etiquetas tenga cada regla ni de cómo las recorra el motor.
+ *
+ * `forbiddenTags` es la ampliación de M6. Sin ella, la única forma de distinguir dos combinaciones
+ * era añadir etiquetas a las acciones hasta que una regla anterior dejara de cumplirse, lo que
+ * hacía que el resultado dependiera del orden en que se escribieran las acciones.
+ */
+const TagRuleFields = {
+  requiredTags: z.array(IdentifierSchema).min(1),
+  forbiddenTags: z.array(IdentifierSchema).default([]),
+};
+
+export const ConsequenceRuleSchema = z
+  .object({ ...TagRuleFields, consequenceId: IdentifierSchema })
+  .strict();
+
+export const IncidentRuleSchema = z
+  .object({ ...TagRuleFields, incidentId: IdentifierSchema })
+  .strict();
+
 const BaseSceneSchema = z.object({
   id: IdentifierSchema,
   title: z.string().min(1),
@@ -90,6 +123,46 @@ const ChoiceSceneFields = {
   feedbackMode: z.enum(["immediate", "deferred"]).default("immediate"),
 };
 
+export const AssemblySlotKindSchema = z.enum([
+  "entry",
+  "musical-action",
+  "mediation-support",
+  "evidence",
+]);
+
+/**
+ * Montador de microclases.
+ *
+ * Los tres momentos del bucle de M2 —apertura, acción musical con decisión real y cierre que
+ * produce evidencia— dejan de ser tres preguntas sueltas y pasan a construir una pieza visible que
+ * crece. Cada hueco se decide en su propia pantalla, porque la regla 1 de M5 exige una decisión por
+ * pantalla; lo que comparten es el montaje, que se muestra encima como una tira compacta y termina
+ * en una pantalla de revisión cuya única tarea es probarlo.
+ *
+ * El montaje no puntúa ni ordena: enumera lo elegido y lo que falta. La consecuencia de la prueba
+ * la calcula el motor determinista a partir de las etiquetas, igual que antes.
+ */
+export const AssemblySchema = z
+  .object({
+    title: z.string().min(1),
+    /** Qué se está montando, en una línea, para la tira compacta. */
+    summary: z.string().min(1),
+    slots: z
+      .array(
+        z
+          .object({
+            id: IdentifierSchema,
+            kind: AssemblySlotKindSchema,
+            label: z.string().min(1),
+            /** Escena de diseño que rellena este hueco. */
+            sceneId: IdentifierSchema,
+          })
+          .strict(),
+      )
+      .min(2),
+  })
+  .strict();
+
 export const SceneSchema = z.discriminatedUnion("kind", [
   BaseSceneSchema.extend({
     kind: z.literal("observation"),
@@ -98,28 +171,29 @@ export const SceneSchema = z.discriminatedUnion("kind", [
   BaseSceneSchema.extend({
     kind: z.literal("design"),
     ...ChoiceSceneFields,
-    slots: z
-      .array(z.enum(["entry", "musical-action", "mediation-support", "evidence"]))
-      .min(1),
+    slots: z.array(AssemblySlotKindSchema).min(1),
+    /** Hueco del montador que rellena esta escena, si el caso declara montador. */
+    assemblySlotId: IdentifierSchema.optional(),
+  }).strict(),
+  BaseSceneSchema.extend({
+    kind: z.literal("assembly-review"),
+    /** Única tarea de la pantalla: probar el montaje. */
+    testLabel: z.string().min(1),
   }).strict(),
   BaseSceneSchema.extend({
     kind: z.literal("consequence"),
     consequenceIds: z.array(IdentifierSchema).min(1),
-    rules: z
-      .array(
-        z
-          .object({
-            requiredTags: z.array(IdentifierSchema).min(1),
-            consequenceId: IdentifierSchema,
-          })
-          .strict(),
-      )
-      .optional(),
+    rules: z.array(ConsequenceRuleSchema).optional(),
     fallbackConsequenceId: IdentifierSchema.optional(),
   }).strict(),
   BaseSceneSchema.extend({
     kind: z.literal("incident"),
-    incidentId: IdentifierSchema,
+    /** Incidente único. Alternativa breve a `incidentIds` cuando el caso sólo tiene uno. */
+    incidentId: IdentifierSchema.optional(),
+    /** Incidentes posibles; cuál aparece lo decide el mismo motor determinista por etiquetas. */
+    incidentIds: z.array(IdentifierSchema).min(1).optional(),
+    rules: z.array(IncidentRuleSchema).optional(),
+    fallbackIncidentId: IdentifierSchema.optional(),
   }).strict(),
   BaseSceneSchema.extend({
     kind: z.literal("revision"),
@@ -170,7 +244,10 @@ export const CaseDefinitionSchema = z
     approachIds: z.array(ApproachIdSchema).min(1),
     stableQuestions: z.array(StableQuestionSchema).min(2),
     lenses: z.array(ContemporaryLensSchema).min(2),
+    /** Reparto del caso. Cada identificador debe existir en el reparto compartido de la campaña. */
     characterIds: z.array(IdentifierSchema),
+    /** Montador de microclases, cuando el caso lo usa. Los tutoriales pueden no tenerlo. */
+    assembly: AssemblySchema.optional(),
     pedagogy: z
       .object({
         allowMultipleDefensible: z.boolean(),
@@ -204,3 +281,8 @@ export type Action = z.infer<typeof ActionSchema>;
 export type Incident = z.infer<typeof IncidentSchema>;
 export type Consequence = z.infer<typeof ConsequenceSchema>;
 export type JournalField = z.infer<typeof JournalFieldSchema>;
+export type Assembly = z.infer<typeof AssemblySchema>;
+export type AssemblySlot = Assembly["slots"][number];
+export type ConsequenceRule = z.infer<typeof ConsequenceRuleSchema>;
+export type IncidentRule = z.infer<typeof IncidentRuleSchema>;
+export type ChoiceScene = Extract<Scene, { kind: "observation" | "design" | "revision" }>;

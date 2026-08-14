@@ -57,7 +57,8 @@ p { max-width: 72ch; line-height: var(--ui-line-height, 1.45); }
 .button, .primary { color: var(--ui-on-accent, #fff); background: var(--ui-accent, #171717); }
 .secondary { color: var(--ui-ink, #171717); background: var(--ui-surface-strong, #fff); }
 button:disabled { cursor: not-allowed; opacity: .45; }
-.text-link { min-height: 44px; display: inline-flex; align-items: center; font-weight: 800; text-underline-offset: .2em; }
+/* El objetivo táctil es el lado menor: un enlace de 44 px de alto y 39 de ancho sigue siendo pequeño. */
+.text-link { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; text-underline-offset: .2em; }
 .grey-note, .notice { max-width: 56rem; margin-top: 1.2rem; padding: .85rem 1rem; border-left: .35rem solid var(--ui-line-strong, #555); background: var(--ui-surface, #f8f8f8); }
 
 .game-screen { min-height: min(42rem, calc(100dvh - 10rem)); display: flex; flex-direction: column; justify-content: center; }
@@ -94,6 +95,52 @@ select, input[type="range"] { width: 100%; min-height: 44px; padding: .4rem; bor
 .journal-preview { padding: 0 .85rem .65rem; border: 2px solid var(--ui-line-strong, #555); background: var(--ui-surface, #f8f8f8); }
 
 .journal-preview dl, .journal-entry dl { display: grid; gap: .55rem; }
+
+/* --- Montador de microclases (M6) ------------------------------------ */
+
+/*
+ * La tira marca estado, nunca premio: regla 7. Ocupa una línea y no repite el texto de ninguna
+ * decisión, que vive entero en la pantalla de montaje (regla 4).
+ */
+.assembly-strip { margin: .1rem 0 .45rem; }
+.assembly-strip ol { display: flex; flex-wrap: wrap; gap: .3rem; margin: 0; padding: 0; list-style: none; }
+.assembly-strip__chip { padding: .18rem .5rem; border: 2px solid var(--ui-line, #777); border-radius: var(--ui-radius, .2rem); color: var(--ui-ink-muted, #454545); background: var(--ui-surface, #f8f8f8); font-family: var(--ui-font-label, inherit); font-size: .68rem; font-weight: 800; letter-spacing: .03em; }
+.assembly-strip__chip[data-state="elegido"] { border-color: var(--ui-accent, #171717); color: var(--ui-ink, #171717); background: var(--ui-surface-strong, #fff); }
+.assembly-strip__chip[data-state="actual"] { border-color: var(--ui-accent, #171717); border-style: dashed; color: var(--ui-ink, #171717); }
+.assembly-strip__state { text-transform: lowercase; }
+
+.assembly-review { padding: .1rem .85rem .6rem; border: 2px solid var(--ui-line-strong, #555); border-radius: var(--ui-radius, .2rem); background: var(--ui-surface, #f8f8f8); }
+.assembly-review dl { display: grid; gap: .5rem; }
+.assembly-review dd em { color: var(--ui-ink-soft, #4a4a4a); }
+
+/* --- Reparto de la participación (M6) -------------------------------- */
+
+.participation { margin-top: .6rem; padding-top: .5rem; border-top: 2px solid var(--ui-line, #777); }
+.participation__title { margin: 0 0 .35rem; font-family: var(--ui-font-label, inherit); font-size: .75rem; font-weight: 850; text-transform: uppercase; letter-spacing: .05em; }
+.participation__list { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.participation__row { display: grid; grid-template-columns: 5.4rem 1fr; gap: .55rem; align-items: start; }
+.participation__role { padding: .1rem .35rem; border: 1px solid var(--ui-line-strong, #555); border-radius: var(--ui-radius, .2rem); font-family: var(--ui-font-label, inherit); font-size: .66rem; font-weight: 850; text-align: center; text-transform: uppercase; }
+.participation__row--no-route .participation__role { border-color: var(--ui-rating-incoherent, #781f1f); color: var(--ui-rating-incoherent, #781f1f); }
+.participation__row small { display: block; color: var(--ui-ink-soft, #4a4a4a); line-height: 1.3; }
+
+/* --- Campaña, ruta de clase y rutas de prueba (M6) -------------------- */
+
+.unit-list, .plain-list { display: grid; gap: .7rem; margin: 1rem 0; padding: 0; list-style: none; }
+.unit { padding: .8rem 1rem; border: 2px solid var(--ui-line, #777); border-radius: var(--ui-radius, .2rem); background: var(--ui-surface, #f8f8f8); }
+.unit[data-state="recommended"] { border-color: var(--ui-accent, #171717); background: var(--ui-surface-strong, #fff); }
+.unit[data-state="planned"] { border-style: dashed; }
+.unit h2 { margin: 0 0 .25rem; font-size: clamp(1.05rem, 2vw, 1.35rem); }
+/* Un enlace dentro de un titular sigue siendo un objetivo táctil: la medición lo encontró en 22 px. */
+.unit h2 a { min-height: 44px; display: inline-flex; align-items: center; }
+.unit__state { margin: 0 0 .15rem; font-family: var(--ui-font-label, inherit); font-size: .68rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+.unit__focus { margin: 0 0 .25rem; }
+.segment-list { display: grid; gap: .8rem; margin: 1rem 0; }
+.segment { padding: .8rem 1rem; border-left: .35rem solid var(--ui-accent, #171717); background: var(--ui-surface, #f8f8f8); }
+.segment h2 { margin: 0 0 .3rem; }
+.segment p { margin: .2rem 0; }
+.journal-summary { margin: 1rem 0; padding: .9rem 1.1rem; border: 2px solid var(--ui-accent, #171717); background: var(--ui-surface-strong, #fff); }
+.journal-summary dl { display: grid; gap: .5rem; }
+.test-banner { margin: 0 0 .5rem; padding: .35rem .6rem; border: 2px dashed var(--ui-line-strong, #555); font-family: var(--ui-font-label, inherit); font-size: .7rem; font-weight: 800; }
 
 .reference-page { padding-block: 1rem; }
 .journal-entry { margin-block: 1rem; padding: 1rem; border: 2px solid var(--ui-line-strong, #555); background: var(--ui-surface, #f8f8f8); }

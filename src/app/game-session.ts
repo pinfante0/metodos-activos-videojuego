@@ -1,10 +1,13 @@
 import type {
+  AssemblySlot,
   CaseDefinition,
   Consequence,
+  Incident,
   JournalEntry,
   JournalField,
   Scene,
 } from "../domain/contracts";
+import { activeTags, resolveConsequenceId, resolveIncidentId } from "../domain/consequence-engine";
 
 export type GrammarKey = "objective" | "principleAction" | "conditionRisk" | "adaptation" | "evidence";
 
@@ -17,10 +20,19 @@ export interface GameSession {
   completed: boolean;
 }
 
-export function createGameSession(caseDefinition: CaseDefinition): GameSession {
+/**
+ * `startSceneId` sostiene los enlaces directos a mitad de un caso: la ruta `#/caso/<slug>/<escena>`
+ * y las rutas de prueba de estados difíciles. El progreso orienta y no bloquea, de modo que entrar
+ * por el medio es un uso previsto y no una vía de escape.
+ */
+export function createGameSession(
+  caseDefinition: CaseDefinition,
+  startSceneId?: string,
+): GameSession {
+  const exists = caseDefinition.scenes.some((scene) => scene.id === startSceneId);
   return {
     caseId: caseDefinition.id,
-    sceneId: caseDefinition.entrySceneId,
+    sceneId: exists && startSceneId ? startSceneId : caseDefinition.entrySceneId,
     selectedActions: {},
     selectedGrammar: {},
     completed: false,
@@ -31,6 +43,44 @@ export function sceneFor(caseDefinition: CaseDefinition, session: GameSession): 
   const scene = caseDefinition.scenes.find((candidate) => candidate.id === session.sceneId);
   if (!scene) throw new Error(`No existe la escena ${session.sceneId}`);
   return scene;
+}
+
+export interface AssemblyPiece {
+  slot: AssemblySlot;
+  actionId?: string;
+  label?: string;
+}
+
+/**
+ * Estado del montador: qué hueco de la microclase ha rellenado cada escena de diseño y cuáles
+ * siguen vacíos. Enumera, no ordena ni valora: la lectura pedagógica llega con la prueba.
+ */
+export function assemblyPieces(
+  caseDefinition: CaseDefinition,
+  session: GameSession,
+): AssemblyPiece[] {
+  return (caseDefinition.assembly?.slots ?? []).map((slot) => {
+    const actionId = session.selectedActions[slot.sceneId];
+    const label = caseDefinition.actions.find((action) => action.id === actionId)?.label;
+    return actionId && label ? { slot, actionId, label } : { slot };
+  });
+}
+
+export function assemblyComplete(caseDefinition: CaseDefinition, session: GameSession): boolean {
+  const pieces = assemblyPieces(caseDefinition, session);
+  return pieces.length > 0 && pieces.every((piece) => piece.actionId !== undefined);
+}
+
+/** Incidente que corresponde a las decisiones ya tomadas, resuelto por el motor determinista. */
+export function incidentForScene(
+  caseDefinition: CaseDefinition,
+  scene: Extract<Scene, { kind: "incident" }>,
+  session: GameSession,
+): Incident {
+  const incidentId = resolveIncidentId(scene, activeTags(caseDefinition, session.selectedActions));
+  const incident = caseDefinition.incidents.find((candidate) => candidate.id === incidentId);
+  if (!incident) throw new Error(`No existe el incidente ${incidentId}`);
+  return incident;
 }
 
 export function consequenceForAction(
@@ -50,16 +100,10 @@ export function consequenceForScene(
   scene: Extract<Scene, { kind: "consequence" }>,
   session: GameSession,
 ): Consequence {
-  const selectedTags = new Set(
-    Object.values(session.selectedActions).flatMap((actionId) =>
-      caseDefinition.actions.find((action) => action.id === actionId)?.tags ?? [],
-    ),
+  const consequenceId = resolveConsequenceId(
+    scene,
+    activeTags(caseDefinition, session.selectedActions),
   );
-  const match = scene.rules?.find((rule) =>
-    rule.requiredTags.every((tag) => selectedTags.has(tag)),
-  );
-  const consequenceId =
-    match?.consequenceId ?? scene.fallbackConsequenceId ?? scene.consequenceIds[0];
   const consequence = caseDefinition.consequences.find(
     (candidate) => candidate.id === consequenceId,
   );
@@ -108,7 +152,7 @@ export function continueFromFeedback(
 export function advanceFromInformationalScene(
   caseDefinition: CaseDefinition,
   session: GameSession,
-  scene: Extract<Scene, { kind: "consequence" | "incident" }>,
+  scene: Extract<Scene, { kind: "consequence" | "incident" | "assembly-review" }>,
 ): GameSession {
   const nextSceneId =
     scene.kind === "consequence"
