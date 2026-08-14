@@ -1,5 +1,5 @@
-import { campaignUnits, findCaseById, findUnitByCaseSlug } from "../content";
-import type { CampaignUnit, JournalEntry, Progress } from "../domain/contracts";
+import { campaignUnits, findCaseById, findUnitByCaseSlug, playableCases } from "../content";
+import type { ApproachId, CampaignUnit, CaseDefinition, JournalEntry, Progress } from "../domain/contracts";
 
 /**
  * Progreso leído contra la campaña.
@@ -14,8 +14,13 @@ import type { CampaignUnit, JournalEntry, Progress } from "../domain/contracts";
  */
 export type UnitState = "completed" | "recommended" | "available" | "planned";
 
-export function unitCaseId(unit: CampaignUnit): string | undefined {
-  return unit.caseSlug ? findCaseById(unit.caseSlug)?.id ?? unit.caseSlug : undefined;
+export function unitCaseId(
+  unit: CampaignUnit,
+  cases: readonly CaseDefinition[] = playableCases,
+): string | undefined {
+  return unit.caseSlug
+    ? cases.find((caseDefinition) => caseDefinition.slug === unit.caseSlug)?.id ?? unit.caseSlug
+    : undefined;
 }
 
 export function isUnitCompleted(unit: CampaignUnit, progress: Progress): boolean {
@@ -71,7 +76,7 @@ export function withCompletedCase(
 
 export interface JournalSummary {
   caseTitles: string[];
-  approachIds: string[];
+  approachIds: ApproachId[];
   maintained?: string;
   revised?: string;
   tension?: string;

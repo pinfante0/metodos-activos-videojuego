@@ -16,8 +16,9 @@ import {
 import {
   declaredIncidentIds,
   resolveConsequenceId,
-  reachableTagSets,
-  TooManyCombinationsError,
+  reachableTagSetsByScene,
+  resolveIncidentId,
+  TooManyReachableStatesError,
 } from "./consequence-engine";
 
 export interface ValidationIssue {
@@ -351,11 +352,11 @@ function consequenceEngineIssues(value: CaseDefinition): ValidationIssue[] {
     }
   });
 
-  let tagSets: Set<string>[];
+  let tagSetsByScene: ReadonlyMap<string, Set<string>[]>;
   try {
-    tagSets = reachableTagSets(value);
+    tagSetsByScene = reachableTagSetsByScene(value);
   } catch (error) {
-    if (error instanceof TooManyCombinationsError) {
+    if (error instanceof TooManyReachableStatesError) {
       issues.push({ code: "too-many-combinations", path: "scenes", message: error.message });
       return issues;
     }
@@ -363,11 +364,16 @@ function consequenceEngineIssues(value: CaseDefinition): ValidationIssue[] {
   }
 
   for (const scene of value.scenes) {
-    if (scene.kind !== "consequence") continue;
+    if (scene.kind !== "consequence" && scene.kind !== "incident") continue;
+    const tagSets = tagSetsByScene.get(scene.id) ?? [];
     const produced = new Set<string>();
     const usedRules = new Set<number>();
     for (const tags of tagSets) {
-      produced.add(resolveConsequenceId(scene, tags));
+      produced.add(
+        scene.kind === "consequence"
+          ? resolveConsequenceId(scene, tags)
+          : resolveIncidentId(scene, tags),
+      );
       const ruleIndex = (scene.rules ?? []).findIndex(
         (rule) =>
           rule.requiredTags.every((tag) => tags.has(tag)) &&
@@ -381,17 +387,20 @@ function consequenceEngineIssues(value: CaseDefinition): ValidationIssue[] {
         code: "shadowed-rule",
         path: `scenes.${scene.id}.rules.${index}`,
         message:
-          `Ninguna combinación de decisiones activa esta regla hacia ${rule.consequenceId}: otra ` +
+          `Ningún recorrido válido activa esta regla hacia ${"consequenceId" in rule ? rule.consequenceId : rule.incidentId}: otra ` +
           "regla anterior la tapa siempre, o sus etiquetas no pueden coincidir",
       });
     });
-    for (const consequenceId of scene.consequenceIds) {
-      if (produced.has(consequenceId)) continue;
+    const declaredIds = scene.kind === "consequence"
+      ? scene.consequenceIds
+      : declaredIncidentIds(scene);
+    for (const resultId of declaredIds) {
+      if (produced.has(resultId)) continue;
       issues.push({
-        code: "unreachable-consequence",
-        path: `scenes.${scene.id}.consequenceIds`,
+        code: scene.kind === "consequence" ? "unreachable-consequence" : "unreachable-incident",
+        path: `scenes.${scene.id}.${scene.kind === "consequence" ? "consequenceIds" : "incidentIds"}`,
         message:
-          `Ninguna combinación de decisiones produce ${consequenceId}. Es retroalimentación escrita ` +
+          `Ningún recorrido válido produce ${resultId}. Es contenido escrito ` +
           "que nadie llegaría a leer",
       });
     }

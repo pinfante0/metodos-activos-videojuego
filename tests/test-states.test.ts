@@ -3,6 +3,8 @@ import { findPlayableCase, playableCases } from "../src/content";
 import { findTestState, seedJournalEntries, TEST_STATES } from "../src/app/test-states";
 import { createGameSession, sceneFor } from "../src/app/game-session";
 import { parseHash } from "../src/app/router";
+import { journalSummaryView, journalText } from "../src/app/render-app";
+import { createEmptyProgress } from "../src/domain/contracts";
 
 /*
  * Un estado difícil es el que sólo aparece cuando algo ha ido de una manera concreta y al que
@@ -96,6 +98,24 @@ describe("la bitácora de prueba se construye con el contenido real", () => {
       expect(item, entry.caseId).toBeDefined();
       expect(entry.combinedApproachIds).toEqual(item?.approachIds);
     }
+  });
+
+  it("muestra nombres legibles de los enfoques en el resumen final", () => {
+    const progress = { ...createEmptyProgress("2026-08-14T00:00:00.000Z"), journal: entries };
+    const html = journalSummaryView(progress);
+    expect(html).toContain("Orff-Schulwerk / Orff-Keetman");
+    expect(html).toContain("Popular Music Education / Green");
+    expect(html).not.toContain(">orff-keetman<");
+    expect(html).not.toContain(">green-pme<");
+  });
+
+  it("incluye el resumen final al copiar la bitácora", () => {
+    const progress = { ...createEmptyProgress("2026-08-14T00:00:00.000Z"), journal: entries };
+    const text = journalText(progress);
+    expect(text).toContain("Lo que te llevas");
+    expect(text).toContain("Principios combinados: Dalcroze · Orff-Schulwerk / Orff-Keetman");
+    expect(text).toContain("Decisión mantenida:");
+    expect(text).toContain("Evidencia que te llevas:");
   });
 });
 

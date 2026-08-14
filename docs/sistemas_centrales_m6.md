@@ -137,18 +137,19 @@ aparece según las decisiones ya tomadas.
 
 ### 4.1. Lo que el validador encuentra ahora
 
-Recorre **todas** las combinaciones de decisiones que el jugador puede producir —de forma
-exhaustiva, no por muestreo, porque un muestreo dejaría pasar exactamente el caso raro que interesa
-encontrar— y detecta:
+Recorre **todos los estados que el jugador puede producir por el grafo real** —incluidos los enlaces
+directos sin decisiones previas y los bucles, pero sin mezclar elecciones de ramas mutuamente
+excluyentes—. Respeta además que un montaje incompleto no deja avanzar. El análisis es exhaustivo,
+no por muestreo, y detecta:
 
 - **reglas tapadas**: ninguna combinación las activa porque otra anterior gana siempre;
-- **consecuencias inalcanzables**: retroalimentación escrita que nadie llegaría a leer;
+- **consecuencias e incidentes inalcanzables**: contenido escrito que nadie llegaría a leer;
 - etiquetas que ninguna acción aporta, reglas que producen resultados no declarados y escenas sin
   reserva.
 
 Con nueve unidades escritas por varias manos, una regla tapada es el defecto silencioso más
-probable, y leyendo caso por caso no se ve. El análisis tiene un límite explícito de 20 000
-combinaciones: por encima avisa en lugar de tardar indefinidamente.
+probable, y leyendo caso por caso no se ve. El análisis tiene un límite explícito de 20 000 estados
+alcanzables: por encima avisa en lugar de tardar indefinidamente.
 
 ---
 
@@ -157,13 +158,15 @@ combinaciones: por encima avisa en lugar de tardar indefinidamente.
 - **Incidentes y revisión** funcionan en los tres casos, con selección determinista y con revisiones
   incoherentes que devuelven a la misma escena en lugar de dejar pasar.
 - **Progreso**: unidad recomendada derivada de la campaña, intentos por unidad, entradas de bitácora
-  y ajustes, con la degradación a memoria temporal ya comprobada como estado difícil propio.
+  y ajustes, con resolución explícita de `caseSlug` a `CaseDefinition.id` aunque ambos valores sean
+  distintos y con la degradación a memoria temporal ya comprobada como estado difícil propio.
 - **Audio**: siguen siendo **seis señales y ninguna más**, con su equivalente textual permanente.
   M6 no ha añadido ninguna; lo que ha hecho es dispararlas también en los estados nuevos. Una prueba
   impide que aparezca una séptima.
 - **Bitácora**: la entrada por caso de M4 más el **resumen final** de `docs/biblia_juego_m2.md`,
   apartado 11 —casos recorridos, principios combinados, decisión mantenida y revisada, tensión y
-  evidencia—. Selecciona de lo guardado; no puntúa, no ordena y no compara con nadie.
+  evidencia—. Los enfoques se muestran con nombres legibles y la copia incluye el mismo resumen que
+  la pantalla. Selecciona de lo guardado; no puntúa, no ordena y no compara con nadie.
 
 ---
 
@@ -188,7 +191,7 @@ saltarse.
 
 El procedimiento completo está en **`docs/comprobaciones_m6.md`**. En resumen:
 
-- **161 pruebas en once archivos**, compilación con TypeScript estricto y paquete PLATEA regenerado.
+- **167 pruebas en once archivos**, compilación con TypeScript estricto y paquete PLATEA regenerado.
 - **`pnpm measure:viewports --runs=3`**: 10 recorridos declarados completados hasta su pantalla de
   cierre en 30 combinaciones de recorrido y tamaño, 462 pantallas de recorrido por pasada medidas
   con los desplegables cerrados y abiertos, más 19 rutas de referencia y estados difíciles en los
@@ -209,6 +212,12 @@ concreto:
    precaución teórica: los incidentes de M7A y M7B serán más largos que el actual.
 3. **El objetivo táctil bajó a 22 px** con los enlaces nuevos —un enlace dentro de un titular, y
    después un enlace de 44 px de alto y 39 de ancho—. El objetivo es el lado menor, no la altura.
+
+### 7.2. Endurecimiento tras la auditoría de M6
+
+La auditoría independiente añadió seis regresiones: una bifurcación que impide combinar etiquetas
+de ramas incompatibles, reglas e incidentes inalcanzables, `id` y `slug` deliberadamente distintos,
+y las dos representaciones de la bitácora —pantalla y copia— con nombres legibles y resumen final.
 
 ---
 
@@ -262,5 +271,5 @@ comprueben la nueva regla, no simplemente borrarlas.
 
 **Superada.** Campaña, navegación, enlaces directos, montador, motor determinista de consecuencias
 e incidentes, revisión, progreso, audio, bitácora y rutas de prueba funcionan de principio a fin en
-tres casos, con 161 pruebas y una medición reproducible en los cinco tamaños objetivo. La campaña
+tres casos, con 167 pruebas y una medición reproducible en los cinco tamaños objetivo. La campaña
 completa no se ha cargado: es M7.

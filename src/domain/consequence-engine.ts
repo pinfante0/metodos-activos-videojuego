@@ -102,49 +102,138 @@ export function choiceScenes(caseDefinition: CaseDefinition) {
 
 /**
  * Límite de la exploración exhaustiva. Un caso del tamaño previsto en `docs/mapa_campana_m2.md`
- * produce decenas de combinaciones; si alguna vez se superara este número, el análisis avisa en
+ * produce decenas de estados; si alguna vez se superara este número, el análisis avisa en
  * lugar de tardar indefinidamente o de dar por inalcanzable algo que sí lo es.
  */
-export const MAX_TAG_COMBINATIONS = 20_000;
+export const MAX_REACHABLE_STATES = 20_000;
 
-export class TooManyCombinationsError extends Error {
+export class TooManyReachableStatesError extends Error {
   constructor(readonly total: number) {
     super(
-      `El caso admite ${total} combinaciones de decisiones, por encima del límite de ${MAX_TAG_COMBINATIONS}. ` +
+      `El caso admite más de ${total - 1} estados alcanzables, por encima del límite de ${MAX_REACHABLE_STATES}. ` +
         "Divida el caso o reduzca las escenas de elección antes de confiar en el análisis de alcance.",
     );
-    this.name = "TooManyCombinationsError";
+    this.name = "TooManyReachableStatesError";
   }
 }
 
+interface ReachableState {
+  readonly sceneId: string;
+  readonly selectedActions: Readonly<Record<string, string>>;
+}
+
+function stateKey(state: ReachableState): string {
+  const selections = Object.entries(state.selectedActions)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([sceneId, actionId]) => `${sceneId}=${actionId}`)
+    .join("|");
+  return `${state.sceneId}|${selections}`;
+}
+
+function tagKey(tags: ReadonlySet<string>): string {
+  return [...tags].sort().join("|");
+}
+
 /**
- * Todas las combinaciones de etiquetas que el jugador puede llegar a producir.
- *
- * Es deliberadamente exhaustivo y no aleatorio: un muestreo dejaría pasar exactamente el caso raro
- * que interesa encontrar, que es la combinación sin resultado previsto. Cada escena de elección
- * aporta también la posibilidad de no haber pasado todavía por ella, porque un enlace directo a
- * mitad del caso deja huecos reales.
+ * Transiciones de `game-session.ts` expresadas sin estado de interfaz. La selección se conserva
+ * por escena —y se sustituye si un bucle vuelve a ella— para que las etiquetas puedan desaparecer
+ * igual que en una sesión real.
  */
-export function reachableTagSets(caseDefinition: CaseDefinition): Set<string>[] {
-  const perScene = choiceScenes(caseDefinition).map((scene) => {
-    const options: (readonly string[])[] = [[]];
-    for (const actionId of scene.actionIds) {
+function nextReachableStates(
+  caseDefinition: CaseDefinition,
+  state: ReachableState,
+): ReachableState[] {
+  const scene = caseDefinition.scenes.find((candidate) => candidate.id === state.sceneId);
+  if (!scene || scene.kind === "reflection") return [];
+
+  if (scene.kind === "observation" || scene.kind === "design" || scene.kind === "revision") {
+    return scene.actionIds.flatMap((actionId) => {
       const action = caseDefinition.actions.find((candidate) => candidate.id === actionId);
-      if (action) options.push(action.tags);
-    }
-    return options;
-  });
-
-  const total = perScene.reduce((product, options) => product * options.length, 1);
-  if (total > MAX_TAG_COMBINATIONS) throw new TooManyCombinationsError(total);
-
-  let combinations: string[][] = [[]];
-  for (const options of perScene) {
-    const next: string[][] = [];
-    for (const partial of combinations) {
-      for (const option of options) next.push([...partial, ...option]);
-    }
-    combinations = next;
+      const consequence = caseDefinition.consequences.find(
+        (candidate) => candidate.id === action?.consequenceId,
+      );
+      if (!action || !consequence) return [];
+      const selectedActions = { ...state.selectedActions, [scene.id]: action.id };
+      const sceneId = scene.feedbackMode === "deferred"
+        ? scene.nextSceneId ?? consequence.nextSceneId ?? scene.id
+        : consequence.nextSceneId ?? scene.id;
+      return [{ sceneId, selectedActions }];
+    });
   }
-  return combinations.map((tags) => new Set(tags));
+
+  if (scene.kind === "consequence") {
+    const consequenceId = resolveConsequenceId(
+      scene,
+      activeTags(caseDefinition, state.selectedActions),
+    );
+    const consequence = caseDefinition.consequences.find(
+      (candidate) => candidate.id === consequenceId,
+    );
+    return [{
+      sceneId: consequence?.nextSceneId ?? scene.nextSceneId ?? scene.id,
+      selectedActions: state.selectedActions,
+    }];
+  }
+
+  if (
+    scene.kind === "assembly-review" &&
+    caseDefinition.assembly &&
+    !caseDefinition.assembly.slots.every((slot) => state.selectedActions[slot.sceneId])
+  ) {
+    return [];
+  }
+
+  return [{
+    sceneId: scene.nextSceneId ?? scene.id,
+    selectedActions: state.selectedActions,
+  }];
+}
+
+/**
+ * Combinaciones de etiquetas que pueden existir al llegar a cada escena por un recorrido real.
+ *
+ * Se inicia una exploración desde cada escena porque `#/caso/<slug>/<escena>` permite enlaces
+ * directos sin decisiones previas. A partir de ahí sólo se siguen las transiciones que ejecuta la
+ * sesión: así nunca se mezclan elecciones de ramas mutuamente excluyentes.
+ */
+export function reachableTagSetsByScene(
+  caseDefinition: CaseDefinition,
+): ReadonlyMap<string, Set<string>[]> {
+  const queue: ReachableState[] = caseDefinition.scenes.map((scene) => ({
+    sceneId: scene.id,
+    selectedActions: {},
+  }));
+  const seen = new Set<string>();
+  const tagsByScene = new Map<string, Map<string, Set<string>>>();
+
+  for (let index = 0; index < queue.length; index += 1) {
+    const state = queue[index];
+    if (!state) continue;
+    const key = stateKey(state);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (seen.size > MAX_REACHABLE_STATES) throw new TooManyReachableStatesError(seen.size);
+
+    const tags = activeTags(caseDefinition, state.selectedActions);
+    const sceneTags = tagsByScene.get(state.sceneId) ?? new Map<string, Set<string>>();
+    sceneTags.set(tagKey(tags), tags);
+    tagsByScene.set(state.sceneId, sceneTags);
+
+    for (const next of nextReachableStates(caseDefinition, state)) {
+      if (!seen.has(stateKey(next))) queue.push(next);
+    }
+  }
+
+  return new Map(
+    [...tagsByScene].map(([sceneId, tagSets]) => [sceneId, [...tagSets.values()]]),
+  );
+}
+
+/** Todas las combinaciones distintas producidas en algún punto de un recorrido válido. */
+export function reachableTagSets(caseDefinition: CaseDefinition): Set<string>[] {
+  const unique = new Map<string, Set<string>>();
+  for (const tagSets of reachableTagSetsByScene(caseDefinition).values()) {
+    for (const tags of tagSets) unique.set(tagKey(tags), tags);
+  }
+  return [...unique.values()];
 }

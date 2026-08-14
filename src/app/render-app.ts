@@ -7,7 +7,7 @@ import {
   outsideCampaignCases, playableCases, walkthroughs,
 } from "../content";
 import type {
-  CampaignUnit, CaseDefinition, Consequence, JournalEntry, Participation, ParticipationRole,
+  ApproachId, CampaignUnit, CaseDefinition, Consequence, JournalEntry, Participation, ParticipationRole,
   Progress, Scene,
 } from "../domain/contracts";
 import { validateCaseDefinition, validateResourceInventory } from "../domain/validation";
@@ -45,6 +45,19 @@ const JOURNAL_LABELS = {
   observableEvidence: "Evidencia observable", defensibleAlternative: "Alternativa defendible",
   finalGrammar: "Justificación final",
 } as const;
+
+const APPROACH_LABELS: Record<ApproachId, string> = {
+  dalcroze: "Dalcroze",
+  kodaly: "Concepto Kodály",
+  "orff-keetman": "Orff-Schulwerk / Orff-Keetman",
+  suzuki: "Suzuki",
+  willems: "Willems",
+  martenot: "Martenot",
+  "campbell-wmp": "World Music Pedagogy / Campbell",
+  "green-pme": "Popular Music Education / Green",
+  schafer: "R. Murray Schafer",
+  gordon: "Music Learning Theory / Gordon",
+};
 
 const GRAMMAR_LABELS: Record<GrammarKey, string> = {
   objective: "Objetivo", principleAction: "Principio y acción",
@@ -313,28 +326,41 @@ function caseTitleFor(caseId: string): string {
   return playableCases.find((item) => item.id === caseId)?.title ?? caseId;
 }
 
-function journalText(entries: JournalEntry[]): string {
-  return entries.map((entry) => {
+function approachLabels(ids: readonly ApproachId[]): string[] {
+  return ids.map((id) => APPROACH_LABELS[id]);
+}
+
+function journalSummaryRows(progress: Progress): [string, string][] {
+  const summary = journalSummary(progress);
+  return [
+    ["Casos recorridos", summary.caseTitles.join(" · ")],
+    ["Principios combinados", approachLabels(summary.approachIds).join(" · ")],
+    ["Decisión mantenida", summary.maintained],
+    ["Decisión revisada", summary.revised],
+    ["Tensión detectada", summary.tension],
+    ["Evidencia que te llevas", summary.evidence],
+  ].filter((row): row is [string, string] => Boolean(row[1]));
+}
+
+export function journalText(progress: Progress): string {
+  const entries = progress.journal.map((entry) => {
     const title = caseTitleFor(entry.caseId);
     return `${title}\n${(Object.keys(JOURNAL_LABELS) as Array<keyof typeof JOURNAL_LABELS>).map((property) => `${JOURNAL_LABELS[property]}: ${entry[property]}`).join("\n")}`;
   }).join("\n\n");
+  if (progress.journal.length === 0) return entries;
+  const summary = `Lo que te llevas\n${journalSummaryRows(progress)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join("\n")}`;
+  return `${summary}\n\n${entries}`;
 }
 
 /**
  * Resumen final de la bitácora, con los campos de `docs/biblia_juego_m2.md`, apartado 11.
  * Selecciona; no puntúa, no ordena y no compara con nadie.
  */
-function journalSummaryView(progress: Progress): string {
+export function journalSummaryView(progress: Progress): string {
   if (progress.journal.length === 0) return "";
-  const summary = journalSummary(progress);
-  const rows = [
-    ["Casos recorridos", summary.caseTitles.join(" · ")],
-    ["Principios combinados", summary.approachIds.join(" · ")],
-    ["Decisión mantenida", summary.maintained],
-    ["Decisión revisada", summary.revised],
-    ["Tensión detectada", summary.tension],
-    ["Evidencia que te llevas", summary.evidence],
-  ].filter((row): row is [string, string] => Boolean(row[1]));
+  const rows = journalSummaryRows(progress);
   return `<section class="journal-summary" aria-labelledby="summary-title"><h2 id="summary-title">Lo que te llevas</h2><dl>${rows.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl></section>`;
 }
 
@@ -621,7 +647,7 @@ export function mountApp(root: HTMLElement): void {
     if (target.closest("[data-close-settings]")) { settingsOpen = false; render(); root.querySelector<HTMLElement>("[data-open-settings]")?.focus(); return; }
     if (target.closest("[data-copy-journal]")) {
       const status = root.querySelector<HTMLElement>(".copy-status");
-      try { await navigator.clipboard.writeText(journalText(progress.journal)); if (status) status.textContent = "Bitácora copiada."; }
+      try { await navigator.clipboard.writeText(journalText(progress)); if (status) status.textContent = "Bitácora copiada."; }
       catch { if (status) status.textContent = "No se pudo copiar automáticamente; selecciona el texto visible."; }
       return;
     }

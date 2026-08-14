@@ -45,12 +45,12 @@ en vacío. Bloquearse es siempre un fallo con diagnóstico, nunca una salida sil
 | --- | --- |
 | `contracts` | que un contrato de M3 acepte datos que no cumplen su forma. |
 | `playable-content` | que el contenido jugable deje de validar o que el motor codifique texto. |
-| `campaign` | que el mapa mienta: unidad jugable sin caso, pendiente con caso, secuencia con saltos, tramos que no suman lo que declaran. Comprueba además que **ninguna unidad queda bloqueada** por no haber completado las anteriores. |
+| `campaign` | que el mapa mienta: unidad jugable sin caso, pendiente con caso, secuencia con saltos, tramos que no suman lo que declaran. Comprueba además que **ninguna unidad queda bloqueada** y que el progreso resuelve correctamente un `slug` distinto del `id` interno. |
 | `cast-participation` | que una persona se convierta en la barrera permanente de un caso, quede reducida a ejecutar, sea omitida de un resultado o quede sin vía sin explicar qué decisión de diseño lo produce. |
-| `consequence-engine` | que una regla quede tapada por otra, que una consecuencia escrita sea inalcanzable, que una etiqueta no la aporte ninguna acción o que una escena con reglas se quede sin resultado de reserva. |
+| `consequence-engine` | que el análisis mezcle ramas incompatibles, que una regla de consecuencia o incidente quede tapada, que un resultado escrito sea inalcanzable, que una etiqueta no la aporte ninguna acción o que una escena con reglas se quede sin reserva. |
 | `assembly` | que un hueco del montador apunte a una escena que no existe, que dos huecos compartan pantalla —rompería la regla 1— o que un montador se quede sin pantalla de montaje. |
 | `walkthroughs` | que un recorrido declarado deje de llegar a su cierre, atraviese otras consecuencias o produzca una bitácora con plantillas sin sustituir. |
-| `test-states` | que una ruta de prueba apunte a un caso, una escena o una acción que ya no existen. |
+| `test-states` | que una ruta de prueba apunte a un caso, una escena o una acción que ya no existen, o que la pantalla y la copia de la bitácora diverjan y expongan identificadores internos. |
 | `progress-repository` | que el progreso se pierda o se corrompa, y que la degradación a memoria temporal siga siendo comprensible. |
 | `router` | que un enlace docente o un QR dejen de resolver, incluidos los enlaces a una escena concreta. |
 | `identity` | que la banda de escena represente a alguien, que aparezca una séptima señal sonora o que un recurso pierda su procedencia. |

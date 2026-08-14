@@ -4,7 +4,7 @@ import { campaign, campaignUnits, playableCases, playableUnits } from "../src/co
 import { validateCampaign } from "../src/domain/validation";
 import { createEmptyProgress, type Progress } from "../src/domain/contracts";
 import {
-  attemptsFor, isUnitCompleted, recommendedCaseId, recommendedUnit, unitState,
+  attemptsFor, isUnitCompleted, recommendedCaseId, recommendedUnit, unitCaseId, unitState,
 } from "../src/app/campaign-progress";
 
 function clone(): any {
@@ -87,6 +87,12 @@ describe("contrato de campaña", () => {
 });
 
 describe("el progreso orienta y no bloquea", () => {
+  it("resuelve el id del caso por su slug aunque ambos identificadores sean distintos", () => {
+    const unit = { ...campaignUnits[0]!, caseSlug: "slug-distinto" };
+    const caseDefinition = { ...playableCases[0]!, id: "id-interno", slug: "slug-distinto" };
+    expect(unitCaseId(unit, [caseDefinition])).toBe("id-interno");
+  });
+
   it("recomienda la primera unidad con contenido que no se ha completado", () => {
     const fresh = progressWith([]);
     expect(recommendedUnit(fresh)?.id).toBe("tutorial-0");
