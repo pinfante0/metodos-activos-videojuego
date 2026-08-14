@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "stage-silhouette",
+      "kind": "image",
+      "status": "prototype",
+      "file": "src/app/identity/stage.ts",
+      "decorative": true,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Silueta de escena trazada para este proyecto; no deriva de ninguna obra ajena"
+      },
+      "alternatives": {}
+    },
+    {
+      "id": "stage-light-change",
+      "kind": "animation",
+      "status": "prototype",
+      "file": "src/styles/identity.css",
+      "decorative": true,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Entrada de la banda de escena definida en la hoja de identidad"
+      },
+      "alternatives": {
+        "reducedMotionFallback": "La banda aparece ya iluminada en su estado final, sin entrada ni desplazamiento."
+      }
+    },
+    {
+      "id": "cue-decision",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Palmada corporal sintetizada en el navegador; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Decisión registrada.",
+        "visualEquivalent": "La pantalla avanza a la escena siguiente."
+      }
+    },
+    {
+      "id": "cue-consequence-coherent",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Quinta justa de lámina sintetizada; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Consecuencia coherente y defendible.",
+        "visualEquivalent": "La retroalimentación enuncia el estado y la banda de escena se ilumina."
+      }
+    },
+    {
+      "id": "cue-consequence-revision",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Cuarta de lámina sintetizada; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Consecuencia defendible con revisión necesaria.",
+        "visualEquivalent": "La retroalimentación enuncia el estado y la banda de escena se ilumina."
+      }
+    },
+    {
+      "id": "cue-consequence-incoherent",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Segunda menor de lámina sintetizada; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Consecuencia incoherente con el encargo.",
+        "visualEquivalent": "La retroalimentación enuncia el estado y la banda de escena se atenúa."
+      }
+    },
+    {
+      "id": "cue-incident",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Golpe de parche sintetizado; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Cambia una condición del aula.",
+        "visualEquivalent": "La escena del incidente sustituye a la pantalla anterior con la luz atenuada."
+      }
+    },
+    {
+      "id": "cue-journal",
+      "kind": "effect",
+      "status": "prototype",
+      "file": "src/app/identity/sound.ts",
+      "decorative": false,
+      "containsSpeech": false,
+      "containsEssentialSound": false,
+      "source": {
+        "origin": "original",
+        "creator": "Equipo del proyecto",
+        "license": "CC BY-SA 4.0",
+        "attribution": "Dos láminas descendentes sintetizadas; pendiente de grabación en M8"
+      },
+      "alternatives": {
+        "textEquivalent": "Entrada guardada en la bitácora.",
+        "visualEquivalent": "Aparece la pantalla de cierre con el enlace a la bitácora."
+      }
+    }
+  ]
+}

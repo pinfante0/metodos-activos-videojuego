@@ -1,13 +1,12 @@
 # Plan maestro del tercer videojuego
 
-Estado: **M5 en curso; comparación de direcciones entregada el 14 de agosto de 2026 y elección
-pendiente**. M4 quedó completado y comprobado localmente el 13 de agosto de 2026. Este documento
-fija las decisiones de alcance y la secuencia de trabajo. El corte vertical gris implementa el
-tutorial y el caso piloto aprobados; sobre él se han aplicado, de forma reversible, tres direcciones
-candidatas que todavía no comprometen ninguna identidad ni campaña.
+Estado: **M5 completada el 14 de agosto de 2026; M6 es la fase siguiente**. M4 quedó completado y
+comprobado localmente el 13 de agosto de 2026. Este documento fija las decisiones de alcance y la
+secuencia de trabajo. El corte vertical implementa el tutorial y el caso piloto aprobados, con la
+identidad **Aula-laboratorio escénica** ya aplicada; no hay campaña ni arte definitivo.
 
-El nombre de trabajo es **El aula de los dos minutos**. Tanto el nombre como la identidad visual
-podrán cambiar durante M5 sin alterar la propuesta pedagógica aprobada.
+El nombre de trabajo es **El aula de los dos minutos** y se conserva. La identidad visual quedó
+fijada en M5 sin alterar la propuesta pedagógica aprobada.
 
 ## Autoridad y fuentes
 
@@ -340,38 +339,57 @@ Tareas:
 Puerta de salida: identidad aprobada sobre una experiencia funcional, no solo en ilustraciones
 aisladas.
 
-Estado: **primera tarea completada en dos iteraciones el 14 de agosto de 2026; puerta de salida no
-superada**. Las tres direcciones —Cuaderno de campo, Aula-laboratorio escénica y Consola de
-decisiones— están construidas y aplicadas de forma reversible al tutorial y al caso piloto, con
-cinco criterios explícitos de legibilidad, accesibilidad, identidad, coste de producción y
-adecuación pedagógica, más el riesgo propio de cada una. La segunda iteración añade a cada una una
-característica experiencial mínima sobre la misma consecuencia del caso piloto, permite escuchar sus
-seis señales desde `#/direcciones` y mide en navegador real las veinte combinaciones de dirección y
-tamaño objetivo. Véase `docs/direcciones_m5.md`.
+Estado: **completada el 14 de agosto de 2026. Puerta de salida superada.**
 
-Esa medición ha corregido una afirmación de M4: el corte gris ya desplazaba las pantallas de
-justificación y de bitácora del caso en algunos tamaños. Queda registrado en
-`docs/corte_vertical_m4.md` y su reparación se decidirá junto con la dirección, porque afecta a la
-composición de la hoja base.
+La identidad aprobada es **Aula-laboratorio escénica**, elegida por el profesor tras comparar tres
+direcciones construidas y recorribles sobre el mismo corte funcional. No se adopta tal cual: el
+escenario oscuro y cálido se concentra en la zona experiencial y toda superficie con lectura extensa
+es clara y de alto contraste; la Consola de decisiones no sobrevive como identidad, pero sí su
+claridad funcional para los paneles de razonamiento y su lógica sonora breve; el lenguaje sonoro
+cifra el estado en un intervalo con timbre acústico y sin banda sonora continua; y los personajes
+quedan condicionados a que el contenido los declare explícitamente. El Cuaderno de campo se retira,
+igual que la ruta `#/direcciones` y toda la capa reversible de comparación. Véase
+`docs/direcciones_m5.md`.
 
-La fase se detuvo deliberadamente antes de elegir. Quedan pendientes las cuatro tareas restantes:
-elegir identidad, personajes, composición, movimiento y lenguaje sonoro; fijar el contrato de
-recursos y el registro de procedencia; aplicar la dirección elegida y retirar las otras dos; y
-verificar subtítulos, reducción de movimiento y legibilidad en navegador real sobre la elegida. No
-se ha producido ningún recurso definitivo. Los contratos de M3, el contenido jugable de M4 y
-`game-session.ts` siguen intactos; `render-app.ts` sí se ha modificado de forma acotada para que la
-dirección alcance la pantalla, según se detalla en `docs/direcciones_m5.md`.
+Se ha fijado el contrato de recursos y el registro de procedencia, con inventario ejecutable de ocho
+recursos —todos originales, todos en estado de prototipo— validado al arrancar. Véase
+`docs/contrato_recursos_m5.md`.
 
-Conviene continuar M5 en el mismo chat en cuanto haya elección. Si hubiera que abrirlo de nuevo, la
-frase exacta es:
+**Decisión de producto añadida en M5:** el juego no puede acabar siendo una ficha con ilustraciones.
+Ocho reglas de composición vinculantes, aplicadas ya al corte por composición y sin eliminar rigor
+ni encoger texto pedagógico, con encargos explícitos a M6, M7C y M10. Véase
+`docs/decision_producto_m5.md`.
 
-> **M5 — Elección de dirección y contrato de recursos.** Trabaja únicamente en `Metodos/`. Lee
-> `AGENTS.md`, `docs/plan_maestro_videojuego.md`, `docs/direcciones_m5.md` y los entregables M2-M4
-> pertinentes. Usa `docs/revision_tema_8.md` como fuente pedagógica canónica. La dirección elegida
-> es **[nombre]**. Aplícala al corte funcional, retira las otras dos y la ruta `#/direcciones`, fija
-> el contrato de recursos y el registro de procedencia, y verifica subtítulos, equivalentes,
-> movimiento reducido y legibilidad en los cinco tamaños objetivo. No produzcas todavía el arte
-> definitivo de M8 ni adelantes M6, y detente en la puerta de salida de M5.
+La medición instrumentada de M5 corrigió además una afirmación de M4 —el corte gris ya desplazaba
+las pantallas de justificación y de bitácora del caso— y **el cierre de M5 lo ha reparado**: ninguna
+pantalla de acción se desplaza en ninguno de los cinco tamaños objetivo, en el tutorial ni en el
+caso piloto, y `pnpm measure:viewports` falla con código 1 si la regla vuelve a romperse.
+
+Límites que M5 deja abiertos y no debe dar por resueltos quien continúe:
+
+- **No hay arte definitivo ni personajes.** Todo lo visible es tipografía, color, retícula y una
+  silueta trazada; todo lo audible está sintetizado. Corresponde a M8.
+- **La promesa de «ver a quién favorece una decisión» sigue sin cumplirse y no se cumplirá con
+  arte.** El contenido no declara participación ni reparto, de modo que ninguna imagen puede
+  mostrarlo sin inventarlo. Ampliar el contrato de contenido es trabajo de M6 y M7, y es la
+  condición previa para que haya personajes.
+- En 360 × 640, la frase de justificación y la vista previa de la bitácora se desplazan por dentro
+  de su recuadro. Conviene observarlo en el piloto de M10.
+
+Los contratos de M3, el contenido jugable de M4 y `game-session.ts` siguen intactos; `render-app.ts`
+y la hoja base se han modificado para aplicar la identidad y las reglas de composición.
+
+M6 puede abrirse en un chat nuevo. La frase exacta es:
+
+> **M6 — Sistemas centrales.** Trabaja únicamente en `Metodos/`. Lee `AGENTS.md`,
+> `docs/plan_maestro_videojuego.md`, `docs/decision_producto_m5.md`, `docs/direcciones_m5.md` y los
+> entregables M2-M5 pertinentes. Usa `docs/revision_tema_8.md` como fuente pedagógica canónica.
+> Generaliza campaña, navegación y enlaces directos; construye el montador de microclases y el
+> sistema determinista de consecuencias; integra incidentes, revisión, progreso, audio y bitácora;
+> crea rutas de prueba para los estados difíciles y automatiza las comprobaciones. Respeta las ocho
+> reglas de composición de M5 y decide explícitamente si el contrato de contenido se amplía para
+> declarar participación y reparto, que es la condición previa para que existan personajes. No
+> produzcas arte definitivo de M8 y detente en la puerta de salida de M6.
 
 ### M6 — Sistemas centrales
 

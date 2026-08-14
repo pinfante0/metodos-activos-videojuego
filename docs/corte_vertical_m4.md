@@ -91,8 +91,12 @@ desbordamiento medido corresponde a la pantalla, no sólo a ese bloque.
 
 No hay desbordamiento horizontal en ningún tamaño y el objetivo táctil mínimo sí se cumple: 44 px en
 las veinte combinaciones medidas. La puerta de salida de M4 no se reabre por esto, pero la
-afirmación queda corregida y su reparación se decidirá junto con la dirección visual, porque afecta
-a la composición de la hoja base. Véase `docs/direcciones_m5.md`, apartado 11.
+afirmación queda corregida.
+
+**Reparado en el cierre de M5.** Con la identidad aplicada, ninguna pantalla de acción se desplaza
+en ninguno de los cinco tamaños objetivo, incluidas estas dos. Se consiguió por composición y sin
+encoger ningún texto pedagógico, y desde entonces `pnpm measure:viewports` falla si la regla vuelve
+a romperse. Véanse `docs/medicion_tamanos_m5.md` y la regla 6 de `docs/decision_producto_m5.md`.
 
 ## Duración y comprensión iniciales
 

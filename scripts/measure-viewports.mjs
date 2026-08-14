@@ -1,10 +1,14 @@
 /**
- * Medición reproducible de los cinco tamaños objetivo para cada dirección de M5.
+ * Medición reproducible de los cinco tamaños objetivo con la identidad fijada en M5.
  *
  * Sirve `dist/` en un puerto local, conduce Chrome sin interfaz por el protocolo de DevTools y
- * recorre el caso piloto completo tomando siempre la misma ruta de decisiones. En cada pantalla
- * mide desbordamiento horizontal, desplazamiento vertical y el menor lado de todo control
- * interactivo visible.
+ * recorre el tutorial y el caso piloto completos tomando siempre la misma ruta de decisiones. En
+ * cada pantalla mide desbordamiento horizontal, desplazamiento vertical y el menor lado de todo
+ * control interactivo visible.
+ *
+ * La regla que comprueba es la sexta de las decisiones de producto de M5: **ninguna pantalla de
+ * acción puede desplazarse** en ninguno de los cinco tamaños objetivo. Las páginas de referencia
+ * —bitácora general, diagnóstico— sí pueden hacerlo y quedan excluidas.
  *
  * Chrome es una dependencia externa deliberada: no se añade al proyecto un navegador de
  * pruebas de decenas de megabytes para una comprobación que se ejecuta a mano en cada fase.
@@ -12,13 +16,14 @@
  *   pnpm build
  *   pnpm measure:viewports                 # tres pasadas, resumen en Markdown
  *   pnpm measure:viewports --runs=1        # una sola pasada
+ *   pnpm measure:viewports --allow-scroll  # informa del desplazamiento sin fallar
  *   pnpm measure:viewports --out=docs/x.md # además escribe el resumen a un archivo
  *
  * Si Chrome no está en una ruta habitual, indíquelo con CHROME_PATH o con --chrome=<ruta>.
  *
- * La comprobación clave es la aserción de que la dirección solicitada está realmente aplicada:
- * sin ella, una navegación que no confirme produce medidas del documento anterior y los números
- * bailan entre pasadas sin que nada lo delate.
+ * La comprobación clave es la aserción de que la identidad esperada está realmente aplicada: sin
+ * ella, una navegación que no confirme produce medidas del documento anterior y los números bailan
+ * entre pasadas sin que nada lo delate.
  */
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
@@ -48,9 +53,11 @@ const VIEWPORTS = [
   { name: "1366 × 768", width: 1366, height: 768 },
   { name: "1440 × 900", width: 1440, height: 900 },
 ];
-const DIRECTIONS = ["gris", "cuaderno", "laboratorio", "consola"];
-const CASE_ROUTE = "#/caso/el-arreglo-que-no-escucha-a-todos";
-const DIRECTION_KEY = "metodos.direccion-m5.v1";
+const CASE_ROUTES = [
+  { name: "tutorial", hash: "#/caso/mucho-hacer-poco-aprender" },
+  { name: "caso piloto", hash: "#/caso/el-arreglo-que-no-escucha-a-todos" },
+];
+const IDENTITY = "aula-laboratorio";
 const PROGRESS_KEY = "metodos.progress.v1";
 
 const CHROME_CANDIDATES = [
@@ -214,23 +221,20 @@ async function runPass(base, cdp, passIndex) {
   let minTarget = Infinity;
   let horizontal = 0;
 
-  for (const direction of DIRECTIONS) {
+  for (const route of CASE_ROUTES) {
     for (const viewport of VIEWPORTS) {
       await send("Emulation.setDeviceMetricsOverride", {
         width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false,
       });
       await load("#/");
-      await evaluate(
-        `localStorage.setItem(${JSON.stringify(DIRECTION_KEY)}, ${JSON.stringify(direction)});` +
-        `localStorage.removeItem(${JSON.stringify(PROGRESS_KEY)}); true`,
-      );
-      await load(CASE_ROUTE);
+      await evaluate(`localStorage.removeItem(${JSON.stringify(PROGRESS_KEY)}); true`);
+      await load(route.hash);
 
       // Sin esta aserción, una navegación que no confirme mide el documento anterior en
       // silencio y el resultado parece ruido del navegador.
-      const applied = await evaluate(`document.documentElement.dataset.direction`);
-      if (applied !== direction) {
-        throw new Error(`Dirección no aplicada: se pidió ${direction} y el documento declara ${applied}`);
+      const applied = await evaluate(`document.documentElement.dataset.identity`);
+      if (applied !== IDENTITY) {
+        throw new Error(`Identidad no aplicada: se esperaba ${IDENTITY} y el documento declara ${applied}`);
       }
 
       for (let step = 0; step < 45; step += 1) {
@@ -239,8 +243,8 @@ async function runPass(base, cdp, passIndex) {
         if (measurement.hOverflow > 1) horizontal += 1;
         if (measurement.isAction && measurement.mainScroll > 1) {
           findings.push({
-            key: `${direction}|${viewport.name}|${measurement.title}`,
-            direction, viewport: viewport.name, screen: measurement.title,
+            key: `${route.name}|${viewport.name}|${measurement.title}`,
+            viewport: viewport.name, screen: measurement.title,
             value: measurement.mainScroll,
           });
         }
@@ -257,6 +261,104 @@ async function runPass(base, cdp, passIndex) {
   return { horizontal, minTarget: minTarget === Infinity ? null : minTarget, worst };
 }
 
+/**
+ * Comprobaciones de interacción y accesibilidad que no dependen del tamaño de ventana y que, por
+ * tanto, basta ejecutar una vez: teclado real, sonido silenciado, movimiento reducido y carácter
+ * decorativo de la banda de escena.
+ */
+async function verifyInteraction(base, cdp) {
+  const { send, nextLoad } = cdp;
+  const evaluate = async (expression) => {
+    const result = await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
+    if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
+    return result.result.value;
+  };
+  const waitReady = async () => {
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (await evaluate(`document.documentElement.dataset.appReady === 'true'`)) return;
+      await new Promise((done) => setTimeout(done, 60));
+    }
+    throw new Error("La aplicación no marcó appReady");
+  };
+  let navigation = 0;
+  const load = async (hash) => {
+    navigation += 1;
+    const settled = nextLoad();
+    await send("Page.navigate", { url: `${base}?verificacion=${navigation}${hash}` });
+    await settled;
+    await waitReady();
+  };
+  const pressDigit = async (digit) => {
+    const shared = { key: digit, code: `Digit${digit}`, windowsVirtualKeyCode: 48 + Number(digit), text: digit };
+    await send("Input.dispatchKeyEvent", { type: "keyDown", ...shared });
+    await send("Input.dispatchKeyEvent", { type: "keyUp", ...shared });
+    await new Promise((done) => setTimeout(done, 60));
+  };
+
+  await send("Emulation.setDeviceMetricsOverride", { width: 1366, height: 768, deviceScaleFactor: 1, mobile: false });
+  const checks = [];
+
+  // Teclado: el atajo numérico debe elegir de verdad, no sólo enfocar.
+  await load("#/");
+  await evaluate(`localStorage.removeItem(${JSON.stringify(PROGRESS_KEY)}); true`);
+  await load(CASE_ROUTES[1].hash);
+  const firstTitle = await evaluate(`document.querySelector('main h1').textContent`);
+  await pressDigit("1");
+  const afterKey = await evaluate(`document.querySelector('main h1').textContent`);
+  const feedbackShown = await evaluate(`!!document.querySelector('.feedback')`);
+  checks.push({
+    name: "Teclado: el atajo numérico toma la decisión",
+    ok: feedbackShown && afterKey === firstTitle,
+    detail: feedbackShown ? "aparece la retroalimentación de la opción 1" : "la pulsación no eligió nada",
+  });
+
+  // Silencio: el equivalente textual debe seguir apareciendo con el sonido apagado.
+  checks.push({
+    name: "La banda de escena es decorativa",
+    ok: await evaluate(`(() => { const s = document.querySelector('.stage'); return !!s && s.getAttribute('aria-hidden') === 'true' && s.textContent.trim() === ''; })()`),
+    detail: "oculta a la tecnología de apoyo y sin texto propio",
+  });
+
+  await evaluate(`(() => {
+    const raw = localStorage.getItem(${JSON.stringify(PROGRESS_KEY)});
+    const progress = raw ? JSON.parse(raw) : null;
+    if (!progress) return false;
+    progress.settings.muted = true;
+    progress.settings.reducedMotion = true;
+    localStorage.setItem(${JSON.stringify(PROGRESS_KEY)}, JSON.stringify(progress));
+    return true;
+  })()`);
+  await load(CASE_ROUTES[1].hash);
+  await pressDigit("1");
+  const caption = await evaluate(`(document.querySelector('.sound-caption') || {}).textContent || ''`);
+  checks.push({
+    name: "Silencio: el equivalente textual sigue anunciándose",
+    ok: caption.startsWith("Sonido silenciado") && caption.length > "Sonido silenciado".length + 5,
+    detail: caption ? `«${caption.slice(0, 60)}»` : "no se anunció nada",
+  });
+  checks.push({
+    name: "El equivalente textual vive en una región viva persistente",
+    ok: await evaluate(`(() => { const n = document.querySelector('.sound-caption'); return !!n && n.getAttribute('role') === 'status' && !document.querySelector('#app').contains(n); })()`),
+    detail: "role=status y fuera del contenedor que se repinta",
+  });
+
+  // Movimiento reducido: la animación de la banda debe quedar anulada.
+  const motion = await evaluate(`(() => {
+    const flag = document.documentElement.dataset.reducedMotion;
+    const svg = document.querySelector('.stage svg');
+    const duration = svg ? getComputedStyle(svg).animationDuration : 'sin banda';
+    return JSON.stringify({ flag, duration });
+  })()`);
+  const motionState = JSON.parse(motion);
+  checks.push({
+    name: "Movimiento reducido: la entrada de la banda queda anulada",
+    ok: motionState.flag === "true" && parseFloat(motionState.duration) < 0.002,
+    detail: `data-reduced-motion=${motionState.flag}, animation-duration=${motionState.duration}`,
+  });
+
+  return checks;
+}
+
 function renderReport(passes) {
   const keys = [...new Set(passes.flatMap((pass) => [...pass.worst.keys()]))].sort();
   const stable = keys.every((key) => new Set(passes.map((pass) => pass.worst.get(key) ?? 0)).size === 1)
@@ -270,15 +372,20 @@ function renderReport(passes) {
   lines.push(`- Desbordamiento horizontal: ${passes[0].horizontal === 0 ? "ninguno" : `${passes[0].horizontal} pantallas`}.`);
   lines.push(`- Objetivo táctil mínimo: ${passes[0].minTarget} px.`);
   lines.push("");
-  lines.push("| Dirección | Tamaño | Pantalla de acción | Desplazamiento |");
-  lines.push("| --- | --- | --- | ---: |");
-  for (const key of keys) {
-    const [direction, viewport, screen] = key.split("|");
-    const values = passes.map((pass) => pass.worst.get(key) ?? 0);
-    const shown = new Set(values).size === 1 ? `${values[0]} px` : `${values.join(" / ")} px (inestable)`;
-    lines.push(`| ${direction} | ${viewport} | ${screen} | ${shown} |`);
+  if (keys.length === 0) {
+    lines.push("- Desplazamiento vertical en pantallas de acción: **ninguno**, en ningún tamaño.");
+  } else {
+    lines.push("| Recorrido | Tamaño | Pantalla de acción | Desplazamiento |");
+    lines.push("| --- | --- | --- | ---: |");
+    for (const key of keys) {
+      const [walk, viewport, screen] = key.split("|");
+      const values = passes.map((pass) => pass.worst.get(key) ?? 0);
+      const shown = new Set(values).size === 1 ? `${values[0]} px` : `${values.join(" / ")} px (inestable)`;
+      lines.push(`| ${walk} | ${viewport} | ${screen} | ${shown} |`);
+    }
   }
-  return { report: lines.join("\n"), stable };
+  const clean = keys.length === 0 && passes[0].horizontal === 0;
+  return { report: lines.join("\n"), stable, clean };
 }
 
 const profile = mkdtempSync(join(tmpdir(), "medicion-m5-"));
@@ -287,12 +394,25 @@ const cdp = await connect(findChrome(), profile);
 let failure;
 
 try {
+  const checks = await verifyInteraction(base, cdp);
   const passes = [];
   for (let pass = 1; pass <= RUNS; pass += 1) {
     passes.push(await runPass(base, cdp, pass));
   }
-  const { report, stable } = renderReport(passes);
-  console.log(report);
+  const { report, stable, clean } = renderReport(passes);
+  const checkLines = [
+    "",
+    "| Comprobación de interacción | Resultado | Detalle |",
+    "| --- | --- | --- |",
+    ...checks.map((check) => `| ${check.name} | ${check.ok ? "correcto" : "**FALLO**"} | ${check.detail} |`),
+  ].join("\n");
+  console.log(`${report}\n${checkLines}`);
+  if (!clean && !args.has("allow-scroll")) {
+    failure = new Error("Hay pantallas de acción que se desplazan: la regla 6 de M5 no se cumple.");
+  }
+  if (checks.some((check) => !check.ok)) {
+    failure = new Error("Alguna comprobación de interacción o accesibilidad ha fallado.");
+  }
   if (OUT) {
     writeFileSync(OUT, `${report}\n`, "utf8");
     console.log(`\nResumen escrito en ${OUT}`);

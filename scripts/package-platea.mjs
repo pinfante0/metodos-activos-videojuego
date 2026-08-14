@@ -7,7 +7,7 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const distDirectory = resolve(projectRoot, "dist");
 const releaseDirectory = resolve(projectRoot, "release");
-const outputFile = resolve(releaseDirectory, "el-aula-de-los-dos-minutos-m4-platea.zip");
+const outputFile = resolve(releaseDirectory, "el-aula-de-los-dos-minutos-m5-platea.zip");
 
 async function listFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });

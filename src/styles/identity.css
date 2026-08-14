@@ -1,0 +1,207 @@
+/*
+ * Identidad fijada en M5: **Aula-laboratorio escénica**.
+ *
+ * Cierra la comparación de tres direcciones. Lo que esta hoja aplica no es una de las tres
+ * candidatas tal cual, sino la síntesis que decidió el profesor:
+ *
+ * - **Zonificación.** El escenario oscuro y cálido se concentra en la banda experiencial —la
+ *   consecuencia y el incidente—. Todas las superficies con lectura extensa son claras, cálidas y
+ *   de alto contraste. El juego no tiene fondo oscuro global, que era el mayor riesgo de D2.
+ * - **Claridad funcional de la Consola.** D3 no sobrevive como identidad, pero sí como recurso:
+ *   los paneles de razonamiento —gramática de la justificación y observables— conservan su
+ *   retícula y sus etiquetas monoespaciadas.
+ * - **Sin gamificación decorativa.** No hay puntos, insignias ni recompensas. El realce sólo marca
+ *   estado, nunca premio.
+ *
+ * Las reglas de composición que sostienen la decisión de producto «esto no puede acabar siendo una
+ * ficha con ilustraciones» están anotadas donde se aplican. La regla que más restringe esta hoja
+ * es la sexta: ninguna pantalla de acción puede desplazarse en los cinco tamaños objetivo, y no
+ * vale conseguirlo encogiendo texto pedagógico.
+ */
+
+:root {
+  color-scheme: light;
+
+  --ui-font-body: "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --ui-font-display: "Segoe UI", Inter, ui-sans-serif, system-ui, sans-serif;
+  /* Etiqueta monoespaciada: la claridad funcional heredada de la Consola. */
+  --ui-font-label: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* Superficies de lectura: claras, cálidas y de alto contraste. */
+  --ui-ground: #f4efe6;
+  --ui-surface: #fbf7f1;
+  --ui-surface-strong: #fff;
+  --ui-ink: #1b1714;
+  --ui-ink-muted: #4a3f36;
+  --ui-ink-soft: #4a3f36;
+  --ui-ink-quiet: #40362e;
+
+  --ui-accent: #8a3b12;
+  --ui-on-accent: #fff;
+  --ui-line: #a08a76;
+  --ui-line-strong: #6d5b4c;
+  --ui-control-border: #7d6a59;
+  --ui-control-border-active: #8a3b12;
+  --ui-progress: #8a3b12;
+  --ui-focus: #0b4f9e;
+
+  --ui-radius: .25rem;
+  --ui-mark-radius: .25rem;
+  --ui-display-tracking: -.03em;
+  --ui-line-height: 1.45;
+  --ui-key-border: 2px solid #8a3b12;
+  --ui-key-radius: .2rem;
+  --ui-key-ink: #fff;
+  --ui-key-bg: #8a3b12;
+
+  --ui-rating-coherent: #1d5c40;
+  --ui-rating-revision: #7a5a0d;
+  --ui-rating-incoherent: #8c2020;
+
+  /* Zona experiencial: la única superficie oscura del juego. */
+  --stage-night: #171110;
+  --stage-crowd: #0c0807;
+  --stage-crowd-back: #241a13;
+  --stage-barrier: #d9704f;
+}
+
+h1, h2 { font-weight: 800; }
+.eyebrow { letter-spacing: .1em; }
+
+/* ------------------------------------------------------------------ */
+/* Zona experiencial: banda de escena                                  */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Decorativa por contrato: la luz cifra el estado cualitativo y la retroalimentación lo enuncia en
+ * palabras justo debajo, de modo que la imagen no aporta información que el texto no dé ya. Por eso
+ * va oculta a la tecnología de apoyo y sin pie de figura, lo que además evita duplicar (regla 4).
+ */
+.stage {
+  overflow: hidden;
+  margin: 0 0 .5rem;
+  border-radius: .5rem;
+  background: radial-gradient(135% 220% at 28% 0%, #3f2c19 0%, var(--stage-night) 62%, #100c0a 100%);
+}
+
+.stage svg {
+  display: block;
+  width: 100%;
+  /* La banda no puede crecer con el ancho: en pantallas bajas robaría la lectura. */
+  max-height: min(3.4rem, 7vh);
+}
+
+.stage__crowd { fill: var(--ui-stage-crowd, var(--stage-crowd)); stroke: none; opacity: .9; }
+.stage__crowd--back { fill: var(--stage-crowd-back); opacity: .75; }
+.stage__barrier { fill: var(--stage-barrier); stroke: none; opacity: .42; }
+
+.stage[data-light="coherent-defensible"] {
+  background: radial-gradient(135% 220% at 28% 0%, #5a3c1c 0%, #241a14 60%, #120d0b 100%);
+}
+.stage[data-light="defensible-needs-revision"] {
+  background: radial-gradient(135% 220% at 28% 0%, #3f2c19 0%, var(--stage-night) 62%, #100c0a 100%);
+}
+.stage[data-light="incoherent-with-brief"] {
+  background: radial-gradient(135% 220% at 28% 0%, #2c2422 0%, #191413 64%, #0e0b0a 100%);
+}
+.stage[data-light="incident"] {
+  background: radial-gradient(135% 220% at 28% 0%, #2a2028 0%, #161116 66%, #0d0a0c 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stage svg { animation: stage-entrada .26s ease-out both; }
+}
+
+@keyframes stage-entrada {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Paneles de razonamiento: la claridad funcional heredada de D3       */
+/* ------------------------------------------------------------------ */
+
+.feedback { border-radius: var(--ui-radius); }
+.feedback__rating { color: var(--ui-ink-muted); }
+
+.reasoning {
+  margin-top: .5rem;
+  border: 2px solid var(--ui-line-strong);
+  border-radius: var(--ui-radius);
+  background: var(--ui-surface-strong);
+}
+
+.reasoning summary { padding: 0 .75rem; }
+.reasoning__grid { padding: 0 .75rem .65rem; }
+.reasoning dt { color: var(--ui-ink-muted); letter-spacing: .04em; }
+
+/*
+ * Regla 6. Abrir un desplegable es un acto deliberado, pero tampoco entonces debe romperse la
+ * pantalla: el panel se desplaza por dentro en lugar de empujar la página.
+ */
+.reasoning[open] .reasoning__grid {
+  max-height: min(18rem, 34vh);
+  overflow-y: auto;
+}
+
+.grammar-form label span { color: var(--ui-ink-muted); font-family: var(--ui-font-label); font-size: .72rem; letter-spacing: .03em; }
+
+/*
+ * Regla 6 sin tocar la regla 5. La frase de justificación crece a medida que se eligen las cinco
+ * piezas y es el texto pedagógico más largo del corte, de modo que no puede encogerse. Se le da
+ * una altura máxima y desplazamiento propio: la frase sigue entera y la pantalla no se mueve.
+ */
+.grammar-preview {
+  max-height: clamp(5rem, 20vh, 11rem);
+  overflow-y: auto;
+  border-radius: var(--ui-radius);
+}
+
+/*
+ * La bitácora del caso es una superficie de repaso, no de lectura obligatoria: se desplaza por
+ * dentro para que la pantalla de acción que la contiene no se desplace nunca. El límite se calcula
+ * sobre la altura disponible, que es lo que fallaba en el corte heredado de M4.
+ */
+.journal-preview { max-height: clamp(7rem, 34vh, 20rem); border-radius: var(--ui-radius); }
+
+.incident { border-radius: var(--ui-radius); border-left-width: .55rem; }
+.choice, .notice, .grey-note, .status, .journal-entry, .settings-panel { border-radius: var(--ui-radius); }
+
+/* ------------------------------------------------------------------ */
+/* Equivalente textual del sonido                                      */
+/* ------------------------------------------------------------------ */
+
+.sound-caption:empty { display: none; }
+
+.sound-caption {
+  position: fixed;
+  z-index: 12;
+  bottom: .5rem;
+  left: max(.5rem, calc((100vw - 76rem) / 2));
+  max-width: min(90vw, 34rem);
+  margin: 0;
+  padding: .4rem .65rem;
+  border: 2px solid var(--ui-accent);
+  border-radius: var(--ui-radius);
+  color: var(--ui-ink);
+  background: var(--ui-surface-strong);
+  font-size: .74rem;
+  font-weight: 700;
+}
+
+@media (max-width: 42rem) {
+  .stage { margin-bottom: .35rem; }
+  .stage svg { max-height: min(2.1rem, 5.5vh); }
+  .reasoning summary { font-size: .82rem; }
+  .sound-caption { bottom: .35rem; font-size: .68rem; }
+  /* El texto del incidente no se toca; lo que cede es el marco que lo rodea. */
+  .incident { margin: .4rem 0; padding: .55rem .7rem; }
+  .grammar-form { gap: .25rem .45rem; }
+  .grammar-preview { max-height: clamp(4.5rem, 15vh, 8rem); margin-top: .45rem; padding: .5rem .6rem; }
+}
+
+/* Portátiles de poca altura: el mismo problema que en móvil, por altura y no por anchura. */
+@media (max-height: 800px) and (min-width: 43rem) {
+  .stage svg { max-height: min(3rem, 5.5vh); }
+  .grammar-preview { max-height: 16vh; }
+}

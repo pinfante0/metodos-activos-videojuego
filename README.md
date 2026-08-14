@@ -30,15 +30,17 @@ escenas y se han comprobado ratón, teclado, táctil y cinco tamaños objetivo.
 - Contenido jugable: `src/content/playable/`.
 - Intérprete común: `src/app/game-session.ts` y `src/app/render-app.ts`.
 
-M5 está en curso y detenida en su primera tarea. Sobre ese mismo corte se han construido tres
-direcciones visuales, sonoras y de experiencia —Cuaderno de campo, Aula-laboratorio escénica y
-Consola de decisiones—, aplicables y reversibles desde `#/direcciones` o desde Ajustes. Cada una
-añade una característica experiencial mínima a la misma consecuencia del caso piloto y deja escuchar
-sus seis señales sonoras. **Ninguna está elegida**: no hay identidad aprobada ni arte definitivo, no
-se ha fijado el contrato de recursos y no se ha construido la campaña completa.
+M5 está completada. La identidad es **Aula-laboratorio escénica**: escenario oscuro y cálido
+concentrado en la banda experiencial, superficies de lectura claras y de alto contraste, paneles de
+razonamiento con la claridad funcional de la Consola, y seis señales sonoras breves que cifran el
+estado en un intervalo con timbre de cuerpo, madera y láminas. **No hay arte definitivo ni
+personajes**: eso es M8, y los personajes dependen además de una ampliación del contenido que
+pertenece a M6. Tampoco hay campaña completa.
 
-- Comparación y criterios: `docs/direcciones_m5.md`.
-- Capa de dirección reversible: `src/app/direction/` y `src/styles/directions.css`.
+- Cierre de la dirección y criterios de la comparación: `docs/direcciones_m5.md`.
+- Reglas de composición vinculantes: `docs/decision_producto_m5.md`.
+- Contrato de recursos y procedencia: `docs/contrato_recursos_m5.md`.
+- Identidad aplicada: `src/app/identity/` y `src/styles/identity.css`.
 - Medición de los cinco tamaños objetivo: `pnpm measure:viewports`, documentada en
   `docs/medicion_tamanos_m5.md`. Requiere Chrome o Edge instalados.
 

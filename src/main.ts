@@ -1,6 +1,6 @@
 import "./styles.css";
-// Capa de dirección M5. Eliminar esta línea devuelve el corte al gris de M4.
-import "./styles/directions.css";
+// Identidad fijada en M5: Aula-laboratorio escénica. Véase `docs/direcciones_m5.md`.
+import "./styles/identity.css";
 import { mountApp } from "./app/render-app";
 
 const root = document.querySelector<HTMLElement>("#app");

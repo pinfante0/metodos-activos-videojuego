@@ -145,11 +145,14 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `material/vasil-dockan-2023-orff-schulwerk-and-popular-music-education.pdf`: fuente
   complementaria aplicada al puente del caso piloto; pendiente de incorporación editorial a la
   bibliografía de la presentación y la guía.
-- `docs/direcciones_m5.md`: tres direcciones visuales, sonoras y de experiencia aplicadas de forma
-  reversible al corte funcional, con los cinco criterios explícitos de comparación. Ninguna elegida.
+- `docs/direcciones_m5.md`: cierre de M5. Comparación de las tres direcciones, identidad elegida,
+  qué se aplicó y qué queda fuera.
+- `docs/decision_producto_m5.md`: las ocho reglas de composición y los encargos a M6, M7C y M10.
+- `docs/contrato_recursos_m5.md`: contrato de recursos, presupuesto y procedencia, con registro
+  ejecutable en `src/content/identity/resources.json`.
 - `docs/medicion_tamanos_m5.md` y `scripts/measure-viewports.mjs`: arnés reproducible de los cinco
   tamaños objetivo y su resultado verificado. Se ejecuta con `pnpm measure:viewports` y requiere
-  Chrome o Edge instalados. No forma parte de la capa de dirección y debe conservarse.
+  Chrome o Edge instalados. No forma parte de la identidad y debe conservarse.
 - `README.md`: resumen breve del estado.
 - `tmp/`: fuentes de construcción y materiales de verificación; no son entregables finales.
 
@@ -167,19 +170,22 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   comprobados. El contenido jugable está separado del intérprete.
 - `docs/corte_vertical_m4.md` registra el alcance, las pruebas, la puerta de salida y los asuntos
   aplazados del corte gris.
-- **M5 está en curso y detenida en su primera tarea.** Existen tres direcciones aplicadas de forma
-  reversible al corte —Cuaderno de campo, Aula-laboratorio escénica y Consola de decisiones— y
-  ninguna está elegida. La elección corresponde al profesor. Cada una tiene una característica
-  experiencial mínima sobre la misma consecuencia del caso piloto y seis señales sonoras audibles
-  desde `#/direcciones`. No se han producido recursos definitivos, no se ha fijado el contrato de
-  recursos y no se ha adelantado nada de M6.
-- La medición en navegador real de M5 corrigió una afirmación de M4: el corte gris ya desplazaba las
-  pantallas de justificación y de bitácora del caso en algunos tamaños objetivo. Está registrado en
-  `docs/corte_vertical_m4.md` y no debe darse por resuelto.
-- La capa de dirección vive en `src/app/direction/`, `src/styles/directions.css` y la ruta
-  `#/direcciones`. No toca los contratos de M3, el contenido jugable ni `game-session.ts`;
-  `render-app.ts` sí se ha modificado de forma acotada. `docs/direcciones_m5.md` detalla esos
-  cambios y cómo revertir la capa por completo.
+- **M5 está completada.** La identidad es **Aula-laboratorio escénica**, elegida por el profesor y
+  aplicada a todo el corte, con la claridad funcional de la Consola conservada sólo para los paneles
+  de razonamiento y su lógica sonora breve. D1 y D3 como identidades, y la ruta `#/direcciones`, se
+  han retirado. Véase `docs/direcciones_m5.md`.
+- **Decisión de producto vinculante:** el juego no puede acabar siendo una ficha con ilustraciones.
+  Ocho reglas de composición en `docs/decision_producto_m5.md`, con encargos explícitos a M6, M7C y
+  M10. Se corrigen por composición, nunca eliminando rigor ni encogiendo texto pedagógico.
+- La identidad vive en `src/app/identity/`, `src/styles/identity.css` y
+  `src/content/identity/resources.json`. El escenario oscuro se concentra en la banda experiencial;
+  toda superficie con lectura extensa es clara y de alto contraste.
+- **No hay arte definitivo.** Todo lo visible es tipografía, color, retícula y una silueta trazada;
+  todo lo audible está sintetizado. Eso es M8. Tampoco hay personajes: dibujarlos exigiría que el
+  contenido declarase participación y reparto, lo que pertenece a M6.
+- La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños,
+  incluidas la justificación y la bitácora del caso, que ya fallaban en M4. `pnpm measure:viewports`
+  falla con código 1 si vuelve a romperse.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 
