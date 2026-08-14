@@ -1,8 +1,10 @@
 # Plan maestro del tercer videojuego
 
-Estado: **M4 completado y comprobado localmente** el 13 de agosto de 2026. Este documento fija las
-decisiones de alcance y la secuencia de trabajo. El corte vertical gris implementa el tutorial y el
-caso piloto aprobados sin adelantar la dirección visual ni la campaña completa.
+Estado: **M5 en curso; comparación de direcciones entregada el 14 de agosto de 2026 y elección
+pendiente**. M4 quedó completado y comprobado localmente el 13 de agosto de 2026. Este documento
+fija las decisiones de alcance y la secuencia de trabajo. El corte vertical gris implementa el
+tutorial y el caso piloto aprobados; sobre él se han aplicado, de forma reversible, tres direcciones
+candidatas que todavía no comprometen ninguna identidad ni campaña.
 
 El nombre de trabajo es **El aula de los dos minutos**. Tanto el nombre como la identidad visual
 podrán cambiar durante M5 sin alterar la propuesta pedagógica aprobada.
@@ -337,6 +339,38 @@ Tareas:
 
 Puerta de salida: identidad aprobada sobre una experiencia funcional, no solo en ilustraciones
 aisladas.
+
+Estado: **primera tarea completada en dos iteraciones el 14 de agosto de 2026; puerta de salida no
+superada**. Las tres direcciones —Cuaderno de campo, Aula-laboratorio escénica y Consola de
+decisiones— están construidas y aplicadas de forma reversible al tutorial y al caso piloto, con
+cinco criterios explícitos de legibilidad, accesibilidad, identidad, coste de producción y
+adecuación pedagógica, más el riesgo propio de cada una. La segunda iteración añade a cada una una
+característica experiencial mínima sobre la misma consecuencia del caso piloto, permite escuchar sus
+seis señales desde `#/direcciones` y mide en navegador real las veinte combinaciones de dirección y
+tamaño objetivo. Véase `docs/direcciones_m5.md`.
+
+Esa medición ha corregido una afirmación de M4: el corte gris ya desplazaba las pantallas de
+justificación y de bitácora del caso en algunos tamaños. Queda registrado en
+`docs/corte_vertical_m4.md` y su reparación se decidirá junto con la dirección, porque afecta a la
+composición de la hoja base.
+
+La fase se detuvo deliberadamente antes de elegir. Quedan pendientes las cuatro tareas restantes:
+elegir identidad, personajes, composición, movimiento y lenguaje sonoro; fijar el contrato de
+recursos y el registro de procedencia; aplicar la dirección elegida y retirar las otras dos; y
+verificar subtítulos, reducción de movimiento y legibilidad en navegador real sobre la elegida. No
+se ha producido ningún recurso definitivo y los contratos de M3, el contenido de M4 y el intérprete
+siguen intactos.
+
+Conviene continuar M5 en el mismo chat en cuanto haya elección. Si hubiera que abrirlo de nuevo, la
+frase exacta es:
+
+> **M5 — Elección de dirección y contrato de recursos.** Trabaja únicamente en `Metodos/`. Lee
+> `AGENTS.md`, `docs/plan_maestro_videojuego.md`, `docs/direcciones_m5.md` y los entregables M2-M4
+> pertinentes. Usa `docs/revision_tema_8.md` como fuente pedagógica canónica. La dirección elegida
+> es **[nombre]**. Aplícala al corte funcional, retira las otras dos y la ruta `#/direcciones`, fija
+> el contrato de recursos y el registro de procedencia, y verifica subtítulos, equivalentes,
+> movimiento reducido y legibilidad en los cinco tamaños objetivo. No produzcas todavía el arte
+> definitivo de M8 ni adelantes M6, y detente en la puerta de salida de M5.
 
 ### M6 — Sistemas centrales
 

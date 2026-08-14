@@ -145,6 +145,8 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `material/vasil-dockan-2023-orff-schulwerk-and-popular-music-education.pdf`: fuente
   complementaria aplicada al puente del caso piloto; pendiente de incorporación editorial a la
   bibliografía de la presentación y la guía.
+- `docs/direcciones_m5.md`: tres direcciones visuales, sonoras y de experiencia aplicadas de forma
+  reversible al corte funcional, con los cinco criterios explícitos de comparación. Ninguna elegida.
 - `README.md`: resumen breve del estado.
 - `tmp/`: fuentes de construcción y materiales de verificación; no son entregables finales.
 
@@ -159,10 +161,21 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   decisiones, personajes funcionales, bitácora, un tutorial y un caso piloto completo.
 - M4 está completada: tutorial y caso piloto funcionan de principio a fin con incidente, revisión,
   retroalimentación, justificación y bitácora; ratón, teclado, táctil y tamaños objetivo están
-  comprobados. El contenido jugable está separado del intérprete. La siguiente fase es **M5 —
-  Dirección visual, sonora y de experiencia**; no se ha anticipado ninguna de sus decisiones.
+  comprobados. El contenido jugable está separado del intérprete.
 - `docs/corte_vertical_m4.md` registra el alcance, las pruebas, la puerta de salida y los asuntos
   aplazados del corte gris.
+- **M5 está en curso y detenida en su primera tarea.** Existen tres direcciones aplicadas de forma
+  reversible al corte —Cuaderno de campo, Aula-laboratorio escénica y Consola de decisiones— y
+  ninguna está elegida. La elección corresponde al profesor. Cada una tiene una característica
+  experiencial mínima sobre la misma consecuencia del caso piloto y seis señales sonoras audibles
+  desde `#/direcciones`. No se han producido recursos definitivos, no se ha fijado el contrato de
+  recursos y no se ha adelantado nada de M6.
+- La medición en navegador real de M5 corrigió una afirmación de M4: el corte gris ya desplazaba las
+  pantallas de justificación y de bitácora del caso en algunos tamaños objetivo. Está registrado en
+  `docs/corte_vertical_m4.md` y no debe darse por resuelto.
+- La capa de dirección vive en `src/app/direction/`, `src/styles/directions.css` y la ruta
+  `#/direcciones`. No toca contratos, contenido ni intérprete, y `docs/direcciones_m5.md` explica
+  cómo revertirla por completo.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

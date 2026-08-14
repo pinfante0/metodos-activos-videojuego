@@ -71,6 +71,29 @@ Todos los controles visibles medidos alcanzan al menos 44 × 44 píxeles CSS. La
 diagnóstico y los detalles desplegables pueden desplazarse porque son pantallas de referencia, no
 pantallas de acción.
 
+### Corrección del 14 de agosto de 2026
+
+La medición instrumentada de M5 —Chrome sin interfaz, recorrido completo del caso en los cinco
+tamaños— **contradice parcialmente la tabla anterior**. Sin ninguna dirección aplicada, es decir en
+este mismo corte gris, dos pantallas de acción sí se desplazan:
+
+| Pantalla | Tamaño | Desplazamiento |
+| --- | --- | ---: |
+| «Construye una defensa completa» | 360 × 640 | hasta 89 px |
+| «Construye una defensa completa» | 1366 × 768 | 21 px |
+| «La bitácora conserva lo que mantuviste y lo que cambiaste» | 1366 × 768 | 81 px |
+| «La bitácora conserva lo que mantuviste y lo que cambiaste» | 1440 × 900 | 26 px |
+
+En la pantalla de justificación el desplazamiento crece conforme se eligen las cinco piezas de la
+gramática, de 43 a 89 píxeles: la comprobación original parece haberse hecho con la frase aún
+incompleta. La pantalla de bitácora del caso contiene un desplegable de referencia, pero el
+desbordamiento medido corresponde a la pantalla, no sólo a ese bloque.
+
+No hay desbordamiento horizontal en ningún tamaño y el objetivo táctil mínimo sí se cumple: 44 px en
+las veinte combinaciones medidas. La puerta de salida de M4 no se reabre por esto, pero la
+afirmación queda corregida y su reparación se decidirá junto con la dirección visual, porque afecta
+a la composición de la hoja base. Véase `docs/direcciones_m5.md`, apartado 11.
+
 ## Duración y comprensión iniciales
 
 El tutorial conserva la hipótesis de **4-5 minutos** de M2 y el caso la de **11-12 minutos**. Un

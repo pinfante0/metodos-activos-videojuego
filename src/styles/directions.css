@@ -1,0 +1,423 @@
+/*
+ * Capa de dirección M5 — reversible.
+ *
+ * Las tres direcciones candidatas se aplican declarando tokens sobre `:root[data-direction]`
+ * y añadiendo composición y ornamento con selectores que la hoja base no utiliza.
+ *
+ * ATENCIÓN: sí modifican espaciados y composición. La banda de aula, la anotación al margen y
+ * el panel de observables añaden elementos y altura a una pantalla de acción, y `laboratorio`
+ * y `consola` alteran además el relleno y el espacio entre filas del encabezado de escena. Por
+ * eso cada dirección obliga a repetir la medición de los cinco tamaños objetivo; lo que no se
+ * toca son las reglas responsivas de la hoja base, que siguen gobernando el corte.
+ *
+ * Para volver al gris de M4 basta con elegir «Gris M4» en Ajustes, o eliminar este archivo,
+ * su importación en `src/main.ts` y el directorio `src/app/direction/`.
+ *
+ * Todos los pares de color declarados aquí se han medido: ningún texto baja de 4,5:1 y ningún
+ * borde de control baja de 3:1. Las cifras están en `docs/direcciones_m5.md`.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Dirección 1 · Cuaderno de campo                                     */
+/* ------------------------------------------------------------------ */
+
+:root[data-direction="cuaderno"] {
+  --dir-ground: #f2ecdf;
+  --dir-surface: #fbf7ee;
+  --dir-surface-strong: #fffdf8;
+  --dir-ink: #22201c;
+  --dir-ink-soft: #57503f;
+  --dir-ink-muted: #57503f;
+  --dir-ink-quiet: #57503f;
+  --dir-line: #a89c80;
+  --dir-line-strong: #6b6250;
+  --dir-control-border: #6b6250;
+  --dir-control-border-active: #22201c;
+  --dir-accent: #7a2711;
+  --dir-on-accent: #fffdf8;
+  --dir-key-bg: #fffdf8;
+  --dir-key-ink: #22201c;
+  --dir-key-border: 2px solid #6b6250;
+  --dir-key-radius: .1rem;
+  --dir-mark-radius: .1rem;
+  --dir-progress: #7a2711;
+  --dir-focus: #0b4fa8;
+  --dir-radius: .12rem;
+  --dir-rating-coherent: #1f5138;
+  --dir-rating-revision: #6b4e07;
+  --dir-rating-incoherent: #8c2020;
+  --dir-font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
+  --dir-font-label: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
+  --dir-display-tracking: -.012em;
+  --dir-line-height: 1.58;
+}
+
+:root[data-direction="cuaderno"] .scene-intro {
+  border-left: .18rem solid var(--dir-accent);
+  padding-left: .75rem;
+}
+
+:root[data-direction="cuaderno"] .feedback h2,
+:root[data-direction="cuaderno"] .grammar-preview {
+  font-style: italic;
+}
+
+:root[data-direction="cuaderno"] .eyebrow {
+  letter-spacing: .12em;
+}
+
+/* Anotación al margen: el objetivo del encargo, escrito junto a la consecuencia. */
+:root[data-direction="cuaderno"] .dir-note {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: .65rem;
+  align-items: start;
+  width: min(100%, 30rem);
+  margin: .5rem 0 0 auto;
+  padding: .5rem .7rem;
+  border-left: .18rem solid var(--dir-accent);
+  background: var(--dir-surface-strong);
+}
+
+:root[data-direction="cuaderno"] .dir-note p { margin: 0; }
+
+:root[data-direction="cuaderno"] .dir-note__vignette {
+  width: 3.2rem;
+  height: auto;
+  color: var(--dir-accent);
+  opacity: .8;
+}
+
+:root[data-direction="cuaderno"] .dir-note__text {
+  font-family: var(--dir-font-display);
+  font-style: italic;
+  font-size: .92rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 42rem) {
+  :root[data-direction="cuaderno"] .dir-note { grid-template-columns: 2.2rem minmax(0, 1fr); gap: .5rem; padding: .4rem .55rem; }
+  :root[data-direction="cuaderno"] .dir-note__vignette { width: 2.2rem; }
+  :root[data-direction="cuaderno"] .dir-note__text { font-size: .82rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Dirección 2 · Aula-laboratorio escénica                             */
+/* ------------------------------------------------------------------ */
+
+:root[data-direction="laboratorio"] {
+  color-scheme: dark;
+  --dir-ground: #10151c;
+  --dir-surface: #1a212b;
+  --dir-surface-strong: #232c38;
+  --dir-ink: #f3f0ea;
+  --dir-ink-soft: #b9c0ca;
+  --dir-ink-muted: #b9c0ca;
+  --dir-ink-quiet: #b9c0ca;
+  --dir-line: #7c8b9c;
+  --dir-line-strong: #7c8b9c;
+  --dir-control-border: #7c8b9c;
+  --dir-control-border-active: #f5b942;
+  --dir-accent: #f5b942;
+  --dir-on-accent: #10151c;
+  --dir-key-bg: #f5b942;
+  --dir-key-ink: #10151c;
+  --dir-key-radius: 50%;
+  --dir-mark-radius: 50%;
+  --dir-progress: #f5b942;
+  --dir-focus: #ffd98a;
+  --dir-radius: .45rem;
+  --dir-rating-coherent: #6fd3a5;
+  --dir-rating-revision: #f0c255;
+  --dir-rating-incoherent: #ff8c7a;
+  --dir-font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-font-display: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-font-label: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-display-tracking: -.03em;
+  --dir-line-height: 1.5;
+}
+
+/* Banda de escenario: la luz cae sobre el aula, la consola queda en penumbra. */
+:root[data-direction="laboratorio"] .scene-heading {
+  padding: .4rem .7rem;
+  border-radius: .6rem;
+  background: radial-gradient(125% 190% at 22% 0%, #3a2c1c 0%, #1f2731 55%, #1a212b 100%);
+}
+
+:root[data-direction="laboratorio"] .choice:hover,
+:root[data-direction="laboratorio"] .choice:focus-visible {
+  box-shadow: 0 0 0 .12rem rgb(245 185 66 / 35%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-direction="laboratorio"] .feedback,
+  :root[data-direction="laboratorio"] .incident {
+    animation: dir-lab-entrada .26s ease-out both;
+  }
+}
+
+@keyframes dir-lab-entrada {
+  from { opacity: 0; transform: translateY(.45rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Banda de aula: figuras abstractas y sin nombre, más una franja de barrera de grupo. */
+:root[data-direction="laboratorio"] .dir-stage {
+  margin: 0 0 .55rem;
+  padding: .45rem .6rem;
+  border-radius: .6rem;
+  background: radial-gradient(130% 210% at 30% 0%, #3a2c1c 0%, #1f2731 60%, #161d26 100%);
+}
+
+:root[data-direction="laboratorio"] .dir-stage__band {
+  display: block;
+  width: 100%;
+  /* La banda no puede crecer con el ancho: en portátiles de poca altura roba la pantalla. */
+  max-height: min(4.4rem, 8vh);
+}
+
+:root[data-direction="laboratorio"] .dir-stage__figure > * {
+  fill: none;
+  stroke: #7c8b9c;
+  stroke-width: 2;
+}
+
+:root[data-direction="laboratorio"] .dir-stage__figure[data-state="decide"] > * {
+  fill: #f5b942;
+  stroke: #f5b942;
+}
+
+:root[data-direction="laboratorio"] .dir-stage__barrier {
+  fill: #ff8c7a;
+  stroke: none;
+  opacity: .5;
+}
+
+:root[data-direction="laboratorio"] .dir-stage figcaption { font-size: .74rem; }
+:root[data-direction="laboratorio"] .dir-stage figcaption p { margin: 0; line-height: 1.3; }
+:root[data-direction="laboratorio"] .dir-stage figcaption .quiet { margin-top: .2rem; font-size: .68rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-direction="laboratorio"] .dir-stage__figure {
+    animation: dir-lab-figura .3s ease-out both;
+    animation-delay: calc(var(--dir-figure-index, 0) * .05s);
+  }
+}
+
+/*
+ * El ajuste de movimiento reducido de la aplicación es independiente de la consulta de medio:
+ * anula la duración, pero no el retardo. Sin esto las figuras seguirían apareciendo escalonadas.
+ */
+[data-reduced-motion="true"] .dir-stage__figure { animation-delay: 0s !important; }
+
+@keyframes dir-lab-figura {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 42rem) {
+  :root[data-direction="laboratorio"] .scene-heading { padding: .28rem .45rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Dirección 3 · Consola de decisiones                                 */
+/* ------------------------------------------------------------------ */
+
+:root[data-direction="consola"] {
+  --dir-ground: #eef1f4;
+  --dir-surface: #f7f9fb;
+  --dir-surface-strong: #ffffff;
+  --dir-ink: #0c1116;
+  --dir-ink-soft: #4a5560;
+  --dir-ink-muted: #4a5560;
+  --dir-ink-quiet: #4a5560;
+  --dir-line: #78838f;
+  --dir-line-strong: #78838f;
+  --dir-control-border: #78838f;
+  --dir-control-border-active: #123fa8;
+  --dir-accent: #123fa8;
+  --dir-on-accent: #ffffff;
+  --dir-key-bg: #123fa8;
+  --dir-key-ink: #ffffff;
+  --dir-key-radius: .12rem;
+  --dir-mark-radius: .12rem;
+  --dir-progress: #123fa8;
+  --dir-focus: #a1004b;
+  --dir-radius: .1rem;
+  --dir-rating-coherent: #0b5d3f;
+  --dir-rating-revision: #7a5200;
+  --dir-rating-incoherent: #a11226;
+  --dir-font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-font-display: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dir-font-label: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --dir-display-tracking: -.038em;
+  --dir-line-height: 1.42;
+}
+
+/* Riel de estado: marca dónde termina el encabezado y empieza la decisión. El riel ocupa una
+   fila propia de la retícula, así que se reduce el espacio entre filas para no gastar altura
+   de una pantalla de acción. */
+:root[data-direction="consola"] .scene-heading { row-gap: .25rem; }
+
+:root[data-direction="consola"] .scene-heading::after {
+  content: "";
+  grid-column: 1 / -1;
+  height: .16rem;
+  background: var(--dir-accent);
+}
+
+:root[data-direction="consola"] .eyebrow,
+:root[data-direction="consola"] dt,
+:root[data-direction="consola"] .feedback__rating {
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+:root[data-direction="consola"] .grammar-preview {
+  border-left-width: .5rem;
+}
+
+/*
+ * El diagrama sustituye al desplegable de observables: mostrar ambos duplicaría el mismo texto
+ * y contradiría la tesis de esta dirección, que es tenerlo todo a la vista.
+ */
+:root[data-direction="consola"] .observables { display: none; }
+
+:root[data-direction="consola"] .dir-panel {
+  margin-top: .55rem;
+  padding: .5rem .65rem;
+  border: 2px solid var(--dir-line-strong);
+  border-radius: var(--dir-radius);
+  background: var(--dir-surface-strong);
+}
+
+:root[data-direction="consola"] .dir-panel > .eyebrow { margin-bottom: .35rem; }
+:root[data-direction="consola"] .dir-panel .quiet { margin: .35rem 0 0; font-size: .68rem; }
+
+:root[data-direction="consola"] .dir-diagram {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem;
+  margin: 0;
+}
+
+:root[data-direction="consola"] .dir-diagram > div {
+  padding: .35rem .45rem;
+  border-left: .25rem solid var(--dir-line);
+  background: var(--dir-surface);
+}
+
+:root[data-direction="consola"] .dir-diagram > div dd { font-size: .78rem; }
+:root[data-direction="consola"] .dir-diagram[data-rating="coherent-defensible"] > div { border-left-color: var(--dir-rating-coherent); }
+:root[data-direction="consola"] .dir-diagram[data-rating="defensible-needs-revision"] > div { border-left-color: var(--dir-rating-revision); }
+:root[data-direction="consola"] .dir-diagram[data-rating="incoherent-with-brief"] > div { border-left-color: var(--dir-rating-incoherent); }
+
+:root[data-direction="consola"] .dir-history { margin-top: .45rem; border-top: 1px solid var(--dir-line); padding-top: .35rem; }
+:root[data-direction="consola"] .dir-history ol { display: grid; gap: .15rem; margin: 0; padding-left: 1.15rem; }
+
+/* Historial mínimo: una línea por decisión. El texto completo permanece en el árbol semántico. */
+:root[data-direction="consola"] .dir-history li {
+  overflow: hidden;
+  font-size: .72rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:root[data-direction="consola"] .dir-history__step { font-family: var(--dir-font-label); font-weight: 800; }
+:root[data-direction="consola"] .dir-history__step::after { content: " → "; }
+
+@media (max-width: 42rem) {
+  :root[data-direction="consola"] .dir-panel { padding: .4rem .5rem; }
+  :root[data-direction="consola"] .dir-diagram { gap: .25rem; }
+  :root[data-direction="consola"] .dir-diagram > div { padding: .25rem .35rem; }
+  :root[data-direction="consola"] .dir-diagram > div dd { font-size: .68rem; line-height: 1.25; }
+  :root[data-direction="consola"] .dir-history li { font-size: .64rem; }
+}
+
+@media (max-width: 42rem) {
+  :root[data-direction="laboratorio"] .dir-stage { padding: .35rem .45rem; }
+  :root[data-direction="laboratorio"] .dir-stage__band { max-height: 3.2rem; }
+  :root[data-direction="laboratorio"] .dir-stage figcaption { font-size: .68rem; }
+  :root[data-direction="laboratorio"] .dir-stage figcaption .quiet { font-size: .63rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Equivalente visual del sonido, común a las tres direcciones          */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Región viva persistente, fuera de `#app`, para que el texto sobreviva a cada repintado.
+ * Está vacía mientras no haya dirección activa, de modo que el gris de M4 no la muestra.
+ */
+.sound-caption {
+  position: fixed;
+  z-index: 18;
+  left: .6rem;
+  bottom: 3.9rem; /* por encima del pie, para no tapar el diagnóstico ni robar altura */
+  max-width: min(72vw, 30rem);
+  margin: 0;
+  padding: .3rem .6rem;
+  border: 1px solid var(--dir-line-strong, #555);
+  border-radius: var(--dir-radius, .2rem);
+  color: var(--dir-ink, #171717);
+  background: var(--dir-surface-strong, #fff);
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.sound-caption:empty { display: none; }
+
+@media (max-width: 42rem) {
+  .sound-caption { bottom: 2.8rem; font-size: .68rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Pantalla de comparación                                             */
+/* ------------------------------------------------------------------ */
+
+.direction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.direction-card {
+  display: grid;
+  align-content: start;
+  gap: .5rem;
+  padding: 1rem;
+  border: 2px solid var(--dir-line-strong, #555);
+  border-radius: var(--dir-radius, .2rem);
+  background: var(--dir-surface, #f8f8f8);
+}
+
+.direction-card[data-active="true"] {
+  border-color: var(--dir-accent, #171717);
+  border-width: .3rem;
+}
+
+.dir-cues ul { display: grid; gap: .45rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+.dir-cues li { display: grid; gap: .1rem; min-width: 0; }
+.dir-cues .quiet { margin: 0; }
+
+.dir-cue {
+  display: inline-flex;
+  gap: .5rem;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: .4rem .6rem;
+  font-size: .78rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.direction-card h2 { margin: 0; }
+.direction-card p { margin: 0; }
+.direction-card dl { display: grid; gap: .45rem; margin: 0; }
+.direction-card dd { line-height: 1.35; }

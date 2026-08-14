@@ -30,8 +30,15 @@ escenas y se han comprobado ratón, teclado, táctil y cinco tamaños objetivo.
 - Contenido jugable: `src/content/playable/`.
 - Intérprete común: `src/app/game-session.ts` y `src/app/render-app.ts`.
 
-La fase se detiene antes de M5: no hay dirección visual o sonora aprobada ni arte definitivo, y no
-se ha construido la campaña completa.
+M5 está en curso y detenida en su primera tarea. Sobre ese mismo corte se han construido tres
+direcciones visuales, sonoras y de experiencia —Cuaderno de campo, Aula-laboratorio escénica y
+Consola de decisiones—, aplicables y reversibles desde `#/direcciones` o desde Ajustes. Cada una
+añade una característica experiencial mínima a la misma consecuencia del caso piloto y deja escuchar
+sus seis señales sonoras. **Ninguna está elegida**: no hay identidad aprobada ni arte definitivo, no
+se ha fijado el contrato de recursos y no se ha construido la campaña completa.
+
+- Comparación y criterios: `docs/direcciones_m5.md`.
+- Capa de dirección reversible: `src/app/direction/` y `src/styles/directions.css`.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

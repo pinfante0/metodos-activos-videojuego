@@ -4,6 +4,9 @@ export type AppRoute =
   | { name: "case"; slug: string }
   | { name: "class-route" }
   | { name: "journal" }
+  // Ruta de trabajo de M5: compara direcciones sobre el corte funcional. No es una ruta de
+  // producto y desaparece cuando se apruebe una dirección.
+  | { name: "directions" }
   | { name: "not-found"; requested: string };
 
 function safeDecode(value: string): string {
@@ -20,6 +23,7 @@ export function parseHash(hash: string): AppRoute {
   if (path === "/prueba-publicacion") return { name: "publication-proof" };
   if (path === "/ruta/clase") return { name: "class-route" };
   if (path === "/bitacora") return { name: "journal" };
+  if (path === "/direcciones") return { name: "directions" };
   const caseMatch = path.match(/^\/caso\/([^/]+)$/);
   if (caseMatch?.[1]) return { name: "case", slug: safeDecode(caseMatch[1]) };
   return { name: "not-found", requested: safeDecode(path) };
@@ -35,6 +39,8 @@ export function hrefFor(route: Exclude<AppRoute, { name: "not-found" }>): string
       return "#/ruta/clase";
     case "journal":
       return "#/bitacora";
+    case "directions":
+      return "#/direcciones";
     case "case":
       return `#/caso/${encodeURIComponent(route.slug)}`;
   }
