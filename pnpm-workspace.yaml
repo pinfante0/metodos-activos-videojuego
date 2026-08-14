@@ -1,2 +1,8 @@
+# El arbol de node_modules de este proyecto se instalo contra un almacen compartido en el
+# directorio padre. Sin esta linea pnpm resuelve el almacen global del usuario, detecta que no
+# coincide con node_modules/.modules.yaml y pide purgar y reinstalar todo el arbol en cuanto se
+# toca package.json. En pnpm 10 y posteriores este ajuste vive aqui, no en .npmrc.
+storeDir: ../.pnpm-store
+
 allowBuilds:
   esbuild: true

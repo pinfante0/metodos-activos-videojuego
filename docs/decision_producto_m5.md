@@ -29,8 +29,10 @@ Ocho reglas, vinculantes para todo lo que se construya a partir de aquí.
    el pie de figura ni un segundo panel lo repiten.
 5. **No se reduce el tamaño del texto pedagógico para hacerlo caber.** Si no cabe, el problema es la
    composición, no el texto.
-6. **Ninguna pantalla de acción se desplaza**, en ninguno de los cinco tamaños objetivo. Las páginas
-   de referencia —bitácora general, diagnóstico— sí pueden hacerlo.
+6. **Ninguna pantalla de acción se desplaza**, en ninguno de los cinco tamaños objetivo y en ningún
+   estado de sus desplegables. Las páginas de referencia —bitácora general, diagnóstico— sí pueden
+   hacerlo. Un bloque puede desplazarse por dentro, siempre que reciba foco por teclado, tenga
+   nombre accesible, muestre foco visible y responda a las flechas.
 7. **No hay puntos, recompensas arbitrarias ni gamificación decorativa.** Ni insignias, ni niveles,
    ni marcadores. El realce marca estado, nunca premio. Esta regla es coherente con el contrato de
    contenido, que ya prohíbe puntuar una decisión docente.
@@ -44,12 +46,16 @@ Ocho reglas, vinculantes para todo lo que se construya a partir de aquí.
   (reglas 2 y 3).
 - La banda de escena perdió su pie de figura: repetía los observables que ya estaban en la pantalla
   (regla 4).
-- La regla 6 se cumple hoy en el tutorial y en el caso piloto, incluidas las pantallas de
-  justificación y de bitácora del caso, que **ya se desplazaban en M4** antes de que M5 tocara nada.
-  Se consiguió con composición —altura acotada y desplazamiento interno en los bloques de repaso—,
-  sin encoger ni un texto.
-- El arnés `pnpm measure:viewports` **falla con código de salida 1** si la regla 6 se rompe, de modo
-  que deja de depender de que alguien se acuerde de mirar.
+- La regla 6 se cumple hoy en el tutorial y en el caso piloto, **con los desplegables cerrados y
+  abiertos**, incluidas las pantallas de justificación y de bitácora del caso, que ya se desplazaban
+  en M4 antes de que M5 tocara nada. Se consiguió con composición —los bloques de repaso encogen al
+  hueco disponible y se desplazan por dentro—, sin encoger ni un texto.
+- Todo bloque con desplazamiento interno es alcanzable con el tabulador, tiene nombre accesible,
+  muestra foco visible y responde a las flechas. La regla 3 no puede pagarse dejando fuera a quien
+  navega con teclado.
+- El arnés `pnpm measure:viewports` **falla con código de salida 1** si la regla 6 se rompe en
+  cualquiera de los dos estados, si un recorrido no llega a su pantalla de cierre o si alguna
+  operación se bloquea, de modo que deja de depender de que alguien se acuerde de mirar.
 
 ## 4. Encargos a fases posteriores
 

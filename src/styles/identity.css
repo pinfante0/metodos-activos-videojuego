@@ -131,16 +131,47 @@ h1, h2 { font-weight: 800; }
   background: var(--ui-surface-strong);
 }
 
-.reasoning summary { padding: 0 .75rem; }
-.reasoning__grid { padding: 0 .75rem .65rem; }
+.reasoning .disclosure__toggle { padding: 0 .75rem; }
+.reasoning__grid { padding: 0 .75rem .65rem; margin: 0; }
 .reasoning dt { color: var(--ui-ink-muted); letter-spacing: .04em; }
 
 /*
- * Regla 6. Abrir un desplegable es un acto deliberado, pero tampoco entonces debe romperse la
- * pantalla: el panel se desplaza por dentro en lugar de empujar la página.
+ * Regla 6, también con el desplegable abierto. La auditoría encontró que abrirlo empujaba la
+ * página unos 39 px en 360 × 640: el panel se desplazaba por dentro, pero además crecía. Ahora su
+ * altura máxima se calcula sobre la ventana y deja sitio al resto de la pantalla, de modo que
+ * `main` no se desplaza ni cerrado ni abierto. No se ha recortado ni encogido ningún texto.
  */
-.reasoning[open] .reasoning__grid {
-  max-height: min(18rem, 34vh);
+
+
+/*
+ * Regla 6, tambien con los desplegables abiertos. Fijar alturas maximas no bastaba: cada pantalla
+ * tiene un resto distinto y abrir el panel la empujaba entre 14 y 85 px. En lugar de adivinar la
+ * altura, la pantalla de juego se acota a la altura disponible y los dos bloques de repaso son los
+ * unicos que pueden encoger; el resto conserva su tamano intacto. Asi el panel ocupa exactamente
+ * el hueco que queda, sea cual sea la pantalla, y `main` no se desplaza en ningun estado.
+ *
+ * Si algun dia el contenido fijo no cupiera por si solo, el resultado seria volver a desplazar la
+ * pagina, nunca recortar texto: no hay recorte posible por esta via.
+ */
+.game-screen { max-height: 100%; justify-content: safe center; }
+.game-screen > * { flex-shrink: 0; }
+
+.game-screen > .reasoning,
+.game-screen > .journal-preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex-shrink: 1;
+}
+
+.game-screen > .grammar-preview { min-height: 0; flex-shrink: 1; }
+
+/* El panel es el único elemento flexible que puede encoger: ocupa el hueco que quede. */
+.disclosure__panel:not([hidden]) {
+  display: block;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 34vh;
   overflow-y: auto;
 }
 
@@ -162,7 +193,19 @@ h1, h2 { font-weight: 800; }
  * dentro para que la pantalla de acción que la contiene no se desplace nunca. El límite se calcula
  * sobre la altura disponible, que es lo que fallaba en el corte heredado de M4.
  */
-.journal-preview { max-height: clamp(7rem, 34vh, 20rem); border-radius: var(--ui-radius); }
+.journal-preview { border-radius: var(--ui-radius); }
+
+
+/*
+ * Todo bloque con desplazamiento interno recibe foco, se anuncia con nombre propio y se desplaza
+ * con las flechas. El contorno se dibuja hacia dentro para que el recorte del propio bloque no se
+ * lo coma.
+ */
+.disclosure__panel:focus-visible,
+.grammar-preview:focus-visible {
+  outline: 3px solid var(--ui-focus);
+  outline-offset: -3px;
+}
 
 .incident { border-radius: var(--ui-radius); border-left-width: .55rem; }
 .choice, .notice, .grey-note, .status, .journal-entry, .settings-panel { border-radius: var(--ui-radius); }
@@ -192,7 +235,7 @@ h1, h2 { font-weight: 800; }
 @media (max-width: 42rem) {
   .stage { margin-bottom: .35rem; }
   .stage svg { max-height: min(2.1rem, 5.5vh); }
-  .reasoning summary { font-size: .82rem; }
+  .reasoning .disclosure__toggle { font-size: .82rem; }
   .sound-caption { bottom: .35rem; font-size: .68rem; }
   /* El texto del incidente no se toca; lo que cede es el marco que lo rodea. */
   .incident { margin: .4rem 0; padding: .55rem .7rem; }

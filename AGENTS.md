@@ -183,9 +183,11 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - **No hay arte definitivo.** Todo lo visible es tipografía, color, retícula y una silueta trazada;
   todo lo audible está sintetizado. Eso es M8. Tampoco hay personajes: dibujarlos exigiría que el
   contenido declarase participación y reparto, lo que pertenece a M6.
-- La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños,
-  incluidas la justificación y la bitácora del caso, que ya fallaban en M4. `pnpm measure:viewports`
-  falla con código 1 si vuelve a romperse.
+- La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños y
+  con los desplegables cerrados y abiertos, incluidas la justificación y la bitácora del caso, que ya
+  fallaban en M4. Los bloques que se desplazan por dentro son accesibles con teclado.
+  `pnpm measure:viewports` recorre ambos casos hasta su cierre y falla con código 1 si la regla se
+  rompe, si un recorrido no termina o si algo se bloquea.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

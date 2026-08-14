@@ -90,18 +90,42 @@ function feedbackCard(consequence: Consequence): string {
 }
 
 /**
+ * Revelado progresivo sin `<details>`.
+ *
+ * `<details>` envuelve su contenido en una caja propia que no es un elemento flexible, de modo que
+ * el panel interior no podía encoger para caber en la pantalla: abrirlo desplazaba la página entre
+ * 14 y 85 px según el tamaño. Un botón con `aria-expanded` y una región asociada sí se comportan
+ * como elementos flexibles, y además dan un nombre accesible y un foco propios al bloque que se
+ * desplaza por dentro.
+ */
+function disclosure(options: {
+  id: string; className: string; toggleLabel: string; regionLabel: string; body: string; expanded: boolean;
+}): string {
+  return `<div class="${options.className}">
+    <button class="disclosure__toggle" type="button" aria-expanded="${options.expanded}" aria-controls="${options.id}" data-toggle-disclosure="${options.id}">${esc(options.toggleLabel)}</button>
+    <div class="disclosure__panel" id="${options.id}" role="region" tabindex="0" aria-label="${esc(options.regionLabel)}"${options.expanded ? "" : " hidden"}>${options.body}</div>
+  </div>`;
+}
+
+/**
  * Regla de composición 3: la explicación pedagógica completa sigue estando entera, pero se pide.
  * Regla 4: nada de lo que hay aquí aparece ya en la pantalla.
  */
 function consequenceDetails(consequence: Consequence): string {
-  return `<details class="reasoning"><summary>Ver reparación y los cuatro observables</summary>
-    <dl class="reasoning__grid">
+  return disclosure({
+    id: "panel-razonamiento",
+    className: "reasoning",
+    toggleLabel: "Ver reparación y los cuatro observables",
+    regionLabel: "Reparación y los cuatro observables",
+    expanded: false,
+    body: `<dl class="reasoning__grid">
     <div><dt>Podrías reparar</dt><dd>${esc(consequence.feedback.possibleRepair)}</dd></div>
     <div><dt>Mira esta evidencia</dt><dd>${esc(consequence.feedback.observableEvidence)}</dd></div>
     <div><dt>Aprendizaje</dt><dd>${esc(consequence.observables.learning)}</dd></div>
     <div><dt>Agencia</dt><dd>${esc(consequence.observables.agency)}</dd></div>
     <div><dt>Barrera</dt><dd>${esc(consequence.observables.barrier)}</dd></div>
-    <div><dt>Evidencia</dt><dd>${esc(consequence.observables.evidence)}</dd></div></dl></details>`;
+    <div><dt>Evidencia</dt><dd>${esc(consequence.observables.evidence)}</dd></div></dl>`,
+  });
 }
 
 function sceneHeader(caseDefinition: CaseDefinition, scene: Scene): string {
@@ -146,7 +170,7 @@ function grammarOptions(scene: Extract<Scene, { kind: "justification" }>, sessio
 }
 
 function justificationScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "justification" }>, session: GameSession): string {
-  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><div class="grammar-form">${grammarOptions(scene, session)}</div><p class="grammar-preview" aria-live="polite">${esc(grammarSentence(caseDefinition, session))}</p><div class="scene-actions"><button class="primary" type="button" data-advance-justification ${grammarComplete(session) ? "" : "disabled"}>Llevar a la bitácora</button></div>`;
+  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><div class="grammar-form">${grammarOptions(scene, session)}</div><p class="grammar-preview" role="region" tabindex="0" aria-label="Justificación en construcción" aria-live="polite">${esc(grammarSentence(caseDefinition, session))}</p><div class="scene-actions"><button class="primary" type="button" data-advance-justification ${grammarComplete(session) ? "" : "disabled"}>Llevar a la bitácora</button></div>`;
 }
 
 function journalDefinition(entry: JournalEntry): string {
@@ -155,7 +179,14 @@ function journalDefinition(entry: JournalEntry): string {
 
 function reflectionScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "reflection" }>, session: GameSession): string {
   const preview = buildJournalEntry(caseDefinition, session, new Date().toISOString(), "00000000-0000-4000-8000-000000000000");
-  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><details class="journal-preview" open><summary>Revisar la entrada</summary><dl>${journalDefinition(preview)}</dl></details><div class="scene-actions"><button class="primary" type="button" data-finish-case>Guardar y cerrar</button></div>`;
+  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p>${disclosure({
+    id: "panel-bitacora",
+    className: "journal-preview",
+    toggleLabel: "Revisar la entrada",
+    regionLabel: "Entrada de bitácora en revisión",
+    expanded: true,
+    body: `<dl>${journalDefinition(preview)}</dl>`,
+  })}<div class="scene-actions"><button class="primary" type="button" data-finish-case>Guardar y cerrar</button></div>`;
 }
 
 function completionView(caseDefinition: CaseDefinition): string {
@@ -297,6 +328,18 @@ export function mountApp(root: HTMLElement): void {
       // confirma que la decisión quedó registrada.
       if (scene.feedbackMode === "deferred") playCue("decision");
       sessions.set(item.id, selectAction(item, session, scene, actionButton.dataset.actionId ?? "")); render(true); return;
+    }
+    // El revelado progresivo no cambia el estado del juego: se conmuta en el sitio, sin repintar,
+    // de modo que el foco y la posición de lectura se conservan.
+    const disclosureToggle = target.closest<HTMLButtonElement>("[data-toggle-disclosure]");
+    if (disclosureToggle) {
+      const panel = root.querySelector<HTMLElement>(`#${CSS.escape(disclosureToggle.dataset.toggleDisclosure ?? "")}`);
+      if (panel) {
+        const expanded = disclosureToggle.getAttribute("aria-expanded") === "true";
+        disclosureToggle.setAttribute("aria-expanded", String(!expanded));
+        panel.hidden = expanded;
+      }
+      return;
     }
     if (target.closest("[data-continue-feedback]") && item && session) {
       sessions.set(item.id, continueFromFeedback(item, session)); render(true); return;

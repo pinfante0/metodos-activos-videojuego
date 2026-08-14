@@ -120,28 +120,43 @@ creador, licencia y atribución, todos en estado de prototipo. El diagnóstico d
 - `pnpm check`: **30 pruebas** en cinco archivos, compilación con TypeScript estricto y paquete
   PLATEA regenerado. La hoja de estilos baja de 19,3 kB a 13,1 kB y el JavaScript de 165 kB a
   149 kB al retirar la capa de comparación.
-- `pnpm measure:viewports --runs=3`: sin desbordamiento horizontal, objetivo táctil mínimo de
-  44 px y **ninguna pantalla de acción se desplaza** en ninguno de los cinco tamaños objetivo, ni
-  en el tutorial ni en el caso piloto. Idéntico en tres pasadas. El arnés falla con código de
-  salida 1 si esa regla se rompe, de modo que la comprobación no depende de que alguien la mire.
-  Detalle en `docs/medicion_tamanos_m5.md`.
+- `pnpm measure:viewports --runs=3`: diez recorridos completados hasta su pantalla de cierre, 120
+  pantallas por pasada medidas **con los desplegables cerrados y abiertos**, sin desbordamiento
+  horizontal, objetivo táctil mínimo de 44 px y **ninguna pantalla de acción se desplaza** en
+  ninguno de los cinco tamaños objetivo ni en ninguno de los dos estados. Idéntico en tres pasadas.
+  El arnés falla con código de salida 1 si la regla se rompe, si un recorrido no llega al final o
+  si alguna operación se bloquea. Salida literal en `docs/medicion_tamanos_m5_salida.md` y
+  procedimiento en `docs/medicion_tamanos_m5.md`.
 - El mismo arnés comprueba, con pulsaciones de teclado reales enviadas por el protocolo de
   DevTools, que el atajo numérico toma la decisión, que la banda de escena es decorativa y muda
   para la tecnología de apoyo, que con el sonido silenciado el equivalente textual se sigue
   anunciando en una región viva persistente, y que con «Reducir movimiento» la entrada de la banda
-  queda anulada. Las cinco comprobaciones pasan y su fallo detiene el arnés.
+  queda anulada. Comprueba además, en 360 × 640, que los tres bloques con desplazamiento interno
+  tienen nombre accesible en el árbol de accesibilidad, se alcanzan tabulando, muestran foco
+  visible y se desplazan con las flechas. Las diecisiete comprobaciones pasan.
 
-  Automatizarlas encontró un defecto que la verificación manual de M4 no vio: **el atajo numérico
-  no funcionaba al abrir un caso por enlace directo**, porque el detector de teclas estaba en `#app`
-  y el foco recién cargada la página está en `body`. Se comprobaba siempre después de haber hecho
-  clic en algo, y así parecía funcionar. Corregido.
+### Tres defectos que encontró la automatización
+
+Ninguno lo había visto la verificación manual.
+
+1. **El atajo numérico no funcionaba al abrir un caso por enlace directo**, porque el detector de
+   teclas estaba en `#app` y el foco recién cargada la página está en `body`. Se comprobaba siempre
+   después de haber hecho clic en algo, y así parecía funcionar.
+2. **Abrir el razonamiento desplazaba la página** entre 14 y 85 px según la pantalla. La causa no
+   era la altura elegida sino la estructura: `<details>` envuelve su contenido en una caja propia
+   que no es un elemento flexible, de modo que el panel interior nunca podía encoger para caber.
+   Sustituido por un botón con `aria-expanded` y una región asociada.
+3. **El propio arnés no llegaba al final del tutorial**: elegía siempre la primera opción, que
+   devuelve a la escena de observación, y giraba en vacío hasta agotar los pasos sin avisar.
 
 ### Lo que sigue siendo un compromiso
 
-En 360 × 640 la frase de justificación y la vista previa de la bitácora se desplazan **por dentro
-de su propio recuadro**. La pantalla no se mueve y ningún texto se ha encogido, pero hay que
-desplazar dentro del bloque para leer la frase completa. Es la solución honesta disponible sin
-tocar el tamaño del texto; conviene revisarla en el piloto de M10.
+En 360 × 640 los tres bloques de repaso —razonamiento, frase de justificación y vista previa de la
+bitácora— se desplazan **por dentro de su propio recuadro**. La pantalla no se mueve y ningún texto
+se ha encogido, pero hay que desplazar dentro del bloque para leerlos enteros. Los tres son
+alcanzables con el tabulador, tienen nombre propio, muestran foco visible y responden a las
+flechas, de modo que el compromiso no penaliza a quien navega con teclado. Conviene revisarlo en el
+piloto de M10.
 
 ## 8. Límites de esta parada
 

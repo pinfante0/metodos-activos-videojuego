@@ -1,7 +1,7 @@
 {
   "name": "el-aula-de-los-dos-minutos",
   "private": true,
-  "version": "0.0.0-m4",
+  "version": "0.0.0-m5",
   "type": "module",
   "packageManager": "pnpm@11.19.0",
   "scripts": {
