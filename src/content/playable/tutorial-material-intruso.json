@@ -132,7 +132,32 @@
       "introduction": "Experimentar antes de nombrar y representar, con la voz y el oído por delante, es el núcleo del concepto Kodály. Ir de un modelo breve a la exploración y a una forma propia con habla, cuerpo, voz e instrumentos es Orff-Schulwerk, elaborado con Gunild Keetman. Hacen trabajos distintos y ninguno se demuestra sacando un material.",
       "resourceIds": [],
       "nextSceneId": "t1-justification",
-      "consequenceIds": ["t1-principle-revealed"]
+      "consequenceIds": [
+        "t1-reveal-voice-rotate",
+        "t1-reveal-voice-decide",
+        "t1-reveal-body-rotate",
+        "t1-reveal-body-decide",
+        "t1-reveal-shared"
+      ],
+      "rules": [
+        {
+          "requiredTags": ["repair-voice-first", "revision-rotate"],
+          "consequenceId": "t1-reveal-voice-rotate"
+        },
+        {
+          "requiredTags": ["repair-voice-first", "revision-decide-first"],
+          "consequenceId": "t1-reveal-voice-decide"
+        },
+        {
+          "requiredTags": ["repair-body-explore", "revision-rotate"],
+          "consequenceId": "t1-reveal-body-rotate"
+        },
+        {
+          "requiredTags": ["repair-body-explore", "revision-decide-first"],
+          "consequenceId": "t1-reveal-body-decide"
+        }
+      ],
+      "fallbackConsequenceId": "t1-reveal-shared"
     },
     {
       "id": "t1-justification",
@@ -278,7 +303,7 @@
     },
     {
       "id": "t1-revision-decide-before-playing",
-      "label": "Acordar y mostrar la transformación con voz y cuerpo, donde todos tienen acceso, y elegir el medio solo al presentarla; quien toca interpreta la versión que le describen sus autores.",
+      "label": "Acordar y mostrar con voz y cuerpo qué se conserva y qué se cambia, donde todos tienen acceso, y elegir el medio solo al presentarlo; quien toca interpreta lo que le describen sus autores.",
       "principleIds": ["decide-where-access-is-equal", "strategic-support"],
       "consequenceId": "t1-revision-decide-outcome",
       "tags": ["defensible", "revision-decide-first"]
@@ -295,7 +320,7 @@
     {
       "id": "t1-incident-medium",
       "constraintFamily": "resources",
-      "reveal": "Al llegar el momento de llevar la fórmula a un medio, las tres láminas se ocupan en cuanto se nombran. Óscar organiza el turno, prueba cada versión antes que sus autores y acaba tocando la de casi todo el mundo. Mara dicta su transformación en voz alta y no llega a tocarla. Inés sigue el turno mirando las manos de quien tiene al lado, porque la entrada vuelve a ser solo el sonido de la lámina. Leo propone hacerla con percusión corporal y el grupo lo entiende como que le ha tocado esperar.",
+      "reveal": "Al llegar el momento de llevar la fórmula a un medio, las tres láminas se ocupan en cuanto se nombran. Óscar organiza el turno, prueba antes que nadie y acaba tocando lo que ha decidido casi todo el mundo. Mara dice en voz alta qué quiere hacer con la fórmula y no llega a tocarlo. Inés sigue el turno mirando las manos de quien tiene al lado, porque la entrada vuelve a ser solo el sonido de la lámina. Leo propone hacerla con percusión corporal y el grupo lo entiende como que le ha tocado esperar.",
       "revisionActionIds": ["t1-revision-rotate-medium", "t1-revision-decide-before-playing", "t1-revision-remove-instruments"]
     }
   ],
@@ -661,19 +686,19 @@
         "learning": "La fórmula suena en varias vías a la vez y se sostiene entre todas.",
         "agency": "Ocupar la lámina deja de depender de quién llegó antes.",
         "barrier": "Gestionar el turno puede comerse el tiempo musical.",
-        "evidence": "Cada versión llega a sonar en el medio que su autoría eligió."
+        "evidence": "Lo que cada pareja ha decidido hacer con la fórmula llega a sonar en el medio que eligió."
       },
       "feedback": {
         "supports": "Repartir el medio con un papel musical para cada vía devuelve el acceso sin bajar el objetivo.",
         "tension": "Una rotación puede volverse administración de turnos y dejar de escucharse.",
-        "possibleRepair": "Comprueba qué versiones cambian de verdad el resultado del grupo.",
+        "possibleRepair": "Comprueba qué decisiones cambian de verdad lo que suena.",
         "observableEvidence": "Mira si voz y cuerpo suenan como parte de la música y no como espera."
       },
       "participation": {
         "roles": [
           {"characterId": "ines", "role": "decides", "note": "La entrada se marca con un gesto visible además del sonido, y le llega su turno de marcarlo."},
           {"characterId": "leo", "role": "decides", "note": "La percusión corporal es uno de los papeles declarados y elige el suyo."},
-          {"characterId": "mara", "role": "decides", "note": "Su turno en las láminas está previsto, de modo que su transformación llega a sonar tal como la pensó."},
+          {"characterId": "mara", "role": "decides", "note": "Su turno en las láminas está previsto, de modo que lo que decide hacer con la fórmula llega a sonar tal como lo pensó."},
           {"characterId": "oscar", "role": "proposes", "note": "Cuando no le toca lámina, sostiene la fórmula y escucha: propone, ya no reparte."}
         ]
       },
@@ -696,10 +721,10 @@
       },
       "participation": {
         "roles": [
-          {"characterId": "ines", "role": "decides", "note": "La transformación se acuerda con voz y cuerpo, donde puede seguir lo que ocurre."},
-          {"characterId": "leo", "role": "decides", "note": "Su versión se decide en el medio donde todos tienen acceso y llega intacta a la presentación."},
+          {"characterId": "ines", "role": "decides", "note": "Qué se conserva y qué se cambia se acuerda con voz y cuerpo, donde puede seguir lo que ocurre."},
+          {"characterId": "leo", "role": "decides", "note": "Su decisión se toma en el medio donde todos tienen acceso y llega intacta a la presentación."},
           {"characterId": "mara", "role": "decides", "note": "Decide qué conserva y qué cambia antes de que el instrumento reparta nada."},
-          {"characterId": "oscar", "role": "performs", "note": "Interpreta la versión que le describen sus autores: su técnica sirve al arreglo sin decidir por él."}
+          {"characterId": "oscar", "role": "performs", "note": "Interpreta lo que le describen sus autores: su técnica sirve a la decisión del grupo sin sustituirla."}
         ]
       },
       "nextSceneId": "t1-reveal"
@@ -730,26 +755,126 @@
       "nextSceneId": "t1-revision"
     },
     {
-      "id": "t1-principle-revealed",
+      "id": "t1-reveal-voice-rotate",
       "rating": "coherent-defensible",
       "observables": {
-        "learning": "La fórmula se experimenta, se reconoce y se transforma; el símbolo llega cuando ya ha sonado.",
-        "agency": "Quien crea no depende de quién alcanzó primero el instrumento.",
-        "barrier": "Las condiciones siguen ahí: tres láminas y una entrada que hay que hacer visible.",
-        "evidence": "Una reproducción sin apoyo y una transformación que conserva un rasgo."
+        "learning": "El grupo reconoce la fórmula sin la pizarra y el símbolo llega cuando ya ha sonado.",
+        "agency": "Cada vía tiene un papel musical declarado y el turno de lámina circula.",
+        "barrier": "La mitad creativa del objetivo todavía no se ha trabajado.",
+        "evidence": "Una reproducción sin apoyo, y un turno donde cada cual puede llevar su decisión."
       },
       "feedback": {
-        "supports": "Has reparado la escena por su principio y no por su material.",
-        "tension": "Los mismos xilófonos y las mismas sílabas rítmicas pueden sostener una copia o una creación.",
+        "supports": "Empezaste por el reconocimiento y ahora el medio repartido le da sitio a la transformación que falta.",
+        "tension": "Reconocer no es transformar: la segunda mitad del objetivo sigue pendiente y necesita su consigna.",
+        "possibleRepair": "Pide en el siguiente turno conservar un rasgo y cambiar otro, y nómbralo antes de empezar.",
+        "observableEvidence": "Comprueba si lo que suena en cada turno conserva algo reconocible de la fórmula."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El turno de marcar la entrada con un gesto visible también le llega: decide cuándo entra el grupo."},
+          {"characterId": "leo", "role": "decides", "note": "La percusión corporal es uno de los papeles declarados y elige el suyo en lugar de esperar."},
+          {"characterId": "mara", "role": "decides", "note": "Aprendió la fórmula de oído y su turno de lámina está previsto: lo que decida llega a sonar."},
+          {"characterId": "oscar", "role": "proposes", "note": "Cuando no le toca lámina sostiene la fórmula y escucha: propone sin repartir los turnos."}
+        ]
+      },
+      "nextSceneId": "t1-justification"
+    },
+    {
+      "id": "t1-reveal-voice-decide",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo reconoce la fórmula sin la pizarra y ahora acuerda qué conservar y qué cambiar.",
+        "agency": "La decisión se toma con voz y cuerpo; el instrumento presenta, no reparte.",
+        "barrier": "La transformación acaba de entrar y todavía no se ha escuchado dos veces.",
+        "evidence": "Una reproducción sin apoyo y una decisión explicada antes de sonar."
+      },
+      "feedback": {
+        "supports": "Empezaste por el reconocimiento y la revisión es exactamente donde entra la transformación que faltaba.",
+        "tension": "Que la decisión se acuerde no garantiza todavía que lo que suene la conserve.",
+        "possibleRepair": "Pide que quien no la ideó nombre el rasgo conservado al escucharla.",
+        "observableEvidence": "Comprueba si lo que suena es lo que sus autores habían decidido."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Qué se conserva y qué se cambia se acuerda con voz y cuerpo, donde puede seguirlo y decidir."},
+          {"characterId": "leo", "role": "decides", "note": "Decide en el medio donde todos tienen acceso, y su decisión llega intacta a la presentación."},
+          {"characterId": "mara", "role": "decides", "note": "Su decisión se toma antes de que el instrumento reparta nada."},
+          {"characterId": "oscar", "role": "performs", "note": "Interpreta lo que le describen sus autores: su técnica sirve a la decisión del grupo sin sustituirla."}
+        ]
+      },
+      "nextSceneId": "t1-justification"
+    },
+    {
+      "id": "t1-reveal-body-rotate",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Del modelo breve salieron versiones propias y ahora todas encuentran un medio donde sonar.",
+        "agency": "Cada vía tiene un papel musical declarado y el turno de lámina circula.",
+        "barrier": "Nadie ha vuelto a la fórmula original tal cual, de modo que el reconocimiento sigue sin comprobarse.",
+        "evidence": "Versiones que conservan un rasgo, cada una en el medio que su autoría eligió."
+      },
+      "feedback": {
+        "supports": "Empezaste por la autoría y el turno repartido impide que el instrumento decida de quién es cada versión.",
+        "tension": "Transformar no prueba reconocer: falta escuchar la fórmula original sin apoyo.",
+        "possibleRepair": "Reserva un turno para la fórmula común antes de cerrar.",
+        "observableEvidence": "Comprueba quién la reproduce sin mirar la pizarra."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El turno de marcar la entrada con un gesto visible le llega, y decide cuándo entra su versión."},
+          {"characterId": "leo", "role": "decides", "note": "Su versión de percusión corporal es una vía más del turno, no la que se queda esperando."},
+          {"characterId": "mara", "role": "decides", "note": "Su turno de lámina está previsto: la versión que ideó llega a sonar tal como la pensó."},
+          {"characterId": "oscar", "role": "proposes", "note": "Cuando no le toca lámina sostiene la fórmula y escucha: propone sin repartir los turnos."}
+        ]
+      },
+      "nextSceneId": "t1-justification"
+    },
+    {
+      "id": "t1-reveal-body-decide",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Del modelo breve salieron versiones propias, acordadas donde todos tienen acceso.",
+        "agency": "La decisión se toma con voz y cuerpo; el instrumento presenta, no reparte.",
+        "barrier": "Nadie ha vuelto a la fórmula original tal cual, de modo que el reconocimiento sigue sin comprobarse.",
+        "evidence": "Una decisión explicada antes de sonar y una versión que conserva un rasgo."
+      },
+      "feedback": {
+        "supports": "Empezaste por la autoría y ahora la decisión no depende de quién alcanzó el instrumento.",
+        "tension": "Transformar no prueba reconocer: falta escuchar la fórmula original sin apoyo.",
+        "possibleRepair": "Vuelve una vez a la fórmula común y pide que la reproduzcan sin la pizarra.",
+        "observableEvidence": "Comprueba si lo que suena es lo que sus autores habían decidido y si conserva el rasgo."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Qué se conserva y qué se cambia se acuerda con voz y cuerpo, donde puede seguirlo y decidir."},
+          {"characterId": "leo", "role": "decides", "note": "Decide en el medio donde todos tienen acceso, y su decisión llega intacta a la presentación."},
+          {"characterId": "mara", "role": "decides", "note": "Su decisión se toma antes de que el instrumento reparta nada."},
+          {"characterId": "oscar", "role": "performs", "note": "Interpreta lo que le describen sus autores: su técnica sirve a la decisión del grupo sin sustituirla."}
+        ]
+      },
+      "nextSceneId": "t1-justification"
+    },
+    {
+      "id": "t1-reveal-shared",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Una escena se repara por el orden entre experiencia y símbolo, no por el objeto que se reparte.",
+        "agency": "Quien crea deja de depender de quién alcanzó primero el instrumento.",
+        "barrier": "Sin las decisiones previas, esta pantalla no puede decir qué mitad del objetivo se trabajó.",
+        "evidence": "La que se elija: reproducir sin apoyo, o conservar un rasgo al transformar."
+      },
+      "feedback": {
+        "supports": "Los mismos xilófonos y las mismas sílabas rítmicas pueden sostener una copia o una creación.",
+        "tension": "Has entrado por aquí sin las decisiones previas, así que el cierre habla del principio y no de tu clase.",
         "possibleRepair": "Cuando alguien llame «método» a un instrumento, pregunta qué hace el alumnado y qué decide.",
         "observableEvidence": "Comprueba si el aprendizaje sobreviviría al quitar el instrumento."
       },
       "participation": {
         "roles": [
-          {"characterId": "ines", "role": "decides", "note": "La entrada ya no depende de un solo canal, de modo que decide cuándo entra."},
-          {"characterId": "leo", "role": "decides"},
-          {"characterId": "mara", "role": "decides", "note": "Su forma de aprender, de oído, es una vía del diseño y no una excepción."},
-          {"characterId": "oscar", "role": "proposes", "note": "Su experiencia aporta modelos sin repartir los turnos del grupo."}
+          {"characterId": "ines", "role": "decides", "note": "Las dos revisiones defendibles le dejan decidir cuándo entra: una le da el turno de marcar la señal y la otra acuerda con voz y cuerpo."},
+          {"characterId": "leo", "role": "decides", "note": "En las dos, el cuerpo es una vía musical y no la sala de espera del instrumento."},
+          {"characterId": "mara", "role": "decides", "note": "En las dos, lo que decide hacer con la fórmula llega a sonar."},
+          {"characterId": "oscar", "role": "performs", "note": "Su turno de tocar existe en las dos; cuál de ellas le devuelve además la palabra depende de la que se elija."}
         ]
       },
       "nextSceneId": "t1-justification"
@@ -769,9 +894,9 @@
   ],
   "journalTemplate": {
     "objective": "Reconocer una fórmula rítmica de dos compases dentro de una canción conocida y transformarla conservando un rasgo.",
-    "first-decision": "Indicio elegido: {{action:t1-observation}}",
-    "maintained-decision": "Lo que hace falta para que un nombre explique la escena: {{action:t1-naming}}",
-    "revised-decision": "Reparé una variable ({{action:t1-repair}}), predije su efecto ({{action:t1-prediction}}) y tras el incidente revisé: {{action:t1-revision}}",
+    "first-decision": "Indicio: {{action:t1-observation}} · Lo que faltaba para poder llamar enfoque a la escena: {{action:t1-naming}} · Predicción: {{action:t1-prediction}}",
+    "maintained-decision": "Mantengo esta reparación: {{action:t1-repair}} La conservo porque el incidente cambió quién ocupaba el medio, no el orden entre experiencia y símbolo, que es lo que había devuelto el objetivo.",
+    "revised-decision": "Tras el incidente reviso quién ocupa el medio y qué hace el resto mientras tanto: {{action:t1-revision}}",
     "trigger": "Las tres láminas concentraron la transferencia: voz y cuerpo quedaron como turno de espera y la entrada volvió a depender solo del sonido.",
     "condition-risk": "{{grammar:conditionRisk}}",
     "adaptation": "{{grammar:adaptation}}",

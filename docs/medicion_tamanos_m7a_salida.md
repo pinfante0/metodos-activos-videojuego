@@ -7,8 +7,8 @@ El procedimiento y la interpretación están en `docs/comprobaciones_m6.md`.
 Pasadas ejecutadas: 3.
 Resultados idénticos en todas las pasadas: **sí**.
 
-- Recorridos declarados: 15, completados hasta su pantalla de cierre en 39 combinaciones de recorrido y tamaño.
-- Pantallas de recorrido medidas por pasada: 652, cada una con los desplegables cerrados y abiertos.
+- Recorridos declarados: 16, completados hasta su pantalla de cierre en 40 combinaciones de recorrido y tamaño.
+- Pantallas de recorrido medidas por pasada: 676, cada una con los desplegables cerrados y abiertos.
 - Páginas de referencia y estados difíciles: 19 rutas × 5 tamaños = 95 pantallas, medidas una vez.
 - Desbordamiento horizontal: ninguno.
 - Objetivo táctil mínimo: 44 px.

@@ -458,10 +458,12 @@ materiales antiguos.
 
 Estado: **en curso; puerta de salida no superada**. La primera entrega parcial ha escrito el
 **Tutorial 1, «El material intruso»** —reparar una variable, predecir su efecto y separar material,
-técnica y principio—, con reparto y participación declarados en sus diez resultados, un incidente de
-recursos que obliga a revisar, dos reparaciones y dos revisiones defendibles y cinco recorridos
-declarados. Faltan los casos 2, 3 y 4, y con ellos Dalcroze y Kodály comparados, Orff-Keetman con
-Willems y Martenot, y Suzuki. Véase `docs/contenido_m7a.md`.
+técnica y principio—, con reparto y participación declarados en sus catorce resultados, un incidente
+de recursos que obliga a revisar, dos reparaciones y dos revisiones defendibles, un cierre distinto
+por combinación de ambas y seis recorridos declarados que consumen todas sus acciones. Una auditoría
+posterior encontró cuatro bloqueos de coherencia entre ramas, ya corregidos y con regresión propia.
+Faltan los casos 2, 3 y 4, y con ellos Dalcroze y Kodály comparados, Orff-Keetman con Willems y
+Martenot, y Suzuki. Véase `docs/contenido_m7a.md`.
 
 ### M7B — Contenido contemporáneo y síntesis
 

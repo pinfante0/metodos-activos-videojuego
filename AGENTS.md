@@ -212,7 +212,7 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
   `#/caso/<slug>/<escena>`.
 - La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
-  los desplegables cerrados y abiertos, en los quince recorridos declarados y en las trece rutas de
+  los desplegables cerrados y abiertos, en los dieciséis recorridos declarados y en las trece rutas de
   prueba. Los cinco bloques que se desplazan por dentro son accesibles con teclado.
   `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
   algo se bloquea o si las pasadas no coinciden.

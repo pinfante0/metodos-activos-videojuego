@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import pilotData from "../src/content/playable/pilot-case.json";
 import tutorialData from "../src/content/playable/tutorial.json";
 import materialData from "../src/content/playable/tutorial-material-intruso.json";
+import walkthroughData from "../src/content/playable/walkthroughs.json";
 import { validateCaseDefinition } from "../src/domain/validation";
 import {
   buildJournalEntry,
@@ -128,6 +129,100 @@ describe("corte vertical dirigido por contenido", () => {
     expect(rating("t1-revision-decide-outcome")).toBe("coherent-defensible");
     expect(unit.pedagogy.avoidsUniversalWinner).toBe(true);
     expect(unit.approachIds).toEqual(["orff-keetman", "kodaly"]);
+  });
+
+  /*
+   * Los cuatro bloqueos de la auditoría del tutorial 1. Cada uno se cerró en el contenido y deja
+   * aquí su regresión: son defectos de coherencia entre ramas, que no se ven leyendo el archivo
+   * seguido y que reaparecen en cuanto se añade una rama nueva.
+   */
+  describe("tutorial 1 · coherencia entre ramas", () => {
+    const unit = parsed(materialData);
+    const revealScene = unit.scenes.find((item) => item.id === "t1-reveal");
+    if (revealScene?.kind !== "consequence") throw new Error("Falta la pantalla de revelación");
+
+    const reveal = (selectedActions: Record<string, string>) =>
+      consequenceForScene(unit, revealScene, { ...createGameSession(unit), selectedActions });
+
+    const REPAIRS = ["t1-repair-voice-first", "t1-repair-body-explore"] as const;
+    const REVISIONS = ["t1-revision-rotate-medium", "t1-revision-decide-before-playing"] as const;
+
+    it("cierra con una revelación distinta por cada combinación de reparación y revisión", () => {
+      const ids = REPAIRS.flatMap((repair) =>
+        REVISIONS.map((revision) => reveal({ "t1-repair": repair, "t1-revision": revision }).id),
+      );
+      expect(new Set(ids).size, ids.join(", ")).toBe(4);
+      // Ninguna revelación puede servir a las dos reparaciones: ahí se coló la afirmación de que
+      // la rama de voz había transformado algo que nunca llegó a pedirse.
+      const voice = new Set(REVISIONS.map((revision) => reveal({ "t1-repair": REPAIRS[0], "t1-revision": revision }).id));
+      const body = REVISIONS.map((revision) => reveal({ "t1-repair": REPAIRS[1], "t1-revision": revision }).id);
+      for (const id of body) expect(voice.has(id), id).toBe(false);
+    });
+
+    it("no inventa una rama cuando se entra por enlace directo sin decisiones", () => {
+      expect(reveal({}).id).toBe("t1-reveal-shared");
+      expect(reveal({ "t1-revision": REVISIONS[0] }).id).toBe("t1-reveal-shared");
+    });
+
+    it("declara el reparto completo en las cinco revelaciones", () => {
+      for (const consequence of unit.consequences.filter((item) => item.id.startsWith("t1-reveal-"))) {
+        expect(consequence.participation?.roles.map((entry) => entry.characterId).sort(), consequence.id)
+          .toEqual([...unit.characterIds].sort());
+      }
+    });
+
+    it("nombra en cada rama la mitad del objetivo que le queda pendiente", () => {
+      const tension = (id: string) =>
+        unit.consequences.find((item) => item.id === id)?.feedback.tension.toLowerCase() ?? "";
+      // La rama de voz reconoce y deja pendiente transformar; la de cuerpo, al revés.
+      expect(tension("t1-reveal-voice-rotate")).toContain("transformar");
+      expect(tension("t1-reveal-voice-decide")).toContain("conserve");
+      expect(tension("t1-reveal-body-rotate")).toContain("reconocer");
+      expect(tension("t1-reveal-body-decide")).toContain("reconocer");
+    });
+
+    it("declara un recorrido para cada acción del tutorial 1", () => {
+      const declared = new Set(
+        walkthroughData.walkthroughs
+          .filter((walk) => walk.caseSlug === unit.slug)
+          .flatMap((walk) => walk.actions ?? []),
+      );
+      // La cobertura declarada es el contrato de M6: una acción sin recorrido es texto pedagógico
+      // que ninguna comprobación recorre, ni en la sesión pura ni en el navegador.
+      for (const action of unit.actions) {
+        expect(declared.has(action.id), `${action.id} no lo consume ningún recorrido declarado`).toBe(true);
+      }
+    });
+
+    it("guarda en la bitácora una decisión mantenida con su razón, distinta de la revisada", () => {
+      const journalFor = (repair: string, revision: string) =>
+        buildJournalEntry(
+          unit,
+          {
+            ...createGameSession(unit),
+            selectedActions: {
+              "t1-observation": "t1-clue-symbol-first",
+              "t1-naming": "t1-name-process-authorship",
+              "t1-repair": repair,
+              "t1-prediction": "t1-predict-reproduce",
+              "t1-revision": revision,
+            },
+          },
+          "2026-08-15T00:00:00.000Z",
+          "00000000-0000-4000-8000-000000000000",
+        );
+      const label = (id: string) => unit.actions.find((item) => item.id === id)?.label ?? "";
+
+      for (const repair of REPAIRS) {
+        const entry = journalFor(repair, REVISIONS[0]);
+        // La decisión mantenida es la reparación que sobrevive al incidente, no la lectura previa.
+        expect(entry.maintainedDecision).toContain(label(repair));
+        expect(entry.maintainedDecision).toContain("porque");
+        expect(entry.maintainedDecision).not.toBe(entry.revisedDecision);
+        expect(entry.revisedDecision).toContain(label(REVISIONS[0]));
+        expect(entry.revisedDecision).not.toContain(label(repair));
+      }
+    });
   });
 
   it("permite cambiar textos y títulos del contenido sin modificar el motor", () => {

@@ -42,7 +42,7 @@
           "t1-feedback-symbol-first",
           "t1-outcome-voice-matched",
           "t1-revision-rotate-outcome",
-          "t1-principle-revealed"
+          "t1-reveal-voice-rotate"
         ],
         "incidentIds": ["t1-incident-medium"],
         "completes": true
@@ -61,7 +61,11 @@
         "t1-revision-decide-before-playing"
       ],
       "expect": {
-        "consequenceIds": ["t1-outcome-body-matched", "t1-revision-decide-outcome"],
+        "consequenceIds": [
+          "t1-outcome-body-matched",
+          "t1-revision-decide-outcome",
+          "t1-reveal-body-decide"
+        ],
         "incidentIds": ["t1-incident-medium"],
         "completes": true
       }
@@ -79,7 +83,11 @@
         "t1-revision-decide-before-playing"
       ],
       "expect": {
-        "consequenceIds": ["t1-outcome-voice-mismatch", "t1-revision-decide-outcome"],
+        "consequenceIds": [
+          "t1-outcome-voice-mismatch",
+          "t1-revision-decide-outcome",
+          "t1-reveal-voice-decide"
+        ],
         "incidentIds": ["t1-incident-medium"],
         "completes": true
       }
@@ -101,7 +109,8 @@
         "consequenceIds": [
           "t1-outcome-engagement",
           "t1-revision-remove-outcome",
-          "t1-revision-rotate-outcome"
+          "t1-revision-rotate-outcome",
+          "t1-reveal-body-rotate"
         ],
         "incidentIds": ["t1-incident-medium"],
         "completes": true
@@ -130,7 +139,33 @@
           "t1-feedback-repair-material",
           "t1-outcome-material",
           "t1-outcome-body-mismatch",
-          "t1-revision-rotate-outcome"
+          "t1-revision-rotate-outcome",
+          "t1-reveal-body-rotate"
+        ],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-1-indicios-alternativos",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · los otros dos reintentos",
+      "purpose": "Los dos indicios falsos que ningún otro recorrido consume: el repertorio conocido, que no es el defecto de la escena, y cambiar de instrumento, que repite el mismo movimiento que ya hizo la docente. Sin esta ruta, sus devoluciones no se recorrerían nunca.",
+      "actions": [
+        "t1-clue-known-song",
+        "t1-clue-symbol-first",
+        "t1-name-swap-percussion",
+        "t1-name-process-authorship",
+        "t1-repair-voice-first",
+        "t1-predict-reproduce",
+        "t1-revision-rotate-medium"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "t1-feedback-known-song",
+          "t1-feedback-swap-percussion",
+          "t1-outcome-voice-matched",
+          "t1-reveal-voice-rotate"
         ],
         "incidentIds": ["t1-incident-medium"],
         "completes": true

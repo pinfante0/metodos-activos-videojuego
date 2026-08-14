@@ -98,21 +98,26 @@ intacto y con una vía menos. Devuelve a la misma pantalla en lugar de dejar pas
 
 `t1-incident-medium`, familia **recursos**. Cambia una condición que el diseño daba por resuelta:
 al llegar el momento de llevar la fórmula a un medio, las tres láminas se ocupan en cuanto se
-nombran, Óscar acaba organizando el turno y tocando la versión de casi todo el mundo, Mara dicta la
-suya sin llegar a tocarla, la entrada vuelve a ser sólo sonora e Inés sigue el turno mirando las
-manos de al lado, y la propuesta de percusión corporal de Leo se lee como que le ha tocado esperar.
+nombran, Óscar acaba organizando el turno y tocando lo que ha decidido casi todo el mundo, Mara dice
+en voz alta qué quiere hacer con la fórmula sin llegar a tocarlo, la entrada vuelve a ser sólo sonora
+e Inés sigue el turno mirando las manos de al lado, y la propuesta de percusión corporal de Leo se
+lee como que le ha tocado esperar.
 
 Revela una relación de grupo y una escasez, **no un fallo personal ni una discapacidad como giro
 sorpresa**. Aparece después de cualquiera de las cinco pruebas que no sean un cambio de material, de
 modo que ninguna rama defendible se queda sin revisar.
 
+Su relato es **el mismo para las dos reparaciones defendibles**, y por eso no da por supuesto que
+existan versiones propias: en la rama de voz todavía no las hay. Habla de lo que cada persona ha
+decidido hacer con la fórmula, que en una rama es reproducirla y en la otra transformarla.
+
 ### 1.5. Reparto y participación
 
 El caso declara cuatro personas del reparto compartido —Inés, Leo, Mara y Óscar—, elegidas porque
 son aquellas cuya participación cambia cuando el símbolo y el instrumento se adelantan a la
-experiencia. Los diez resultados que el juego presenta como consecuencia de un diseño o de una
-revisión declaran el papel de las cuatro; es lo que exige el contrato ampliado en M6 y sin lo cual
-el caso no valida.
+experiencia. Los **catorce** resultados que el juego presenta como consecuencia de un diseño o de una
+revisión —seis pruebas, tres revisiones y cinco cierres— declaran el papel de las cuatro; es lo que
+exige el contrato ampliado en M6 y sin lo cual el caso no valida.
 
 Dos observaciones que el dato hace visibles y que ninguna imagen podría inventar:
 
@@ -127,7 +132,7 @@ Dos observaciones que el dato hace visibles y que ninguna imagen podría inventa
 
 ### 1.6. Recorridos declarados
 
-Cinco recorridos nuevos en `src/content/playable/walkthroughs.json`, uno por rama que merece
+Seis recorridos nuevos en `src/content/playable/walkthroughs.json`, uno por rama que merece
 comprobarse. Los ejecutan las pruebas sobre la sesión pura y el arnés sobre Chrome real, desde una
 sola fuente.
 
@@ -137,21 +142,85 @@ sola fuente.
 | `tutorial-1-cuerpo-acertada` | La segunda reparación defendible y la segunda revisión defendible. |
 | `tutorial-1-prediccion-cruzada` | Predicción que habla de algo que ese cambio no hacía posible. |
 | `tutorial-1-prediccion-vaga` | Predicción que se cumple siempre, más la revisión que retira el material y devuelve a la misma escena. |
-| `tutorial-1-material-y-reintento` | Los dos reintentos de las pantallas de observación, el resultado de reserva que devuelve a reparar y una segunda prueba. |
+| `tutorial-1-material-y-reintento` | Dos reintentos, el resultado de reserva que devuelve a reparar y una segunda prueba. |
+| `tutorial-1-indicios-alternativos` | Los otros dos indicios falsos: el repertorio conocido y el cambio de instrumento. |
 
-Entre los cinco atraviesan los seis resultados de la prueba, los tres de la revisión, el incidente,
-la revelación, la justificación y la bitácora.
+Entre los seis atraviesan **todas las acciones del caso**, los seis resultados de la prueba, los
+tres de la revisión, los cuatro cierres por rama, el incidente, la justificación y la bitácora. Una
+prueba lo exige: una acción sin recorrido declarado es texto pedagógico que ninguna comprobación
+recorre.
+
+### 1.7. El cierre depende de la rama
+
+La pantalla de revelación nombra las dos tradiciones por su función —experimentar antes de nombrar y
+representar, con la voz y el oído por delante, en el concepto Kodály; ir de un modelo breve a la
+exploración y a una forma propia, con habla, cuerpo, voz e instrumentos, en Orff-Schulwerk elaborado
+con Gunild Keetman— y esa parte es la misma siempre, porque es cierta siempre.
+
+Lo que **no** puede ser el mismo es lo que el cierre afirma de la clase. Cada reparación defendible
+trabaja una mitad del objetivo y deja la otra pendiente, y cada revisión reparte la participación de
+una manera distinta. Por eso el cierre se resuelve por las mismas reglas deterministas que el resto
+del caso, con una consecuencia por combinación de reparación y revisión:
+
+| Rama | Qué afirma el cierre | Qué deja pendiente |
+| --- | --- | --- |
+| Voz + rotación | Reconocen la fórmula sin la pizarra y el turno de medio circula. | Transformar: la consigna que falta, con sitio ya reservado en el turno. |
+| Voz + decidir antes de tocar | Reconocen la fórmula y la revisión es donde entra la transformación. | Que lo que suene conserve de verdad lo acordado. |
+| Cuerpo + rotación | Hay versiones propias y todas encuentran medio donde sonar. | Reconocer la fórmula original sin apoyo. |
+| Cuerpo + decidir antes de tocar | Las versiones se acuerdan donde el acceso es equivalente. | Reconocer la fórmula original sin apoyo. |
+
+La quinta consecuencia es la de reserva, y sólo se alcanza entrando por enlace directo a la pantalla
+sin decisiones previas. Dice exactamente eso: que habla del principio y no de la clase de quien
+entra. **Declarar los huecos en lugar de inventarlos** es la misma regla que ya seguía la
+justificación del caso 6 abierta por el medio.
+
+Cada uno de los cinco cierres declara además su propio reparto, porque quién decide al final del
+recorrido depende de la revisión elegida y no puede darse por sabido.
 
 ---
 
-## 2. Comprobaciones de esta entrega
+## 2. Qué corrigió la auditoría de la entrega
 
-- **`pnpm check`**: 197 pruebas en once archivos, compilación con TypeScript estricto y paquete
-  PLATEA regenerado. Las tres pruebas nuevas de `tests/playable-content.test.ts` fijan la
-  combinación reparación × predicción, el resultado de reserva y que las dos reparaciones y las dos
-  revisiones defendibles conservan su estado sin ganadora.
-- **`pnpm measure:viewports --runs=3`**: 15 recorridos declarados completados hasta su pantalla de
-  cierre en 39 combinaciones de recorrido y tamaño, 652 pantallas de recorrido por pasada medidas
+La auditoría del primer commit encontró cuatro bloqueos. Los cuatro eran de la misma familia:
+**afirmaciones que valían para una rama y se estaban haciendo en todas**. Ninguno se ve leyendo el
+archivo seguido, y por eso los cuatro dejan una regresión.
+
+1. **La transformación desaparecía en la rama de voz.** El resultado de la prueba decía con razón
+   que reproducir no es transformar, pero el incidente hablaba después de «cada versión» y de «su
+   transformación», y el cierre daba el objetivo entero por trabajado. La reparación por la voz
+   nunca había pedido transformar nada. Ahora el incidente habla de lo que cada persona ha decidido
+   hacer con la fórmula, la revisión que acuerda qué se conserva y qué se cambia es el lugar donde
+   esa mitad entra, y el cierre de la rama de voz lo dice: reconocimiento comprobado, transformación
+   pendiente y con sitio.
+2. **La revelación final era una sola para todas las ramas, con un solo reparto.** Ahora son cinco,
+   resueltas por regla, con el reparto propio de cada combinación. La regresión comprueba que
+   ninguna revelación puede servir a las dos reparaciones a la vez; si alguien lo intentara, el
+   analizador del motor declararía además inalcanzable la que quedara tapada.
+3. **`t1-clue-known-song` y `t1-name-swap-percussion` no los recorría nadie.** Eran las dos
+   devoluciones que explican que el repertorio conocido no es el defecto de la escena y que cambiar
+   de instrumento repite el movimiento que ya hizo la docente: justo las dos que más falta hacen y
+   las únicas sin comprobar. Un recorrido nuevo las consume y una prueba exige que **toda** acción
+   de la unidad tenga recorrido declarado.
+4. **La bitácora no guardaba una decisión mantenida.** Guardaba la lectura previa en su lugar, y la
+   revisada mezclaba reparación, predicción y revisión en una línea. Ahora la decisión mantenida es
+   la reparación que sobrevive al incidente **con su razón** —el incidente cambió quién ocupaba el
+   medio, no el orden entre experiencia y símbolo—, la revisada es la revisión, y la predicción
+   viaja con la primera lectura.
+
+Las cuatro regresiones se comprobaron rompiendo el contenido a propósito: sin el recorrido nuevo,
+sin la razón en la bitácora y con una revelación compartida entre ramas, cada prueba falla con su
+mensaje antes de que nadie tenga que darse cuenta leyendo.
+
+---
+
+## 3. Comprobaciones de esta entrega
+
+- **`pnpm check`**: 208 pruebas en once archivos, compilación con TypeScript estricto y paquete
+  PLATEA regenerado. Las nueve pruebas nuevas de `tests/playable-content.test.ts` fijan la
+  combinación reparación × predicción, el resultado de reserva, que las dos reparaciones y las dos
+  revisiones defendibles conservan su estado sin ganadora, y las cuatro regresiones de la auditoría.
+- **`pnpm measure:viewports --runs=3`**: 16 recorridos declarados completados hasta su pantalla de
+  cierre en 40 combinaciones de recorrido y tamaño, 676 pantallas de recorrido por pasada medidas
   con los desplegables cerrados y abiertos, más 19 rutas de referencia y estados difíciles en los
   cinco tamaños. **Ningún desbordamiento horizontal, ninguna pantalla de acción que se desplace y
   objetivo táctil mínimo de 44 px.** Resultados idénticos en las tres pasadas. Salida literal en
@@ -160,7 +229,7 @@ la revelación, la justificación y la bitácora.
 - Las salvaguardas del reparto, el análisis exhaustivo del motor y la coherencia de la campaña se
   comprueban solas sobre el contenido nuevo: las tres suites recorren todos los casos publicados.
 
-### 2.1. Lo que encontró la medición
+### 3.1. Lo que encontró la medición
 
 **Cuatro caracteres de más en el pie rompieron la regla 6 en todas las pantallas de acción.** Al
 cambiar la etiqueta del pie de «M6» a «M7A en curso», el texto pasaba a ocupar una línea más en
@@ -175,7 +244,7 @@ o del pie: son las dos únicas piezas que restan altura a todas las pantallas de
 
 ---
 
-## 3. Qué **no** contiene esta entrega
+## 4. Qué **no** contiene esta entrega
 
 Ninguna de estas ausencias es un olvido; son el alcance que la entrega no tenía.
 
@@ -188,7 +257,7 @@ Ninguna de estas ausencias es un olvido; son el alcance que la entrega no tenía
   trazada de M5; todo lo audible sigue sintetizado y siguen siendo seis señales.
 - **M7A no está completa** y su puerta de salida no se ha superado.
 
-## 4. Límites abiertos que quien continúe no debe dar por resueltos
+## 5. Límites abiertos que quien continúe no debe dar por resueltos
 
 - **Los siete minutos de la unidad siguen siendo una hipótesis de diseño.** El tutorial tiene diez
   escenas y, en un recorrido sin reintentos, catorce pantallas contando las de retroalimentación.
@@ -200,5 +269,11 @@ Ninguna de estas ausencias es un olvido; son el alcance que la entrega no tenía
 - **El reparto de este caso son cuatro personas y el del caso 6, seis.** Las unidades que faltan
   deberán decidir su reparto por lo que la escena hace visible, no por completar la lista: cada
   persona declarada obliga a escribir su papel en todos los resultados del caso.
+- **La cobertura declarada completa sólo se exige, por ahora, a esta unidad.** El tutorial 0, el
+  caso piloto y el banco de mecánicas tienen cinco acciones que ningún recorrido consume:
+  `observe-choice` y `repair-more-colours`; `brief-instruments-only` y
+  `revision-dictate-equal-parts`; y `probe-action-single-form`. Son contenido de M4 y M6 y quedan
+  fuera de esta corrección, pero extender la regla a los tres casos es trabajo pequeño y conviene
+  hacerlo antes de que la campaña crezca.
 - **La ruta presencial ya tiene sus tres tramos con contenido.** Sus tiempos siguen sin medirse, que
   es el encargo de M7C.
