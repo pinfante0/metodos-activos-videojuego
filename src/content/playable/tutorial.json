@@ -273,8 +273,8 @@
   "completion": {
     "eyebrow": "Tutorial completado",
     "title": "Ya distingues actividad de evidencia",
-    "body": "Ahora aplicarás el mismo lenguaje a un caso con tres decisiones, una prueba, un incidente y una revisión.",
-    "nextLabel": "Continuar al caso completo",
-    "nextRoute": "#/caso/el-arreglo-que-no-escucha-a-todos"
+    "body": "En el siguiente tutorial repararás una variable, predecirás su efecto y comprobarás por qué un material no equivale a un enfoque.",
+    "nextLabel": "Continuar al tutorial 1",
+    "nextRoute": "#/caso/el-material-intruso"
   }
 }

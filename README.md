@@ -50,15 +50,25 @@ condición previa para que existan personajes: cada resultado de diseño o de re
 papel permite a cada persona del aula, y tres salvaguardas de M2 impiden que alguien se convierta en
 la barrera permanente de un caso o quede reducido a ejecutar.
 
-**Sigue sin haber arte definitivo ni personajes dibujados** —eso es M8— y siete de las nueve unidades
-siguen sin contenido: son M7A y M7B.
+**Sigue sin haber arte definitivo ni personajes dibujados** —eso es M8—: la producción audiovisual
+no ha empezado.
 
 - Cierre de la fase y encargos a M7 y M8: `docs/sistemas_centrales_m6.md`.
 - Qué demuestra cada comprobación: `docs/comprobaciones_m6.md`.
 - Campaña y reparto compartido: `src/content/campaign/`.
 - Recorridos declarados: `src/content/playable/walkthroughs.json`.
 - Medición de los cinco tamaños objetivo: `pnpm measure:viewports`. Requiere Chrome o Edge
-  instalados; su salida verificada está en `docs/medicion_tamanos_m6_salida.md`.
+  instalados; su salida verificada de M6 está en `docs/medicion_tamanos_m6_salida.md`.
+
+M7A está **en curso**. Su primera entrega parcial escribe el Tutorial 1, «El material intruso»:
+reparar una variable, predecir su efecto y comprobar que un material o una técnica aislada no son un
+enfoque. Con él son tres de las nueve unidades con contenido, y la ruta presencial tiene ya sus tres
+tramos jugables. Faltan los casos 2, 3 y 4 —Dalcroze y Kodály comparados, Orff-Keetman con Willems y
+Martenot, y Suzuki— y todo M7B.
+
+- Registro de la fase, decisiones y límites: `docs/contenido_m7a.md`.
+- Contenido de la unidad: `src/content/playable/tutorial-material-intruso.json`.
+- Medición verificada de esta entrega: `docs/medicion_tamanos_m7a_salida.md`.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

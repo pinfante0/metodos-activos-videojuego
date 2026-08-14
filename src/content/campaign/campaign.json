@@ -25,8 +25,8 @@
       "operation": "Reparar una variable y predecir.",
       "minutes": 7,
       "approachIds": ["orff-keetman", "kodaly"],
-      "caseSlug": null,
-      "status": "planned"
+      "caseSlug": "el-material-intruso",
+      "status": "playable"
     },
     {
       "id": "caso-2",

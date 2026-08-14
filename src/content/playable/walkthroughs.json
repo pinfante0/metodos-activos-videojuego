@@ -25,6 +25,118 @@
       }
     },
     {
+      "id": "tutorial-1-voz-acertada",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · reparación por la voz y predicción acertada",
+      "purpose": "La rama en la que la predicción corresponde a lo que el cambio hace observable, con el incidente del medio escaso y la revisión por rotación. Atraviesa todas las pantallas nuevas de la unidad.",
+      "actions": [
+        "t1-clue-symbol-first",
+        "t1-name-process-authorship",
+        "t1-repair-voice-first",
+        "t1-predict-reproduce",
+        "t1-revision-rotate-medium"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": [
+          "t1-feedback-symbol-first",
+          "t1-outcome-voice-matched",
+          "t1-revision-rotate-outcome",
+          "t1-principle-revealed"
+        ],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-1-cuerpo-acertada",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · reparación por el cuerpo y predicción acertada",
+      "purpose": "La segunda reparación defendible, con otra prioridad: autoría antes que reconocimiento. Comprueba la segunda regla y la revisión que decide donde el acceso ya es equivalente.",
+      "actions": [
+        "t1-clue-symbol-first",
+        "t1-name-process-authorship",
+        "t1-repair-body-explore",
+        "t1-predict-variation",
+        "t1-revision-decide-before-playing"
+      ],
+      "expect": {
+        "consequenceIds": ["t1-outcome-body-matched", "t1-revision-decide-outcome"],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-1-prediccion-cruzada",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · predicción que no corresponde al cambio",
+      "purpose": "Reparación defendible y predicción que habla de algo que ese cambio no hacía posible. Es la rama que enseña para qué sirve predecir, y sólo existe porque el resultado combina las dos decisiones.",
+      "actions": [
+        "t1-clue-symbol-first",
+        "t1-name-process-authorship",
+        "t1-repair-voice-first",
+        "t1-predict-variation",
+        "t1-revision-decide-before-playing"
+      ],
+      "expect": {
+        "consequenceIds": ["t1-outcome-voice-mismatch", "t1-revision-decide-outcome"],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-1-prediccion-vaga",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · predicción que se cumple siempre",
+      "purpose": "Un diseño coherente con una predicción que no puede comprobarse, más la revisión que retira el material en lugar de repartirlo y devuelve a la misma escena.",
+      "actions": [
+        "t1-clue-symbol-first",
+        "t1-name-process-authorship",
+        "t1-repair-body-explore",
+        "t1-predict-engagement",
+        "t1-revision-remove-instruments",
+        "t1-revision-rotate-medium"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "t1-outcome-engagement",
+          "t1-revision-remove-outcome",
+          "t1-revision-rotate-outcome"
+        ],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
+      "id": "tutorial-1-material-y-reintento",
+      "caseSlug": "el-material-intruso",
+      "name": "Tutorial 1 · el material intruso y dos reintentos",
+      "purpose": "Los dos bucles de reintento de las pantallas de observación y el resultado de reserva, que devuelve a la reparación en lugar de dejar pasar un cambio de material. Al segundo intento, la predicción se queda corta por el otro lado.",
+      "actions": [
+        "t1-clue-three-xylophones",
+        "t1-clue-symbol-first",
+        "t1-name-instruments-suffice",
+        "t1-name-process-authorship",
+        "t1-repair-more-material",
+        "t1-predict-engagement",
+        "t1-repair-body-explore",
+        "t1-predict-reproduce",
+        "t1-revision-rotate-medium"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "t1-feedback-three-xylophones",
+          "t1-feedback-instruments-suffice",
+          "t1-feedback-repair-material",
+          "t1-outcome-material",
+          "t1-outcome-body-mismatch",
+          "t1-revision-rotate-outcome"
+        ],
+        "incidentIds": ["t1-incident-medium"],
+        "completes": true
+      }
+    },
+    {
       "id": "piloto-coherente",
       "caseSlug": "el-arreglo-que-no-escucha-a-todos",
       "name": "Caso 6 · montaje coherente",

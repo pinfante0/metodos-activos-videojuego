@@ -13,6 +13,20 @@ function clone(): any {
 
 const slugs = new Set(playableCases.map((item) => item.slug));
 
+/*
+ * Las unidades se localizan por su estado y no por su posición: cada entrega de M7 convierte una
+ * pendiente en jugable, y una prueba escrita contra `units[1]` deja de comprobar lo que dice su
+ * nombre en cuanto esa unidad se escribe.
+ */
+function indexOfFirst(status: "planned" | "playable"): number {
+  const index = campaignData.units.findIndex((unit) => unit.status === status);
+  if (index < 0) throw new Error(`La campaña ya no tiene ninguna unidad ${status}`);
+  return index;
+}
+
+const firstPlanned = indexOfFirst("planned");
+const playableUnitIds = campaignUnits.filter((unit) => unit.status === "playable").map((unit) => unit.id);
+
 function progressWith(completedCaseIds: string[]): Progress {
   return { ...createEmptyProgress("2026-08-14T00:00:00.000Z"), completedCaseIds };
 }
@@ -39,7 +53,7 @@ describe("contrato de campaña", () => {
 
   it("rechaza una unidad que se anuncia jugable sin contenido", () => {
     const variant = clone();
-    variant.units[1].status = "playable";
+    variant.units[firstPlanned].status = "playable";
     const result = validateCampaign(variant, slugs);
     expect(result.ok).toBe(false);
     if (result.ok) return;
@@ -48,7 +62,7 @@ describe("contrato de campaña", () => {
 
   it("rechaza una unidad pendiente que finge señalar un caso", () => {
     const variant = clone();
-    variant.units[1].caseSlug = "mucho-hacer-poco-aprender";
+    variant.units[firstPlanned].caseSlug = "mucho-hacer-poco-aprender";
     const result = validateCampaign(variant, slugs);
     expect(result.ok).toBe(false);
     if (result.ok) return;
@@ -97,8 +111,11 @@ describe("el progreso orienta y no bloquea", () => {
     const fresh = progressWith([]);
     expect(recommendedUnit(fresh)?.id).toBe("tutorial-0");
     const afterTutorial = progressWith(["mucho-hacer-poco-aprender"]);
-    expect(recommendedUnit(afterTutorial)?.id).toBe("caso-6");
-    expect(recommendedCaseId(afterTutorial)).toBe("el-arreglo-que-no-escucha-a-todos");
+    expect(recommendedUnit(afterTutorial)?.id).toBe("tutorial-1");
+    expect(recommendedCaseId(afterTutorial)).toBe("el-material-intruso");
+    const afterBothTutorials = progressWith(["mucho-hacer-poco-aprender", "el-material-intruso"]);
+    expect(recommendedUnit(afterBothTutorials)?.id).toBe("caso-6");
+    expect(recommendedCaseId(afterBothTutorials)).toBe("el-arreglo-que-no-escucha-a-todos");
   });
 
   it("no recomienda nada cuando ya se ha recorrido todo lo escrito", () => {
@@ -122,10 +139,13 @@ describe("el progreso orienta y no bloquea", () => {
 
   it("distingue completada, recomendada, disponible y pendiente", () => {
     const progress = progressWith(["mucho-hacer-poco-aprender"]);
-    expect(unitState(campaignUnits[0]!, progress)).toBe("completed");
-    expect(unitState(campaignUnits[6]!, progress)).toBe("recommended");
-    expect(unitState(campaignUnits[1]!, progress)).toBe("planned");
-    expect(isUnitCompleted(campaignUnits[0]!, progress)).toBe(true);
+    const [first, second, third] = playableUnitIds;
+    const unitOf = (id?: string) => campaignUnits.find((unit) => unit.id === id)!;
+    expect(unitState(unitOf(first), progress)).toBe("completed");
+    expect(unitState(unitOf(second), progress)).toBe("recommended");
+    expect(unitState(unitOf(third), progress)).toBe("available");
+    expect(unitState(campaignUnits[firstPlanned]!, progress)).toBe("planned");
+    expect(isUnitCompleted(unitOf(first), progress)).toBe(true);
   });
 
   it("cuenta los intentos por unidad sin convertirlos en puntuación", () => {

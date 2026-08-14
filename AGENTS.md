@@ -155,11 +155,17 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `docs/comprobaciones_m6.md`: qué demuestra cada comprobación y cómo se ejecuta. Sustituye, para el
   arnés de navegador, al procedimiento de `docs/medicion_tamanos_m5.md`, que se conserva como
   registro histórico.
+- `docs/contenido_m7a.md`: **registro en curso de M7A**. Recoge cada entrega parcial del lote
+  histórico, sus decisiones pedagógicas, sus comprobaciones y sus límites. No declara la fase
+  cerrada.
 - `scripts/measure-viewports.mjs`: arnés reproducible de los cinco tamaños objetivo, generalizado en
   M6 a los recorridos declarados y a las rutas de prueba. Se ejecuta con `pnpm measure:viewports` y
   requiere Chrome o Edge instalados. Debe conservarse.
 - `src/content/campaign/`: campaña y reparto compartido. Editar `campaign.json` es la única edición
   necesaria para reordenar o ampliar la secuencia.
+- `src/content/playable/tutorial-material-intruso.json`: primera unidad escrita en M7A. Tutorial 1,
+  «El material intruso»: reparar una variable, predecir su efecto y separar material, técnica y
+  principio.
 - `src/content/playable/walkthroughs.json`: recorridos declarados. Los ejecutan las pruebas sobre la
   sesión pura y el arnés sobre Chrome real, desde una sola fuente.
 - `README.md`: resumen breve del estado.
@@ -206,10 +212,16 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
   `#/caso/<slug>/<escena>`.
 - La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
-  los desplegables cerrados y abiertos, en los diez recorridos declarados y en las trece rutas de
+  los desplegables cerrados y abiertos, en los quince recorridos declarados y en las trece rutas de
   prueba. Los cinco bloques que se desplazan por dentro son accesibles con teclado.
   `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
   algo se bloquea o si las pasadas no coinciden.
+- **El encabezado y el pie restan altura a todas las pantallas.** Alargar su texto una línea rompió
+  la regla 6 en todas las pantallas de acción de los dos tamaños estrechos a la vez, y sólo lo vio la
+  medición. Antes de tocarlos, vuelva a ejecutar el arnés.
+- **M7A está en curso, no completada.** La primera entrega parcial escribe el Tutorial 1, «El
+  material intruso», que es hoy la tercera de las nueve unidades con contenido. Faltan los casos 2,
+  3 y 4 con Willems y Martenot en su peso complementario. Véase `docs/contenido_m7a.md`.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

@@ -1,8 +1,8 @@
 # Plan maestro del tercer videojuego
 
-Estado: **M6 completada el 14 de agosto de 2026; M7A es la fase siguiente**. Este documento fija las
+Estado: **M6 completada el 14 de agosto de 2026; M7A abierta y en curso**. Este documento fija las
 decisiones de alcance y la secuencia de trabajo. Los sistemas centrales funcionan de principio a fin
-con la identidad **Aula-laboratorio escénica** aplicada y con dos de las nueve unidades escritas;
+con la identidad **Aula-laboratorio escénica** aplicada y con tres de las nueve unidades escritas;
 no hay arte definitivo.
 
 El nombre de trabajo es **El aula de los dos minutos** y se conserva. La identidad visual quedó
@@ -455,6 +455,13 @@ Tareas:
 
 Puerta de salida: lote histórico validado técnica y pedagógicamente, sin recuperar errores de
 materiales antiguos.
+
+Estado: **en curso; puerta de salida no superada**. La primera entrega parcial ha escrito el
+**Tutorial 1, «El material intruso»** —reparar una variable, predecir su efecto y separar material,
+técnica y principio—, con reparto y participación declarados en sus diez resultados, un incidente de
+recursos que obliga a revisar, dos reparaciones y dos revisiones defendibles y cinco recorridos
+declarados. Faltan los casos 2, 3 y 4, y con ellos Dalcroze y Kodály comparados, Orff-Keetman con
+Willems y Martenot, y Suzuki. Véase `docs/contenido_m7a.md`.
 
 ### M7B — Contenido contemporáneo y síntesis
 

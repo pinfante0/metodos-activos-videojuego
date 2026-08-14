@@ -3,6 +3,7 @@ import castData from "./campaign/cast.json";
 import pilotCaseData from "./playable/pilot-case.json";
 import probeCaseData from "./playable/probe-case.json";
 import tutorialData from "./playable/tutorial.json";
+import tutorialMaterialData from "./playable/tutorial-material-intruso.json";
 import walkthroughData from "./playable/walkthroughs.json";
 import type {
   Campaign,
@@ -50,12 +51,17 @@ export function findCharacter(id: string): Character | undefined {
 }
 
 /**
+ * Los casos se declaran en el orden de la campaña; el banco de mecánicas va al final porque no
+ * pertenece a ella.
+ *
  * `banco-de-mecanicas` es contenido provisional de M6: ejercita el sistema completo —montador de
  * cuatro huecos, etiquetas excluidas, dos incidentes— y **no forma parte de la campaña**. Se llega
- * a él desde las rutas de prueba. M7A y M7B escriben el contenido real de las unidades pendientes.
+ * a él desde las rutas de prueba. M7A y M7B escriben el contenido real de las unidades pendientes;
+ * `el-material-intruso` es la primera de ellas.
  */
 export const playableCases: CaseDefinition[] = [
-  unwrap(validateCaseDefinition(tutorialData, new Set(), castIds), "Tutorial"),
+  unwrap(validateCaseDefinition(tutorialData, new Set(), castIds), "Tutorial 0"),
+  unwrap(validateCaseDefinition(tutorialMaterialData, new Set(), castIds), "Tutorial 1"),
   unwrap(validateCaseDefinition(pilotCaseData, new Set(), castIds), "Caso piloto"),
   unwrap(validateCaseDefinition(probeCaseData, new Set(), castIds), "Banco de mecánicas"),
 ];

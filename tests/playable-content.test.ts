@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import pilotData from "../src/content/playable/pilot-case.json";
 import tutorialData from "../src/content/playable/tutorial.json";
+import materialData from "../src/content/playable/tutorial-material-intruso.json";
 import { validateCaseDefinition } from "../src/domain/validation";
 import {
   buildJournalEntry,
@@ -73,6 +74,60 @@ describe("corte vertical dirigido por contenido", () => {
     expect(entry.revisedDecision).toContain("Reorganizar grupos");
     expect(entry.finalGrammar).not.toContain("{{");
     expect(entry.combinedApproachIds).toEqual(["orff-keetman", "green-pme"]);
+  });
+
+  /*
+   * La operación nueva del tutorial 1 es «reparar una variable y predecir su efecto». Predecir sólo
+   * enseña algo si el resultado depende de las dos decisiones a la vez: si dependiera sólo de la
+   * reparación, la predicción sería decorado y podría acertarse siempre.
+   */
+  it("hace que el resultado del tutorial 1 dependa de la reparación y de la predicción a la vez", () => {
+    const unit = parsed(materialData);
+    const scene = unit.scenes.find((item) => item.id === "t1-test");
+    if (scene?.kind !== "consequence") throw new Error("Falta la pantalla de prueba");
+    const outcome = (repair: string, prediction: string) => {
+      const session = {
+        ...createGameSession(unit),
+        selectedActions: { "t1-repair": repair, "t1-prediction": prediction },
+      };
+      return consequenceForScene(unit, scene, session).id;
+    };
+
+    // Misma reparación, dos predicciones: el resultado cambia.
+    expect(outcome("t1-repair-voice-first", "t1-predict-reproduce")).toBe("t1-outcome-voice-matched");
+    expect(outcome("t1-repair-voice-first", "t1-predict-variation")).toBe("t1-outcome-voice-mismatch");
+    // Misma predicción, dos reparaciones: también.
+    expect(outcome("t1-repair-body-explore", "t1-predict-reproduce")).toBe("t1-outcome-body-mismatch");
+    expect(outcome("t1-repair-body-explore", "t1-predict-variation")).toBe("t1-outcome-body-matched");
+    // Una predicción que se cumple siempre no distingue reparaciones, y eso es lo que enseña.
+    expect(outcome("t1-repair-voice-first", "t1-predict-engagement")).toBe("t1-outcome-engagement");
+    expect(outcome("t1-repair-body-explore", "t1-predict-engagement")).toBe("t1-outcome-engagement");
+  });
+
+  it("no deja pasar un cambio de material como si fuera una reparación", () => {
+    const unit = parsed(materialData);
+    const scene = unit.scenes.find((item) => item.id === "t1-test");
+    if (scene?.kind !== "consequence") throw new Error("Falta la pantalla de prueba");
+    const session = {
+      ...createGameSession(unit),
+      selectedActions: { "t1-repair": "t1-repair-more-material", "t1-prediction": "t1-predict-reproduce" },
+    };
+    const outcome = consequenceForScene(unit, scene, session);
+    expect(outcome.id).toBe("t1-outcome-material");
+    expect(outcome.rating).toBe("incoherent-with-brief");
+    // Devuelve a la reparación: no bloquea el progreso, pero tampoco da por reparada la escena.
+    expect(outcome.nextSceneId).toBe("t1-repair");
+  });
+
+  it("mantiene dos reparaciones y dos revisiones defendibles sin declarar una ganadora", () => {
+    const unit = parsed(materialData);
+    const rating = (id: string) => unit.consequences.find((item) => item.id === id)?.rating;
+    expect(rating("t1-outcome-voice-matched")).toBe("coherent-defensible");
+    expect(rating("t1-outcome-body-matched")).toBe("coherent-defensible");
+    expect(rating("t1-revision-rotate-outcome")).toBe("coherent-defensible");
+    expect(rating("t1-revision-decide-outcome")).toBe("coherent-defensible");
+    expect(unit.pedagogy.avoidsUniversalWinner).toBe(true);
+    expect(unit.approachIds).toEqual(["orff-keetman", "kodaly"]);
   });
 
   it("permite cambiar textos y títulos del contenido sin modificar el motor", () => {
