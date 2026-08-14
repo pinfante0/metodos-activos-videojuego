@@ -36,13 +36,23 @@ juego. Se conservan sin una sola modificación:
 
 - los contratos de M3: `src/domain/contracts/` y `src/domain/validation.ts`;
 - el contenido jugable de M4: `src/content/playable/tutorial.json` y `pilot-case.json`;
-- el intérprete: `src/app/game-session.ts`;
+- la máquina de escenas: `src/app/game-session.ts`;
 - la semántica pedagógica del corte: la función precede al nombre, no hay puntuación global, las
   consecuencias son posibilidades plausibles, existen dos revisiones defendibles y la bitácora
   conserva decisión mantenida, decisión revisada y alternativa.
 
-Ninguna dirección añade, quita ni reordena una decisión, una consecuencia o un texto pedagógico. No
-cambian lo que el juego afirma.
+**Lo que sí ha cambiado.** `docs/corte_vertical_m4.md` define el intérprete como el conjunto de
+`game-session.ts` y `render-app.ts`, de modo que decir «el intérprete sigue intacto» sería falso:
+`render-app.ts` sí se ha modificado. Los cambios están acotados y son los siguientes:
+
+- la dirección aplicada atraviesa `routeContent`, `gameView` y `consequenceScene` como parámetro;
+- se llama a `consequenceExtras` en la pantalla de consecuencia;
+- el panel de ajustes incorpora el selector de dirección y la ruta `#/direcciones` su vista;
+- se añaden la región viva del equivalente sonoro y el disparo de señales.
+
+Ninguno de esos cambios toca la resolución de escenas, de consecuencias, de la gramática ni de la
+bitácora, que siguen viviendo íntegramente en `game-session.ts`. Ninguna dirección añade, quita ni
+reordena una decisión, una consecuencia o un texto pedagógico. No cambian lo que el juego afirma.
 
 **Corrección respecto a la primera iteración.** La primera versión de este documento afirmaba que
 las direcciones no modifican espaciados. Era falso ya entonces —`laboratorio` alteraba el relleno
@@ -97,14 +107,26 @@ consecuencia se ve en la escena antes de leerse en el texto.
   literalmente la promesa de la biblia de juego: «veo a quién y qué favorece».
 - **Movimiento:** entradas cortas con desplazamiento y cambio de luz. El modo de movimiento reducido
   sustituye cada animación por un estado fijo etiquetado, nunca por la ausencia de información.
-- **Característica en la consecuencia:** una **banda de aula** con una figura abstracta y sin nombre
-  por personaje declarado en el caso, y un **cambio visible de participación** derivado del estado
-  cualitativo de la consecuencia: quién aparece decidiendo y quién ejecutando. Una franja marca la
-  **barrera del conjunto**, tomada del observable `barrier`. El pie de figura da el equivalente
-  textual completo y advierte que las figuras no representan a personas concretas ni un recuento.
-  Con movimiento reducido la banda aparece ya formada, sin retardo escalonado, y no pierde
-  información. Si un caso declara menos de tres personajes, la banda no se dibuja y queda sólo el
-  equivalente textual: una figura sola no representa un grupo.
+- **Característica en la consecuencia:** una **banda de escena** con una silueta continua que se
+  sale del encuadre por ambos lados, una franja de barrera y una **iluminación que cambia con el
+  estado cualitativo** de la consecuencia. Toda la información la llevan dos textos exactos del
+  contenido, `agency` y `barrier`, en el pie de figura. Con movimiento reducido la banda aparece ya
+  formada y no pierde información.
+
+  **Corrección del 14 de agosto de 2026.** La primera versión de esta banda dibujaba una figura por
+  personaje declarado y derivaba del estado cualitativo cuántas «decidían» y cuántas «ejecutaban»:
+  5, 3 o 1 de 6. Eso era un recuento visual y una distribución que el contenido no declara en
+  ninguna parte, es decir, exactamente el diagnóstico de personas que la biblia de juego prohíbe.
+  Que el pie de figura dijera «no es un recuento» no retiraba lo que la imagen afirmaba.
+
+  La banda es ahora una constante del código: no depende del estado cualitativo, ni de
+  `characterIds`, ni de ningún otro dato. Es deliberadamente **no enumerable** —la silueta se corta
+  en ambos bordes, de modo que el grupo continúa fuera del encuadre— y no distingue papeles. El
+  estado cualitativo sólo llega como atributo y sólo cambia la luz de la escena. Seis pruebas
+  estructurales, no de texto, lo sostienen: se comprueba sobre **todas** las consecuencias del
+  tutorial y del caso piloto que el esqueleto del marcado es único, que no existe ningún elemento
+  por persona, que el resultado es idéntico con 0, 1, 2, 3, 6 y 20 personajes declarados, y que
+  sólo se publican `agency` y `barrier`, nunca `learning` ni `evidence`.
 
 ### D3 · Consola de decisiones
 
@@ -155,8 +177,8 @@ compararlas sin ellos falsearía el resultado.
 | Texto secundario | 6,8:1 – 7,5:1 | 8,8:1 – 10,0:1 | 6,7:1 – 7,6:1 |
 | Borde de control | 5,1:1 – 5,6:1 | 4,7:1 – 5,3:1 | 3,4:1 – 3,9:1 |
 | Riesgo de lectura | bloque uniforme, poca jerarquía | fatiga en párrafos largos sobre fondo oscuro | densidad excesiva en 360 × 640 |
-| Desplazamiento añadido en la consecuencia, 360 × 640 | +92 px | +158 px | +222 px |
-| Desplazamiento añadido en la consecuencia, 1366 × 768 | +27 px | +108 px | +107 px |
+| Desplazamiento añadido en la consecuencia, 360 × 640 | +92 px | +143 px | +222 px |
+| Desplazamiento añadido en la consecuencia, 1366 × 768 | +27 px | +91 px | +107 px |
 | En 390 × 844, 768 × 1024 y 1440 × 900 | sin desplazamiento | sin desplazamiento | sin desplazamiento |
 
 Las tres superan con holgura el mínimo de 4,5:1 para texto y de 3:1 para bordes de control. La
@@ -170,6 +192,16 @@ se comprimió el panel en pantallas estrechas. Lo que queda no puede bajarse má
 cuerpo de texto, es decir, sin pagarlo en la propia legibilidad. Que la consecuencia de D3 cueste
 222 px en un móvil pequeño no es un defecto de implementación: es el precio de su tesis, tener las
 cuatro dimensiones y el historial siempre a la vista.
+
+**Este desplazamiento es aceptable como coste de comparación, no como resultado.** Estas tres
+maquetas existen para que se pueda decidir viendo, y para eso vale la pena aceptar que una pantalla
+se desplace. La dirección que se elija, en cambio, deberá **recuperar la regla de pantallas de
+acción sin desplazamiento en los cinco tamaños objetivo**, y no puede lograrlo encogiendo texto
+pedagógico significativo: ni el enunciado de la escena, ni las opciones, ni la retroalimentación, ni
+los observables. Las salidas legítimas son otras —repartir la consecuencia en dos momentos,
+convertir parte del panel en desplegable, reducir ornamento, revisar la composición base— y elegir
+entre ellas forma parte del tramo que aplique la dirección, junto con la reparación del
+desplazamiento que el corte gris ya arrastraba.
 
 ### Accesibilidad
 
@@ -217,14 +249,21 @@ Esta distinción es la que impide confundir una maqueta con una dirección termi
 | Dirección | Aplicado hoy sobre el corte | Descrito, no producido |
 | --- | --- | --- |
 | D1 Cuaderno | paleta, tipografía con serifa, regla de margen, casilla de decisión cuadrada, seis señales sonoras con equivalente textual, **viñeta de tinta y anotación al margen en la consecuencia** | viñetas figurativas de los personajes, marcas de corrección dibujadas a mano, encabezados manuscritos |
-| D2 Laboratorio | paleta oscura, banda de escenario iluminada, acento ámbar, entrada animada de retroalimentación e incidente, seis señales sonoras con equivalente textual, **banda de aula con figuras abstractas, reparto visible de decisiones y franja de barrera** | figuras con carácter propio y variantes de estado, código de color por puerta de entrada, iluminación que señala a quién afecta cada decisión, reacción escénica del incidente |
+| D2 Laboratorio | paleta oscura, banda de escenario iluminada, acento ámbar, entrada animada de retroalimentación e incidente, seis señales sonoras con equivalente textual, **banda de escena no enumerable con iluminación por estado y los observables de agencia y barrera** | figuras con carácter propio, código de color por puerta de entrada, iluminación que señala a quién afecta cada decisión, reacción escénica del incidente |
 | D3 Consola | paleta clara de alto contraste, etiquetas monoespaciadas, riel de estado, casilla rectangular, seis señales sonoras con equivalente textual, **diagrama de los cuatro observables e historial mínimo de decisiones** | riel permanente con las cinco preguntas estables, historial lateral persistente en todas las pantallas |
 
 La segunda iteración corrige el desequilibrio de la primera: las tres tienen ya una característica
 experiencial funcionando sobre la misma pantalla. Aun así **D2 sigue siendo la que más promete y
-menos enseña**: su banda es una maqueta de seis figuras geométricas, no el repertorio de personajes
-con carácter que sostiene su ventaja pedagógica y su coste. Al comparar conviene recordar que el
-salto entre lo que hoy se ve de D2 y lo que D2 sería está mucho menos financiado que en D1 y D3.
+menos enseña**, y la corrección de la banda lo ha acentuado: hoy es una silueta anónima e
+iluminada, no el repertorio de personajes con carácter que sostiene su ventaja pedagógica y su
+coste.
+
+Esa distancia es informativa, no un accidente de la maqueta. La ventaja prometida por D2 —«se ve a
+quién favorece una decisión»— exige exactamente aquello que el contenido actual no declara y que la
+biblia de juego prohíbe inventar. Para cumplirla de verdad, D2 no necesita sólo arte: necesitaría
+que los casos declarasen quién participa y cómo, lo que significa ampliar el contrato de contenido
+y escribir esa información caso por caso. **Ese coste no es de M8, es de M6 y M7**, y conviene
+tenerlo delante al decidir.
 
 ## 7. Cómo probarlas
 
@@ -262,6 +301,10 @@ Para eliminar por completo la capa de dirección basta con:
    a `consequenceExtras`;
 5. borrar `tests/directions.test.ts`.
 
+`scripts/measure-viewports.mjs` y `docs/medicion_tamanos_m5.md` no forman parte de la capa de
+dirección y conviene conservarlos: la medición de los cinco tamaños seguirá haciendo falta en M6, M8
+y M9, con dirección elegida o sin ella.
+
 `src/styles.css` no necesita revertirse: M5 sólo la tokenizó, y cada token conserva como valor de
 reserva exactamente el literal de M4, de modo que sin ninguna dirección declarada el resultado es el
 gris aprobado. Lo comprueba la medición del apartado 11: con «Gris M4» aplicado, el recorrido se
@@ -297,8 +340,13 @@ Después de que el profesor elija —y sólo entonces:
 - fijar identidad, personajes, composición, movimiento y lenguaje sonoro definitivos;
 - fijar el contrato de recursos y el registro de procedencia, licencia y atribución;
 - aplicar la dirección elegida al corte completo y retirar las otras dos;
+- **recuperar la regla de pantallas de acción sin desplazamiento en los cinco tamaños objetivo**,
+  sin encoger texto pedagógico significativo, y reparar de paso el desplazamiento que el corte gris
+  ya arrastraba en justificación y bitácora del caso;
 - verificar en navegador real subtítulos y equivalentes, movimiento reducido y legibilidad, y
-  medir de nuevo los cinco tamaños objetivo con la dirección elegida;
+  volver a ejecutar `pnpm measure:viewports` con la dirección elegida;
+- si la elegida es D2, decidir por separado si el contrato de contenido debe declarar participación
+  y reparto, porque sin eso su ventaja pedagógica no puede representarse sin inventarla;
 - decidir si el nombre de trabajo «El aula de los dos minutos» se conserva.
 
 ## 11. Comprobaciones de esta entrega
@@ -310,40 +358,41 @@ Después de que el profesor elija —y sólo entonces:
   en texto ni de 3:1 en borde de control.
 - `pnpm validate:content`: tutorial, caso piloto, sonda de M3 y contraejemplos siguen validando. La
   capa de dirección no ha tocado ningún dato.
-- `pnpm test`: **35 pruebas superadas** en cinco archivos, las 17 de M4 más 18 nuevas.
+- `pnpm test`: **39 pruebas superadas** en cinco archivos, las 17 de M4 más 22 nuevas.
   `tests/directions.test.ts` comprueba que hay exactamente tres candidatas sobre la línea base, que
   cada una declara los cinco criterios, que toda señal sonora tiene equivalente textual, que los
   estados de consecuencia siguen siendo tres, que cualquier valor desconocido devuelve el corte al
   gris sin tocar la clave de progreso y que `#/direcciones` no altera las rutas del contrato M3.
-  Sobre la característica experiencial comprueba además que el gris no añade nada, que D1 anota el
-  objetivo real del caso y marca la viñeta como decorativa, que D2 acompaña la banda de un
-  equivalente textual con la barrera y renuncia a dibujarla cuando el caso no representa un grupo,
-  que D3 muestra los cuatro observables y las decisiones ya tomadas, y que ninguna introduce
-  puntuación, recuento ni nombres de personajes.
+  Sobre la característica experiencial comprueba que el gris no añade nada, que D1 anota el objetivo
+  real del caso y marca la viñeta como decorativa, que D3 muestra los cuatro observables y las
+  decisiones ya tomadas, y que ninguna introduce puntuación ni nombres de personajes. Seis pruebas
+  estructurales protegen además la salvaguarda de representación de D2 sobre todas las consecuencias
+  de ambos casos, según se detalla en el apartado 3. Se ha comprobado que muerden: reintroducir la
+  regresión —una figura por personaje— hace fallar tres de ellas.
 - `pnpm build`: TypeScript estricto sin errores y salida Vite con base relativa.
 - `pnpm build:platea`: paquete portable regenerado sin incidencias. La hoja de estilos pasa a
   19,3 kB, 4,7 kB comprimidos, y el JavaScript no aumenta de forma apreciable.
 
 ### Medición en navegador real
 
-Chrome sin interfaz, conducido por el protocolo de DevTools sobre la compilación de producción. Se
-recorre el caso piloto completo con la misma ruta de decisiones en **cuatro direcciones × cinco
-tamaños objetivo = 20 combinaciones**, midiendo en cada pantalla el desbordamiento horizontal, el
-desplazamiento vertical y el menor lado de todo control interactivo visible. Los resultados son
-estables en tres pasadas consecutivas.
+`pnpm measure:viewports` recorre el caso piloto completo con la misma ruta de decisiones en **cuatro
+direcciones × cinco tamaños objetivo = 20 combinaciones**, sobre Chrome sin interfaz. El arnés vive
+en `scripts/measure-viewports.mjs`, comprueba que la dirección pedida está realmente aplicada antes
+de medir y falla si las pasadas no coinciden. El procedimiento, la salida literal de tres pasadas y
+cómo leerla están en `docs/medicion_tamanos_m5.md`.
 
 | Comprobación | Resultado |
 | --- | --- |
 | Desbordamiento horizontal | **Ninguno** en las 20 combinaciones. |
 | Objetivo táctil mínimo | **44 px** en las 20 combinaciones; el más ajustado es el enlace de marca del encabezado. |
-| Desplazamiento en pantallas de acción | Ver más abajo. |
+| Estabilidad | Idéntico en tres pasadas consecutivas. |
 
 Desplazamiento vertical máximo en pantalla de acción, en píxeles CSS:
 
 | Pantalla | Gris M4 | D1 Cuaderno | D2 Laboratorio | D3 Consola |
 | --- | ---: | ---: | ---: | ---: |
-| Primera consecuencia · 360 × 640 | 0 | 92 | 158 | 222 |
-| Primera consecuencia · 1366 × 768 | 0 | 27 | 108 | 107 |
+| Primera consecuencia · 360 × 640 | 0 | 92 | 143 | 222 |
+| Primera consecuencia · 1366 × 768 | 0 | 27 | 91 | 107 |
 | Justificación · 360 × 640 | 89 | 91 | 99 | 97 |
 | Bitácora del caso · 1366 × 768 | 81 | 87 | 96 | 87 |
 

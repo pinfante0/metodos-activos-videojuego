@@ -358,8 +358,9 @@ La fase se detuvo deliberadamente antes de elegir. Quedan pendientes las cuatro 
 elegir identidad, personajes, composición, movimiento y lenguaje sonoro; fijar el contrato de
 recursos y el registro de procedencia; aplicar la dirección elegida y retirar las otras dos; y
 verificar subtítulos, reducción de movimiento y legibilidad en navegador real sobre la elegida. No
-se ha producido ningún recurso definitivo y los contratos de M3, el contenido de M4 y el intérprete
-siguen intactos.
+se ha producido ningún recurso definitivo. Los contratos de M3, el contenido jugable de M4 y
+`game-session.ts` siguen intactos; `render-app.ts` sí se ha modificado de forma acotada para que la
+dirección alcance la pantalla, según se detalla en `docs/direcciones_m5.md`.
 
 Conviene continuar M5 en el mismo chat en cuanto haya elección. Si hubiera que abrirlo de nuevo, la
 frase exacta es:

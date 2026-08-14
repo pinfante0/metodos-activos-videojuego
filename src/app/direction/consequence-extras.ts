@@ -63,53 +63,37 @@ function cuadernoExtras(caseDefinition: CaseDefinition): ConsequenceExtras {
 }
 
 /* ------------------------------------------------------------------ */
-/* D2 · Aula-laboratorio: banda de aula con figuras abstractas         */
+/* D2 · Aula-laboratorio: banda de escena, iluminación y texto          */
 /* ------------------------------------------------------------------ */
 
-/** Reparto plausible derivado del estado cualitativo. No es un recuento ni una medición. */
-function participationSplit(rating: Consequence["rating"], total: number): number {
-  if (rating === "coherent-defensible") return Math.max(1, Math.ceil((total * 5) / 6));
-  if (rating === "defensible-needs-revision") return Math.max(1, Math.round(total / 2));
-  return Math.max(1, Math.floor(total / 6));
-}
+/*
+ * La primera versión de esta banda dibujaba una figura por personaje y decidía cuántas
+ * «decidían» a partir del estado cualitativo de la consecuencia. Era un recuento visual: el
+ * contenido no declara en ninguna parte cuántas personas deciden, de modo que la imagen
+ * afirmaba algo que el caso no dice y que ninguna advertencia al pie podía retirar.
+ *
+ * La banda es ahora una constante. No depende del rating, ni de `characterIds`, ni de ningún
+ * otro dato: es una silueta continua que se sale del encuadre por ambos lados, precisamente
+ * para que no pueda contarse ni leerse como un reparto de papeles. Lo único que varía con el
+ * estado cualitativo es la iluminación de la escena, que ya es información declarada y que la
+ * retroalimentación nombra igualmente.
+ *
+ * Toda la información la llevan los dos textos exactos del contenido: `agency` y `barrier`.
+ */
+const STAGE_ARTWORK = `<svg class="dir-stage__band" viewBox="0 0 200 56" role="presentation" aria-hidden="true" focusable="false">
+  <path class="dir-stage__crowd dir-stage__crowd--back" d="M-20 52 Q -4 32 10 52 Q 20 28 36 52 Q 44 34 56 52 Q 70 26 86 52 Q 94 36 106 52 Q 120 28 136 52 Q 144 34 156 52 Q 170 30 186 52 Q 194 38 220 52 L220 56 L-20 56 Z" />
+  <path class="dir-stage__crowd" d="M-14 50 Q -2 22 12 50 Q 20 30 30 50 Q 44 18 60 50 Q 66 34 76 50 Q 88 24 102 50 Q 110 32 120 50 Q 132 20 148 50 Q 154 36 164 50 Q 176 26 190 50 Q 198 34 214 50 L214 56 L-14 56 Z" />
+  <rect class="dir-stage__barrier" x="0" y="49" width="200" height="7" />
+</svg>`;
 
-const PARTICIPATION_TEXT: Record<Consequence["rating"], string> = {
-  "coherent-defensible":
-    "la mayor parte del grupo aparece tomando decisiones musicales y una parte menor ejecuta lo que otras deciden",
-  "defensible-needs-revision":
-    "una parte del grupo decide y otra ejecuta lo que ya está decidido",
-  "incoherent-with-brief":
-    "las decisiones se concentran en una parte pequeña del grupo",
-};
-
-function abstractFigure(index: number, deciding: boolean): string {
-  const x = 10 + index * 30;
-  const state = deciding ? "decide" : "ejecuta";
-  return `<g class="dir-stage__figure" data-state="${state}" style="--dir-figure-index:${index}">
-    <circle cx="${x + 9}" cy="14" r="6.5" />
-    <path d="M${x} 44 C${x} 30 ${x + 4} 25 ${x + 9} 25 C${x + 14} 25 ${x + 18} 30 ${x + 18} 44 Z" />
-  </g>`;
-}
-
-function laboratorioExtras(
-  caseDefinition: CaseDefinition,
-  consequence: Consequence,
-): ConsequenceExtras {
-  const total = caseDefinition.characterIds.length;
-  const deciding = participationSplit(consequence.rating, total);
-  // Con menos de tres figuras la banda no representa un grupo: queda sólo el equivalente textual.
-  const band = total >= 3
-    ? `<svg class="dir-stage__band" viewBox="0 0 ${10 + total * 30} 56" role="presentation" aria-hidden="true" focusable="false">
-        ${Array.from({ length: total }, (_, index) => abstractFigure(index, index < deciding)).join("")}
-        <rect class="dir-stage__barrier" x="0" y="46" width="${10 + total * 30}" height="8" />
-      </svg>`
-    : "";
+function laboratorioExtras(consequence: Consequence): ConsequenceExtras {
   return {
-    before: `<figure class="dir-stage">
-      ${band}
+    before: `<figure class="dir-stage" data-rating="${consequence.rating}">
+      ${STAGE_ARTWORK}
       <figcaption>
-        <p><strong>Equivalente textual de la banda:</strong> ${esc(PARTICIPATION_TEXT[consequence.rating])}. La franja marca una barrera del conjunto: ${esc(consequence.observables.barrier)}</p>
-        <p class="quiet">Figuras abstractas y sin nombre: una posibilidad de reparto, no personas concretas ni un recuento.</p>
+        <p><strong>Agencia:</strong> ${esc(consequence.observables.agency)}</p>
+        <p><strong>Barrera:</strong> ${esc(consequence.observables.barrier)}</p>
+        <p class="quiet">La banda es decorativa y no representa a personas ni cuántas participan. Su iluminación sólo refleja el estado cualitativo que devuelve la retroalimentación; toda la información está en este texto.</p>
       </figcaption>
     </figure>`,
     after: "",
@@ -176,7 +160,7 @@ export function consequenceExtras(
 ): ConsequenceExtras {
   switch (direction) {
     case "cuaderno": return cuadernoExtras(caseDefinition);
-    case "laboratorio": return laboratorioExtras(caseDefinition, consequence);
+    case "laboratorio": return laboratorioExtras(consequence);
     case "consola": return consolaExtras(caseDefinition, consequence, session);
     case "gris": return EMPTY;
   }

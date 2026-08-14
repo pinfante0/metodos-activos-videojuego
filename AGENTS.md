@@ -147,6 +147,9 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   bibliografía de la presentación y la guía.
 - `docs/direcciones_m5.md`: tres direcciones visuales, sonoras y de experiencia aplicadas de forma
   reversible al corte funcional, con los cinco criterios explícitos de comparación. Ninguna elegida.
+- `docs/medicion_tamanos_m5.md` y `scripts/measure-viewports.mjs`: arnés reproducible de los cinco
+  tamaños objetivo y su resultado verificado. Se ejecuta con `pnpm measure:viewports` y requiere
+  Chrome o Edge instalados. No forma parte de la capa de dirección y debe conservarse.
 - `README.md`: resumen breve del estado.
 - `tmp/`: fuentes de construcción y materiales de verificación; no son entregables finales.
 
@@ -174,8 +177,9 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   pantallas de justificación y de bitácora del caso en algunos tamaños objetivo. Está registrado en
   `docs/corte_vertical_m4.md` y no debe darse por resuelto.
 - La capa de dirección vive en `src/app/direction/`, `src/styles/directions.css` y la ruta
-  `#/direcciones`. No toca contratos, contenido ni intérprete, y `docs/direcciones_m5.md` explica
-  cómo revertirla por completo.
+  `#/direcciones`. No toca los contratos de M3, el contenido jugable ni `game-session.ts`;
+  `render-app.ts` sí se ha modificado de forma acotada. `docs/direcciones_m5.md` detalla esos
+  cambios y cómo revertir la capa por completo.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

@@ -128,30 +128,6 @@ describe("característica experiencial sobre la consecuencia representativa", ()
     expect(after).toContain('aria-hidden="true"');
   });
 
-  it("D2 acompaña la banda con un equivalente textual que incluye la barrera del grupo", () => {
-    const { before } = consequenceExtras("laboratorio", pilot, consequence, session);
-    expect(before).toContain("<figcaption>");
-    expect(before).toContain(consequence.observables.barrier);
-    expect(before).toContain("Equivalente textual");
-    // Seis personajes en el caso piloto: la banda se dibuja y queda oculta a tecnología de apoyo.
-    expect(before).toContain('class="dir-stage__band"');
-    expect((before.match(/dir-stage__figure/g) ?? []).length).toBe(pilot.characterIds.length);
-    // La salvaguarda de M2 debe seguir visible en pantalla, no sólo en la documentación.
-    expect(before).toContain("no personas concretas");
-    expect(before).toContain("ni un recuento");
-  });
-
-  it("D2 renuncia a la banda cuando el caso no representa un grupo", () => {
-    const tutorial = findPlayableCase("mucho-hacer-poco-aprender") as CaseDefinition;
-    const reveal = tutorial.consequences[0] as Consequence;
-    const { before } = consequenceExtras(
-      "laboratorio", tutorial, reveal, createGameSession(tutorial),
-    );
-    expect(tutorial.characterIds.length).toBeLessThan(3);
-    expect(before).not.toContain("dir-stage__band");
-    expect(before).toContain("Equivalente textual");
-  });
-
   it("D3 muestra los cuatro observables y el historial de decisiones ya tomadas", () => {
     const { after } = consequenceExtras("consola", pilot, consequence, session);
     for (const value of Object.values(consequence.observables)) {
@@ -177,6 +153,103 @@ describe("característica experiencial sobre la consecuencia representativa", ()
     const html = `${before}${after}`;
     expect(html).not.toContain("Óscar");
     expect(html).not.toContain("Mara");
+  });
+});
+
+/*
+ * Salvaguarda de M2: una consecuencia declara posibilidades plausibles, nunca un diagnóstico ni
+ * un recuento de personas. La banda de D2 llegó a dibujar una figura por personaje y a decidir
+ * cuántas «decidían» desde el estado cualitativo, es decir, inventaba una distribución que el
+ * contenido no declara. Estas pruebas no buscan palabras: comprueban estructuralmente que el
+ * marcado de la banda es invariante y que sólo publica los dos observables permitidos.
+ */
+describe("D2 no puede representar un reparto de personas", () => {
+  const everyCase = [
+    findPlayableCase("mucho-hacer-poco-aprender") as CaseDefinition,
+    findPlayableCase("el-arreglo-que-no-escucha-a-todos") as CaseDefinition,
+  ];
+
+  const escapeHtml = (value: string): string =>
+    value.replace(/[&<>'"]/g, (character) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] ?? character);
+
+  /** Deja el marcado sin lo único que el contenido puede aportar, para comparar el resto. */
+  const skeleton = (html: string): string =>
+    html
+      .replace(/<p><strong>Agencia:<\/strong>[\s\S]*?<\/p>/, "«AGENCIA»")
+      .replace(/<p><strong>Barrera:<\/strong>[\s\S]*?<\/p>/, "«BARRERA»")
+      .replace(/data-rating="[a-z-]+"/g, 'data-rating="«ESTADO»"');
+
+  const everyConsequence = everyCase.flatMap((caseDefinition) =>
+    caseDefinition.consequences.map((consequence) => ({ caseDefinition, consequence })),
+  );
+
+  it("cubre todas las consecuencias del tutorial y del caso piloto", () => {
+    expect(everyConsequence.length).toBeGreaterThan(15);
+  });
+
+  it("produce exactamente el mismo marcado de banda para todas ellas", () => {
+    const shapes = new Set<string>();
+    for (const { caseDefinition, consequence } of everyConsequence) {
+      const { before } = consequenceExtras(
+        "laboratorio", caseDefinition, consequence, createGameSession(caseDefinition),
+      );
+      shapes.add(skeleton(before));
+    }
+    // Un único esqueleto: nada del contenido puede alterar la forma, el número ni el papel.
+    expect(shapes.size).toBe(1);
+  });
+
+  it("no contiene ningún elemento por persona", () => {
+    for (const { caseDefinition, consequence } of everyConsequence) {
+      const { before } = consequenceExtras(
+        "laboratorio", caseDefinition, consequence, createGameSession(caseDefinition),
+      );
+      expect(before).not.toMatch(/<circle/);
+      expect(before).not.toMatch(/<g[\s>]/);
+      // Dos siluetas continuas y constantes, nunca una por participante.
+      expect((before.match(/<path/g) ?? []).length).toBe(2);
+    }
+  });
+
+  it("no varía con el reparto de personajes que declare el caso", () => {
+    const [, pilotCase] = everyCase;
+    const consequence = pilotCase!.consequences[0] as Consequence;
+    const session = createGameSession(pilotCase!);
+    const baseline = consequenceExtras("laboratorio", pilotCase!, consequence, session).before;
+    for (const size of [0, 1, 2, 3, 6, 20]) {
+      const variant: CaseDefinition = {
+        ...pilotCase!,
+        characterIds: Array.from({ length: size }, (_, index) => `persona-${index}`),
+      };
+      expect(consequenceExtras("laboratorio", variant, consequence, session).before).toBe(baseline);
+    }
+  });
+
+  it("publica los textos exactos de agencia y barrera, y ningún otro observable", () => {
+    for (const { caseDefinition, consequence } of everyConsequence) {
+      const { before } = consequenceExtras(
+        "laboratorio", caseDefinition, consequence, createGameSession(caseDefinition),
+      );
+      expect(before).toContain(escapeHtml(consequence.observables.agency));
+      expect(before).toContain(escapeHtml(consequence.observables.barrier));
+      expect(before).not.toContain(escapeHtml(consequence.observables.learning));
+      expect(before).not.toContain(escapeHtml(consequence.observables.evidence));
+    }
+  });
+
+  it("sólo deja que el estado cualitativo llegue como atributo, no como forma", () => {
+    const ratings = new Set<string>();
+    for (const { caseDefinition, consequence } of everyConsequence) {
+      const { before } = consequenceExtras(
+        "laboratorio", caseDefinition, consequence, createGameSession(caseDefinition),
+      );
+      const match = before.match(/data-rating="([a-z-]+)"/);
+      expect(match?.[1]).toBe(consequence.rating);
+      ratings.add(consequence.rating);
+    }
+    // Los tres estados aparecen y ninguno cambia el marcado, sólo la iluminación por CSS.
+    expect(ratings.size).toBe(3);
   });
 });
 

@@ -10,6 +10,7 @@
     "build:pages": "cross-env VITE_DEPLOY_TARGET=github-pages pnpm build",
     "build:platea": "cross-env VITE_DEPLOY_TARGET=platea pnpm build && node scripts/package-platea.mjs",
     "check": "pnpm validate:content && pnpm test && pnpm build && pnpm build:platea",
+    "measure:viewports": "node scripts/measure-viewports.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "validate:content": "vitest run tests/contracts.test.ts tests/playable-content.test.ts --reporter=verbose"

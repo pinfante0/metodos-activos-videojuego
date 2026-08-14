@@ -39,6 +39,8 @@ se ha fijado el contrato de recursos y no se ha construido la campaña completa.
 
 - Comparación y criterios: `docs/direcciones_m5.md`.
 - Capa de dirección reversible: `src/app/direction/` y `src/styles/directions.css`.
+- Medición de los cinco tamaños objetivo: `pnpm measure:viewports`, documentada en
+  `docs/medicion_tamanos_m5.md`. Requiere Chrome o Edge instalados.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

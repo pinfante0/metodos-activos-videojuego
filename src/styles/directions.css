@@ -162,12 +162,28 @@
   to { opacity: 1; transform: none; }
 }
 
-/* Banda de aula: figuras abstractas y sin nombre, más una franja de barrera de grupo. */
+/*
+ * Banda de escena. La silueta es una constante decorativa que se sale del encuadre por ambos
+ * lados: no es contable y no representa personas ni papeles. Lo único que cambia con el estado
+ * cualitativo de la consecuencia es la luz de la escena.
+ */
 :root[data-direction="laboratorio"] .dir-stage {
   margin: 0 0 .55rem;
   padding: .45rem .6rem;
   border-radius: .6rem;
   background: radial-gradient(130% 210% at 30% 0%, #3a2c1c 0%, #1f2731 60%, #161d26 100%);
+}
+
+:root[data-direction="laboratorio"] .dir-stage[data-rating="coherent-defensible"] {
+  background: radial-gradient(130% 210% at 30% 0%, #4b3a20 0%, #23303a 58%, #161d26 100%);
+}
+
+:root[data-direction="laboratorio"] .dir-stage[data-rating="defensible-needs-revision"] {
+  background: radial-gradient(130% 210% at 30% 0%, #3a2c1c 0%, #1f2731 60%, #161d26 100%);
+}
+
+:root[data-direction="laboratorio"] .dir-stage[data-rating="incoherent-with-brief"] {
+  background: radial-gradient(130% 210% at 30% 0%, #2a2530 0%, #1b2029 62%, #141920 100%);
 }
 
 :root[data-direction="laboratorio"] .dir-stage__band {
@@ -177,21 +193,21 @@
   max-height: min(4.4rem, 8vh);
 }
 
-:root[data-direction="laboratorio"] .dir-stage__figure > * {
-  fill: none;
-  stroke: #7c8b9c;
-  stroke-width: 2;
+:root[data-direction="laboratorio"] .dir-stage__crowd {
+  fill: #0e131a;
+  stroke: none;
+  opacity: .85;
 }
 
-:root[data-direction="laboratorio"] .dir-stage__figure[data-state="decide"] > * {
-  fill: #f5b942;
-  stroke: #f5b942;
+:root[data-direction="laboratorio"] .dir-stage__crowd--back {
+  fill: #1b232e;
+  opacity: .7;
 }
 
 :root[data-direction="laboratorio"] .dir-stage__barrier {
   fill: #ff8c7a;
   stroke: none;
-  opacity: .5;
+  opacity: .45;
 }
 
 :root[data-direction="laboratorio"] .dir-stage figcaption { font-size: .74rem; }
@@ -199,21 +215,9 @@
 :root[data-direction="laboratorio"] .dir-stage figcaption .quiet { margin-top: .2rem; font-size: .68rem; }
 
 @media (prefers-reduced-motion: no-preference) {
-  :root[data-direction="laboratorio"] .dir-stage__figure {
-    animation: dir-lab-figura .3s ease-out both;
-    animation-delay: calc(var(--dir-figure-index, 0) * .05s);
+  :root[data-direction="laboratorio"] .dir-stage__band {
+    animation: dir-lab-entrada .26s ease-out both;
   }
-}
-
-/*
- * El ajuste de movimiento reducido de la aplicación es independiente de la consulta de medio:
- * anula la duración, pero no el retardo. Sin esto las figuras seguirían apareciendo escalonadas.
- */
-[data-reduced-motion="true"] .dir-stage__figure { animation-delay: 0s !important; }
-
-@keyframes dir-lab-figura {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
 }
 
 @media (max-width: 42rem) {
