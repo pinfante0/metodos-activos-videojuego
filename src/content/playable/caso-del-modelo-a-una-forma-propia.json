@@ -1,0 +1,1101 @@
+{
+  "schemaVersion": 1,
+  "id": "del-modelo-a-una-forma-propia",
+  "slug": "del-modelo-a-una-forma-propia",
+  "status": "reviewed",
+  "title": "Del modelo a una forma propia",
+  "experienceType": "case",
+  "durationMinutes": 10,
+  "modes": ["home"],
+  "learningObjective": "Convertir un motivo de dos compases dicho y percutido en una versión propia que conserve un rasgo reconocible, y colocarla en una forma donde se oiga dónde entra y dónde sale.",
+  "approachIds": ["orff-keetman", "willems", "martenot"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "notation-theory-improvisation-creation",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "agency-creativity", "evidence-context"],
+  "characterIds": ["ines", "leo", "mara", "oscar", "julia"],
+  "assembly": {
+    "title": "Microclase de dos minutos",
+    "summary": "Un modelo, una exploración y una forma donde cada versión pueda oírse.",
+    "slots": [
+      {"id": "slot-modelo", "kind": "entry", "label": "Momento 1 · el modelo", "sceneId": "c3-model"},
+      {"id": "slot-exploracion", "kind": "musical-action", "label": "Momento 2 · la exploración", "sceneId": "c3-explore"},
+      {"id": "slot-forma", "kind": "evidence", "label": "Momento 3 · la forma", "sceneId": "c3-form"}
+    ]
+  },
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "c3-brief",
+  "scenes": [
+    {
+      "id": "c3-brief",
+      "kind": "observation",
+      "title": "Lee el encargo antes de montar nada",
+      "introduction": "5.º de Primaria, doce parejas. La retahíla ya la dicen de memoria y dentro hay un motivo de dos compases que se repite. Dispones de voz, cuerpo, mesas, un juego de láminas y pequeña percusión al fondo del aula, y sillas que se pueden apartar; nadie tiene papel delante. Dos condiciones vienen dadas con el encargo: ninguna consigna puede viajar solo por el aire, y el grupo debe poder saber de antemano cuándo cambia cada cosa. Tienes dos minutos y tres momentos que montar.",
+      "resourceIds": [],
+      "prompt": "¿Qué tendría que poder oírse al terminar los dos minutos para decir que ha funcionado?",
+      "actionIds": ["c3-brief-recognisable-variation", "c3-brief-everyone-plays", "c3-brief-exact-repeat"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c3-model",
+      "kind": "design",
+      "title": "Momento 1 · cómo conoce el grupo el motivo",
+      "introduction": "El primer momento decide con qué material entra el motivo en el aula y cuánto sitio deja desde el principio. No se juzga aquí: los tres momentos se prueban juntos.",
+      "resourceIds": [],
+      "prompt": "¿Cómo llega el motivo al grupo?",
+      "actionIds": ["c3-model-open-echo", "c3-model-closed-echo", "c3-model-instruments-first"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "c3-explore",
+      "slots": ["entry"],
+      "assemblySlotId": "slot-modelo"
+    },
+    {
+      "id": "c3-explore",
+      "kind": "design",
+      "title": "Momento 2 · qué ocurre entre el modelo y una versión propia",
+      "introduction": "El momento que convierte la imitación en autoría: aquí se decide qué conserva cada versión y quién elige ese criterio.",
+      "resourceIds": [],
+      "prompt": "¿Qué hace cada pareja con el motivo?",
+      "actionIds": ["c3-explore-one-trait", "c3-explore-declared-trait", "c3-explore-teacher-menu"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "c3-form",
+      "slots": ["musical-action"],
+      "assemblySlotId": "slot-exploracion"
+    },
+    {
+      "id": "c3-form",
+      "kind": "design",
+      "title": "Momento 3 · dónde se oye lo que ha hecho cada pareja",
+      "introduction": "El cierre decide qué podrás observar al terminar. Una versión que nadie llega a oír no ha entrado en ninguna forma.",
+      "resourceIds": [],
+      "prompt": "¿Cómo se cierra la microclase?",
+      "actionIds": ["c3-form-aba-sustained", "c3-form-listen-and-name", "c3-form-all-at-once"],
+      "feedbackMode": "deferred",
+      "nextSceneId": "c3-assembly",
+      "slots": ["evidence"],
+      "assemblySlotId": "slot-forma"
+    },
+    {
+      "id": "c3-assembly",
+      "kind": "assembly-review",
+      "title": "Tu microclase montada",
+      "introduction": "Los tres momentos ya forman una sola pieza. Léela como la leería quien entra en el aula: con qué material aparece el motivo, qué tiene que decidir cada pareja y dónde se oirá lo que haya decidido.",
+      "resourceIds": [],
+      "nextSceneId": "c3-test",
+      "testLabel": "Probar la microclase"
+    },
+    {
+      "id": "c3-test",
+      "kind": "consequence",
+      "title": "Prueba · dos minutos con los tres momentos dentro",
+      "introduction": "El resultado combina los tres momentos: cambiar uno cambia lo que ocurre en los otros dos. Describe una posibilidad pedagógica, no un diagnóstico del grupo.",
+      "resourceIds": [],
+      "consequenceIds": [
+        "c3-outcome-instruments-first",
+        "c3-outcome-chosen-not-made",
+        "c3-outcome-all-at-once",
+        "c3-outcome-open-limit-aba",
+        "c3-outcome-open-limit-halves",
+        "c3-outcome-open-declared-aba",
+        "c3-outcome-open-declared-halves",
+        "c3-outcome-closed-limit-aba",
+        "c3-outcome-closed-limit-halves",
+        "c3-outcome-closed-declared-aba",
+        "c3-outcome-closed-declared-halves",
+        "c3-outcome-unbuilt"
+      ],
+      "rules": [
+        {"requiredTags": ["model-instruments"], "consequenceId": "c3-outcome-instruments-first"},
+        {"requiredTags": ["explore-menu"], "consequenceId": "c3-outcome-chosen-not-made"},
+        {"requiredTags": ["form-tutti"], "consequenceId": "c3-outcome-all-at-once"},
+        {"requiredTags": ["model-open", "explore-limit", "form-aba"], "consequenceId": "c3-outcome-open-limit-aba"},
+        {"requiredTags": ["model-open", "explore-limit", "form-halves"], "consequenceId": "c3-outcome-open-limit-halves"},
+        {"requiredTags": ["model-open", "explore-declared", "form-aba"], "consequenceId": "c3-outcome-open-declared-aba"},
+        {"requiredTags": ["model-open", "explore-declared", "form-halves"], "consequenceId": "c3-outcome-open-declared-halves"},
+        {"requiredTags": ["model-closed", "explore-limit", "form-aba"], "consequenceId": "c3-outcome-closed-limit-aba"},
+        {"requiredTags": ["model-closed", "explore-limit", "form-halves"], "consequenceId": "c3-outcome-closed-limit-halves"},
+        {"requiredTags": ["model-closed", "explore-declared", "form-aba"], "consequenceId": "c3-outcome-closed-declared-aba"},
+        {"requiredTags": ["model-closed", "explore-declared", "form-halves"], "consequenceId": "c3-outcome-closed-declared-halves"}
+      ],
+      "fallbackConsequenceId": "c3-outcome-unbuilt"
+    },
+    {
+      "id": "c3-incident",
+      "kind": "incident",
+      "title": "Incidente · doce parejas probando a la vez",
+      "introduction": "La prueba deja ver una condición que el montaje daba por resuelta: que doce parejas pudieran explorar al mismo tiempo en la misma sala. La tensión pertenece a la organización del aula, no a ninguna persona.",
+      "resourceIds": [],
+      "nextSceneId": "c3-revision",
+      "incidentId": "c3-incident-everyone-at-once"
+    },
+    {
+      "id": "c3-revision",
+      "kind": "revision",
+      "title": "Revisa en qué condiciones se explora",
+      "introduction": "Mantén los tres momentos y cambia solo lo que el incidente ha puesto en duda: en qué condiciones se prueba y de dónde saca cada persona la referencia.",
+      "resourceIds": [],
+      "prompt": "¿Qué cambias?",
+      "actionIds": ["c3-revision-graded-listening", "c3-revision-prepared-entries", "c3-revision-calm-instead"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c3-reveal",
+      "kind": "consequence",
+      "title": "Un proceso y dos lentes que lo sostienen",
+      "introduction": "Ir de un modelo breve a la exploración y a una forma creada, con habla, cuerpo, voz, movimiento, juego e instrumentos, es el núcleo de Orff-Schulwerk, la propuesta artístico-pedagógica que Carl Orff elaboró con Gunild Keetman. Lo que has añadido al revisar no es otro método: es una lente sobre ese mismo proceso. Graduar la escucha por pasos, de una diferencia gruesa a una fina y de ahí a una respuesta musical, es la aportación de Edgar Willems. Cuidar la calidad del gesto, la atención y la alternancia entre concentración y distensión al servicio de una finalidad musical es la de la pedagogía Martenot, desarrollada en familia por Madeleine, Ginette y Maurice Martenot. Las dos sirven aquí a un proceso que sigue siendo el de Orff y Keetman: ninguna lo sustituye y ninguna se funde con él.",
+      "resourceIds": [],
+      "nextSceneId": "c3-justification",
+      "consequenceIds": [
+        "c3-reveal-limit-listening",
+        "c3-reveal-limit-entries",
+        "c3-reveal-declared-listening",
+        "c3-reveal-declared-entries",
+        "c3-reveal-shared"
+      ],
+      "rules": [
+        {"requiredTags": ["explore-limit", "revision-listening"], "consequenceId": "c3-reveal-limit-listening"},
+        {"requiredTags": ["explore-limit", "revision-entries"], "consequenceId": "c3-reveal-limit-entries"},
+        {"requiredTags": ["explore-declared", "revision-listening"], "consequenceId": "c3-reveal-declared-listening"},
+        {"requiredTags": ["explore-declared", "revision-entries"], "consequenceId": "c3-reveal-declared-entries"}
+      ],
+      "fallbackConsequenceId": "c3-reveal-shared"
+    },
+    {
+      "id": "c3-justification",
+      "kind": "justification",
+      "title": "Construye tu defensa",
+      "introduction": "No hace falta escribir texto libre. Elige una pieza en cada hueco y comprueba que objetivo, principio, riesgo, adaptación y evidencia forman una sola decisión.",
+      "resourceIds": [],
+      "nextSceneId": "c3-reflection",
+      "grammarOptions": {
+        "objective": [
+          {"id": "c3-objective-own-version-in-form", "label": "que cada pareja convierta el motivo en una versión propia que conserve un rasgo reconocible y la coloque donde pueda oírse dónde entra y dónde sale"}
+        ],
+        "principleAction": [
+          {"id": "c3-principle-model-to-authorship", "label": "recorrer entero el camino montado —imitar un modelo breve, explorar con él y fijar una versión— sin que el objeto ni el turno decidan quién crea"},
+          {"id": "c3-principle-form-holds-authorship", "label": "sostener entre todos una forma en la que cada versión tenga un sitio audible, conservando el camino montado de imitación, exploración y creación"}
+        ],
+        "conditionRisk": [
+          {"id": "c3-risk-loudest-surface", "label": "explorar todos a la vez deja que lo que más suena sustituya a la idea de cada pareja, y entonces crear no produce nada que nadie pueda reconocer"},
+          {"id": "c3-risk-air-and-surprise", "label": "la referencia puede quedar solo en el aire y el cambio puede llegar sin anunciar, y entonces quedan fuera quien no puede seguirla por ahí y quien necesita saber qué va a ocurrir"}
+        ],
+        "adaptation": [
+          {"id": "c3-adapt-graded-listening", "label": "graduar de oído dos contrastes anunciados del motivo antes de explorar, hacerlos perceptibles también por señal visual y vibración, y explorar por turnos de dos parejas con el resto escuchando qué ha cambiado"},
+          {"id": "c3-adapt-prepared-entries", "label": "acordar un gesto visible y una vibración que abren y cierran cada turno, dejar un silencio antes de entrar y alternar exploración y escucha en tandas anunciadas"}
+        ],
+        "evidence": [
+          {"id": "c3-evidence-name-the-trait", "label": "si cada pareja puede decir o mostrar qué rasgo del motivo conserva su versión"},
+          {"id": "c3-evidence-turn-in-form", "label": "si cada versión ocupa su turno dentro de la forma sin solaparse con la siguiente"}
+        ]
+      }
+    },
+    {
+      "id": "c3-reflection",
+      "kind": "reflection",
+      "title": "Qué mantuviste y qué cambiaste",
+      "introduction": "La bitácora conserva el razonamiento, no una nota. Revisa qué montaste en cada momento y qué cambiaste después del incidente.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "c3-brief-recognisable-variation",
+      "label": "Que cada versión se reconozca como una versión de ese motivo y se oiga dónde entra y dónde sale.",
+      "principleIds": ["objective-action-evidence", "recognisable-authorship"],
+      "consequenceId": "c3-feedback-recognisable",
+      "tags": ["continue"]
+    },
+    {
+      "id": "c3-brief-everyone-plays",
+      "label": "Que todo el mundo llegue a tocar en las láminas: si están ahí, hay que usarlas.",
+      "principleIds": ["material-without-principle"],
+      "consequenceId": "c3-feedback-everyone-plays",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c3-brief-exact-repeat",
+      "label": "Que repitan el motivo exactamente igual que el modelo, sin fallos.",
+      "principleIds": ["imitation-as-whole-objective"],
+      "consequenceId": "c3-feedback-exact-repeat",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c3-model-open-echo",
+      "label": "Decirlo con las palabras de la retahíla y percutirlo sobre el cuerpo, en juego de eco, dejando el último tiempo abierto: cada eco puede rematarlo a su manera.",
+      "principleIds": ["speech-body-entry", "open-model"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-model-open",
+      "tags": ["model-open"]
+    },
+    {
+      "id": "c3-model-closed-echo",
+      "label": "Modelarlo entero y repetirlo en eco hasta que salga igual que el modelo: primero asentar el motivo, después ya habrá tiempo de cambiarlo.",
+      "principleIds": ["speech-body-entry", "imitation-first"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-model-closed",
+      "tags": ["model-closed"]
+    },
+    {
+      "id": "c3-model-instruments-first",
+      "label": "Repartir las láminas y enseñar el motivo directamente en ellas, que es lo que distingue a esta tradición de las demás.",
+      "principleIds": ["object-as-approach"],
+      "consequenceId": "c3-choice-model-instruments",
+      "tags": ["model-instruments"]
+    },
+    {
+      "id": "c3-explore-one-trait",
+      "label": "Por parejas, probar en voz y sobre el cuerpo tres maneras de cambiarlo —el final, la velocidad, dónde cae el acento— y quedarse con una que todavía se reconozca.",
+      "principleIds": ["bounded-exploration", "authorship-with-common-ground"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-explore-limit",
+      "tags": ["explore-limit"]
+    },
+    {
+      "id": "c3-explore-declared-trait",
+      "label": "Por parejas, decir qué rasgo del motivo van a conservar —el final, las sílabas, el acento— y transformar libremente todo lo demás.",
+      "principleIds": ["declared-constraint", "authorship-chooses-the-ground"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-explore-declared",
+      "tags": ["explore-declared"]
+    },
+    {
+      "id": "c3-explore-teacher-menu",
+      "label": "Presentar tú tres variaciones ya preparadas y que cada pareja elija y ensaye la que más le guste.",
+      "principleIds": ["choosing-is-not-creating"],
+      "consequenceId": "c3-choice-explore-menu",
+      "tags": ["explore-menu"]
+    },
+    {
+      "id": "c3-form-aba-sustained",
+      "label": "Todo el grupo sostiene el motivo con voz y cuerpo; se abre un hueco, entra una pareja con su versión y se vuelve al motivo. Al terminar, cada pareja dice qué conservó.",
+      "principleIds": ["shared-form", "authorship-has-a-place"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-form-aba",
+      "tags": ["form-aba"]
+    },
+    {
+      "id": "c3-form-listen-and-name",
+      "label": "Media clase sostiene el motivo y presenta sus versiones; la otra media escucha y dice qué reconoce de cada una. Después se cambian los papeles.",
+      "principleIds": ["listening-as-task", "recognition-as-evidence"],
+      "approachIds": ["orff-keetman"],
+      "consequenceId": "c3-choice-form-halves",
+      "tags": ["form-halves"]
+    },
+    {
+      "id": "c3-form-all-at-once",
+      "label": "Que todas las parejas toquen su versión a la vez: así suena lleno y participa todo el mundo.",
+      "principleIds": ["activity-is-not-evidence"],
+      "consequenceId": "c3-choice-form-tutti",
+      "tags": ["form-tutti"]
+    },
+    {
+      "id": "c3-revision-graded-listening",
+      "label": "Comparar antes dos contrastes del motivo —más largo o más corto, acento delante o detrás—, a la vista y en vibración además de al oído, hasta que cualquiera diga cuál ha sonado; después explorar por turnos de dos parejas mientras el resto escucha.",
+      "principleIds": ["graded-listening", "equivalent-perception-routes"],
+      "approachIds": ["willems"],
+      "consequenceId": "c3-revision-listening-outcome",
+      "tags": ["defensible", "revision-listening"]
+    },
+    {
+      "id": "c3-revision-prepared-entries",
+      "label": "Acordar antes un gesto visible y una vibración que abren y cierran cada turno, con un silencio corto antes de entrar; explorar en dos tandas anunciadas y, entre una y otra, soltar el cuerpo y escuchar.",
+      "principleIds": ["prepared-attention", "announced-change"],
+      "approachIds": ["martenot"],
+      "consequenceId": "c3-revision-entries-outcome",
+      "tags": ["defensible", "revision-entries"]
+    },
+    {
+      "id": "c3-revision-calm-instead",
+      "label": "Cambiar los dos minutos por un rato de relajación con música tranquila para bajar el volumen, y dejar la creación para otro día.",
+      "principleIds": ["calm-replaces-music"],
+      "consequenceId": "c3-revision-calm-outcome",
+      "tags": ["incoherent", "retry"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "c3-incident-everyone-at-once",
+      "constraintFamily": "sensory-access-load",
+      "reveal": "Llega el rato de probar y las doce parejas empiezan a la vez en la misma sala. A los veinte segundos lo que se oye es un solo bloque de sonido y casi nadie distingue lo que está haciendo su propia pareja. Tres parejas acaban repitiendo lo que llega desde las láminas del fondo, que es lo que más suena, sin haberlo decidido. Julia deja de probar y espera de pie: nadie ha dicho cuánto dura esto ni cómo se sabrá que ha terminado. Inés pierde la referencia en cuanto el motivo deja de estar a la vista de alguien y solo está en el aire. Mara tiene algo y no consigue que su propia pareja lo oiga. Leo propone bajar la voz y hacerlo sobre la mesa para poder oírse de cerca, y funciona en su pareja y solo en su pareja. Tú recorres la sala y no puedes distinguir quién está probando algo de quién está esperando a que esto acabe.",
+      "revisionActionIds": ["c3-revision-graded-listening", "c3-revision-prepared-entries", "c3-revision-calm-instead"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "c3-feedback-recognisable",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Reconocer una versión exige haber retenido el motivo y haber decidido qué se conserva de él.",
+        "agency": "Cada pareja tiene que elegir qué cambia y qué no.",
+        "barrier": "Si nadie llega a oír una versión, la decisión que la produjo no existe para el aula.",
+        "evidence": "Puede mirarse pareja a pareja y no solo al conjunto."
+      },
+      "feedback": {
+        "supports": "Has elegido una evidencia que junta las dos mitades del encargo: que haya versión propia y que tenga sitio donde oírse.",
+        "tension": "Las dos mitades pueden perderse por separado, y por caminos distintos.",
+        "possibleRepair": "Guarda esa doble exigencia: te hará falta en los tres momentos.",
+        "observableEvidence": "Piensa qué tendría que ocurrir en el aula para poder decir las dos cosas a la vez."
+      },
+      "nextSceneId": "c3-model"
+    },
+    {
+      "id": "c3-feedback-everyone-plays",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Tocar un instrumento del aula es una experiencia musical real y vale la pena que ocurra.",
+        "agency": "Que todo el mundo toque no obliga a nadie a decidir nada sobre lo que toca.",
+        "barrier": "Hay un juego de láminas y doce parejas: repartirlo ya es repartir el acceso.",
+        "evidence": "Haber tocado no distingue quién ha creado algo de quién ha copiado lo de al lado."
+      },
+      "feedback": {
+        "supports": "Las láminas y la pequeña percusión pertenecen a esta tradición desde el principio y no hay ninguna razón para esconderlas.",
+        "tension": "Lo que no puede hacer un instrumento es sustituir al proceso: el objeto no dice si alguien ha reconocido, explorado o creado nada.",
+        "possibleRepair": "Busca una evidencia que hable de lo que suena y no de lo que se sostiene en las manos.",
+        "observableEvidence": "Pregúntate qué sabrías al terminar si todas las parejas hubieran tocado y ninguna hubiera cambiado nada."
+      },
+      "nextSceneId": "c3-brief"
+    },
+    {
+      "id": "c3-feedback-exact-repeat",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Repetir bien un motivo es un logro y es el primer paso de este proceso.",
+        "agency": "Repetir sin cambiar nada no pide ninguna decisión musical.",
+        "barrier": "Un aula puede repetir con precisión durante dos minutos y no haber creado nada.",
+        "evidence": "La precisión de la copia no muestra qué ha entendido nadie de la figura."
+      },
+      "feedback": {
+        "supports": "Imitar no es el defecto de esta escena: es de donde arranca el camino, y sin un modelo bien retenido no hay nada que transformar.",
+        "tension": "El encargo pide llegar más lejos: una versión propia que todavía se reconozca. Si la imitación es todo, el proceso se queda en su primer paso.",
+        "possibleRepair": "Conserva la imitación y añade lo que tiene que pasar después.",
+        "observableEvidence": "Mira qué se podría oír al final que no estuviera ya en el modelo."
+      },
+      "nextSceneId": "c3-brief"
+    },
+    {
+      "id": "c3-choice-model-open",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El motivo entra por el habla y el cuerpo, y el hueco final invita a rematar.",
+        "agency": "Cada eco puede terminar de una manera.",
+        "barrier": "El motivo original queda menos firme.",
+        "evidence": "Se ve y se oye qué remate elige cada cual."
+      },
+      "feedback": {
+        "supports": "La autoría empieza en la imitación.",
+        "tension": "Quien no tenga el motivo entero rematará sobre algo incompleto.",
+        "possibleRepair": "Dilo entero un par de veces antes de abrir el final.",
+        "observableEvidence": "Mira quién remata y quién repite."
+      },
+      "nextSceneId": "c3-explore"
+    },
+    {
+      "id": "c3-choice-model-closed",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Todo el grupo comparte exactamente el mismo punto de partida.",
+        "agency": "En este momento nadie decide todavía nada.",
+        "barrier": "La imitación puede ocupar más tiempo del previsto.",
+        "evidence": "Se oye quién tiene el motivo entero."
+      },
+      "feedback": {
+        "supports": "Un modelo común hace reconocible cualquier rasgo que se conserve después.",
+        "tension": "Si la imitación lo ocupa todo, la exploración no llega.",
+        "possibleRepair": "Ponle un final claro al eco.",
+        "observableEvidence": "Mira cuánto tarda el grupo en decirlo sin ti."
+      },
+      "nextSceneId": "c3-explore"
+    },
+    {
+      "id": "c3-choice-model-instruments",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El motivo aparece como una digitación antes que como una figura.",
+        "agency": "Las decisiones se van en el turno de lámina.",
+        "barrier": "Un juego de láminas y doce parejas.",
+        "evidence": "Sabrás quién ha tocado."
+      },
+      "feedback": {
+        "supports": "Los instrumentos del aula forman parte de esta tradición.",
+        "tension": "Puestos por delante, reparten el acceso antes que ninguna decisión musical.",
+        "possibleRepair": "Deja el instrumento para cuando haya algo que llevar a él.",
+        "observableEvidence": "Mira cuántas parejas están esperando."
+      },
+      "nextSceneId": "c3-explore"
+    },
+    {
+      "id": "c3-choice-explore-limit",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cambiar el final, la velocidad o el acento son tres maneras nombrables de transformar.",
+        "agency": "Cada pareja decide cuál usa y hasta dónde.",
+        "barrier": "El límite estrecha lo que alguien quizá quería hacer.",
+        "evidence": "Queda un rasgo que conservar y por tanto algo que reconocer."
+      },
+      "feedback": {
+        "supports": "Un límite compartido es lo que convierte doce inventos en doce versiones.",
+        "tension": "Un límite demasiado estrecho produce doce versiones parecidas.",
+        "possibleRepair": "Tres maneras bastan; no hacen falta más.",
+        "observableEvidence": "Mira cuál elige cada pareja."
+      },
+      "nextSceneId": "c3-form"
+    },
+    {
+      "id": "c3-choice-explore-declared",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada pareja elige y dice qué rasgo del motivo conserva.",
+        "agency": "La elección alcanza al criterio y no solo al resultado.",
+        "barrier": "Doce criterios distintos hacen más difícil comparar unas versiones con otras.",
+        "evidence": "Cada versión puede contrastarse con lo que su pareja declaró."
+      },
+      "feedback": {
+        "supports": "Declarar qué se conserva mantiene el rasgo y deja la elección en el aula.",
+        "tension": "Reconocer exige saber qué declaró cada pareja.",
+        "possibleRepair": "Que la declaración se diga justo antes de tocar.",
+        "observableEvidence": "Mira si lo que suena conserva lo declarado."
+      },
+      "nextSceneId": "c3-form"
+    },
+    {
+      "id": "c3-choice-explore-menu",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El grupo distingue tres versiones y ensaya una.",
+        "agency": "Elegir entre opciones cerradas no cambia el material.",
+        "barrier": "El paso del modelo a la autoría no llega a darse.",
+        "evidence": "Sabrás qué eligió cada pareja."
+      },
+      "feedback": {
+        "supports": "Mostrar ejemplos de qué se puede cambiar enseña mucho.",
+        "tension": "Si las versiones ya vienen hechas, el paso lo has dado tú.",
+        "possibleRepair": "Usa una como ejemplo y deja el resto por decidir.",
+        "observableEvidence": "Mira qué decide cada pareja sobre el material."
+      },
+      "nextSceneId": "c3-form"
+    },
+    {
+      "id": "c3-choice-form-aba",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La forma existe y todo el grupo la sostiene.",
+        "agency": "Cada pareja entra en su hueco.",
+        "barrier": "Con doce parejas el turno es largo.",
+        "evidence": "Se oye dónde se abre el hueco y dónde vuelve el motivo."
+      },
+      "feedback": {
+        "supports": "Sostener algo común entre muchos es una experiencia musical de primer orden.",
+        "tension": "La escucha se cansa hacia el final del turno.",
+        "possibleRepair": "Parte la ronda en dos si hace falta.",
+        "observableEvidence": "Mira quién entra sin que le señalen."
+      },
+      "nextSceneId": "c3-assembly"
+    },
+    {
+      "id": "c3-choice-form-halves",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Escuchar deja de ser esperar y pasa a ser una tarea.",
+        "agency": "Quien escucha decide qué nombra.",
+        "barrier": "La forma entera con todo el grupo dentro no llega a sonar.",
+        "evidence": "Lo que dice quien escucha puede contrastarse con lo que dice quien lo hizo."
+      },
+      "feedback": {
+        "supports": "El reconocimiento deja de ser cosa tuya y pasa al aula.",
+        "tension": "La evidencia depende de poder decirlo o mostrarlo.",
+        "possibleRepair": "Admite respuestas dichas, mostradas o tocadas.",
+        "observableEvidence": "Mira si reconocen sin que se lo digan."
+      },
+      "nextSceneId": "c3-assembly"
+    },
+    {
+      "id": "c3-choice-form-tutti",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Suena lleno y no se distingue nada.",
+        "agency": "Cada pareja ha decidido algo que nadie oirá.",
+        "barrier": "El volumen tapa a quien no puede competir con él.",
+        "evidence": "No queda nada observable."
+      },
+      "feedback": {
+        "supports": "Tocar a la vez algo común funciona muy bien.",
+        "tension": "Aquí lo que suena a la vez son doce cosas distintas.",
+        "possibleRepair": "Que lo común sea el motivo y lo distinto tenga turno.",
+        "observableEvidence": "Pregúntate qué podrías oír de una sola pareja."
+      },
+      "nextSceneId": "c3-assembly"
+    },
+    {
+      "id": "c3-outcome-instruments-first",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El motivo llega como algo que tocar antes de que nadie lo haya dicho ni percutido: se aprende dónde poner las manos, no qué figura es.",
+        "agency": "Los dos minutos se van en quién coge qué lámina y en qué orden, y esa no es una decisión musical.",
+        "barrier": "Hay un juego de láminas y doce parejas: el instrumento ha repartido el acceso antes de que existiera ninguna decisión.",
+        "evidence": "Al terminar sabrás quién ha tocado; no sabrás quién ha reconocido el motivo ni quién ha hecho algo con él."
+      },
+      "feedback": {
+        "supports": "Las láminas, la pequeña percusión, la voz y el cuerpo son medios de esta tradición desde su origen, y no hay ninguna razón para dejarlos guardados.",
+        "tension": "Lo que no es el enfoque es el objeto. El proceso que este caso monta empieza en el habla, el cuerpo y el juego, y sigue por la exploración y la creación; empezar repartiendo láminas se salta justo la parte que lo convierte en un proceso.",
+        "possibleRepair": "Deja el instrumento para cuando haya algo que llevar a él.",
+        "observableEvidence": "Vuelve al momento 1 y mira por dónde puede entrar el motivo sin que nadie tenga que esperar turno."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "El motivo se enseña tocando y contando turnos, sin nada que decir, ver ni sentir cerca: la decisión de empezar por las láminas no le deja ninguna vía equivalente para tener la figura."},
+          {"characterId": "leo", "role": "supports", "note": "Percute y sostiene mientras espera turno de lámina, pero el diseño no le ha pedido ninguna idea propia."},
+          {"characterId": "mara", "role": "no-route", "note": "Aprende de oído y produciendo, y aquí el motivo solo existe en unas láminas que en este turno no le tocan: es la decisión de repartir instrumentos la que la deja fuera, no su formación."},
+          {"characterId": "oscar", "role": "performs", "note": "Ya lee y toca: con las láminas por delante es el primero que saca el motivo y el aula se coloca detrás. Interpreta, y de decidir la forma no ha llegado a haber ocasión."},
+          {"characterId": "julia", "role": "supports", "note": "Se ocupa de que el turno se diga en voz alta antes de empezar, que es justo lo que le falta a ella; el diseño le da un papel de orden y ninguna decisión musical."}
+        ]
+      },
+      "nextSceneId": "c3-model"
+    },
+    {
+      "id": "c3-outcome-chosen-not-made",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El grupo aprende a distinguir tres versiones ajenas y a ensayar una; ninguna pareja ha tenido que transformar nada.",
+        "agency": "Elegir entre tres opciones cerradas es una decisión, pero no cambia el material: el motivo sale del aula igual que entró.",
+        "barrier": "Sin exploración propia no hay nada que reconocer como versión de nadie.",
+        "evidence": "Al terminar podrás decir qué variante eligió cada pareja, no qué rasgo decidió conservar."
+      },
+      "feedback": {
+        "supports": "Ofrecer modelos es parte del oficio, y tres variantes bien hechas enseñan mucho sobre qué se puede cambiar en un motivo de dos compases.",
+        "tension": "El paso que el encargo pide es el que va del modelo a una forma propia. Si las versiones ya vienen hechas, ese paso lo has dado tú y el aula solo lo ha ensayado.",
+        "possibleRepair": "Usa una de tus tres variantes como ejemplo de qué clase de cosa se puede tocar, y deja que la versión la decidan ellas.",
+        "observableEvidence": "Vuelve al momento 2 y mira qué tendría que decidir cada pareja para que la versión fuese suya."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Las tres variantes se han mostrado además de sonar, así que puede seguirlas y ensayar la elegida; lo que no existe para nadie es una versión que inventar."},
+          {"characterId": "leo", "role": "performs", "note": "Ensaya la variante elegida con voz y percusión corporal, sin desplazarse; qué cambia en ella ya venía decidido."},
+          {"characterId": "mara", "role": "performs", "note": "Reconoce de oído las tres variantes enseguida y no le sirve de nada: el diseño no pide ninguna propia."},
+          {"characterId": "oscar", "role": "performs", "note": "Ensaya la variante elegida y su lectura le ayuda a fijarla; tampoco a él le corresponde ninguna decisión sobre ella."},
+          {"characterId": "julia", "role": "performs", "note": "Las tres variantes se presentan y se anuncian antes, así que puede prepararse y participar sin sobresaltos; lo que no hay en toda la microclase es una decisión musical que tomar."}
+        ]
+      },
+      "nextSceneId": "c3-explore"
+    },
+    {
+      "id": "c3-outcome-all-at-once",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Suena lleno durante veinte segundos y no se distingue ni una sola versión, tampoco para quien la hizo.",
+        "agency": "Cada pareja ha decidido algo que nadie va a poder oír, y una decisión que no llega a sonar no ha entrado en la clase.",
+        "barrier": "El volumen tapa a quien no puede competir con él, y lo poco que quedaba de referencia viajaba solo por el aire.",
+        "evidence": "No hay nada observable: ni dónde entra una versión, ni qué conserva, ni quién la hizo."
+      },
+      "feedback": {
+        "supports": "Que todo el grupo toque a la vez es una experiencia real y tiene su sitio: sostener algo común entre muchos es de lo que mejor funciona en esta tradición.",
+        "tension": "Aquí lo común no existe: son doce cosas distintas superpuestas. Lo que el encargo pedía oír —dónde entra y dónde sale cada versión— es exactamente lo que desaparece.",
+        "possibleRepair": "Que lo común sea el motivo y que lo distinto tenga turno.",
+        "observableEvidence": "Vuelve al momento 3 y decide dónde se oye lo que ha hecho cada pareja."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Doce versiones a la vez y solo por el aire: la decisión de superponerlas no deja ninguna vía para localizar ninguna, tampoco la suya."},
+          {"characterId": "leo", "role": "performs", "note": "Toca su versión con percusión corporal y queda tapada como las demás."},
+          {"characterId": "mara", "role": "performs", "note": "Toca la suya y no llega a oírla nadie, tampoco ella."},
+          {"characterId": "oscar", "role": "performs", "note": "Toca la suya; esta vez su oficio no le destaca, porque no destaca ninguna."},
+          {"characterId": "julia", "role": "no-route", "note": "El diseño concentra doce fuentes de sonido sin turno ni aviso: no hay manera de anticipar nada ni de sostener la participación dentro de eso."}
+        ]
+      },
+      "nextSceneId": "c3-form"
+    },
+    {
+      "id": "c3-outcome-open-limit-aba",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El eco deja el último tiempo abierto, así que hay algo de cada cual desde el primer minuto, y el límite del momento 2 hace que lo que cambia siga siendo reconocible como ese motivo.",
+        "agency": "Cada pareja decide qué cambia dentro de un terreno común, y el grupo entero sostiene el motivo mientras alguien entra.",
+        "barrier": "Las doce parejas prueban a la vez en la misma sala y nada dice cuánto dura ese rato ni cómo se sabrá que ha terminado.",
+        "evidence": "Se oye dónde se abre el hueco y dónde vuelve el motivo, y al final cada pareja dice qué conservó."
+      },
+      "feedback": {
+        "supports": "Has montado el camino entero: un modelo que ya invita a rematar, una exploración con un límite que deja algo que conservar y una forma que sostiene todo el grupo.",
+        "tension": "El motivo original queda menos firme cuando el eco se abre desde el principio, y con doce parejas la ronda de turnos es larga.",
+        "possibleRepair": "Antes de abrir el primer hueco, dilo entero una vez más entre todos.",
+        "observableEvidence": "Mira quién entra en su hueco sin que nadie le señale."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El motivo se dice y se percute sobre el cuerpo: es visible además de sonoro, y el cambio acordado —final, velocidad o acento— puede señalarse. Decide el suyo."},
+          {"characterId": "leo", "role": "decides", "note": "Voz y percusión corporal son aquí la vía principal y no exigen desplazarse: decide qué cambia su pareja y cómo entra en el hueco."},
+          {"characterId": "mara", "role": "decides", "note": "Todo el proceso ocurre de oído, que es su terreno, y no pasa por ningún papel escrito."},
+          {"characterId": "oscar", "role": "decides", "note": "El eco abierto no premia leer: remata como el resto y decide su versión sin que su oficio le adelante el turno."},
+          {"characterId": "julia", "role": "decides", "note": "El límite dice qué se prueba y cuándo se cierra, y la forma tiene un orden previsible: puede prepararse y decidir."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-open-limit-halves",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Hay algo de cada cual desde el eco abierto, el límite mantiene reconocible lo que cambia y media clase tiene que decir qué reconoce de la otra mitad.",
+        "agency": "Cada pareja decide qué cambia y, cuando escucha, decide además qué nombra de lo que oye.",
+        "barrier": "La forma entera, con las doce parejas dentro, no llega a sonar nunca; y el rato de probar sigue ocurriendo a la vez y sin final anunciado.",
+        "evidence": "Lo que dice quien escucha puede contrastarse con lo que dice quien lo hizo, y las dos cosas se registran."
+      },
+      "feedback": {
+        "supports": "Has puesto el reconocimiento en manos del aula: quien escucha tiene una tarea y no un rato de espera, y eso produce evidencia sin que tengas que juzgar tú.",
+        "tension": "El motivo original queda menos firme con el eco abierto, y la clase no llega a sostener nunca la pieza completa: se oye por mitades.",
+        "possibleRepair": "Reserva los últimos veinte segundos para hacerla una vez entera.",
+        "observableEvidence": "Mira si quien escucha nombra el rasgo antes de que se lo digan."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El motivo vive en el habla y el cuerpo, así que es visible además de sonoro; decide su cambio y, en el turno de escucha, decide qué reconoce y lo muestra."},
+          {"characterId": "leo", "role": "decides", "note": "Decide qué cambia su pareja y lo presenta con voz y percusión corporal; escuchar y nombrar tampoco exige moverse del sitio."},
+          {"characterId": "mara", "role": "decides", "note": "Reconocer de oído qué ha cambiado otra pareja es exactamente lo que sabe hacer, y aquí cuenta como conocimiento."},
+          {"characterId": "oscar", "role": "decides", "note": "El eco abierto no premia leer, y en el turno de escucha su respuesta vale lo mismo que las demás: no reparte turnos."},
+          {"characterId": "julia", "role": "decides", "note": "El límite y el reparto por mitades están dichos de antemano: sabe cuándo presenta y cuándo escucha, y decide en los dos papeles."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-open-declared-aba",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El eco deja el último tiempo abierto y cada pareja dice antes qué va a conservar: hay autoría desde el primer minuto y hay un rasgo que buscar en cada versión, aunque no sea el mismo en todas.",
+        "agency": "Cada pareja elige su propio terreno —qué conserva y qué cambia— y el grupo entero sostiene el motivo mientras alguien entra.",
+        "barrier": "Con doce rasgos distintos, reconocer una versión exige recordar cuál declaró esa pareja; y las doce siguen probando a la vez y sin final anunciado.",
+        "evidence": "Se oye dónde se abre el hueco y dónde vuelve el motivo, y cada versión puede contrastarse con lo que su pareja declaró."
+      },
+      "feedback": {
+        "supports": "Has montado el camino entero y has dejado que sea cada pareja quien elija qué conserva: la autoría alcanza al criterio y no solo al resultado, y aun así hay algo que reconocer.",
+        "tension": "El motivo original queda menos firme cuando el eco se abre desde el principio, y doce criterios distintos hacen más difícil comparar unas versiones con otras.",
+        "possibleRepair": "Pide que cada pareja repita su declaración justo antes de entrar en el hueco.",
+        "observableEvidence": "Mira si lo que suena conserva lo que esa pareja dijo que iba a conservar."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El motivo vive en el habla y el cuerpo, y el rasgo declarado es uno de sus rasgos visibles: decide el suyo y puede mostrar cuál es."},
+          {"characterId": "leo", "role": "decides", "note": "Decide con su pareja qué conservar y qué cambiar, con voz y percusión corporal, y entra con ello en su hueco."},
+          {"characterId": "mara", "role": "decides", "note": "Elegir de oído qué merece conservarse es su terreno, y aquí esa elección es la decisión principal del momento 2."},
+          {"characterId": "oscar", "role": "decides", "note": "El eco abierto no premia leer y elegir el propio criterio tampoco: decide como el resto."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuánto dura el rato de probar y cómo se sabrá que ha terminado, porque el diseño no lo ha fijado en ninguna parte."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-open-declared-halves",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Hay autoría desde el eco abierto, cada pareja dice antes qué va a conservar y media clase escucha para decir qué reconoce, con esa declaración como referencia.",
+        "agency": "Cada pareja elige su propio terreno; quien escucha decide qué nombra de lo que oye.",
+        "barrier": "La forma entera, con las doce parejas dentro, no llega a sonar nunca; y el rato de probar sigue ocurriendo a la vez y sin final anunciado.",
+        "evidence": "Lo que dice quien escucha puede contrastarse con lo que la pareja declaró antes de tocar."
+      },
+      "feedback": {
+        "supports": "Reconocer deja de ser cosa tuya: quien escucha tiene una tarea y una referencia concreta contra la que contrastarla, y el criterio lo ha puesto cada pareja.",
+        "tension": "El motivo original queda menos firme con el eco abierto, y con doce criterios distintos quien escucha necesita saber cuál buscaba cada pareja antes de decir nada.",
+        "possibleRepair": "Que la declaración se diga en voz alta justo antes de cada presentación.",
+        "observableEvidence": "Mira si quien escucha nombra el rasgo antes de que se lo confirmen."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El motivo vive en el habla y el cuerpo: decide qué conserva y, en el turno de escucha, decide qué reconoce y lo muestra."},
+          {"characterId": "leo", "role": "decides", "note": "Decide su criterio y lo presenta con voz y percusión corporal; escuchar y nombrar tampoco le exige moverse."},
+          {"characterId": "mara", "role": "decides", "note": "Elegir de oído qué conservar y reconocerlo en las demás son las dos cosas que sabe hacer, y aquí son la tarea."},
+          {"characterId": "oscar", "role": "decides", "note": "El eco abierto no premia leer, y en el turno de escucha su respuesta vale lo mismo que las demás."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuánto dura el rato de probar y qué hay que escuchar exactamente, porque el diseño no lo ha fijado."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-closed-limit-aba",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Todo el grupo parte del mismo motivo exacto, y por eso el límite del momento 2 produce versiones cuyo rasgo conservado se distingue con claridad.",
+        "agency": "La decisión llega toda de golpe en el momento 2, después de un primer momento en el que nadie decidía nada.",
+        "barrier": "La imitación exacta se come parte de los dos minutos y la exploración entra con prisa; además, las doce parejas prueban a la vez y sin final anunciado.",
+        "evidence": "Se oye dónde se abre el hueco y dónde vuelve el motivo, y el rasgo conservado destaca porque el original lo tiene todo el mundo."
+      },
+      "feedback": {
+        "supports": "Asentar el modelo antes de moverlo es una decisión defendible y tiene un premio concreto: cuando el punto de partida es idéntico para todos, cualquier cosa que se conserve se oye enseguida.",
+        "tension": "El precio es el tiempo y el orden: durante el primer momento nadie decide nada, y si la imitación se alarga, el paso a la autoría llega apretado.",
+        "possibleRepair": "Ponle un número de ecos al momento 1 y respétalo.",
+        "observableEvidence": "Mira cuánto queda del reloj cuando empieza el momento 2."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El motivo se dice y se percute sobre el cuerpo, así que lo tiene entero y a la vista antes de cambiar nada; decide su cambio dentro del límite acordado."},
+          {"characterId": "leo", "role": "decides", "note": "Imita y después decide con voz y percusión corporal; ni una cosa ni la otra le piden desplazarse."},
+          {"characterId": "mara", "role": "decides", "note": "Retener el modelo exacto es también trabajo de oído: llega con él entero al momento 2 y decide su versión."},
+          {"characterId": "oscar", "role": "proposes", "note": "La consigna de repetirlo hasta que salga igual convierte su eco en la referencia del aula sin que nadie lo decida: propone y el resto se ajusta. Es la decisión de diseño la que le da ese sitio, no él quien lo toma."},
+          {"characterId": "julia", "role": "decides", "note": "El momento 1 es previsible y el límite del momento 2 dice qué se prueba: sabe qué va a pasar y decide su versión."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-closed-limit-halves",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El punto de partida idéntico y el límite del momento 2 hacen que la mitad que escucha pueda nombrar con precisión qué se ha conservado en cada versión.",
+        "agency": "Quien crea decide dentro del límite; quien escucha decide qué nombra, y esa segunda decisión llega justo después de la primera.",
+        "barrier": "La imitación exacta se come parte de los dos minutos, la forma completa no llega a sonar con todo el grupo dentro y el rato de probar sigue ocurriendo a la vez.",
+        "evidence": "El rasgo conservado se puede nombrar y contrastar, porque el original lo tiene todo el mundo exactamente igual."
+      },
+      "feedback": {
+        "supports": "Es la combinación que más limpio deja el reconocimiento: modelo común, cambio acotado y alguien cuya tarea es decir qué reconoce.",
+        "tension": "A cambio, la autoría llega tarde y acotada, y la clase nunca llega a sostener la pieza entera: siempre hay media clase fuera.",
+        "possibleRepair": "Si el reconocimiento sale bien a la primera, acorta el momento 1 la próxima vez.",
+        "observableEvidence": "Mira si quien escucha nombra el rasgo sin dudar y sin que se lo digan."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Llega al momento 2 con el motivo entero, dicho y percutido a la vista; decide su cambio y, al escuchar, decide qué reconoce y lo muestra."},
+          {"characterId": "leo", "role": "decides", "note": "Imita, decide su cambio y lo presenta con voz y percusión corporal; escuchar y nombrar tampoco le exige moverse."},
+          {"characterId": "mara", "role": "decides", "note": "Nombrar de oído qué ha cambiado otra pareja es su terreno, y aquí es la tarea principal de media clase."},
+          {"characterId": "oscar", "role": "proposes", "note": "Repetirlo hasta que salga igual convierte su eco en la referencia sin que nadie lo decida; en el turno de escucha, en cambio, su respuesta vale lo mismo que las demás."},
+          {"characterId": "julia", "role": "decides", "note": "Momento previsible, límite dicho y reparto por mitades anunciado: sabe en todo momento qué le toca y decide en los dos papeles."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-closed-declared-aba",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Todo el grupo parte del mismo motivo exacto y cada pareja elige después qué conservar de él: el punto de partida común hace que el rasgo declarado se oiga con nitidez.",
+        "agency": "Nadie decide nada en el momento 1, y en el momento 2 cada pareja decide incluso el criterio.",
+        "barrier": "La imitación exacta se come parte de los dos minutos y la elección llega con prisa; y las doce parejas siguen probando a la vez y sin final anunciado.",
+        "evidence": "Se oye dónde se abre el hueco y dónde vuelve el motivo, y el rasgo declarado destaca porque el original lo tiene todo el mundo igual."
+      },
+      "feedback": {
+        "supports": "Asentar el modelo y dejar después que cada pareja elija qué conservar se sostienen bien: cuanto más firme es el punto de partida, más se nota lo que alguien decide guardar de él.",
+        "tension": "El precio es el tiempo y el orden: durante el momento 1 nadie decide nada, y si la imitación se alarga, la elección del criterio llega apretada.",
+        "possibleRepair": "Ponle un número de ecos al momento 1 y respétalo.",
+        "observableEvidence": "Mira cuánto queda del reloj cuando cada pareja tiene que declarar su rasgo."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Llega con el motivo entero, dicho y percutido a la vista, y elige un rasgo que puede mostrar además de oír."},
+          {"characterId": "leo", "role": "decides", "note": "Imita y después decide con su pareja qué conservar, con voz y percusión corporal."},
+          {"characterId": "mara", "role": "decides", "note": "Retener el modelo exacto es trabajo de oído, y elegir qué conservar también: las dos cosas están en su terreno."},
+          {"characterId": "oscar", "role": "proposes", "note": "La consigna de repetirlo hasta que salga igual convierte su eco en la referencia del aula sin que nadie lo decida; elegir criterio, en cambio, no le adelanta."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuánto dura el rato de probar y cómo se sabrá que ha terminado: el momento 1 era previsible y el momento 2 ha dejado de serlo."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-closed-declared-halves",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El aula asegura un motivo idéntico para todos, cada pareja elige qué conservar de él y la otra mitad escucha para decir qué reconoce con esa declaración delante.",
+        "agency": "Nadie decide nada en el momento 1; en el momento 2 cada pareja decide el criterio y, al escuchar, decide qué nombra.",
+        "barrier": "La imitación exacta se come parte de los dos minutos, la forma completa no llega a sonar con todo el grupo dentro y el rato de probar sigue ocurriendo a la vez.",
+        "evidence": "Quien escucha tiene el motivo original fresco y la declaración de la pareja: puede decir si el rasgo está o no está."
+      },
+      "feedback": {
+        "supports": "Es la combinación que más limpio deja el reconocimiento sin quitarle a nadie la elección: modelo común, criterio propio y alguien cuya tarea es decir qué reconoce.",
+        "tension": "A cambio, la autoría llega tarde y la clase nunca llega a sostener la pieza entera: siempre hay media clase fuera.",
+        "possibleRepair": "Si el reconocimiento sale bien a la primera, acorta el momento 1 la próxima vez.",
+        "observableEvidence": "Mira si quien escucha nombra el rasgo declarado sin dudar y sin que se lo confirmen."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Llega con el motivo entero y a la vista, elige un rasgo que puede mostrar y, al escuchar, decide qué reconoce."},
+          {"characterId": "leo", "role": "decides", "note": "Imita, decide su criterio y lo presenta con voz y percusión corporal, sin desplazarse."},
+          {"characterId": "mara", "role": "decides", "note": "Retiene el modelo de oído, elige de oído qué conservar y reconoce de oído lo de las demás."},
+          {"characterId": "oscar", "role": "proposes", "note": "Repetirlo hasta que salga igual convierte su eco en la referencia sin que nadie lo decida; en el turno de escucha su respuesta vale lo mismo que las demás."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuánto dura el rato de probar, porque el reparto por mitades sí está anunciado y ese rato no."}
+        ]
+      },
+      "nextSceneId": "c3-incident"
+    },
+    {
+      "id": "c3-outcome-unbuilt",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "No hay microclase que probar: faltan momentos por montar.",
+        "agency": "Sin las tres decisiones, esta pantalla no puede decir quién decide qué.",
+        "barrier": "Inventar aquí un resultado sería afirmar algo de un aula que todavía no existe.",
+        "evidence": "La que se elija en los tres momentos; ahora mismo no hay ninguna."
+      },
+      "feedback": {
+        "supports": "Has entrado directamente a la pantalla que afirma qué le pasa al aula, y eso es un uso previsto: el progreso orienta y no bloquea.",
+        "tension": "Lo que no puede hacerse es dar por probada una microclase que nadie ha montado.",
+        "possibleRepair": "Monta los tres momentos y vuelve; el recorrido no ha perdido nada.",
+        "observableEvidence": "Empieza por el momento 1 y decide con qué material entra el motivo."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "leo", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "mara", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "oscar", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "julia", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."}
+        ]
+      },
+      "nextSceneId": "c3-model"
+    },
+    {
+      "id": "c3-revision-listening-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo distingue y nombra dos contrastes del motivo antes de volver a usarlos, y después cada versión se prueba delante de alguien cuya tarea es decir qué ha cambiado.",
+        "agency": "Cada pareja sigue decidiendo qué cambia: lo que se ha graduado es la escucha, no la creación.",
+        "barrier": "El camino hasta la versión propia se alarga y queda menos tiempo para probar.",
+        "evidence": "Puede pedirse a cualquiera que diga cuál de los dos contrastes ha sonado y contrastarlo con lo que dice la pareja que lo hizo."
+      },
+      "feedback": {
+        "supports": "Preparar el oído por pasos —de una diferencia gruesa a una fina y de ahí a una respuesta musical— es lo que permite que después alguien reconozca un rasgo conservado, y llevarla a la vista y a la vibración la pone al alcance de todos.",
+        "tension": "Si la comparación se alarga, la sesión puede acabar clasificando sonidos en lugar de crear ninguna forma: la progresión auditiva vale por lo que hace posible después, no por sí sola.",
+        "possibleRepair": "Dos contrastes bastan; el tercero ya es otro día.",
+        "observableEvidence": "Comprueba si alguien que no lo hizo puede decir qué cambió."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Los dos contrastes se muestran también a la vista y en vibración, así que los distingue y decide cuál usa, y nombra el de otras parejas sin depender del aire."},
+          {"characterId": "leo", "role": "decides", "note": "Compara y decide con voz y percusión corporal, y los turnos de dos parejas no exigen moverse del sitio."},
+          {"characterId": "mara", "role": "decides", "note": "Distinguir contrastes de oído es exactamente lo que sabe hacer, y aquí la clase entera lo trata como conocimiento."},
+          {"characterId": "oscar", "role": "decides", "note": "Escuchar y nombrar no premia leer, y en los turnos de dos parejas espera como todo el mundo: su oficio deja de repartir el orden."},
+          {"characterId": "julia", "role": "decides", "note": "Los turnos de dos parejas están dichos de antemano y la comparación tiene un final claro: sabe cuánto dura cada cosa y decide."}
+        ]
+      },
+      "nextSceneId": "c3-reveal"
+    },
+    {
+      "id": "c3-revision-entries-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada turno empieza y termina en un sitio que todo el mundo percibe, y entre una tanda y otra el aula vuelve a escuchar en lugar de acumular sonido.",
+        "agency": "Cada pareja decide qué cambia y también cuándo entra, porque el gesto le da un comienzo que puede tomar sin esperar a que tú lo des.",
+        "barrier": "Lo que se oiga dentro del turno sigue dependiendo de lo que se acordara en el momento 2: esta revisión repara las condiciones, no la consigna.",
+        "evidence": "Se oye dónde empieza y dónde acaba cada versión sin que nadie tenga que avisar por encima."
+      },
+      "feedback": {
+        "supports": "El gesto y el silencio están haciendo aquí trabajo musical: marcan el comienzo y el final de una forma, que es justo lo que el encargo pide poder oír. Y al ser visibles y vibrar, abren el turno a quien no puede tomarlo del aire.",
+        "tension": "Un gesto que no abre nada se convierte en una rutina de calma. Si dejara de servir para entrar y salir, habrías cambiado ruido por silencio y no por música.",
+        "possibleRepair": "Que el gesto siga marcando el turno y no el pulso: en cuanto marca el pulso, vuelves a dar tú la entrada.",
+        "observableEvidence": "Comprueba si las entradas ocurren sin que tengas que contar."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El gesto que abre el turno es visible y la vibración lo acompaña: sabe cuándo entra y decide su entrada sin depender de una señal sonora."},
+          {"characterId": "leo", "role": "decides", "note": "El gesto se acuerda con las manos y el turno se toma desde el sitio: decide cuándo entra y con qué."},
+          {"characterId": "mara", "role": "decides", "note": "Con las tandas separadas por escucha, lo que hace su pareja llega a oírse: decide su versión y consigue que exista para los demás."},
+          {"characterId": "oscar", "role": "decides", "note": "El gesto que abre el turno rota entre las parejas y no se queda con él; cuando no le toca, escucha."},
+          {"characterId": "julia", "role": "decides", "note": "Las dos tandas están anunciadas y el silencio antes de entrar es previsible: puede prepararse, entrar y decidir."}
+        ]
+      },
+      "nextSceneId": "c3-reveal"
+    },
+    {
+      "id": "c3-revision-calm-outcome",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El aula queda en silencio y nadie ha convertido el motivo en nada.",
+        "agency": "La única decisión que quedaba viva —qué conserva cada versión— se aplaza a otro día.",
+        "barrier": "Lo que apareció fue que doce parejas no podían oírse a la vez; quitar la música baja el volumen sin tocar esa condición.",
+        "evidence": "No queda nada observable del objetivo de hoy."
+      },
+      "feedback": {
+        "supports": "La relajación activa, el cuidado del clima y la alternancia entre concentración y distensión no son un adorno: pertenecen a una tradición pedagógica seria y preparan de verdad la escucha, el gesto y la entonación.",
+        "tension": "Lo que las convierte en pedagogía musical es que preparen una acción musical. Separadas de ella se quedan en una rutina de calma: los dos minutos se van en bajar el volumen y el encargo sigue sin hacerse.",
+        "possibleRepair": "Conserva el silencio y la preparación, y ponlos a abrir un turno.",
+        "observableEvidence": "Vuelve a la revisión y busca un cambio que toque la condición que el incidente reveló."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "supports", "note": "La actividad deja de exigir información sonora porque deja de haber actividad musical: su vía no mejora, se vacía."},
+          {"characterId": "leo", "role": "supports", "note": "Acompaña la propuesta desde su sitio; la versión que tenía preparada se queda sin ocasión de sonar."},
+          {"characterId": "mara", "role": "supports", "note": "Lo que no conseguía que se oyera sigue sin oírse, ahora porque ya no hay nada que oír."},
+          {"characterId": "oscar", "role": "supports", "note": "Acompaña como el resto; la escucha tranquila no le da ni le quita ningún papel."},
+          {"characterId": "julia", "role": "supports", "note": "El cambio se anuncia y el silencio le sienta bien; lo que ha desaparecido es la música que iba a hacer."}
+        ]
+      },
+      "nextSceneId": "c3-revision"
+    },
+    {
+      "id": "c3-reveal-limit-listening",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Las versiones conservan un rasgo del motivo y el aula ha aprendido a distinguirlo y a nombrarlo antes de usarlo.",
+        "agency": "Cada pareja decide qué conserva y qué cambia dentro de las tres maneras que pusiste tú; graduar la escucha no le ha quitado a nadie esa decisión.",
+        "barrier": "El camino se ha alargado —preparar el oído ocupa tiempo que no está en la creación— y el criterio de qué conservar lo pusiste tú.",
+        "evidence": "Alguien que no hizo una versión puede decir qué conserva del motivo, y cada versión ocupa su turno dentro de la forma que montaste."
+      },
+      "feedback": {
+        "supports": "Has montado un proceso completo —imitar, explorar con un límite y fijar una versión— y lo has sostenido graduando la escucha: por eso el rasgo conservado no solo existe, además puede reconocerse y nombrarse.",
+        "tension": "Queda pendiente lo que la otra lente habría dejado ver: dónde empieza y dónde termina exactamente cada versión, que es lo que un comienzo preparado hace perceptible sin que nadie avise.",
+        "possibleRepair": "En otra sesión, abre y cierra cada turno con un gesto acordado y un silencio.",
+        "observableEvidence": "Comprueba si el rasgo se nombra igual desde dentro y desde fuera de la pareja."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El contraste está a la vista y en vibración además de en el aire: decide su versión y nombra la de otras parejas."},
+          {"characterId": "leo", "role": "decides", "note": "Decide qué conserva y qué cambia con voz y percusión corporal, y nombra desde su sitio."},
+          {"characterId": "mara", "role": "decides", "note": "Reconocer y nombrar de oído es su terreno, y el aula lo trata como conocimiento y no como una habilidad aparte."},
+          {"characterId": "oscar", "role": "decides", "note": "Decide su versión y espera turno como el resto: nada en este cierre le pide organizar a nadie."},
+          {"characterId": "julia", "role": "decides", "note": "El límite, los contrastes y los turnos están dichos de antemano: decide con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c3-justification"
+    },
+    {
+      "id": "c3-reveal-limit-entries",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Las versiones conservan un rasgo del motivo y se oye con precisión dónde empieza y dónde termina cada una.",
+        "agency": "Cada pareja decide qué conserva dentro del terreno que pusiste tú, y decide también cuándo entra: el turno lo toma, no se lo dan.",
+        "barrier": "Que el rasgo se conserve no garantiza que alguien de fuera de la pareja sepa nombrarlo, y el criterio de qué conservar lo pusiste tú.",
+        "evidence": "Cada versión ocupa su turno, y las entradas y las salidas ocurren en su sitio sin que nadie las anuncie por encima."
+      },
+      "feedback": {
+        "supports": "Has montado un proceso completo —imitar, explorar con un límite y fijar una versión— y lo has sostenido preparando el gesto, el silencio y la atención: por eso la forma se oye como forma y no como una sucesión de turnos.",
+        "tension": "Queda pendiente lo que la otra lente habría dejado ver: si el rasgo conservado puede reconocerlo y nombrarlo alguien que no lo hizo, que es lo que una escucha graduada comprueba.",
+        "possibleRepair": "En otra sesión, compara dos contrastes del motivo antes de dejar explorar.",
+        "observableEvidence": "Comprueba si alguien de fuera de la pareja sabría decir qué conserva cada versión."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El gesto que abre el turno es visible y la vibración lo acompaña: decide su versión y decide cuándo entra."},
+          {"characterId": "leo", "role": "decides", "note": "Toma el turno desde su sitio con el gesto acordado y decide qué conserva su versión."},
+          {"characterId": "mara", "role": "decides", "note": "Las tandas separadas por escucha hacen que su versión llegue a oírse, y decide qué conserva de oído."},
+          {"characterId": "oscar", "role": "decides", "note": "El gesto de apertura rota y no se queda con él: decide su versión y escucha cuando no le toca."},
+          {"characterId": "julia", "role": "decides", "note": "El límite y las tandas están anunciados y el silencio antes de entrar es previsible: decide con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c3-justification"
+    },
+    {
+      "id": "c3-reveal-declared-listening",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada versión conserva el rasgo que su propia pareja eligió, y el aula ha aprendido a distinguir y nombrar contrastes del motivo antes de usarlos.",
+        "agency": "La autoría alcanzó también al criterio: cada pareja decidió qué conservaba, y graduar la escucha no le quitó a nadie esa decisión.",
+        "barrier": "Con doce criterios distintos, comparar unas versiones con otras cuesta más que si el terreno hubiera sido común.",
+        "evidence": "Alguien que no hizo una versión puede decir qué conserva y contrastarlo con lo que su pareja declaró, y cada versión ocupa su turno dentro de la forma que montaste."
+      },
+      "feedback": {
+        "supports": "Has dejado el criterio en manos de cada pareja y has graduado la escucha para que el rasgo elegido pueda reconocerse: la autoría llega al qué y al cómo, y aun así hay algo que reconocer.",
+        "tension": "Queda pendiente lo que la otra lente habría dejado ver: dónde empieza y dónde termina exactamente cada versión, que es lo que un comienzo preparado hace perceptible sin que nadie avise.",
+        "possibleRepair": "En otra sesión, abre y cierra cada turno con un gesto acordado y un silencio.",
+        "observableEvidence": "Comprueba si el rasgo se nombra igual desde dentro y desde fuera de la pareja."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El contraste está a la vista y en vibración además de en el aire: elige su rasgo y nombra el de otras parejas."},
+          {"characterId": "leo", "role": "decides", "note": "Elige qué conserva y qué cambia con voz y percusión corporal, y nombra desde su sitio."},
+          {"characterId": "mara", "role": "decides", "note": "Elegir y reconocer de oído es su terreno, y el aula lo trata como conocimiento y no como una habilidad aparte."},
+          {"characterId": "oscar", "role": "decides", "note": "Elige su criterio y espera turno como el resto: nada en este cierre le pide organizar a nadie."},
+          {"characterId": "julia", "role": "decides", "note": "Los contrastes y los turnos de dos parejas están dichos de antemano: decide con lo que va a ocurrir ya anunciado."}
+        ]
+      },
+      "nextSceneId": "c3-justification"
+    },
+    {
+      "id": "c3-reveal-declared-entries",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada versión conserva el rasgo que su propia pareja eligió y se oye con precisión dónde empieza y dónde termina cada una.",
+        "agency": "Cada pareja decidió qué conservaba y decide también cuándo entra: el turno lo toma, no se lo dan.",
+        "barrier": "Con doce criterios distintos, que alguien de fuera nombre el rasgo exige conocer antes lo que esa pareja declaró.",
+        "evidence": "Cada versión ocupa su turno y sale de él en su sitio, y dentro de cada una hay un rasgo declarado que buscar."
+      },
+      "feedback": {
+        "supports": "Has dejado el criterio en manos de cada pareja y has preparado el gesto, el silencio y la atención: la forma se oye como forma y cada versión llega con algo suyo dentro.",
+        "tension": "Queda pendiente lo que la otra lente habría dejado ver: si el rasgo elegido puede reconocerlo y nombrarlo alguien que no lo hizo, que es lo que una escucha graduada comprueba.",
+        "possibleRepair": "En otra sesión, compara dos contrastes del motivo antes de dejar elegir.",
+        "observableEvidence": "Comprueba si alguien de fuera de la pareja sabría decir qué conserva cada versión."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El gesto que abre el turno es visible y la vibración lo acompaña: elige su rasgo y decide cuándo entra."},
+          {"characterId": "leo", "role": "decides", "note": "Toma el turno desde su sitio con el gesto acordado y decide qué conserva su versión."},
+          {"characterId": "mara", "role": "decides", "note": "Las tandas separadas por escucha hacen que se oiga lo que eligió conservar."},
+          {"characterId": "oscar", "role": "decides", "note": "El gesto de apertura rota y no se queda con él: elige su criterio y escucha cuando no le toca."},
+          {"characterId": "julia", "role": "decides", "note": "Las dos tandas están anunciadas y el silencio antes de entrar es previsible: decide con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c3-justification"
+    },
+    {
+      "id": "c3-reveal-shared",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Un proceso que va del modelo a una forma propia necesita las tres cosas: algo que imitar, sitio para explorar y una forma donde lo creado pueda oírse. Aquí todavía no hay ninguna de las tres.",
+        "agency": "Sin las tres decisiones, esta pantalla no puede decir quién decide qué en tu clase.",
+        "barrier": "Inventar aquí un reparto sería afirmar algo de un aula que no ha ocurrido.",
+        "evidence": "La que produzca el montaje: nombrar el rasgo conservado, o localizar el principio y el final de cada versión."
+      },
+      "feedback": {
+        "supports": "Has entrado directamente al cierre histórico, y eso es un uso previsto: el progreso orienta y no bloquea, y el marco de arriba es cierto siempre.",
+        "tension": "Lo que no puede hacerse es dar por recorrido un proceso que nadie ha montado. Este cierre habla del principio, no de tu clase, y por eso no lleva a la justificación: lleva al momento 1.",
+        "possibleRepair": "Monta los tres momentos y vuelve; el recorrido no ha perdido nada.",
+        "observableEvidence": "Empieza por el momento 1 y decide con qué material entra el motivo."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "leo", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "mara", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "oscar", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "julia", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."}
+        ]
+      },
+      "nextSceneId": "c3-model"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ],
+  "journalTemplate": {
+    "objective": "Convertir un motivo de dos compases dicho y percutido en una versión propia que conserve un rasgo reconocible, y colocarla en una forma donde se oiga dónde entra y dónde sale.",
+    "first-decision": "Evidencia elegida en el encargo: {{action:c3-brief}} · Momento 1, cómo conoce el grupo el motivo: {{action:c3-model}} · Momento 2, qué ocurre entre el modelo y una versión propia: {{action:c3-explore}}",
+    "maintained-decision": "Mantengo el momento 3, el sitio donde cada versión puede oírse: {{action:c3-form}} Lo conservo porque el incidente cambió las condiciones en que se explora —doce parejas probando a la vez en la misma sala—, no el sitio que cada versión necesita para llegar a sonar.",
+    "revised-decision": "Tras el incidente reviso en qué condiciones se explora: {{action:c3-revision}}",
+    "trigger": "Doce parejas probando a la vez en la misma sala: lo que más sonaba pasó a ser la referencia y dejó de poder oírse la idea de cada pareja.",
+    "condition-risk": "{{grammar:conditionRisk}}",
+    "adaptation": "{{grammar:adaptation}}",
+    "observable-evidence": "{{grammar:evidence}}",
+    "defensible-alternative": "La otra lente también repara lo que el incidente reveló y comprueba otra cosa: graduar de oído los contrastes hace que el rasgo conservado pueda reconocerse y nombrarse; preparar el gesto, el silencio y las tandas hace que se oiga dónde empieza y dónde termina cada versión. Ninguna de las dos sustituye el proceso de imitar, explorar y crear: lo sostienen, y ninguna puede tomar por mí la decisión del momento 2.",
+    "final-grammar": "Para {{grammar:objective}}, uso {{grammar:principleAction}} porque {{grammar:conditionRisk}}; incorporo {{grammar:adaptation}} y comprobaré {{grammar:evidence}}."
+  },
+  "completion": {
+    "eyebrow": "Caso 3 completado",
+    "title": "Ya montas tres momentos que llevan de un modelo a una forma propia",
+    "body": "Has decidido con qué material entra el motivo, qué tiene que hacer cada pareja con él y dónde se oye lo que haya hecho, y has comprobado que cambiar uno de los tres momentos cambia lo que ocurre en los otros dos. Al revisar has añadido una lente que sostiene ese proceso sin sustituirlo. La campaña conserva aquí lo aprendido.",
+    "nextLabel": "Volver a la campaña",
+    "nextRoute": "#/campana"
+  }
+}

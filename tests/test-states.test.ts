@@ -92,11 +92,22 @@ describe("la bitácora de prueba se construye con el contenido real", () => {
     }
   });
 
+  /*
+   * Los enfoques anotados salen del recorrido, no del encabezado del caso. Mientras un caso
+   * combinaba dos tradiciones que se recorrían siempre, las dos listas coincidían. Un caso que
+   * declara un proceso y dos lentes, de las que sólo una llega a elegirse, anota menos: lo que no
+   * puede hacer nunca es anotar una tradición que el caso no declara.
+   */
   it("no está escrita a mano: cambia si cambia el contenido", () => {
     for (const entry of entries) {
       const item = playableCases.find((candidate) => candidate.id === entry.caseId);
       expect(item, entry.caseId).toBeDefined();
-      expect(entry.combinedApproachIds).toEqual(item?.approachIds);
+      expect(entry.combinedApproachIds.length, entry.caseId).toBeGreaterThan(0);
+      for (const approachId of entry.combinedApproachIds) {
+        expect(item?.approachIds, entry.caseId).toContain(approachId);
+      }
+      const declaraPorAccion = item?.actions.some((action) => action.approachIds?.length);
+      if (!declaraPorAccion) expect(entry.combinedApproachIds).toEqual(item?.approachIds);
     }
   });
 

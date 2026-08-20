@@ -63,6 +63,16 @@ export const ActionSchema = z
     principleIds: z.array(IdentifierSchema).min(1),
     consequenceId: IdentifierSchema,
     tags: z.array(IdentifierSchema).default([]),
+    /**
+     * Tradición que esta decisión pone en juego, cuando el caso necesita distinguirlo.
+     *
+     * La bitácora registraba como «principios combinados» los enfoques del caso entero, y eso
+     * bastaba mientras un caso combinaba dos tradiciones que se recorrían siempre. El caso 3
+     * declara tres —un proceso y dos lentes— de las que sólo una lente llega a elegirse: anotar las
+     * tres afirmaría una combinación que nadie hizo. Es opcional, y un caso que no la declare
+     * conserva el comportamiento anterior intacto.
+     */
+    approachIds: z.array(ApproachIdSchema).min(1).optional(),
   })
   .strict();
 

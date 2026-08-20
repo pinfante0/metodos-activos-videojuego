@@ -433,6 +433,7 @@ export function validateCaseDefinition(
   const entryIssue = missingReference(sceneIds, value.entrySceneId, "entrySceneId", "una escena");
   if (entryIssue) issues.push(entryIssue);
 
+  const declaredApproaches = new Set<string>(value.approachIds);
   value.actions.forEach((action, index) => {
     const issue = missingReference(
       consequenceIds,
@@ -441,6 +442,23 @@ export function validateCaseDefinition(
       "una consecuencia",
     );
     if (issue) issues.push(issue);
+
+    /*
+     * El enfoque que una acción pone en juego alimenta los «principios combinados» de la bitácora.
+     * Si pudiera nombrar una tradición que el caso no declara, la bitácora acabaría atribuyendo al
+     * recorrido una combinación que la unidad no cubre, y nadie lo vería hasta leer una entrada
+     * guardada.
+     */
+    action.approachIds?.forEach((approachId, approachIndex) => {
+      if (declaredApproaches.has(approachId)) return;
+      issues.push({
+        code: "approach-outside-case",
+        path: `actions.${index}.approachIds.${approachIndex}`,
+        message:
+          `La acción ${action.id} pone en juego el enfoque ${approachId}, que este caso no declara. ` +
+          "La bitácora anotaría una tradición que la unidad no cubre",
+      });
+    });
   });
 
   value.incidents.forEach((incident, incidentIndex) => {

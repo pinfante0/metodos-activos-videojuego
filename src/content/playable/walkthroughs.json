@@ -332,6 +332,208 @@
       }
     },
     {
+      "id": "caso-3-modelo-abierto-y-escucha-graduada",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · modelo abierto, límite y escucha graduada",
+      "purpose": "El camino completo del montador: un modelo que ya invita a rematar, una exploración acotada y una forma que sostiene todo el grupo, revisada con la lente de la progresión auditiva. Atraviesa todas las pantallas nuevas de la unidad.",
+      "actions": [
+        "c3-brief-recognisable-variation",
+        "c3-model-open-echo",
+        "c3-explore-one-trait",
+        "c3-form-aba-sustained",
+        "c3-revision-graded-listening"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": [
+          "c3-feedback-recognisable",
+          "c3-outcome-open-limit-aba",
+          "c3-revision-listening-outcome",
+          "c3-reveal-limit-listening"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-modelo-cerrado-y-turnos-preparados",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · modelo cerrado, límite y turnos preparados",
+      "purpose": "La otra prioridad defendible en el momento 1 —asentar el motivo antes de moverlo— con el cierre por mitades y la otra lente, la del gesto y la atención que abren y cierran cada turno.",
+      "actions": [
+        "c3-brief-recognisable-variation",
+        "c3-model-closed-echo",
+        "c3-explore-one-trait",
+        "c3-form-listen-and-name",
+        "c3-revision-prepared-entries"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c3-outcome-closed-limit-halves",
+          "c3-revision-entries-outcome",
+          "c3-reveal-limit-entries"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-rasgo-declarado-con-forma-sostenida",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · criterio declarado por cada pareja dentro de una forma sostenida",
+      "purpose": "La segunda exploración defendible: cada pareja elige y declara qué rasgo conserva. La versión sigue siendo reconocible, pero contra doce criterios distintos en lugar de uno común, y la lente de la escucha graduada es la que lo hace nombrable.",
+      "actions": [
+        "c3-brief-recognisable-variation",
+        "c3-model-open-echo",
+        "c3-explore-declared-trait",
+        "c3-form-aba-sustained",
+        "c3-revision-graded-listening"
+      ],
+      "expect": {
+        "consequenceIds": ["c3-outcome-open-declared-aba", "c3-reveal-declared-listening"],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-rasgo-declarado-con-mitades",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · modelo común y criterio propio, comprobado por la otra mitad",
+      "purpose": "Un punto de partida idéntico para todos y un criterio elegido por cada pareja: la mitad que escucha tiene el motivo fresco y la declaración delante, y puede decir si el rasgo está o no está.",
+      "actions": [
+        "c3-brief-recognisable-variation",
+        "c3-model-closed-echo",
+        "c3-explore-declared-trait",
+        "c3-form-listen-and-name",
+        "c3-revision-prepared-entries"
+      ],
+      "expect": {
+        "consequenceIds": ["c3-outcome-closed-declared-halves", "c3-reveal-declared-entries"],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-instrumento-por-delante",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · las láminas primero, y la revisión que cambia música por calma",
+      "purpose": "La tensión que el mapa de campaña pide para esta unidad: el instrumento concentra el interés antes de que exista ninguna decisión musical. Recorre además el indicio falso del encargo, la segunda exploración defendible y la revisión que convierte el cuidado del clima en una rutina aislada.",
+      "actions": [
+        "c3-brief-everyone-plays",
+        "c3-brief-recognisable-variation",
+        "c3-model-instruments-first",
+        "c3-explore-one-trait",
+        "c3-form-aba-sustained",
+        "c3-model-open-echo",
+        "c3-explore-declared-trait",
+        "c3-form-listen-and-name",
+        "c3-revision-calm-instead",
+        "c3-revision-graded-listening"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c3-feedback-everyone-plays",
+          "c3-outcome-instruments-first",
+          "c3-outcome-open-declared-halves",
+          "c3-revision-calm-outcome",
+          "c3-revision-listening-outcome",
+          "c3-reveal-declared-listening"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-variaciones-ya-hechas",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · elegir entre tres variaciones ya preparadas",
+      "purpose": "El momento 2 sin autoría: elegir entre opciones cerradas no cambia el material y el paso del modelo a la forma propia lo acaba dando el docente. Consume además el otro indicio falso del encargo, el de la repetición exacta como objetivo entero.",
+      "actions": [
+        "c3-brief-exact-repeat",
+        "c3-brief-recognisable-variation",
+        "c3-model-closed-echo",
+        "c3-explore-teacher-menu",
+        "c3-form-listen-and-name",
+        "c3-explore-one-trait",
+        "c3-form-aba-sustained",
+        "c3-revision-prepared-entries"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c3-feedback-exact-repeat",
+          "c3-outcome-chosen-not-made",
+          "c3-outcome-closed-limit-aba",
+          "c3-reveal-limit-entries"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-todas-a-la-vez",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · las doce versiones a la vez",
+      "purpose": "La tercera tensión declarada en el mapa: la creación pierde claridad auditiva. Doce versiones superpuestas no dejan nada observable, y el reintento cambia solo el momento 3.",
+      "actions": [
+        "c3-brief-recognisable-variation",
+        "c3-model-open-echo",
+        "c3-explore-one-trait",
+        "c3-form-all-at-once",
+        "c3-form-listen-and-name",
+        "c3-revision-prepared-entries"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c3-outcome-all-at-once",
+          "c3-outcome-open-limit-halves",
+          "c3-reveal-limit-entries"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-enlace-directo-al-montaje",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · enlace directo a la prueba, sin montaje",
+      "purpose": "Entrar por el medio a la pantalla que afirma qué le pasa al aula sin haber montado ningún momento. Debe declarar el hueco en lugar de inventar un resultado y devolver al momento 1 sin bloquear nada.",
+      "startSceneId": "c3-test",
+      "actions": [
+        "c3-model-closed-echo",
+        "c3-explore-declared-trait",
+        "c3-form-aba-sustained",
+        "c3-revision-prepared-entries"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c3-outcome-unbuilt",
+          "c3-outcome-closed-declared-aba",
+          "c3-reveal-declared-entries"
+        ],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-3-enlace-directo-a-la-revelacion",
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "name": "Caso 3 · enlace directo al cierre histórico",
+      "purpose": "El marco histórico completo —Orff y Keetman, y las dos lentes— abierto sin ninguna decisión previa. El cierre declara los huecos en lugar de inventar un reparto y conduce al momento 1, de modo que el caso no puede darse por recorrido sin montar nada. Mide la pantalla más larga de la unidad en los cinco tamaños.",
+      "startSceneId": "c3-reveal",
+      "actions": [
+        "c3-model-open-echo",
+        "c3-explore-one-trait",
+        "c3-form-aba-sustained",
+        "c3-revision-graded-listening"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": ["c3-reveal-shared", "c3-outcome-open-limit-aba", "c3-reveal-limit-listening"],
+        "incidentIds": ["c3-incident-everyone-at-once"],
+        "completes": true
+      }
+    },
+    {
       "id": "piloto-coherente",
       "caseSlug": "el-arreglo-que-no-escucha-a-todos",
       "name": "Caso 6 · montaje coherente",

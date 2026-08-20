@@ -49,8 +49,8 @@
       "operation": "Montar tres momentos.",
       "minutes": 10,
       "approachIds": ["orff-keetman", "willems", "martenot"],
-      "caseSlug": null,
-      "status": "planned"
+      "caseSlug": "del-modelo-a-una-forma-propia",
+      "status": "playable"
     },
     {
       "id": "caso-4",

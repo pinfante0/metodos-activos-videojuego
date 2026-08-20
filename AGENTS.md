@@ -169,6 +169,10 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `src/content/playable/caso-una-frase-dos-entradas.json`: segunda unidad escrita en M7A. Caso 2,
   «Una frase, dos entradas»: comparar dos soluciones defendibles con Dalcroze y el concepto Kodály
   como dos puertas a la misma relación musical. Auditado con las herramientas reales del proyecto.
+- `src/content/playable/caso-del-modelo-a-una-forma-propia.json`: tercera unidad escrita en M7A.
+  Caso 3, «Del modelo a una forma propia»: montar tres momentos con Orff-Schulwerk y Gunild Keetman
+  como proceso, y Willems y Martenot como lentes que sólo entran al revisar. Comprobado con las
+  herramientas reales del proyecto.
 - `src/content/playable/walkthroughs.json`: recorridos declarados. Los ejecutan las pruebas sobre la
   sesión pura y el arnés sobre Chrome real, desde una sola fuente.
 - `README.md`: resumen breve del estado.
@@ -215,19 +219,47 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
   `#/caso/<slug>/<escena>`.
 - La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
-  los desplegables cerrados y abiertos, en los veintitrés recorridos declarados y en las trece rutas
-  de prueba. Los seis bloques que pueden desplazarse por dentro son accesibles con teclado.
+  los desplegables cerrados y abiertos, en los treinta y dos recorridos declarados y en las catorce
+  rutas de prueba. Los seis bloques que pueden desplazarse por dentro son accesibles con teclado.
   `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
   algo se bloquea o si las pasadas no coinciden.
 - **El encabezado y el pie restan altura a todas las pantallas.** Alargar su texto una línea rompió
   la regla 6 en todas las pantallas de acción de los dos tamaños estrechos a la vez, y sólo lo vio la
   medición. Antes de tocarlos, vuelva a ejecutar el arnés.
-- **M7A está en curso, no completada.** Dos entregas parciales: el Tutorial 1, «El material
-  intruso», y el Caso 2, «Una frase, dos entradas», que son hoy la tercera y la cuarta de las nueve
-  unidades con contenido. Faltan los casos 3 y 4, con Willems y Martenot en su peso complementario.
-  El Caso 2 está auditado: 259 pruebas, TypeScript estricto, compilación y paquete PLATEA, más
-  tres pasadas de 23 recorridos en 51 combinaciones de recorrido y tamaño, y una pasada exhaustiva
-  de los cinco tamaños en los 23 recorridos. Véase `docs/contenido_m7a.md`, apartado 3.2.
+- **«Sostiene» y «Tensiona» quedan fuera del bloque que encoge.** Todo lo demás de una consecuencia
+  —reparación, observables y reparto— vive en un panel que se desplaza por dentro, pero esos dos
+  campos no. Un «Sostiene» largo desborda la pantalla de acción sin que se note al leer el archivo, y
+  fue lo que rompió la regla 6 en el caso 3. Es el primer sitio donde mirar cuando una pantalla se
+  desplaza y acortar los rótulos no cambia la cifra.
+- **M7A está en curso, no completada.** Tres entregas parciales: el Tutorial 1, «El material
+  intruso», el Caso 2, «Una frase, dos entradas», y el Caso 3, «Del modelo a una forma propia», que
+  son hoy la tercera, la cuarta y la quinta de las nueve unidades con contenido. **Falta el caso 4**,
+  con Suzuki y sus condiciones de transferencia; sin él la puerta de salida de M7A no se supera.
+  El Caso 3 está **aprobado tras auditoría independiente**: 331 pruebas, TypeScript estricto,
+  compilación y paquete PLATEA; tres pasadas idénticas de 32 recorridos en 68 combinaciones de
+  recorrido y tamaño; 20 rutas de referencia y estados difíciles medidas en los cinco tamaños; y
+  una pasada exhaustiva con 160 combinaciones y 3225 pantallas. Tres rondas de auditoría encontraron
+  nueve hallazgos de contenido, contrato y cobertura; todos quedaron corregidos, cubiertos por
+  regresiones o comprobaciones de navegador y reauditados. Véase
+  `docs/contenido_m7a.md`, apartados 3 y 4.3.
+- **La siguiente tarea es M7A-4, Caso 4, «Un entorno que no todos tienen».** Debe tratar Suzuki como
+  un ecosistema de escucha, imitación, repetición y pasos pequeños, separar el principio aprovechable
+  de las condiciones que no pueden suponerse en el aula generalista y cerrar M7A sin anticipar M7B,
+  M7C ni M8. El comportamiento heredado del enlace directo del Caso 6 sigue documentado como deuda
+  previa y no debe mezclarse con esa entrega.
+- **El caso 3 fija cómo se reparte el peso entre tradiciones.** Orff-Keetman es el proceso que ocupa
+  los tres momentos del montador; Willems y Martenot son lentes que sólo entran al revisar. Una
+  prueba impide que una lente ocupe uno de los tres momentos, y los nombres de autor no aparecen en
+  ningún rótulo de decisión: sólo en la pantalla de revelación, cuando ya se ha jugado. Una prueba
+  comprueba además que **ninguna consecuencia y ninguna otra escena repiten la atribución
+  histórica**: se afirma en un solo sitio.
+- **Ninguna rama que el juego permita terminar puede dejar el objetivo sin cumplir.** Una versión del
+  caso 3 ofrecía una exploración sin límite con la que se llegaba a un cierre coherente que a la vez
+  declaraba que no existía el rasgo reconocible exigido. Una regresión semántica comprueba ahora que
+  ningún cierre ni ninguna prueba defendible niega lo que el objetivo pide.
+- **La bitácora anota los enfoques del recorrido, no los del encabezado del caso.** `approachIds` en
+  una acción es opcional; cuando ninguna acción del caso lo declara, el comportamiento anterior
+  queda intacto. Sirve para no atribuir una lente que nadie eligió.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

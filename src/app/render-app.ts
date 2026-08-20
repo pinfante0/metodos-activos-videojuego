@@ -19,7 +19,7 @@ import { findCue, IDENTITY_NAME, type SoundCueId } from "./identity/identity";
 import { createSoundSketch } from "./identity/sound";
 import { stageBand } from "./identity/stage";
 import {
-  advanceFromInformationalScene, assemblyPieces, buildJournalEntry, consequenceForScene,
+  advanceFromInformationalScene, assemblyPieces, buildJournalEntry, canFinishCase, consequenceForScene,
   continueFromFeedback, createGameSession, grammarComplete, grammarSentence, incidentForScene,
   sceneFor, selectAction, selectGrammar, type GameSession, type GrammarKey,
 } from "./game-session";
@@ -298,6 +298,19 @@ function journalDefinition(entry: JournalEntry): string {
 }
 
 function reflectionScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "reflection" }>, session: GameSession): string {
+  /*
+   * Enlace directo a la reflexión sin haber montado la microclase. Es un uso previsto, pero no hay
+   * nada que registrar: la bitácora saldría con todos los campos sin selección y sin ningún enfoque
+   * recorrido, y esa entrada ni siquiera pasa el contrato de progreso. En lugar de fingir un cierre
+   * —o de dejar que reviente al guardar—, la pantalla dice qué falta y lleva a ese momento.
+   */
+  if (!canFinishCase(caseDefinition, session)) {
+    const pending = assemblyPieces(caseDefinition, session).find((piece) => piece.actionId === undefined);
+    const target = pending ? `#/caso/${caseDefinition.slug}/${pending.slot.sceneId}` : `#/caso/${caseDefinition.slug}`;
+    return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p>
+      <p class="notice" role="status">La bitácora recoge decisiones, y esta microclase todavía no tiene ninguna en «${esc(pending?.slot.label ?? "el montaje")}». Móntalo y vuelve: no se pierde nada de lo recorrido.</p>
+      <div class="scene-actions"><a class="button" href="${target}">Ir a ${esc(pending?.slot.label ?? "el montaje")}</a></div>`;
+  }
   const preview = buildJournalEntry(caseDefinition, session, new Date().toISOString(), "00000000-0000-4000-8000-000000000000");
   return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p>${disclosure({
     id: "panel-bitacora",
@@ -639,7 +652,7 @@ export function mountApp(root: HTMLElement): void {
     if (target.closest("[data-advance-justification]") && item && session && scene?.kind === "justification" && grammarComplete(session)) {
       store({ ...session, sceneId: scene.nextSceneId ?? session.sceneId }); render(true); return;
     }
-    if (target.closest("[data-finish-case]") && item && session) {
+    if (target.closest("[data-finish-case]") && item && session && canFinishCase(item, session)) {
       const now = new Date().toISOString();
       const entry = buildJournalEntry(item, session, now, randomAttemptId());
       progress = withCompletedCase(progress, item.id, entry, now);

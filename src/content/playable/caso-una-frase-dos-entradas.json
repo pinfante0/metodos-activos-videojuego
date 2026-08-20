@@ -952,7 +952,7 @@
     "eyebrow": "Caso 2 completado",
     "title": "Ya eliges una puerta y dices qué deja sin comprobar",
     "body": "Has comparado dos entradas defendibles para el mismo objetivo, has decidido qué hacías tú mientras sonaba y has revisado de dónde sacaba cada persona la información para entrar. La campaña conserva aquí lo aprendido y no adelanta ninguna unidad pendiente.",
-    "nextLabel": "Volver a la campaña",
-    "nextRoute": "#/campana"
+    "nextLabel": "Continuar al caso 3",
+    "nextRoute": "#/caso/del-modelo-a-una-forma-propia"
   }
 }

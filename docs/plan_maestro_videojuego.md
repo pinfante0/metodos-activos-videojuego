@@ -479,8 +479,37 @@ pruebas, TypeScript estricto, compilación y paquete PLATEA; el arnés completa 
 tamaños asignados durante tres pasadas idénticas y, además, en una pasada exhaustiva de los cinco
 tamaños sin desplazar ninguna pantalla de acción.
 
-Faltan los casos 3 y 4, y con ellos Orff-Keetman con Willems y Martenot, y Suzuki. Véase
-`docs/contenido_m7a.md`.
+La tercera escribe el **Caso 3, «Del modelo a una forma propia»** —montar tres momentos—, primera
+unidad de la campaña que usa el montador de microclases: el modelo, la exploración y la forma se
+deciden en tres pantallas sin devolución propia y la prueba las combina en ocho resultados
+defendibles, uno por combinación, todos ellos con una versión reconocible. Orff-Schulwerk, elaborado
+con Gunild Keetman, es el proceso que ocupa los tres momentos; Willems y Martenot entran sólo al
+revisar, como dos lentes que sostienen ese proceso sin sustituirlo, y una prueba impide
+estructuralmente que una lente ocupe uno de los tres momentos. Con ella son **cinco de las nueve
+unidades con contenido** y **tres las entregas parciales de M7A**. Las tres tensiones que el mapa declara para la unidad son las tres opciones incoherentes,
+cada una con vuelta a su propio momento; el incidente es de acceso sensorial y carga, y su relato
+sirve por igual a las ocho ramas; y los cuatro cierres distinguen reparar las condiciones de un
+proceso de reparar la decisión que lo define. Nueve recorridos declarados consumen todas sus acciones
+y **todos** sus resultados.
+
+Tres rondas de auditoría independiente posteriores han encontrado nueve hallazgos. La primera, cinco: una rama
+que se dejaba completar contradiciendo el objetivo, una gramática cuyos cruces no se sostenían, un
+cierre por enlace directo que inventaba reparto y terminaba el caso sin montar nada, una bitácora que
+atribuía lentes no elegidas y documentación desincronizada. La segunda, tres más: cruces de gramática
+que los propios cierres negaban, un enlace directo a la reflexión que ofrecía cerrar y hacía lanzar
+al contrato de progreso, y un `approachIds` por acción que el validador no comprobaba. Los ocho están
+corregidos y cada uno deja su regresión. La tercera detectó que la nueva salida de la reflexión vacía
+no estaba incluida en el arnés de navegador; ahora dispone de estado difícil y seis comprobaciones
+reales en los cinco tamaños.
+
+**Estado: aprobada tras auditoría independiente.** `pnpm check` pasa con 331 pruebas, TypeScript
+estricto, compilación y paquete PLATEA; el arnés completa los 32 recorridos en tres pasadas idénticas,
+mide 20 rutas de referencia y estados difíciles en los cinco tamaños y, además, ejecuta una pasada
+exhaustiva —160 combinaciones y 3225 pantallas— sin desplazar ninguna pantalla de acción. Los ocho
+hallazgos de las tres rondas quedaron corregidos, cubiertos por regresiones o comprobaciones de
+navegador y reauditados antes de aprobar la entrega.
+
+Falta el **caso 4**, y con él Suzuki. Véase `docs/contenido_m7a.md`.
 
 ### M7B — Contenido contemporáneo y síntesis
 

@@ -116,6 +116,15 @@ export const TEST_STATES: readonly TestState[] = [
     sceneId: "pilot-justification",
   },
   {
+    id: "reflexion-sin-montaje",
+    name: "Reflexión abierta sin haber montado nada",
+    purpose:
+      "Enlace docente directo a la bitácora del caso 3 sin ninguna decisión previa. No hay nada que registrar: la pantalla no puede ofrecer un cierre que el contrato de progreso rechazaría, así que debe decir qué falta y llevar al momento que lo resuelve.",
+    kind: "case",
+    caseSlug: "del-modelo-a-una-forma-propia",
+    sceneId: "c3-reflection",
+  },
+  {
     id: "cierre-de-caso",
     name: "Pantalla de cierre de un caso",
     purpose: "El final del recorrido, con el enlace a la unidad siguiente y la repetición.",

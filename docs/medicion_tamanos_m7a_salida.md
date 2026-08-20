@@ -1,15 +1,15 @@
 # Salida reproducible de `pnpm measure:viewports --runs=3`
 
 Generada por el propio arnés. **No se edita a mano**: se regenera con
-`pnpm measure:viewports --runs=3 --out=docs\medicion_tamanos_m7a_salida.md`.
+`pnpm measure:viewports --runs=3 --out=docs/medicion_tamanos_m7a_salida.md`.
 El procedimiento y la interpretación están en `docs/comprobaciones_m6.md`.
 
 Pasadas ejecutadas: 3.
 Resultados idénticos en todas las pasadas: **sí**.
 
-- Recorridos declarados: 23, completados hasta su pantalla de cierre en 51 combinaciones de recorrido y tamaño.
-- Pantallas de recorrido medidas por pasada: 922, cada una con los desplegables cerrados y abiertos.
-- Páginas de referencia y estados difíciles: 19 rutas × 5 tamaños = 95 pantallas, medidas una vez.
+- Recorridos declarados: 32, completados hasta su pantalla de cierre en 68 combinaciones de recorrido y tamaño.
+- Pantallas de recorrido medidas por pasada: 1257, cada una con los desplegables cerrados y abiertos.
+- Páginas de referencia y estados difíciles: 20 rutas × 5 tamaños = 100 pantallas, medidas una vez.
 - Desbordamiento horizontal: ninguno.
 - Objetivo táctil mínimo: 44 px.
 - Desplazamiento en pantallas de acción · recorridos: **ninguno**, en ningún tamaño ni estado.
@@ -22,6 +22,12 @@ Resultados idénticos en todas las pasadas: **sí**.
 | Silencio: el equivalente textual sigue anunciándose | correcto | «Sonido silenciado · Consecuencia defendible con revisión n…» |
 | El equivalente textual vive en una región viva persistente | correcto | role=status y fuera del contenedor que se repinta |
 | Movimiento reducido: la entrada de la banda queda anulada | correcto | data-reduced-motion=true, animation-duration=1e-05s |
+| Reflexión sin montaje: no ofrece cerrar el caso | correcto | no existe ningún control de cierre |
+| Reflexión sin montaje: avisa de qué falta | correcto | «La bitácora recoge decisiones, y esta microclase todavía n…» |
+| Reflexión sin montaje: la salida es un objetivo táctil suficiente | correcto | lado menor de 48 px |
+| Reflexión sin montaje: la salida apunta al momento que falta | correcto | href=#/caso/del-modelo-a-una-forma-propia/c3-model |
+| Reflexión sin montaje: la salida se alcanza con el tabulador | correcto | recibe el foco tabulando |
+| Reflexión sin montaje: la salida conduce al momento 1 y se puede decidir | correcto | #/caso/del-modelo-a-una-forma-propia/c3-model · «Momento 1 · cómo conoce el grupo el motivo» · 3 opciones |
 
 | Bloque con desplazamiento interno · 360 × 640 | Resultado | Detalle |
 | --- | --- | --- |
@@ -48,4 +54,4 @@ Resultados idénticos en todas las pasadas: **sí**.
 | «montaje de la microclase»: nombre accesible | correcto | «Montaje de la microclase» |
 | «montaje de la microclase»: alcanzable con el tabulador | correcto | recibe el foco tabulando |
 | «montaje de la microclase»: foco visible | correcto | contorno solid de 3 px |
-| «montaje de la microclase»: se desplaza con el teclado | correcto | las flechas mueven el bloque; recorrido disponible de 78 px |
+| «montaje de la microclase»: se desplaza con el teclado | correcto | las flechas mueven el bloque; recorrido disponible de 192 px |

@@ -7,6 +7,7 @@ import type {
   JournalField,
   Scene,
 } from "../domain/contracts";
+import { JournalEntrySchema } from "../domain/contracts";
 import { activeTags, resolveConsequenceId, resolveIncidentId } from "../domain/consequence-engine";
 
 export type GrammarKey = "objective" | "principleAction" | "conditionRisk" | "adaptation" | "evidence";
@@ -69,6 +70,23 @@ export function assemblyPieces(
 export function assemblyComplete(caseDefinition: CaseDefinition, session: GameSession): boolean {
   const pieces = assemblyPieces(caseDefinition, session);
   return pieces.length > 0 && pieces.every((piece) => piece.actionId !== undefined);
+}
+
+/**
+ * Si el caso puede darse por cerrado con las decisiones tomadas hasta ahora.
+ *
+ * Un enlace directo a la pantalla de reflexión es un uso previsto —el progreso orienta y no
+ * bloquea—, pero cerrar ahí sin haber decidido nada guardaría una bitácora sin ningún enfoque
+ * recorrido, y esa entrada **no pasa el contrato de progreso**: al guardarla, `ProgressSchema`
+ * lanzaba. El criterio es exactamente ése y no una regla aparte que pudiera divergir de él: no se
+ * ofrece cerrar cuando lo que se guardaría no validaría.
+ */
+export function canFinishCase(caseDefinition: CaseDefinition, session: GameSession): boolean {
+  if (!caseDefinition.journalTemplate) return false;
+  const candidate = buildJournalEntry(
+    caseDefinition, session, "1970-01-01T00:00:00.000Z", "00000000-0000-4000-8000-000000000000",
+  );
+  return JournalEntrySchema.safeParse(candidate).success;
 }
 
 /** Incidente que corresponde a las decisiones ya tomadas, resuelto por el motor determinista. */
@@ -229,6 +247,31 @@ const JOURNAL_PROPERTY: Record<JournalField, keyof JournalEntry> = {
   "final-grammar": "finalGrammar",
 };
 
+/**
+ * Enfoques que la bitácora registra como «principios combinados».
+ *
+ * Hasta aquí eran los declarados por el caso entero. El caso 3 declara un proceso y dos lentes, y
+ * sólo una lente llega a elegirse: anotar las tres afirmaría una combinación que el recorrido no
+ * hizo. Cuando alguna acción del caso declara su tradición mandan las acciones elegidas, en el
+ * orden que fija el caso para que la bitácora sea reproducible; cuando ninguna la declara se
+ * conserva el comportamiento anterior sin tocar nada.
+ */
+function combinedApproaches(
+  caseDefinition: CaseDefinition,
+  session: GameSession,
+): CaseDefinition["approachIds"] {
+  if (!caseDefinition.actions.some((action) => action.approachIds?.length)) {
+    return caseDefinition.approachIds;
+  }
+  const chosen = new Set(
+    Object.values(session.selectedActions).flatMap(
+      (actionId) =>
+        caseDefinition.actions.find((candidate) => candidate.id === actionId)?.approachIds ?? [],
+    ),
+  );
+  return caseDefinition.approachIds.filter((approachId) => chosen.has(approachId));
+}
+
 export function buildJournalEntry(
   caseDefinition: CaseDefinition,
   session: GameSession,
@@ -250,7 +293,7 @@ export function buildJournalEntry(
     observableEvidence: "",
     defensibleAlternative: "",
     finalGrammar: "",
-    combinedApproachIds: caseDefinition.approachIds,
+    combinedApproachIds: combinedApproaches(caseDefinition, session),
   };
   for (const [field, template] of Object.entries(caseDefinition.journalTemplate)) {
     const property = JOURNAL_PROPERTY[field as JournalField];

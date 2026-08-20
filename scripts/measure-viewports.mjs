@@ -633,6 +633,73 @@ async function verifyInteraction(base, cdp) {
     detail: `data-reduced-motion=${motion.flag}, animation-duration=${motion.duration}`,
   });
 
+  /*
+   * Reflexión abierta por enlace directo sin haber montado nada.
+   *
+   * La pantalla no puede ofrecer «Guardar y cerrar»: la entrada que guardaría no pasa el contrato
+   * de progreso. Lo que sí tiene que haber es un aviso de qué falta y una salida utilizable, y eso
+   * hay que comprobarlo en navegador real: la regresión pura demuestra que el guardián dice que no,
+   * no que la pantalla resultante se pueda manejar.
+   */
+  await load("#/prueba/reflexion-sin-montaje");
+  const reflection = JSON.parse(await evaluate(`(() => {
+    const link = document.querySelector('.scene-actions a.button');
+    const rect = link ? link.getBoundingClientRect() : null;
+    return JSON.stringify({
+      finish: !!document.querySelector('[data-finish-case]'),
+      notice: (document.querySelector('.notice') || {}).textContent?.trim() ?? '',
+      href: link ? link.getAttribute('href') : '',
+      side: rect ? Math.round(Math.min(rect.width, rect.height)) : 0,
+    });
+  })()`));
+  checks.push({
+    name: "Reflexión sin montaje: no ofrece cerrar el caso",
+    ok: !reflection.finish,
+    detail: reflection.finish ? "sigue habiendo «Guardar y cerrar»" : "no existe ningún control de cierre",
+  });
+  checks.push({
+    name: "Reflexión sin montaje: avisa de qué falta",
+    ok: reflection.notice.length > 40 && /m[oó]nt/i.test(reflection.notice) && /momento/i.test(reflection.notice),
+    detail: reflection.notice ? `«${reflection.notice.slice(0, 58)}…»` : "no aparece ningún aviso",
+  });
+  checks.push({
+    name: "Reflexión sin montaje: la salida es un objetivo táctil suficiente",
+    ok: reflection.side >= 44,
+    detail: `lado menor de ${reflection.side} px`,
+  });
+  checks.push({
+    name: "Reflexión sin montaje: la salida apunta al momento que falta",
+    ok: reflection.href.endsWith("/c3-model"),
+    detail: reflection.href ? `href=${reflection.href}` : "no hay ningún enlace",
+  });
+
+  // Alcanzarla con el tabulador y activarla con Intro, sin tocar el ratón.
+  await evaluate(`document.body.focus(); document.activeElement === document.body`);
+  let reachedExit = false;
+  for (let press = 0; press < 40 && !reachedExit; press += 1) {
+    await key("Tab", "Tab", 9);
+    reachedExit = await evaluate(`document.activeElement === document.querySelector('.scene-actions a.button')`);
+  }
+  checks.push({
+    name: "Reflexión sin montaje: la salida se alcanza con el tabulador",
+    ok: reachedExit,
+    detail: reachedExit ? "recibe el foco tabulando" : "no se alcanzó en 40 pulsaciones",
+  });
+  if (reachedExit) {
+    await key("Enter", "Enter", 13);
+    await new Promise((done) => setTimeout(done, 120));
+    const landed = JSON.parse(await evaluate(`JSON.stringify({
+      hash: location.hash,
+      title: (document.querySelector('main h1') || {}).textContent?.trim() ?? '',
+      choices: document.querySelectorAll('.choice').length,
+    })`));
+    checks.push({
+      name: "Reflexión sin montaje: la salida conduce al momento 1 y se puede decidir",
+      ok: landed.hash.endsWith("/c3-model") && landed.choices > 0,
+      detail: `${landed.hash} · «${landed.title}» · ${landed.choices} opciones`,
+    });
+  }
+
   return checks;
 }
 
