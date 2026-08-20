@@ -126,6 +126,7 @@ const SCROLLABLE_BLOCKS = [
   { selector: "#panel-bitacora", label: "vista previa de la bitácora" },
   { selector: "#panel-montaje", label: "montaje de la microclase" },
   { selector: "#panel-incidente", label: "relato del incidente" },
+  { selector: "#panel-marco-consecuencia", label: "marco pedagógico de la consecuencia" },
 ];
 
 const CHROME_CANDIDATES = [

@@ -60,15 +60,21 @@ no ha empezado.
 - Medición de los cinco tamaños objetivo: `pnpm measure:viewports`. Requiere Chrome o Edge
   instalados; su salida verificada de M6 está en `docs/medicion_tamanos_m6_salida.md`.
 
-M7A está **en curso**. Su primera entrega parcial escribe el Tutorial 1, «El material intruso»:
-reparar una variable, predecir su efecto y comprobar que un material o una técnica aislada no son un
-enfoque. Con él son tres de las nueve unidades con contenido, y la ruta presencial tiene ya sus tres
-tramos jugables. Faltan los casos 2, 3 y 4 —Dalcroze y Kodály comparados, Orff-Keetman con Willems y
+M7A está **en curso**, con dos entregas parciales. La primera escribe el Tutorial 1, «El material
+intruso»: reparar una variable, predecir su efecto y comprobar que un material o una técnica aislada
+no son un enfoque. La segunda escribe el Caso 2, «Una frase, dos entradas»: comparar dos soluciones
+defendibles para un mismo objetivo musical, con Dalcroze y el concepto Kodály como dos puertas a la
+misma relación que no se funden. Con ellas son cuatro de las nueve unidades con contenido, y la ruta
+presencial tiene sus tres tramos jugables. Faltan los casos 3 y 4 —Orff-Keetman con Willems y
 Martenot, y Suzuki— y todo M7B.
 
 - Registro de la fase, decisiones y límites: `docs/contenido_m7a.md`.
-- Contenido de la unidad: `src/content/playable/tutorial-material-intruso.json`.
-- Medición verificada de esta entrega: `docs/medicion_tamanos_m7a_salida.md`.
+- Contenido de las unidades: `src/content/playable/tutorial-material-intruso.json` y
+  `src/content/playable/caso-una-frase-dos-entradas.json`.
+- Medición verificada de las dos entregas: `docs/medicion_tamanos_m7a_salida.md`.
+- **La segunda entrega está auditada.** `pnpm check` pasa con 259 pruebas, TypeScript estricto y
+  paquete PLATEA; los 23 recorridos pasan en tres pasadas regladas y en una pasada exhaustiva de los
+  cinco tamaños sin desplazar ninguna pantalla de acción.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

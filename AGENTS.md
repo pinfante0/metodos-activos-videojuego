@@ -166,6 +166,9 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `src/content/playable/tutorial-material-intruso.json`: primera unidad escrita en M7A. Tutorial 1,
   «El material intruso»: reparar una variable, predecir su efecto y separar material, técnica y
   principio.
+- `src/content/playable/caso-una-frase-dos-entradas.json`: segunda unidad escrita en M7A. Caso 2,
+  «Una frase, dos entradas»: comparar dos soluciones defendibles con Dalcroze y el concepto Kodály
+  como dos puertas a la misma relación musical. Auditado con las herramientas reales del proyecto.
 - `src/content/playable/walkthroughs.json`: recorridos declarados. Los ejecutan las pruebas sobre la
   sesión pura y el arnés sobre Chrome real, desde una sola fuente.
 - `README.md`: resumen breve del estado.
@@ -212,16 +215,19 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
   `#/caso/<slug>/<escena>`.
 - La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
-  los desplegables cerrados y abiertos, en los dieciséis recorridos declarados y en las trece rutas de
-  prueba. Los cinco bloques que se desplazan por dentro son accesibles con teclado.
+  los desplegables cerrados y abiertos, en los veintitrés recorridos declarados y en las trece rutas
+  de prueba. Los seis bloques que pueden desplazarse por dentro son accesibles con teclado.
   `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
   algo se bloquea o si las pasadas no coinciden.
 - **El encabezado y el pie restan altura a todas las pantallas.** Alargar su texto una línea rompió
   la regla 6 en todas las pantallas de acción de los dos tamaños estrechos a la vez, y sólo lo vio la
   medición. Antes de tocarlos, vuelva a ejecutar el arnés.
-- **M7A está en curso, no completada.** La primera entrega parcial escribe el Tutorial 1, «El
-  material intruso», que es hoy la tercera de las nueve unidades con contenido. Faltan los casos 2,
-  3 y 4 con Willems y Martenot en su peso complementario. Véase `docs/contenido_m7a.md`.
+- **M7A está en curso, no completada.** Dos entregas parciales: el Tutorial 1, «El material
+  intruso», y el Caso 2, «Una frase, dos entradas», que son hoy la tercera y la cuarta de las nueve
+  unidades con contenido. Faltan los casos 3 y 4, con Willems y Martenot en su peso complementario.
+  El Caso 2 está auditado: 259 pruebas, TypeScript estricto, compilación y paquete PLATEA, más
+  tres pasadas de 23 recorridos en 51 combinaciones de recorrido y tamaño, y una pasada exhaustiva
+  de los cinco tamaños en los 23 recorridos. Véase `docs/contenido_m7a.md`, apartado 3.2.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

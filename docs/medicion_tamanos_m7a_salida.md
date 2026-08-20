@@ -1,14 +1,14 @@
 # Salida reproducible de `pnpm measure:viewports --runs=3`
 
 Generada por el propio arnés. **No se edita a mano**: se regenera con
-`pnpm measure:viewports --runs=3 --out=docs/medicion_tamanos_m7a_salida.md`.
+`pnpm measure:viewports --runs=3 --out=docs\medicion_tamanos_m7a_salida.md`.
 El procedimiento y la interpretación están en `docs/comprobaciones_m6.md`.
 
 Pasadas ejecutadas: 3.
 Resultados idénticos en todas las pasadas: **sí**.
 
-- Recorridos declarados: 16, completados hasta su pantalla de cierre en 40 combinaciones de recorrido y tamaño.
-- Pantallas de recorrido medidas por pasada: 676, cada una con los desplegables cerrados y abiertos.
+- Recorridos declarados: 23, completados hasta su pantalla de cierre en 51 combinaciones de recorrido y tamaño.
+- Pantallas de recorrido medidas por pasada: 922, cada una con los desplegables cerrados y abiertos.
 - Páginas de referencia y estados difíciles: 19 rutas × 5 tamaños = 95 pantallas, medidas una vez.
 - Desbordamiento horizontal: ninguno.
 - Objetivo táctil mínimo: 44 px.
@@ -29,6 +29,10 @@ Resultados idénticos en todas las pasadas: **sí**.
 | «reparación, observables y reparto»: alcanzable con el tabulador | correcto | recibe el foco tabulando |
 | «reparación, observables y reparto»: foco visible | correcto | contorno solid de 3 px |
 | «reparación, observables y reparto»: se desplaza con el teclado | correcto | las flechas mueven el bloque; recorrido disponible de 154 px |
+| «marco pedagógico de la consecuencia»: nombre accesible | correcto | «Marco pedagógico de la consecuencia» |
+| «marco pedagógico de la consecuencia»: alcanzable con el tabulador | correcto | recibe el foco tabulando |
+| «marco pedagógico de la consecuencia»: foco visible | correcto | contorno solid de 3 px |
+| «marco pedagógico de la consecuencia»: se desplaza con el teclado | correcto | las flechas mueven el bloque; recorrido disponible de 18 px |
 | «vista previa de la bitácora»: nombre accesible | correcto | «Entrada de bitácora en revisión» |
 | «vista previa de la bitácora»: alcanzable con el tabulador | correcto | recibe el foco tabulando |
 | «vista previa de la bitácora»: foco visible | correcto | contorno solid de 3 px |

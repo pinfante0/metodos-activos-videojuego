@@ -172,6 +172,166 @@
       }
     },
     {
+      "id": "caso-2-cuerpo-y-musica-viva",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · puerta del cuerpo con música que se adapta",
+      "purpose": "La combinación que hace funcionar la puerta del cuerpo: el docente adapta la música en directo. Sigue con la revisión que pone la anticipación al alcance de cada persona y atraviesa todas las pantallas nuevas de la unidad.",
+      "actions": [
+        "c2-brief-enter-on-time",
+        "c2-compare-door-and-symbol",
+        "c2-entry-body-listen",
+        "c2-teacher-improvise-adapt",
+        "c2-revision-checkable-anticipation"
+      ],
+      "viewportCoverage": "all",
+      "expect": {
+        "consequenceIds": [
+          "c2-feedback-enter-on-time",
+          "c2-feedback-door-and-symbol",
+          "c2-outcome-body-adapt",
+          "c2-revision-checkable-outcome",
+          "c2-reveal-body-checkable"
+        ],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-voz-y-secuencia",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · puerta de la voz con secuencia hacia el símbolo",
+      "purpose": "La otra combinación coherente, con la prioridad contraria: interiorizar y representar. Comprueba también la segunda revisión defendible, la que convierte el cambio de la frase en contenido.",
+      "actions": [
+        "c2-brief-enter-on-time",
+        "c2-compare-door-and-symbol",
+        "c2-entry-voice-inner",
+        "c2-teacher-sequence-symbol",
+        "c2-revision-two-versions"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c2-outcome-voice-sequence",
+          "c2-revision-two-versions-outcome",
+          "c2-reveal-voice-versions"
+        ],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-cuerpo-con-secuencia",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · el cuerpo con una frase que no cambia",
+      "purpose": "El primer cruce: la puerta del cuerpo con un docente que sostiene la frase estable. No es un error de etiqueta, es una tensión real: el gesto acaba ilustrando un plan en lugar de reaccionar a lo que suena.",
+      "actions": [
+        "c2-brief-enter-on-time",
+        "c2-compare-door-and-symbol",
+        "c2-entry-body-listen",
+        "c2-teacher-sequence-symbol",
+        "c2-revision-two-versions"
+      ],
+      "expect": {
+        "consequenceIds": ["c2-outcome-body-sequence", "c2-reveal-body-versions"],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-voz-con-improvisacion",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · la voz con una referencia que se mueve",
+      "purpose": "El segundo cruce: cantar por dentro exige una frase estable con la que comparar, y aquí la frase cambia cada vuelta. Es la combinación que más acceso cuesta y la que mejor muestra por qué el papel docente no es un envoltorio.",
+      "actions": [
+        "c2-brief-enter-on-time",
+        "c2-compare-door-and-symbol",
+        "c2-entry-voice-inner",
+        "c2-teacher-improvise-adapt",
+        "c2-revision-checkable-anticipation"
+      ],
+      "expect": {
+        "consequenceIds": ["c2-outcome-voice-improvise", "c2-reveal-voice-checkable"],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-simbolo-primero",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · el símbolo antes que la frase, con dos reintentos",
+      "purpose": "La tensión que el mapa de campaña pide para esta unidad: la notación llega antes de que el patrón se haya comprendido. Recorre además los dos indicios falsos del encargo y de la comparación, y la revisión que convierte a una persona en el reloj de la clase.",
+      "actions": [
+        "c2-brief-count-bars",
+        "c2-brief-enter-on-time",
+        "c2-compare-material",
+        "c2-compare-door-and-symbol",
+        "c2-entry-score-count",
+        "c2-teacher-sequence-symbol",
+        "c2-entry-voice-inner",
+        "c2-teacher-improvise-adapt",
+        "c2-revision-follow-oscar",
+        "c2-revision-checkable-anticipation"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c2-feedback-count-bars",
+          "c2-feedback-material",
+          "c2-feedback-entry-score",
+          "c2-outcome-score-first",
+          "c2-outcome-voice-improvise",
+          "c2-revision-follow-outcome",
+          "c2-revision-checkable-outcome",
+          "c2-reveal-voice-checkable"
+        ],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-solo-la-cuenta",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · contar y marcar la entrada",
+      "purpose": "La otra manera de perder la evidencia: la puerta es defendible, pero el docente da el cierre y el grupo lo ejecuta. Consume además los dos indicios falsos que ningún otro recorrido toca: la canción de memoria y llamar pasiva a la versión cantada.",
+      "actions": [
+        "c2-brief-sing-whole",
+        "c2-brief-enter-on-time",
+        "c2-compare-active-or-not",
+        "c2-compare-door-and-symbol",
+        "c2-entry-body-listen",
+        "c2-teacher-count-cues",
+        "c2-teacher-improvise-adapt",
+        "c2-revision-checkable-anticipation"
+      ],
+      "expect": {
+        "consequenceIds": [
+          "c2-feedback-sing-whole",
+          "c2-feedback-active-or-not",
+          "c2-feedback-teacher-count",
+          "c2-outcome-count-cues",
+          "c2-outcome-body-adapt",
+          "c2-reveal-body-checkable"
+        ],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-2-enlace-directo-a-la-prueba",
+      "caseSlug": "una-frase-dos-entradas",
+      "name": "Caso 2 · enlace directo a la prueba, sin diseño",
+      "purpose": "Entrar por el medio a la pantalla que afirma qué le pasa al aula sin haber decidido nada. Debe declarar el hueco en lugar de inventar un resultado, y devolver a la puerta de entrada sin bloquear nada.",
+      "startSceneId": "c2-test",
+      "actions": [
+        "c2-entry-body-listen",
+        "c2-teacher-improvise-adapt",
+        "c2-revision-checkable-anticipation"
+      ],
+      "expect": {
+        "consequenceIds": ["c2-outcome-undecided", "c2-outcome-body-adapt", "c2-reveal-body-checkable"],
+        "incidentIds": ["c2-incident-shared-entry"],
+        "completes": true
+      }
+    },
+    {
       "id": "piloto-coherente",
       "caseSlug": "el-arreglo-que-no-escucha-a-todos",
       "name": "Caso 6 · montaje coherente",

@@ -167,6 +167,17 @@ h1, h2 { font-weight: 800; }
 .game-screen > .grammar-preview { min-height: 0; flex-shrink: 1; }
 
 /*
+ * El marco comparativo de una consecuencia conserva el texto completo y cede solo el espacio que
+ * excede la pantalla. La altura mínima mantiene visible su idea principal; el resto queda accesible
+ * con foco y flechas, sin hacer desplazable `main`.
+ */
+.game-screen > .consequence-intro {
+  min-height: 3.5rem;
+  flex-shrink: 1;
+  overflow-y: auto;
+}
+
+/*
  * El montaje es el bloque de repaso de M6 y se comporta como los tres anteriores: encoge al hueco
  * disponible y se desplaza por dentro, con foco, nombre accesible y flechas. Cuatro decisiones con
  * su texto completo no caben en 360 × 640, y encogerlas rompería la regla 5.
@@ -186,7 +197,8 @@ h1, h2 { font-weight: 800; }
 }
 
 .assembly-review:focus-visible,
-.incident:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: -3px; }
+.incident:focus-visible,
+.consequence-intro:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: -3px; }
 
 /*
  * El aviso de ruta de prueba ocupa altura que la pantalla de juego no tenía prevista.

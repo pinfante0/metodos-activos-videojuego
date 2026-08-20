@@ -2,7 +2,7 @@
 
 Estado: **M6 completada el 14 de agosto de 2026; M7A abierta y en curso**. Este documento fija las
 decisiones de alcance y la secuencia de trabajo. Los sistemas centrales funcionan de principio a fin
-con la identidad **Aula-laboratorio escénica** aplicada y con tres de las nueve unidades escritas;
+con la identidad **Aula-laboratorio escénica** aplicada y con cuatro de las nueve unidades escritas;
 no hay arte definitivo.
 
 El nombre de trabajo es **El aula de los dos minutos** y se conserva. La identidad visual quedó
@@ -456,14 +456,31 @@ Tareas:
 Puerta de salida: lote histórico validado técnica y pedagógicamente, sin recuperar errores de
 materiales antiguos.
 
-Estado: **en curso; puerta de salida no superada**. La primera entrega parcial ha escrito el
-**Tutorial 1, «El material intruso»** —reparar una variable, predecir su efecto y separar material,
-técnica y principio—, con reparto y participación declarados en sus catorce resultados, un incidente
-de recursos que obliga a revisar, dos reparaciones y dos revisiones defendibles, un cierre distinto
-por combinación de ambas y seis recorridos declarados que consumen todas sus acciones. Una auditoría
-posterior encontró cuatro bloqueos de coherencia entre ramas, ya corregidos y con regresión propia.
-Faltan los casos 2, 3 y 4, y con ellos Dalcroze y Kodály comparados, Orff-Keetman con Willems y
-Martenot, y Suzuki. Véase `docs/contenido_m7a.md`.
+Estado: **en curso; puerta de salida no superada**. Hay dos entregas parciales.
+
+La primera escribió el **Tutorial 1, «El material intruso»** —reparar una variable, predecir su
+efecto y separar material, técnica y principio—, con reparto y participación declarados en sus
+catorce resultados, un incidente de recursos que obliga a revisar, dos reparaciones y dos revisiones
+defendibles, un cierre distinto por combinación de ambas y seis recorridos declarados que consumen
+todas sus acciones. Una auditoría posterior encontró cuatro bloqueos de coherencia entre ramas, ya
+corregidos y con regresión propia.
+
+La segunda escribe el **Caso 2, «Una frase, dos entradas»** —comparar dos soluciones defendibles—,
+con Dalcroze y el concepto Kodály como dos puertas a la misma relación musical que no se funden: dos
+entradas defendibles cruzadas con tres papeles docentes, las dos maneras de perder la evidencia que
+el mapa declara para la unidad, un incidente de imitación sin comprensión cuyo relato sirve por igual
+a las dos ramas, dos revisiones defendibles que ofrecen acceso equivalente con prioridades distintas, un cierre por
+combinación de puerta y revisión, y siete recorridos declarados que consumen todas sus acciones. Es
+además la primera unidad en que el jugador debe explicar el papel docente y comparar alternativas,
+como fija la matriz pedagógica. La auditoría corrigió la incoherencia entre papel docente y cierre,
+el acceso solo sonoro de dos ramas, el producto libre de la gramática, el adelanto del caso siguiente
+y el desbordamiento del cierre histórico. **La entrega está auditada:** `pnpm check` pasa con 259
+pruebas, TypeScript estricto, compilación y paquete PLATEA; el arnés completa los 23 recorridos en los
+tamaños asignados durante tres pasadas idénticas y, además, en una pasada exhaustiva de los cinco
+tamaños sin desplazar ninguna pantalla de acción.
+
+Faltan los casos 3 y 4, y con ellos Orff-Keetman con Willems y Martenot, y Suzuki. Véase
+`docs/contenido_m7a.md`.
 
 ### M7B — Contenido contemporáneo y síntesis
 

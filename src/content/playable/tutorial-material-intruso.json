@@ -907,8 +907,8 @@
   "completion": {
     "eyebrow": "Tutorial completado",
     "title": "Ya reparas una variable y predices su efecto",
-    "body": "Has separado material, técnica y principio, y has comprobado que predecir sirve para saber dónde mirar. El caso 2 comparará dos entradas defendibles para un mismo objetivo; todavía se está escribiendo.",
-    "nextLabel": "Volver a la campaña",
-    "nextRoute": "#/campana"
+    "body": "Has separado material, técnica y principio, y has comprobado que predecir sirve para saber dónde mirar. En el caso 2 compararás dos entradas defendibles para un mismo objetivo y tendrás que decir qué deja sin comprobar la que elijas.",
+    "nextLabel": "Continuar al caso 2",
+    "nextRoute": "#/caso/una-frase-dos-entradas"
   }
 }

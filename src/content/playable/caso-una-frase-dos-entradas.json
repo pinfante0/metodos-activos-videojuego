@@ -1,0 +1,958 @@
+{
+  "schemaVersion": 1,
+  "id": "una-frase-dos-entradas",
+  "slug": "una-frase-dos-entradas",
+  "status": "reviewed",
+  "title": "Una frase, dos entradas",
+  "experienceType": "case",
+  "durationMinutes": 8,
+  "modes": ["home"],
+  "learningObjective": "Reconocer dónde cierra una frase de cuatro compases dentro de una canción conocida y entrar a tiempo justo después, sin que nadie avise.",
+  "approachIds": ["dalcroze", "kodaly"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "notation-theory-improvisation-creation",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "agency-creativity", "evidence-context"],
+  "characterIds": ["ines", "leo", "mara", "oscar", "julia"],
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "c2-brief",
+  "scenes": [
+    {
+      "id": "c2-brief",
+      "kind": "observation",
+      "title": "Lee el encargo antes de decidir nada",
+      "introduction": "5.º de Primaria. La canción ya la conocen: la han cantado varias veces y la reconocen en cuanto empieza. Dentro hay una frase de cuatro compases que se repite. Dispones de un teclado, un altavoz, sillas que se pueden apartar y un pasillo central; nadie tiene partitura delante. Dos condiciones vienen dadas con el encargo: ninguna información puede viajar solo por el aire, y el grupo debe poder saber de antemano qué va a ocurrir.",
+      "resourceIds": [],
+      "prompt": "¿Qué tendría que ocurrir para poder decir que han reconocido dónde cierra la frase?",
+      "actionIds": ["c2-brief-enter-on-time", "c2-brief-count-bars", "c2-brief-sing-whole"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c2-comparison",
+      "kind": "observation",
+      "title": "Dos planes para los mismos dos minutos",
+      "introduction": "Dos compañeras de prácticas han preparado cada una su versión de los mismos dos minutos. En la primera, el grupo recorre la frase con un gesto continuo mientras suena y cambia de dirección donde la frase cierra. En la segunda, el grupo canta la frase, después la canta por dentro desde el penúltimo compás y vuelve a entrar en el cierre. Las dos duran dos minutos y las dos terminan con el grupo entrando a tiempo.",
+      "resourceIds": [],
+      "prompt": "¿En qué se diferencian de verdad?",
+      "actionIds": ["c2-compare-door-and-symbol", "c2-compare-material", "c2-compare-active-or-not"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c2-entry",
+      "kind": "design",
+      "title": "Elige la puerta de entrada",
+      "introduction": "Las dos versiones sirven al mismo objetivo. No elijas la mejor: elige la que trabaja lo que quieres poder observar hoy, sabiendo qué dejarás sin comprobar al descartar la otra.",
+      "resourceIds": [],
+      "prompt": "¿Por dónde entra el grupo a la frase?",
+      "actionIds": ["c2-entry-body-listen", "c2-entry-voice-inner", "c2-entry-score-count"],
+      "feedbackMode": "immediate",
+      "slots": ["entry"]
+    },
+    {
+      "id": "c2-teacher",
+      "kind": "design",
+      "title": "Decide qué haces tú mientras suena",
+      "introduction": "El papel docente no es el envoltorio de la actividad: cambia lo que el grupo llega a poder decidir. Esta decisión se juntará con la anterior cuando pruebes los dos minutos.",
+      "resourceIds": [],
+      "prompt": "¿Qué haces mientras la música suena?",
+      "actionIds": ["c2-teacher-improvise-adapt", "c2-teacher-sequence-symbol", "c2-teacher-count-cues"],
+      "feedbackMode": "immediate",
+      "slots": ["mediation-support"]
+    },
+    {
+      "id": "c2-test",
+      "kind": "consequence",
+      "title": "Prueba · dos minutos con las dos decisiones dentro",
+      "introduction": "El resultado combina la puerta que elegiste con lo que tú haces mientras suena. Describe una posibilidad pedagógica, no un diagnóstico del grupo.",
+      "resourceIds": [],
+      "consequenceIds": [
+        "c2-outcome-score-first",
+        "c2-outcome-count-cues",
+        "c2-outcome-body-adapt",
+        "c2-outcome-voice-sequence",
+        "c2-outcome-body-sequence",
+        "c2-outcome-voice-improvise",
+        "c2-outcome-undecided"
+      ],
+      "rules": [
+        {
+          "requiredTags": ["entry-score-count"],
+          "consequenceId": "c2-outcome-score-first"
+        },
+        {
+          "requiredTags": ["teacher-count-cues"],
+          "consequenceId": "c2-outcome-count-cues"
+        },
+        {
+          "requiredTags": ["entry-body-listen", "teacher-improvise-adapt"],
+          "consequenceId": "c2-outcome-body-adapt"
+        },
+        {
+          "requiredTags": ["entry-voice-inner", "teacher-sequence-symbol"],
+          "consequenceId": "c2-outcome-voice-sequence"
+        },
+        {
+          "requiredTags": ["entry-body-listen", "teacher-sequence-symbol"],
+          "consequenceId": "c2-outcome-body-sequence"
+        },
+        {
+          "requiredTags": ["entry-voice-inner", "teacher-improvise-adapt"],
+          "consequenceId": "c2-outcome-voice-improvise"
+        }
+      ],
+      "fallbackConsequenceId": "c2-outcome-undecided"
+    },
+    {
+      "id": "c2-incident",
+      "kind": "incident",
+      "title": "Incidente · la frase no cierra donde siempre",
+      "introduction": "La prueba deja ver de dónde estaba sacando el grupo la información para entrar. La tensión pertenece a la organización de la clase, no a ninguna persona.",
+      "resourceIds": [],
+      "nextSceneId": "c2-revision",
+      "incidentId": "c2-incident-shared-entry"
+    },
+    {
+      "id": "c2-revision",
+      "kind": "revision",
+      "title": "Revisa dónde está la referencia",
+      "introduction": "Mantén la puerta de entrada que ya sostiene el objetivo y cambia solo lo que el incidente ha puesto en duda: de dónde saca cada persona la información para entrar.",
+      "resourceIds": [],
+      "prompt": "¿Qué cambias?",
+      "actionIds": ["c2-revision-checkable-anticipation", "c2-revision-two-versions", "c2-revision-follow-oscar"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c2-reveal",
+      "kind": "consequence",
+      "title": "Dos puertas para la misma relación",
+      "introduction": "Comprender la música mientras suena, con el cuerpo y la escucha, y con el docente adaptando lo que toca a lo que ve, es el núcleo de la rítmica de Émile Jaques-Dalcroze. Experimentar y preparar antes de nombrar y representar, con la voz y el oído interno por delante, es el núcleo del concepto Kodály, que integró herramientas anteriores —sílabas rítmicas y signos manuales— como medios y nunca como finalidad. Entran por puertas distintas a la misma relación musical, comprueban cosas distintas y no se funden en una sola secuencia.",
+      "resourceIds": [],
+      "nextSceneId": "c2-justification",
+      "consequenceIds": [
+        "c2-reveal-body-checkable",
+        "c2-reveal-body-versions",
+        "c2-reveal-voice-checkable",
+        "c2-reveal-voice-versions",
+        "c2-reveal-shared"
+      ],
+      "rules": [
+        {
+          "requiredTags": ["entry-body-listen", "revision-checkable"],
+          "consequenceId": "c2-reveal-body-checkable"
+        },
+        {
+          "requiredTags": ["entry-body-listen", "revision-two-versions"],
+          "consequenceId": "c2-reveal-body-versions"
+        },
+        {
+          "requiredTags": ["entry-voice-inner", "revision-checkable"],
+          "consequenceId": "c2-reveal-voice-checkable"
+        },
+        {
+          "requiredTags": ["entry-voice-inner", "revision-two-versions"],
+          "consequenceId": "c2-reveal-voice-versions"
+        }
+      ],
+      "fallbackConsequenceId": "c2-reveal-shared"
+    },
+    {
+      "id": "c2-justification",
+      "kind": "justification",
+      "title": "Construye tu defensa",
+      "introduction": "No hace falta escribir texto libre. Elige una pieza en cada hueco y comprueba que objetivo, principio, riesgo, adaptación y evidencia forman una sola decisión.",
+      "resourceIds": [],
+      "nextSceneId": "c2-reflection",
+      "grammarOptions": {
+        "objective": [
+          {"id": "c2-objective-phrase-close", "label": "reconocer dónde cierra una frase de cuatro compases y entrar a tiempo justo después"}
+        ],
+        "principleAction": [
+          {"id": "c2-principle-embodied-listening", "label": "mantener la función de la puerta elegida —respuesta corporal en tiempo real u oído interno vocal— y hacer accesible la misma relación sin sustituirla"},
+          {"id": "c2-principle-inner-hearing", "label": "experimentar el cierre por la puerta elegida, comprobarlo antes de que responda el grupo y representarlo solo después"}
+        ],
+        "conditionRisk": [
+          {"id": "c2-risk-sound-only", "label": "la referencia puede quedar solo en el aire o en la entrada ajena, y entonces acertar no demuestra reconocimiento"},
+          {"id": "c2-risk-habit", "label": "una frase siempre igual puede convertir el reconocimiento en memoria y la entrada colectiva en imitación"}
+        ],
+        "adaptation": [
+          {"id": "c2-adapt-visible-pulse", "label": "hacer perceptible el cambio rítmico por sonido, señal visual y vibración, anunciar que puede variar y pedir una anticipación individual"},
+          {"id": "c2-adapt-announced-change", "label": "asentar la frase y alternar después dos versiones anunciadas con señal sonora, visual y vibratoria, admitiendo respuestas dichas o mostradas"}
+        ],
+        "evidence": [
+          {"id": "c2-evidence-enter-alone", "label": "si cada persona anticipa el cierre de la versión normal o alargada antes de que otra persona lo muestre"},
+          {"id": "c2-evidence-tell-which", "label": "si pueden decir o mostrar cuál de las dos versiones ocurrió y dónde cerró sin copiar la entrada del grupo"}
+        ]
+      }
+    },
+    {
+      "id": "c2-reflection",
+      "kind": "reflection",
+      "title": "Qué mantuviste y qué cambiaste",
+      "introduction": "La bitácora conserva el razonamiento, no una nota. Revisa qué puerta elegiste, qué hacías tú mientras sonaba y qué cambiaste después del incidente.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "c2-brief-enter-on-time",
+      "label": "Que entren a tiempo justo después del cierre sin que nadie les avise.",
+      "principleIds": ["objective-action-evidence"],
+      "consequenceId": "c2-feedback-enter-on-time",
+      "tags": ["continue"]
+    },
+    {
+      "id": "c2-brief-count-bars",
+      "label": "Que sepan decir que la frase dura cuatro compases.",
+      "principleIds": ["symbol-before-experience"],
+      "consequenceId": "c2-feedback-count-bars",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c2-brief-sing-whole",
+      "label": "Que canten la canción entera de memoria sin equivocarse.",
+      "principleIds": ["known-repertoire-as-door"],
+      "consequenceId": "c2-feedback-sing-whole",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c2-compare-door-and-symbol",
+      "label": "En por dónde entra el grupo a la frase y en qué momento aparece representada.",
+      "principleIds": ["entry-point-comparison", "experience-before-symbol"],
+      "consequenceId": "c2-feedback-door-and-symbol",
+      "tags": ["continue"]
+    },
+    {
+      "id": "c2-compare-material",
+      "label": "En el material: una necesita teclado y espacio, y la otra no necesita nada.",
+      "principleIds": ["material-without-principle"],
+      "consequenceId": "c2-feedback-material",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c2-compare-active-or-not",
+      "label": "En que la primera es activa y la segunda no: en una se mueven y en la otra están quietos.",
+      "principleIds": ["activity-is-not-evidence"],
+      "consequenceId": "c2-feedback-active-or-not",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c2-entry-body-listen",
+      "label": "Recorrer la frase con un gesto continuo —brazos, manos o desplazamiento, cada cual el suyo— que cambia de dirección justo donde la frase cierra, mientras la música suena.",
+      "principleIds": ["embodied-musical-relation", "listening-in-real-time"],
+      "consequenceId": "c2-feedback-entry-body",
+      "tags": ["entry-body-listen", "experience-first"]
+    },
+    {
+      "id": "c2-entry-voice-inner",
+      "label": "Cantar la frase entera, después cantarla por dentro desde el penúltimo compás y volver a entrar juntos en el cierre.",
+      "principleIds": ["inner-hearing", "experience-before-symbol"],
+      "consequenceId": "c2-feedback-entry-voice",
+      "tags": ["entry-voice-inner", "experience-first"]
+    },
+    {
+      "id": "c2-entry-score-count",
+      "label": "Mostrar la frase escrita en la pizarra y contar los cuatro compases en voz alta antes de escucharla.",
+      "principleIds": ["symbol-before-experience"],
+      "consequenceId": "c2-feedback-entry-score",
+      "tags": ["entry-score-count"]
+    },
+    {
+      "id": "c2-teacher-improvise-adapt",
+      "label": "Tocas tú y adaptas la música en directo a lo que ves: repites la frase, la alargas o la cortas según quién esté anticipando y quién esté copiando.",
+      "principleIds": ["teacher-improvises-adapts"],
+      "consequenceId": "c2-feedback-teacher-improvise",
+      "tags": ["teacher-improvise-adapt"]
+    },
+    {
+      "id": "c2-teacher-sequence-symbol",
+      "label": "Sostienes la misma frase y preparas el paso siguiente: primero la dicen y la cantan, después le ponen sílabas rítmicas y solo al final la ven representada.",
+      "principleIds": ["prepare-name-represent"],
+      "consequenceId": "c2-feedback-teacher-sequence",
+      "tags": ["teacher-sequence-symbol"]
+    },
+    {
+      "id": "c2-teacher-count-cues",
+      "label": "Cuentas en voz alta y marcas la entrada con la mano para que nadie se equivoque.",
+      "principleIds": ["direction-replaces-recognition"],
+      "consequenceId": "c2-feedback-teacher-count",
+      "tags": ["teacher-count-cues"]
+    },
+    {
+      "id": "c2-revision-checkable-anticipation",
+      "label": "Asentar primero la frase y anunciar que después podrá alargarse; cuando cambie, hacer perceptible su recorrido con sonido, una señal visual y vibración —sin marcar la entrada—, y pedir que cada persona anticipe el cierre antes de mirar al grupo.",
+      "principleIds": ["equivalent-perception-routes", "individual-anticipation"],
+      "consequenceId": "c2-revision-checkable-outcome",
+      "tags": ["defensible", "revision-checkable"]
+    },
+    {
+      "id": "c2-revision-two-versions",
+      "label": "Asentar la frase y alternar después dos versiones anunciadas —la de siempre y una alargada—, haciendo perceptible el cambio rítmico por sonido, señal visual y vibración; cada persona elige primero y después su pareja dice o muestra cuál ocurrió y dónde cerró.",
+      "principleIds": ["variation-as-content", "announced-change"],
+      "consequenceId": "c2-revision-two-versions-outcome",
+      "tags": ["defensible", "revision-two-versions"]
+    },
+    {
+      "id": "c2-revision-follow-oscar",
+      "label": "Que Óscar marque la entrada al grupo: es quien mejor la oye y así nadie se equivoca.",
+      "principleIds": ["expertise-as-permanent-cue"],
+      "consequenceId": "c2-revision-follow-outcome",
+      "tags": ["incoherent", "retry"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "c2-incident-shared-entry",
+      "constraintFamily": "experience-roles",
+      "reveal": "En la última vuelta la frase no cierra donde siempre: dura dos compases más. Casi toda la clase entra en el sitio de siempre y se corrige un segundo después, mirando a Óscar, que ha sido el único que ha esperado. Inés entra con el grupo, como venía haciendo: su referencia era la entrada de quien tiene al lado, no el cierre de la frase. Mara nota que se ha alargado y entra medio compás tarde, porque primero comprueba contra los demás. Julia se detiene y espera, porque nadie había dicho que la frase pudiera cambiar. Leo pregunta si eso ha sido un fallo tuyo o parte del ejercicio, y la pregunta es buena: nadie tenía forma de saberlo.",
+      "revisionActionIds": ["c2-revision-checkable-anticipation", "c2-revision-two-versions", "c2-revision-follow-oscar"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "c2-feedback-enter-on-time",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Entrar a tiempo exige haber oído venir el cierre, no recordarlo.",
+        "agency": "Cada persona tiene que decidir cuándo entra.",
+        "barrier": "Si alguien da la señal de entrada, la evidencia desaparece.",
+        "evidence": "Se puede mirar persona a persona, y no solo al grupo entero."
+      },
+      "feedback": {
+        "supports": "Has elegido algo que solo puede ocurrir si la frase se ha reconocido.",
+        "tension": "Entrar a la vez también se consigue copiando a quien se tiene al lado.",
+        "possibleRepair": "Guarda esa duda: vas a necesitarla dentro de un rato.",
+        "observableEvidence": "Mira quién empieza sin mirar a nadie."
+      },
+      "nextSceneId": "c2-comparison"
+    },
+    {
+      "id": "c2-feedback-count-bars",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Saber que la frase dura cuatro compases es una información útil.",
+        "agency": "Contar no obliga a escuchar dónde cierra.",
+        "barrier": "El número puede acertarse sin haber reconocido la frase.",
+        "evidence": "Una cuenta correcta y una entrada tarde pueden convivir."
+      },
+      "feedback": {
+        "supports": "Has nombrado una forma de representar la frase, y representarla forma parte del objetivo del tema.",
+        "tension": "Aquí llega antes de que haya nada que representar: el número describe una frase que todavía no se ha oído cerrar.",
+        "possibleRepair": "Busca algo que solo pueda ocurrir después de reconocerla.",
+        "observableEvidence": "Piensa qué harías tú al oír el cierre."
+      },
+      "nextSceneId": "c2-brief"
+    },
+    {
+      "id": "c2-feedback-sing-whole",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Cantar la canción de memoria es un logro real, y ya lo tienen.",
+        "agency": "Repetir lo aprendido no pide ninguna decisión nueva.",
+        "barrier": "Se puede saber la canción entera y no anticipar dónde cierra la frase.",
+        "evidence": "La memoria de la canción no distingue quién oye el cierre."
+      },
+      "feedback": {
+        "supports": "Partir de un repertorio conocido es una buena decisión, y el encargo ya la ha tomado.",
+        "tension": "El objetivo no es la canción: es una frase de cuatro compases que hay dentro.",
+        "possibleRepair": "Busca una evidencia que hable de la frase y no del repertorio.",
+        "observableEvidence": "Mira qué ocurre justo en el punto donde la frase termina."
+      },
+      "nextSceneId": "c2-brief"
+    },
+    {
+      "id": "c2-feedback-door-and-symbol",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Las dos versiones trabajan la misma relación musical por puertas distintas.",
+        "agency": "En las dos es el grupo quien decide cuándo entra.",
+        "barrier": "Ninguna ha decidido todavía qué hace el docente mientras suena.",
+        "evidence": "El cierre puede reconocerse con el cuerpo o con la voz."
+      },
+      "feedback": {
+        "supports": "Has mirado la puerta de entrada y el momento del símbolo, que es donde estas dos tradiciones se distinguen de verdad.",
+        "tension": "Que las dos sirvan no significa que den lo mismo: cada una deja ver algo que la otra no.",
+        "possibleRepair": "Elige una por el objetivo y quédate con lo que la otra te habría dado.",
+        "observableEvidence": "Comprueba qué podrías observar en cada una y qué no."
+      },
+      "nextSceneId": "c2-entry"
+    },
+    {
+      "id": "c2-feedback-material",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El espacio y una música que pueda cambiar en directo sí importan.",
+        "agency": "Ninguna de las dos versiones decide nada por tener o no teclado.",
+        "barrier": "Con el mismo material se pueden montar las dos, y también ninguna.",
+        "evidence": "El objeto no dice cuándo aparece el símbolo."
+      },
+      "feedback": {
+        "supports": "Los recursos condicionan lo que puede montarse, y conviene mirarlos.",
+        "tension": "La música que se adapta en directo puede salir de un teclado, de tu voz o de un altavoz que se para y se repite: hace falta poder cambiarla, no un mueble concreto.",
+        "possibleRepair": "Vuelve a leer qué hace el grupo en cada plan y en qué orden.",
+        "observableEvidence": "Mira por dónde entra la frase y cuándo se ve escrita."
+      },
+      "nextSceneId": "c2-comparison"
+    },
+    {
+      "id": "c2-feedback-active-or-not",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Moverse hace visible lo que se está oyendo.",
+        "agency": "Cantar por dentro también es una acción, y además exige decidir.",
+        "barrier": "Llamar pasiva a la segunda versión deja fuera a media clase.",
+        "evidence": "Estar quieto no se parece a no estar haciendo nada."
+      },
+      "feedback": {
+        "supports": "El movimiento es una vía potente y la primera versión la aprovecha.",
+        "tension": "«Activo» no quiere decir moverse: cantar una frase por dentro y volver a entrar en el sitio exacto es de las cosas más activas que pueden pedirse.",
+        "possibleRepair": "Compara qué hace el grupo con la música, no cuánto se desplaza.",
+        "observableEvidence": "Mira qué decide el grupo en cada plan."
+      },
+      "nextSceneId": "c2-comparison"
+    },
+    {
+      "id": "c2-feedback-entry-body",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La frase se comprende mientras suena y el cierre aparece como un cambio en el propio gesto.",
+        "agency": "Cada persona decide con qué parte del cuerpo la recorre y dónde cambia.",
+        "barrier": "Lo que ocurre se ve, pero todavía no queda dicho ni representado.",
+        "evidence": "El gesto cambia —o no cambia— exactamente donde la frase cierra."
+      },
+      "feedback": {
+        "supports": "El cuerpo no sirve solo para moverse: permite representar pulso, metro y frase, y sostiene la escucha mientras la música ocurre.",
+        "tension": "Si nadie llega a decir qué ha pasado, tendrás gestos coordinados y ninguna forma de saber qué han entendido.",
+        "possibleRepair": "Deja abierta la vía de brazos o manos: recorrer la frase no exige desplazarse.",
+        "observableEvidence": "Ahora decide qué haces tú mientras suena."
+      },
+      "nextSceneId": "c2-teacher"
+    },
+    {
+      "id": "c2-feedback-entry-voice",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La frase se interioriza y su final se anticipa por dentro antes de sonar.",
+        "agency": "Cada persona decide cuándo vuelve a entrar.",
+        "barrier": "Todo depende de una referencia que ahora mismo viaja solo por el aire.",
+        "evidence": "Volver a entrar juntos después de cantar por dentro es difícil de fingir."
+      },
+      "feedback": {
+        "supports": "Cantar por dentro y volver a entrar es una de las formas más exigentes de comprobar el oído interno, y no necesita ningún material.",
+        "tension": "Si la frase nunca cambia, entrar bien puede ser memoria del grupo y no reconocimiento.",
+        "possibleRepair": "Piensa qué vía le queda a quien no puede seguir la referencia de oído.",
+        "observableEvidence": "Ahora decide qué haces tú mientras suena."
+      },
+      "nextSceneId": "c2-teacher"
+    },
+    {
+      "id": "c2-feedback-entry-score",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Ver la frase escrita ordena lo que ya se ha oído.",
+        "agency": "Contar cuatro compases antes de escuchar no abre ninguna decisión.",
+        "barrier": "Quien no lee entra en la clase por una puerta que no es suya.",
+        "evidence": "Contar bien no muestra que se haya oído dónde cierra."
+      },
+      "feedback": {
+        "supports": "La notación no es el problema: guardar la frase por escrito forma parte del objetivo del tema.",
+        "tension": "Puesta delante, la representación sustituye la experiencia en lugar de recogerla.",
+        "possibleRepair": "Deja la pizarra para después de que el cierre se haya reconocido.",
+        "observableEvidence": "Pregúntate si podrían entrar a tiempo con la frase tapada."
+      },
+      "nextSceneId": "c2-teacher"
+    },
+    {
+      "id": "c2-feedback-teacher-improvise",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La música deja de ser una grabación fija y responde a lo que ocurre.",
+        "agency": "El grupo tiene que escuchar cada vuelta, porque no puede saber de memoria qué viene.",
+        "barrier": "Quien necesita anticipar qué va a pasar puede quedarse fuera si el cambio no se anuncia.",
+        "evidence": "Se ve quién ajusta su entrada cuando la frase cambia."
+      },
+      "feedback": {
+        "supports": "Adaptar la música en directo convierte tu escucha en herramienta docente: cambias lo que suena en función de lo que ves.",
+        "tension": "Exige poder tocar y observar a la vez, y deja la sesión dependiendo de tu propia destreza.",
+        "possibleRepair": "Anuncia que la frase puede cambiar: la sorpresa no es el contenido.",
+        "observableEvidence": "Ahora prueba los dos minutos."
+      },
+      "nextSceneId": "c2-test"
+    },
+    {
+      "id": "c2-feedback-teacher-sequence",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada paso prepara el siguiente y el símbolo llega al final, sobre algo ya sonado.",
+        "agency": "El grupo decide en cada paso, siempre sobre la misma frase.",
+        "barrier": "Sostener la frase estable hace la sesión previsible y también repetible de memoria.",
+        "evidence": "Lo que se representa al final puede compararse con lo que sonó al principio."
+      },
+      "feedback": {
+        "supports": "Secuenciar de lo experimentado a lo representado es justo lo que impide que el símbolo llegue antes de tiempo.",
+        "tension": "Una secuencia estable puede acabar comprobando la memoria de la clase en lugar de su escucha.",
+        "possibleRepair": "Reserva un momento en que la frase no sea la esperada.",
+        "observableEvidence": "Ahora prueba los dos minutos."
+      },
+      "nextSceneId": "c2-test"
+    },
+    {
+      "id": "c2-feedback-teacher-count",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Con la cuenta y el gesto, todo el mundo entra en el sitio.",
+        "agency": "Nadie decide cuándo entrar: se entra cuando tú lo dices.",
+        "barrier": "La evidencia que elegiste desaparece, porque ya nadie tiene que reconocer nada.",
+        "evidence": "Entrar a la vez deja de significar algo."
+      },
+      "feedback": {
+        "supports": "Contar y marcar sostiene a quien se pierde, y hay momentos de una clase en que hace falta.",
+        "tension": "Si es lo único que hay, el objetivo se cumple sin que nadie lo alcance: tú das el cierre y el grupo lo ejecuta.",
+        "possibleRepair": "Guarda el gesto para preparar y retíralo antes de comprobar.",
+        "observableEvidence": "Ahora prueba los dos minutos."
+      },
+      "nextSceneId": "c2-test"
+    },
+    {
+      "id": "c2-outcome-body-adapt",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El gesto cambia de dirección donde la frase cierra, y cuando la frase se alarga la mayoría lo nota mientras suena.",
+        "agency": "Cada persona decide con qué parte del cuerpo recorre la frase y cuándo cambia.",
+        "barrier": "Lo que el grupo ha entendido no ha quedado dicho ni representado en ninguna parte.",
+        "evidence": "Se ve, persona a persona, quién gira donde cierra y quién gira cuando gira quien tiene al lado."
+      },
+      "feedback": {
+        "supports": "La música que se adapta en directo obliga a escuchar cada vuelta, y el cuerpo hace visible lo que se está oyendo.",
+        "tension": "Nada de esto se ha nombrado ni representado: si la sesión acabara aquí, mañana habría que empezar otra vez por el gesto.",
+        "possibleRepair": "Reserva medio minuto para que digan dónde cerró.",
+        "observableEvidence": "Mira quién cambia de dirección sin mirar a nadie."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "proposes", "note": "El gesto es visible además de sonoro y propone que el pulso se sostenga también a la vista; sin eso, el cierre le sigue llegando solo por el aire."},
+          {"characterId": "leo", "role": "decides", "note": "La consigna dice recorrer la frase, no desplazarse: elige hacerlo con los brazos y decide dónde cambia de dirección."},
+          {"characterId": "mara", "role": "decides", "note": "Aprender de oído es aquí la vía principal: decide su cambio de gesto sin depender de leer nada."},
+          {"characterId": "oscar", "role": "decides", "note": "Su lectura no le da ninguna ventaja mientras la música cambia: decide escuchando, como el resto."},
+          {"characterId": "julia", "role": "proposes", "note": "El cambio no se había anunciado: propone avisar antes de la vuelta siguiente y el grupo lo prueba."}
+        ]
+      },
+      "nextSceneId": "c2-incident"
+    },
+    {
+      "id": "c2-outcome-voice-sequence",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Cantan la frase, la cantan por dentro desde el penúltimo compás y vuelven a entrar juntos; el símbolo llega al final, sobre algo que ya ha sonado.",
+        "agency": "Cada persona decide cuándo vuelve a entrar, sin que nadie dé la señal.",
+        "barrier": "Toda la referencia viaja por el aire: quien no puede seguirla por ahí se queda sin dónde agarrarse.",
+        "evidence": "Se oye quién vuelve a entrar en el sitio y quién espera medio compás a los demás."
+      },
+      "feedback": {
+        "supports": "Cantar por dentro y volver a entrar comprueba el oído interno, y el símbolo llega al final para guardar lo ya sonado.",
+        "tension": "Con una frase siempre igual no puedes distinguir reconocer de recordar, y la referencia sigue siendo solo sonora.",
+        "possibleRepair": "Sostén el pulso también a la vista y deja que la frase cambie una vez.",
+        "observableEvidence": "Comprueba quién entra a tiempo sin mirar a quien tiene al lado."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "El cierre y el pulso viajan solo por el aire y cantar por dentro no deja ninguna huella visible: el diseño no ha previsto ninguna vía equivalente para que sepa dónde cierra la frase."},
+          {"characterId": "leo", "role": "decides", "note": "Cantar y volver a entrar no exige moverse por el aula: decide su entrada igual que el resto."},
+          {"characterId": "mara", "role": "decides", "note": "Aprende la frase de oído y decide su entrada sin pasar por ningún papel escrito."},
+          {"characterId": "oscar", "role": "proposes", "note": "Cuando la frase se ve al final, propone cómo escribir el cierre: leer llega después de cantar y no abre la sesión."},
+          {"characterId": "julia", "role": "decides", "note": "La secuencia es previsible y cada paso se anuncia: puede anticipar qué viene y decidir su entrada."}
+        ]
+      },
+      "nextSceneId": "c2-incident"
+    },
+    {
+      "id": "c2-outcome-body-sequence",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "La frase se recorre con el cuerpo y al final se representa: el orden entre experiencia y símbolo es el correcto.",
+        "agency": "El gesto se repite igual en cada vuelta, así que hay menos que decidir cada vez.",
+        "barrier": "Como la música no cambia, el gesto puede sostenerse de memoria.",
+        "evidence": "No puedes distinguir quién reacciona al cierre de quién repite el gesto aprendido."
+      },
+      "feedback": {
+        "supports": "Has puesto el cuerpo antes del símbolo y el símbolo al final: esa secuencia es exactamente lo que impide que la notación llegue antes de tiempo.",
+        "tension": "El cuerpo estaba ahí para reaccionar a lo que suena, y con una frase que nunca cambia acaba ilustrando un plan en lugar de escucharlo.",
+        "possibleRepair": "Mantén la secuencia y deja que la frase cambie una vez antes de representarla.",
+        "observableEvidence": "Comprueba si alguien se queda a medio gesto cuando la música no hace lo previsto."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "proposes", "note": "El gesto es visible y propone cómo dibujar el cierre cuando llega el momento de representarlo; la señal sonora sigue sin tener equivalente."},
+          {"characterId": "leo", "role": "decides", "note": "Elige la vía de brazos y decide cómo representa el cierre al final."},
+          {"characterId": "mara", "role": "performs", "note": "La frase no cambia y el gesto ya está acordado: esta vuelta repite en lugar de decidir."},
+          {"characterId": "oscar", "role": "proposes", "note": "Propone cómo escribir la frase cuando llega la representación, que es donde su lectura aporta sin abrir la sesión."},
+          {"characterId": "julia", "role": "decides", "note": "Nada cambia sin avisar: puede anticipar la vuelta siguiente y decidir cuándo entra."}
+        ]
+      },
+      "nextSceneId": "c2-incident"
+    },
+    {
+      "id": "c2-outcome-voice-improvise",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "Cantan y siguen los cambios con la voz: la escucha está viva en cada vuelta.",
+        "agency": "Cada cambio obliga a decidir de nuevo, aunque no siempre dé tiempo.",
+        "barrier": "Cantar por dentro necesita una referencia fija, y aquí la referencia se mueve.",
+        "evidence": "Cuando el grupo entra a la vez, no sabes si es oído interno o es seguir a la voz que más suena."
+      },
+      "feedback": {
+        "supports": "La voz sigue lo que ocurre y el grupo escucha cada vuelta: nadie está repitiendo de memoria.",
+        "tension": "Cantar por dentro solo comprueba algo si hay una frase estable con la que comparar; cambiándola cada vez, la comprobación se pierde.",
+        "possibleRepair": "Fija la frase mientras se interioriza y cámbiala después, cuando ya haya algo que reconocer.",
+        "observableEvidence": "Escucha si alguien entra medio compás tarde, justo detrás de la voz más fuerte."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Toda la referencia es sonora y además cambia cada vuelta: el diseño no le ha dejado ninguna vía para saber dónde cierra la frase."},
+          {"characterId": "leo", "role": "proposes", "note": "Propone marcar el cierre con las manos para que se vea cuándo cambia; todavía no se ha decidido si se hace."},
+          {"characterId": "mara", "role": "decides", "note": "Aprender de oído en tiempo real es su terreno: decide su entrada en cada cambio."},
+          {"characterId": "oscar", "role": "decides", "note": "No hay nada escrito que leer: decide escuchando, como el resto."},
+          {"characterId": "julia", "role": "proposes", "note": "Pregunta si la frase va a volver a cambiar y propone avisarlo antes de cada vuelta, que es justo lo que le falta a este diseño."}
+        ]
+      },
+      "nextSceneId": "c2-incident"
+    },
+    {
+      "id": "c2-outcome-score-first",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "La frase se ve escrita y se cuentan cuatro compases antes de que suene.",
+        "agency": "No hay nada que decidir: la frase llega ya contada.",
+        "barrier": "Quien no lee entra en la clase por una puerta que no es suya.",
+        "evidence": "Contar bien no muestra que se haya oído dónde cierra."
+      },
+      "feedback": {
+        "supports": "Representar la frase forma parte del objetivo del tema y no hay que renunciar a ello.",
+        "tension": "Puesta delante, la representación sustituye la experiencia en lugar de recogerla: es exactamente la tensión que este caso venía a mirar.",
+        "possibleRepair": "Vuelve a la puerta de entrada y deja la pizarra para después del cierre reconocido.",
+        "observableEvidence": "Pregúntate si podrían entrar a tiempo con la frase tapada."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "La pizarra dice cuántos compases hay, pero no cuándo cierran: entra cuando ve entrar a los demás."},
+          {"characterId": "leo", "role": "performs", "note": "No hay nada que decidir ni que hacer de más de una manera: la cuenta llega hecha."},
+          {"characterId": "mara", "role": "no-route", "note": "Aprende de oído y aquí todavía no ha sonado nada: el diseño empieza por lo único que no puede usar."},
+          {"characterId": "oscar", "role": "performs", "note": "Ni siquiera quien lee decide: la cuenta viene dada y solo hay que seguirla."},
+          {"characterId": "julia", "role": "performs", "note": "La secuencia es previsible, pero previsible no es comprensible: sigue la cuenta sin nada que reconocer."}
+        ]
+      },
+      "nextSceneId": "c2-entry"
+    },
+    {
+      "id": "c2-outcome-count-cues",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Todo el mundo entra en el sitio exacto.",
+        "agency": "La decisión de cuándo entrar la has tomado tú.",
+        "barrier": "La evidencia que elegiste ha desaparecido de la clase.",
+        "evidence": "Entrar a la vez ya no dice nada sobre quién reconoce el cierre."
+      },
+      "feedback": {
+        "supports": "Nadie se pierde y la clase suena bien: contar y marcar sostiene, y hay momentos en que hace falta.",
+        "tension": "Si el aviso está siempre, el objetivo se cumple sin que nadie lo alcance: das el cierre y el grupo lo ejecuta.",
+        "possibleRepair": "Usa el gesto para preparar y quítalo justo antes de comprobar.",
+        "observableEvidence": "Comprueba qué ocurre la primera vez que no marcas la entrada."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "El gesto de entrada es visible y por fin le llega a tiempo; lo que le llega es la orden, no el cierre de la frase."},
+          {"characterId": "leo", "role": "performs", "note": "Entra con el grupo sin decidir nada."},
+          {"characterId": "mara", "role": "performs", "note": "Su oído no tiene aquí ninguna función: la entrada viene marcada."},
+          {"characterId": "oscar", "role": "performs", "note": "Tampoco su lectura decide: la cuenta la llevas tú."},
+          {"characterId": "julia", "role": "performs", "note": "La consigna es clarísima y no hay ninguna ambigüedad; tampoco hay nada que reconocer."}
+        ]
+      },
+      "nextSceneId": "c2-teacher"
+    },
+    {
+      "id": "c2-outcome-undecided",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "No hay microclase que probar: falta la puerta de entrada, falta qué haces tú mientras suena, o faltan las dos.",
+        "agency": "Sin esas decisiones no hay nada que el grupo pueda decidir.",
+        "barrier": "Esta pantalla no puede decir qué ocurre en un aula que todavía no se ha diseñado.",
+        "evidence": "La evidencia depende de lo que decidas, y por eso se elige antes."
+      },
+      "feedback": {
+        "supports": "Has entrado por enlace directo, que es un uso previsto: el progreso orienta y no bloquea.",
+        "tension": "Declarar el hueco es más honesto que rellenarlo: sin decisiones, cualquier consecuencia sería inventada.",
+        "possibleRepair": "Elige la puerta de entrada y el papel docente, y vuelve a probar.",
+        "observableEvidence": "Después de decidir, esta misma pantalla sí podrá decirte qué mirar."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Todavía no hay ninguna decisión de diseño: sin puerta de entrada no existe ninguna vía, equivalente o no, que ofrecerle."},
+          {"characterId": "leo", "role": "no-route", "note": "Sin decisiones no hay consigna, y sin consigna no hay nada que pueda hacerse de más de una manera."},
+          {"characterId": "mara", "role": "no-route", "note": "Sin puerta de entrada todavía no ha sonado nada que pueda aprenderse de oído."},
+          {"characterId": "oscar", "role": "no-route", "note": "Sin secuencia decidida no hay ningún momento en que leer aporte algo."},
+          {"characterId": "julia", "role": "no-route", "note": "Sin diseño no hay nada que anunciar ni nada que anticipar."}
+        ]
+      },
+      "nextSceneId": "c2-entry"
+    },
+    {
+      "id": "c2-revision-checkable-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La frase se asienta antes de variar y la anticipación puede comprobarse persona a persona.",
+        "agency": "Cada cual decide dónde cree que cierra antes de mirar la respuesta del grupo.",
+        "barrier": "La señal equivalente tiene que reproducir el cambio rítmico sin convertirse en una orden de entrada.",
+        "evidence": "Se ve quién anticipa el cierre normal o alargado antes de que otra persona lo muestre."
+      },
+      "feedback": {
+        "supports": "Asentar primero la frase repara la referencia móvil; anunciar la variación repara la imprevisibilidad, y la señal visual y vibratoria del cambio rítmico abre una vía que no depende del aire ni de la entrada ajena.",
+        "tension": "Puede volverse un procedimiento: mucha señal y poca relación musical.",
+        "possibleRepair": "Comprueba que la señal sigue la forma y la duración de la frase, pero nunca indica cuándo debe entrar el grupo.",
+        "observableEvidence": "Compara la anticipación individual con el cierre que después se oye, se ve y se percibe por vibración."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal visual y la vibración reproducen el cambio rítmico sin darle la entrada: anticipa el cierre con una referencia que puede percibir."},
+          {"characterId": "leo", "role": "decides", "note": "Señalar su anticipación no exige desplazarse y puede hacerlo con brazos, voz o percusión corporal."},
+          {"characterId": "mara", "role": "decides", "note": "Marca su anticipación antes de mirar al grupo: su oído se comprueba contra la frase."},
+          {"characterId": "oscar", "role": "proposes", "note": "Ayuda a ajustar la correspondencia entre sonido, señal visual y vibración; su acierto ya no reparte las entradas."},
+          {"characterId": "julia", "role": "decides", "note": "Sabe que primero se asienta la frase y después puede variar: recupera previsión sin conocer de antemano el cierre concreto."}
+        ]
+      },
+      "nextSceneId": "c2-reveal"
+    },
+    {
+      "id": "c2-revision-two-versions-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El cambio deja de ser una trampa y pasa a ser el contenido: hay que distinguir dos frases parecidas.",
+        "agency": "Cada pareja decide cuál ha sonado y lo sostiene delante de las demás.",
+        "barrier": "La señal equivalente debe mostrar el cambio rítmico, no limitarse a duplicar el pulso ni a anunciar la respuesta.",
+        "evidence": "Puede compararse lo que dicen o muestran con la versión que se oyó, se vio y se percibió por vibración."
+      },
+      "feedback": {
+        "supports": "Asentar la primera versión, anunciar la alternancia y ofrecer el cambio rítmico por sonido, señal visual y vibración quita la sorpresa y deja el reconocimiento: entrar bien ya no puede ser costumbre.",
+        "tension": "La respuesta por parejas puede ocultar quién reconoció la versión y quién aceptó la lectura de la otra persona.",
+        "possibleRepair": "Pide primero una elección simultánea individual y usa después la pareja para explicar en qué se diferencian.",
+        "observableEvidence": "Comprueba si cada persona identifica la versión antes de conversar y si la pareja puede localizar después el cierre."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Distingue el cambio rítmico mediante la señal visual y la vibración, y puede mostrar dónde cerró sin depender de la respuesta de su pareja."},
+          {"characterId": "leo", "role": "decides", "note": "Elige primero y después acuerda con su pareja cómo mostrar la versión, con voz, brazos o percusión corporal."},
+          {"characterId": "mara", "role": "decides", "note": "Distinguir de oído dos versiones parecidas cuenta como conocimiento y su elección queda registrada antes de conversar."},
+          {"characterId": "oscar", "role": "decides", "note": "Decide primero por su cuenta y después ayuda a explicar la diferencia; acertar ya no le da el turno de nadie."},
+          {"characterId": "julia", "role": "decides", "note": "Se ha anunciado la alternancia y se ha asentado la primera versión: puede prepararse sin conocer cuál ocurrirá."}
+        ]
+      },
+      "nextSceneId": "c2-reveal"
+    },
+    {
+      "id": "c2-revision-follow-outcome",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Todo el mundo vuelve a entrar en el sitio.",
+        "agency": "La referencia sigue siendo una persona; ahora, además, siempre la misma.",
+        "barrier": "Óscar queda de ayudante permanente y deja de tener clase.",
+        "evidence": "Ya no hay nada que observar: la entrada la da él."
+      },
+      "feedback": {
+        "supports": "Detectas que hacía falta una referencia fiable, y es cierto que hacía falta.",
+        "tension": "Nombrar a quien mejor oye convierte su competencia en el reloj de la clase: el grupo sigue entrando por imitación y él deja de escuchar por su cuenta.",
+        "possibleRepair": "Haz que la referencia sea algo que cualquiera pueda sostener, y que circule.",
+        "observableEvidence": "Comprueba qué ocurre cuando le toca a otra persona sostenerla."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Ahora hay una entrada visible y por primera vez le llega a tiempo; lo que le llega es la entrada de una persona, no el cierre de la frase."},
+          {"characterId": "leo", "role": "performs", "note": "Entra con la señal, sin nada que reconocer."},
+          {"characterId": "mara", "role": "performs", "note": "Su oído vuelve a comprobarse contra una persona en vez de contra la música."},
+          {"characterId": "oscar", "role": "supports", "note": "El diseño lo coloca de referencia permanente: sostiene la clase y se queda sin decisión propia."},
+          {"characterId": "julia", "role": "performs", "note": "La clase vuelve a ser previsible, y también vacía: no queda nada que anticipar."}
+        ]
+      },
+      "nextSceneId": "c2-revision"
+    },
+    {
+      "id": "c2-reveal-body-checkable",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo recorre con el cuerpo una frase primero estable y después variable; cada persona anticipa por su cuenta dónde cierra.",
+        "agency": "Señalar antes de mirar al grupo convierte la anticipación en una decisión individual.",
+        "barrier": "Nada de lo comprendido se ha nombrado ni representado: mañana habrá que empezar otra vez por el gesto.",
+        "evidence": "Quién anticipa el cierre normal o alargado antes de que otra persona lo muestre."
+      },
+      "feedback": {
+        "supports": "Elegiste la puerta del cuerpo y la escucha en tiempo real; la revisión ha asentado la frase antes de variar y ha hecho perceptible el cambio rítmico por sonido, señal visual y vibración, sin dar la entrada.",
+        "tension": "Lo que la otra puerta te habría dado sigue pendiente: cantar la frase y verla representada al final es lo que permite volver sobre ella sin repetir la sesión entera.",
+        "possibleRepair": "Cierra pidiendo que canten la frase y señalen dónde cerró; el símbolo puede esperar a mañana, pero no puede no llegar nunca.",
+        "observableEvidence": "Comprueba si pueden decir dónde cerró sin volver a hacer el gesto."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal visual y la vibración reproducen el cambio rítmico sin marcar la entrada: decide dónde cierra la frase."},
+          {"characterId": "leo", "role": "decides", "note": "Recorre la frase con los brazos y señala el cierre; ninguna de las dos cosas le pide desplazarse."},
+          {"characterId": "mara", "role": "decides", "note": "Decide de oído y lo marca antes de que nadie lo enseñe."},
+          {"characterId": "oscar", "role": "proposes", "note": "Propone cómo coordinar las tres vías perceptivas; su acierto ya no reparte las entradas."},
+          {"characterId": "julia", "role": "decides", "note": "Sabe cuándo puede haber variación, pero no cuál será: puede anticipar y decidir."}
+        ]
+      },
+      "nextSceneId": "c2-justification"
+    },
+    {
+      "id": "c2-reveal-body-versions",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo recorre la frase con el cuerpo y distingue la versión estable de la alargada por su cambio rítmico.",
+        "agency": "Cada persona elige primero; después cada pareja sostiene una respuesta y la explica.",
+        "barrier": "La frase no ha quedado nombrada ni representada en ninguna parte.",
+        "evidence": "Qué versión ocurrió, dónde cerró y en qué se diferencian, sin copiar la elección de la pareja."
+      },
+      "feedback": {
+        "supports": "Elegiste el cuerpo y la escucha; la revisión ha convertido el cambio en contenido y lo ha hecho perceptible por sonido, señal visual y vibración: entrar a tiempo ya no puede ser costumbre ni depender solo del aire.",
+        "tension": "Sigue faltando lo que la otra puerta comprueba: cantar la frase por dentro y verla escrita al final, que es lo que permite guardarla.",
+        "possibleRepair": "Antes de cerrar, pide que canten la versión que acaban de reconocer.",
+        "observableEvidence": "Comprueba si pueden mostrar dónde cerró cada una sin volver a escucharlas."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal visual y la vibración le permiten distinguir el cambio rítmico y mostrar su elección antes de conversar."},
+          {"characterId": "leo", "role": "decides", "note": "Elige primero y después acuerda con su pareja cómo mostrar la versión con brazos, voz o percusión corporal."},
+          {"characterId": "mara", "role": "decides", "note": "Distinguir de oído dos versiones parecidas cuenta aquí como conocimiento y su elección queda registrada antes de conversar."},
+          {"characterId": "oscar", "role": "decides", "note": "Decide primero por su cuenta; acertar ya no le da el turno de nadie."},
+          {"characterId": "julia", "role": "decides", "note": "La alternancia estaba anunciada, aunque no la versión concreta: puede prepararse y decidir."}
+        ]
+      },
+      "nextSceneId": "c2-justification"
+    },
+    {
+      "id": "c2-reveal-voice-checkable",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo canta e interioriza una frase estable y después anticipa el cierre cuando una versión anunciada puede alargarse.",
+        "agency": "Señalar antes de entrar hace visible quién ha decidido y cuándo.",
+        "barrier": "La puerta vocal no comprueba cómo responde el cuerpo entero a la forma musical mientras cambia.",
+        "evidence": "Quién anticipa el cierre normal o alargado antes de mirar al grupo y vuelve a entrar en el sitio."
+      },
+      "feedback": {
+        "supports": "Elegiste la voz y el oído interno; la revisión ha asentado la frase antes de variar y ha abierto una vía visual y vibratoria para percibir el cambio sin convertirla en señal de entrada.",
+        "tension": "Lo que la otra puerta habría dejado ver sigue pendiente: adaptar la música en directo a la respuesta corporal permite observar cómo se comprende la forma mientras ocurre.",
+        "possibleRepair": "En otra sesión, deja que el grupo recorra con el cuerpo una frase que se adapta a lo que observas.",
+        "observableEvidence": "Compara quién anticipa el cierre con lo que después canta y representa."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal visual y la vibración reproducen el cambio rítmico sin marcar la entrada: anticipa dónde cierra."},
+          {"characterId": "leo", "role": "decides", "note": "Aporta una forma de marcar el cierre con percusión corporal y decide usarla para señalar su anticipación."},
+          {"characterId": "mara", "role": "decides", "note": "Su oído se comprueba contra una frase estable y después contra una variación anunciada, no contra el grupo."},
+          {"characterId": "oscar", "role": "proposes", "note": "Propone cómo representar el cierre cuando llegue el momento de escribirlo."},
+          {"characterId": "julia", "role": "decides", "note": "Cada paso se anuncia: anticipa y decide."}
+        ]
+      },
+      "nextSceneId": "c2-justification"
+    },
+    {
+      "id": "c2-reveal-voice-versions",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El grupo canta e interioriza la frase y distingue la versión estable de la alargada por su cambio rítmico.",
+        "agency": "Cada persona elige primero; después cada pareja sostiene qué versión ocurrió y lo explica.",
+        "barrier": "La puerta vocal no comprueba la respuesta corporal continua a la forma musical.",
+        "evidence": "Qué versión ocurrió y dónde cerró, por una vía elegida antes de conversar con la pareja."
+      },
+      "feedback": {
+        "supports": "Elegiste la voz y el oído interno; la revisión ha hecho perceptible el cambio por sonido, señal visual y vibración, y ha separado la elección individual de la explicación en pareja.",
+        "tension": "Lo que la otra puerta habría dejado ver sigue pendiente: el recorrido corporal continuo permite observar cómo cambia la respuesta mientras cambia la música.",
+        "possibleRepair": "En otra sesión, recorre ambas versiones con un gesto continuo y compara dónde cambia la dirección.",
+        "observableEvidence": "Comprueba si pueden cantar por dentro y localizar el cierre de ambas versiones antes de verlas representadas."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La señal visual y la vibración le permiten distinguir el cambio rítmico y mostrar su elección antes de conversar."},
+          {"characterId": "leo", "role": "decides", "note": "Elige primero y después muestra con las manos la respuesta de la pareja, sin desplazarse."},
+          {"characterId": "mara", "role": "decides", "note": "Reconocer de oído la versión alargada es su terreno y su elección individual cuenta como conocimiento."},
+          {"characterId": "oscar", "role": "decides", "note": "Decide primero por su cuenta; su lectura interviene después, cuando la frase ya experimentada se representa."},
+          {"characterId": "julia", "role": "decides", "note": "La alternancia venía anunciada, aunque no la versión concreta: puede prepararse y decidir."}
+        ]
+      },
+      "nextSceneId": "c2-justification"
+    },
+    {
+      "id": "c2-reveal-shared",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Una misma relación musical admite más de una puerta, y la puerta elegida decide qué puede comprobarse.",
+        "agency": "Quien entra a tiempo por su cuenta ha decidido algo; quien entra con el grupo, todavía no.",
+        "barrier": "Sin las decisiones previas, esta pantalla no puede decir qué puerta se trabajó ni qué quedó pendiente.",
+        "evidence": "La que se elija: señalar el cierre antes de que suene, o distinguir dos versiones de la misma frase."
+      },
+      "feedback": {
+        "supports": "Las dos puertas llevan a la misma relación y ninguna la agota: por eso el caso pide elegir una y decir qué deja sin comprobar.",
+        "tension": "Has entrado por aquí sin las decisiones previas, así que el cierre habla del principio y no de tu clase.",
+        "possibleRepair": "Cuando alguien pregunte cuál de las dos es mejor, devuelve la pregunta al objetivo y a lo que quiere poder observar.",
+        "observableEvidence": "Comprueba si la evidencia elegida podría cumplirse copiando a quien se tiene al lado."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Las dos revisiones defendibles hacen perceptible el cambio rítmico por sonido, señal visual y vibración; en ambas elige antes de mirar al grupo."},
+          {"characterId": "leo", "role": "decides", "note": "En las dos decide su respuesta y puede darla con voz o con percusión corporal, que cuentan como respuesta musical y no como sustituto de otra."},
+          {"characterId": "mara", "role": "decides", "note": "En las dos, su oído se comprueba contra la música y no contra el grupo."},
+          {"characterId": "oscar", "role": "decides", "note": "En las dos deja de repartir las entradas y registra su propia anticipación antes de ayudar a explicar la diferencia."},
+          {"characterId": "julia", "role": "decides", "note": "En las dos se anuncia lo que va a ocurrir, y eso es lo que le devuelve la decisión."}
+        ]
+      },
+      "nextSceneId": "c2-justification"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ],
+  "journalTemplate": {
+    "objective": "Reconocer dónde cierra una frase de cuatro compases dentro de una canción conocida y entrar a tiempo justo después, sin que nadie avise.",
+    "first-decision": "Evidencia elegida: {{action:c2-brief}} · Diferencia real entre los dos planes: {{action:c2-comparison}} · Papel docente durante la prueba: {{action:c2-teacher}}",
+    "maintained-decision": "Mantengo esta puerta de entrada: {{action:c2-entry}} La conservo porque el incidente cambió de dónde sacaba cada persona la información para entrar, no la puerta por la que la frase se comprende.",
+    "revised-decision": "Tras el incidente reviso dónde está la referencia: {{action:c2-revision}}",
+    "trigger": "La frase duró dos compases más y casi toda la clase entró donde siempre: la referencia había dejado de ser la música y era la entrada de quien se tenía al lado.",
+    "condition-risk": "{{grammar:conditionRisk}}",
+    "adaptation": "{{grammar:adaptation}}",
+    "observable-evidence": "{{grammar:evidence}}",
+    "defensible-alternative": "La otra puerta también sostiene el objetivo y comprueba otra cosa: el cuerpo y la escucha en tiempo real muestran la frase mientras suena; la voz y el oído interno permiten interiorizarla y representarla después. Elegir una deja sin comprobar lo que la otra deja ver.",
+    "final-grammar": "Para {{grammar:objective}}, uso {{grammar:principleAction}} porque {{grammar:conditionRisk}}; incorporo {{grammar:adaptation}} y comprobaré {{grammar:evidence}}."
+  },
+  "completion": {
+    "eyebrow": "Caso 2 completado",
+    "title": "Ya eliges una puerta y dices qué deja sin comprobar",
+    "body": "Has comparado dos entradas defendibles para el mismo objetivo, has decidido qué hacías tú mientras sonaba y has revisado de dónde sacaba cada persona la información para entrar. La campaña conserva aquí lo aprendido y no adelanta ninguna unidad pendiente.",
+    "nextLabel": "Volver a la campaña",
+    "nextRoute": "#/campana"
+  }
+}

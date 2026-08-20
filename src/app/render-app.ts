@@ -258,7 +258,12 @@ function assemblyReviewScene(caseDefinition: CaseDefinition, scene: Extract<Scen
 
 function consequenceScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "consequence" }>, session: GameSession): string {
   const consequence = consequenceForScene(caseDefinition, scene, session);
-  return `${sceneHeader(caseDefinition, scene)}${stageBand(consequence.rating)}<p class="scene-intro">${esc(scene.introduction)}</p>${feedbackCard(consequence)}${consequenceDetails(consequence)}
+  /*
+   * El marco de una consecuencia puede contener la comparación histórica completa. Se conserva
+   * entero, pero cede altura y se desplaza por dentro como los demás bloques largos: así una unidad
+   * nueva no obliga a recortar pedagogía ni a desplazar la pantalla de acción.
+   */
+  return `${sceneHeader(caseDefinition, scene)}${stageBand(consequence.rating)}<p class="scene-intro consequence-intro" id="panel-marco-consecuencia" role="region" tabindex="0" aria-label="Marco pedagógico de la consecuencia">${esc(scene.introduction)}</p>${feedbackCard(consequence)}${consequenceDetails(consequence)}
     <div class="scene-actions"><button class="primary" type="button" data-advance-info>Continuar</button></div>`;
 }
 
@@ -385,7 +390,7 @@ function homeView(progress: Progress): string {
   const href = target ? unitHref(target) : undefined;
   const playable = campaignUnits.filter((unit) => unit.status === "playable").length;
   const label = target && attemptsFor(target, progress) > 0 ? "Repetir" : "Continuar";
-  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M7A en curso · primera unidad histórica</p><h1 id="home-title" tabindex="-1">Observa, repara y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia y repararás una variable prediciendo su efecto. Después montarás una microclase de dos minutos, la probarás, afrontarás un incidente y defenderás lo que decidas.</p><div class="actions">${href && target ? `<a class="button" href="${href}">${label}: ${esc(target.title)}</a>` : ""}<a class="text-link" href="#/campana">Ver la campaña</a></div><div class="grey-note" role="note"><strong>Sistema completo, campaña a medias.</strong> Las mecánicas funcionan de principio a fin con ${playable} de las ${campaignUnits.length} unidades escritas; el resto se escribe en M7A y M7B. Las ilustraciones, los personajes dibujados y el sonido grabado son M8.</div></section>`;
+  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M7A en curso · dos unidades históricas jugables</p><h1 id="home-title" tabindex="-1">Observa, repara y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia y repararás una variable prediciendo su efecto. Después montarás una microclase de dos minutos, la probarás, afrontarás un incidente y defenderás lo que decidas.</p><div class="actions">${href && target ? `<a class="button" href="${href}">${label}: ${esc(target.title)}</a>` : ""}<a class="text-link" href="#/campana">Ver la campaña</a></div><div class="grey-note" role="note"><strong>Sistema completo, campaña a medias.</strong> Las mecánicas funcionan de principio a fin con ${playable} de las ${campaignUnits.length} unidades escritas; el resto se escribe en M7A y M7B. Las ilustraciones, los personajes dibujados y el sonido grabado son M8.</div></section>`;
 }
 
 function campaignView(progress: Progress): string {

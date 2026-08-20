@@ -37,8 +37,8 @@
       "operation": "Comparar dos soluciones defendibles.",
       "minutes": 8,
       "approachIds": ["dalcroze", "kodaly"],
-      "caseSlug": null,
-      "status": "planned"
+      "caseSlug": "una-frase-dos-entradas",
+      "status": "playable"
     },
     {
       "id": "caso-3",

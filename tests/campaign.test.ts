@@ -113,9 +113,13 @@ describe("el progreso orienta y no bloquea", () => {
     const afterTutorial = progressWith(["mucho-hacer-poco-aprender"]);
     expect(recommendedUnit(afterTutorial)?.id).toBe("tutorial-1");
     expect(recommendedCaseId(afterTutorial)).toBe("el-material-intruso");
+    // La tercera unidad con contenido cambia con cada entrega de M7: se toma de la campaña, no se
+    // escribe a mano, para que la prueba siga comprobando la recomendación y no un nombre.
     const afterBothTutorials = progressWith(["mucho-hacer-poco-aprender", "el-material-intruso"]);
-    expect(recommendedUnit(afterBothTutorials)?.id).toBe("caso-6");
-    expect(recommendedCaseId(afterBothTutorials)).toBe("el-arreglo-que-no-escucha-a-todos");
+    const third = playableUnits[2]!;
+    const thirdCase = playableCases.find((item) => item.slug === third.caseSlug)!;
+    expect(recommendedUnit(afterBothTutorials)?.id).toBe(third.id);
+    expect(recommendedCaseId(afterBothTutorials)).toBe(thirdCase.id);
   });
 
   it("no recomienda nada cuando ya se ha recorrido todo lo escrito", () => {
