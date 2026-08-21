@@ -21,7 +21,8 @@ import { stageBand } from "./identity/stage";
 import {
   advanceFromInformationalScene, assemblyPieces, buildJournalEntry, canFinishCase, consequenceForScene,
   continueFromFeedback, createGameSession, grammarComplete, grammarSentence, incidentForScene,
-  sceneFor, selectAction, selectGrammar, type GameSession, type GrammarKey,
+  grammarChoices, pendingGrammarDecisions, sceneFor, selectAction, selectGrammar,
+  type GameSession, type GrammarKey,
 } from "./game-session";
 import { parseHash, type AppRoute } from "./router";
 import { findTestState, seedJournalEntries, TEST_STATES, type TestState } from "./test-states";
@@ -278,9 +279,14 @@ function incidentScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { k
   return `${sceneHeader(caseDefinition, scene)}${stageBand("incident")}<p class="scene-intro">${esc(scene.introduction)}</p><blockquote class="incident" id="panel-incidente" role="region" tabindex="0" aria-label="Qué revela el incidente"><p>${esc(incident.reveal)}</p></blockquote><p class="quiet">La tensión pertenece a la organización del aula; ninguna persona funciona como problema o giro sorpresa.</p><div class="scene-actions"><button class="primary" type="button" data-advance-info>Revisar el diseño</button></div>`;
 }
 
-function grammarOptions(scene: Extract<Scene, { kind: "justification" }>, session: GameSession): string {
+/**
+ * Sólo se ofrecen las piezas que la partida permite: quien jugó una rama no puede defender otra.
+ * El hueco de la evidencia no declara etiquetas y sigue ofreciendo las dos, porque ahí la elección
+ * es genuina y las dos son defendibles en cualquier rama.
+ */
+function grammarOptions(caseDefinition: CaseDefinition, session: GameSession): string {
   return (Object.keys(GRAMMAR_LABELS) as GrammarKey[]).map((key) => {
-    const options = scene.grammarOptions[key].map((option) => {
+    const options = grammarChoices(caseDefinition, session, key).map((option) => {
       const id = typeof option === "string" ? option : option.id;
       const label = typeof option === "string" ? option : option.label;
       return `<option value="${esc(id)}" ${session.selectedGrammar[key] === id ? "selected" : ""}>${esc(label)}</option>`;
@@ -289,8 +295,45 @@ function grammarOptions(scene: Extract<Scene, { kind: "justification" }>, sessio
   }).join("");
 }
 
+/**
+ * La justificación cuando la defensa depende de decisiones que aún no se han tomado.
+ *
+ * Ocurre al abrir la pantalla por enlace directo y también con un recorrido a medias. Aquí no se
+ * pinta el formulario: los huecos ligados no tienen ninguna pieza que ofrecer —no hay clase de la
+ * que hablar— y dibujar cinco desplegables de los que tres están vacíos sería pedir una tarea
+ * imposible y, de paso, romper la regla 6 en los dos tamaños estrechos. La única tarea de esta
+ * pantalla es ir a decidir, que es la regla 1 aplicada al estado en que se entra por el medio.
+ *
+ * No es un bloqueo: nada impide navegar, el progreso no se toca y la salida lleva a la primera
+ * pantalla capaz de abrir el hueco que falta, derivada del contenido y no escrita a mano. Los casos
+ * que no atan su gramática nunca llegan aquí y su justificación queda exactamente igual que siempre.
+ */
+function pendingJustification(
+  caseDefinition: CaseDefinition,
+  scene: Extract<Scene, { kind: "justification" }>,
+  pending: ReturnType<typeof pendingGrammarDecisions>,
+): string {
+  const huecos = pending.map((item) => `«${GRAMMAR_LABELS[item.key]}»`);
+  const lista = huecos.length === 1
+    ? huecos[0]!
+    : `${huecos.slice(0, -1).join(", ")} y ${huecos[huecos.length - 1]!}`;
+  const first = pending[0]!;
+  const href = `#/caso/${encodeURIComponent(caseDefinition.slug)}/${encodeURIComponent(first.sceneId)}`;
+  const falta = pending.length === 1
+    ? `${lista} depende de una decisión que aún no has tomado`
+    : `${lista} dependen de decisiones que aún no has tomado`;
+  /*
+   * La introducción de la escena no se pinta aquí: describe cómo elegir entre piezas, y en esta
+   * pantalla no hay ninguna. Repetirla junto al aviso duplicaría el mismo asunto (regla 4) y era
+   * lo que dejaba la pantalla 30 px por encima del hueco en 360 × 640. El aviso se basta solo.
+   */
+  return `${sceneHeader(caseDefinition, scene)}<p class="notice" role="note">Aquí sólo aparecen las piezas de la clase que hayas decidido, y ${esc(falta)}. Por eso no hay todavía nada que elegir: no se puede defender una clase que no ha ocurrido.</p><div class="scene-actions"><a class="button" href="${href}">Empezar por «${esc(first.sceneTitle)}»</a></div>`;
+}
+
 function justificationScene(caseDefinition: CaseDefinition, scene: Extract<Scene, { kind: "justification" }>, session: GameSession): string {
-  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><div class="grammar-form">${grammarOptions(scene, session)}</div><p class="grammar-preview" role="region" tabindex="0" aria-label="Justificación en construcción" aria-live="polite">${esc(grammarSentence(caseDefinition, session))}</p><div class="scene-actions"><button class="primary" type="button" data-advance-justification ${grammarComplete(session) ? "" : "disabled"}>Llevar a la bitácora</button></div>`;
+  const pending = pendingGrammarDecisions(caseDefinition, session);
+  if (pending.length > 0) return pendingJustification(caseDefinition, scene, pending);
+  return `${sceneHeader(caseDefinition, scene)}<p class="scene-intro">${esc(scene.introduction)}</p><div class="grammar-form">${grammarOptions(caseDefinition, session)}</div><p class="grammar-preview" role="region" tabindex="0" aria-label="Justificación en construcción" aria-live="polite">${esc(grammarSentence(caseDefinition, session))}</p><div class="scene-actions"><button class="primary" type="button" data-advance-justification ${grammarComplete(session) ? "" : "disabled"}>Llevar a la bitácora</button></div>`;
 }
 
 function journalDefinition(entry: JournalEntry): string {
@@ -403,7 +446,7 @@ function homeView(progress: Progress): string {
   const href = target ? unitHref(target) : undefined;
   const playable = campaignUnits.filter((unit) => unit.status === "playable").length;
   const label = target && attemptsFor(target, progress) > 0 ? "Repetir" : "Continuar";
-  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M7A en curso · dos unidades históricas jugables</p><h1 id="home-title" tabindex="-1">Observa, repara y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia y repararás una variable prediciendo su efecto. Después montarás una microclase de dos minutos, la probarás, afrontarás un incidente y defenderás lo que decidas.</p><div class="actions">${href && target ? `<a class="button" href="${href}">${label}: ${esc(target.title)}</a>` : ""}<a class="text-link" href="#/campana">Ver la campaña</a></div><div class="grey-note" role="note"><strong>Sistema completo, campaña a medias.</strong> Las mecánicas funcionan de principio a fin con ${playable} de las ${campaignUnits.length} unidades escritas; el resto se escribe en M7A y M7B. Las ilustraciones, los personajes dibujados y el sonido grabado son M8.</div></section>`;
+  return `<section class="hero" aria-labelledby="home-title"><p class="eyebrow">M7A completada · lote histórico validado</p><h1 id="home-title" tabindex="-1">Observa, repara y revisa una microclase</h1><p class="lede">Primero distinguirás actividad de evidencia y repararás una variable prediciendo su efecto. Después montarás una microclase de dos minutos, la probarás, afrontarás un incidente y defenderás lo que decidas.</p><div class="actions">${href && target ? `<a class="button" href="${href}">${label}: ${esc(target.title)}</a>` : ""}<a class="text-link" href="#/campana">Ver la campaña</a></div><div class="grey-note" role="note"><strong>Sistema completo, campaña a medias.</strong> Las mecánicas funcionan de principio a fin con ${playable} de las ${campaignUnits.length} unidades escritas; el resto se escribe en M7B. Las ilustraciones, los personajes dibujados y el sonido grabado son M8.</div></section>`;
 }
 
 function campaignView(progress: Progress): string {
@@ -679,7 +722,7 @@ export function mountApp(root: HTMLElement): void {
     const context = caseContextFor(route);
     const session = context ? sessions.get(context.key) : undefined;
     if (grammarKey && context && session) {
-      sessions.set(context.key, selectGrammar(session, grammarKey, target.value)); render();
+      sessions.set(context.key, selectGrammar(context.item, session, grammarKey, target.value)); render();
       root.querySelector<HTMLSelectElement>(`[data-grammar-key="${grammarKey}"]`)?.focus(); return;
     }
     const setting = target.dataset.setting as "muted" | "volume" | "reducedMotion" | undefined;

@@ -5,13 +5,14 @@ import {
   consequenceForScene,
   continueFromFeedback,
   createGameSession,
+  GRAMMAR_KEYS,
+  grammarChoices,
   grammarComplete,
   incidentForScene,
   sceneFor,
   selectAction,
   selectGrammar,
   type GameSession,
-  type GrammarKey,
 } from "./game-session";
 
 /**
@@ -26,14 +27,6 @@ import {
  * que encontró la automatización de M5: un recorrido que giraba en vacío hasta agotar los pasos y
  * terminaba pareciendo correcto.
  */
-
-const GRAMMAR_KEYS: readonly GrammarKey[] = [
-  "objective",
-  "principleAction",
-  "conditionRisk",
-  "adaptation",
-  "evidence",
-];
 
 export interface WalkthroughTrace {
   /** Escenas visitadas, en orden. */
@@ -96,8 +89,13 @@ export function runWalkthrough(
     if (scene.kind === "justification") {
       const pending = GRAMMAR_KEYS.find((key) => !session.selectedGrammar[key]);
       if (pending) {
+        /*
+         * Las piezas se toman de lo que la partida ofrece, no de la lista entera: si un recorrido
+         * declara una pieza de otra rama, aquí se ve. Antes se tomaba la primera de la lista, y por
+         * eso doce recorridos distintos producían la misma bitácora.
+         */
+        const options = grammarChoices(caseDefinition, session, pending);
         const declared = walk.grammar?.[pending];
-        const options = scene.grammarOptions[pending];
         const first = options[0];
         const optionId =
           declared ?? (typeof first === "string" ? first : first?.id);
@@ -105,7 +103,16 @@ export function runWalkthrough(
           trace.blocked = `La escena ${scene.id} no ofrece ninguna pieza para «${pending}»`;
           return trace;
         }
-        session = selectGrammar(session, pending, optionId);
+        const next = selectGrammar(caseDefinition, session, pending, optionId);
+        if (next === session) {
+          trace.blocked =
+            `El recorrido declara «${optionId}» para «${pending}», y esta partida no la ofrece: ` +
+            `pertenece a otra rama. Disponibles: ${options
+              .map((option) => (typeof option === "string" ? option : option.id))
+              .join(", ")}`;
+          return trace;
+        }
+        session = next;
         continue;
       }
       if (!grammarComplete(session)) {

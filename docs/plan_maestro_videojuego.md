@@ -2,7 +2,7 @@
 
 Estado: **M6 completada el 14 de agosto de 2026; M7A abierta y en curso**. Este documento fija las
 decisiones de alcance y la secuencia de trabajo. Los sistemas centrales funcionan de principio a fin
-con la identidad **Aula-laboratorio escénica** aplicada y con cuatro de las nueve unidades escritas;
+con la identidad **Aula-laboratorio escénica** aplicada y con seis de las nueve unidades escritas;
 no hay arte definitivo.
 
 El nombre de trabajo es **El aula de los dos minutos** y se conserva. La identidad visual quedó
@@ -406,9 +406,9 @@ los resultados de un caso, nadie puede quedar reducido a ejecutar en todo el cas
 admite ningún número por persona. La ampliación **no habilita arte**: entrega el dato y su lectura
 accesible para que M8 pueda dibujar a quién favorece una decisión sin inventarlo.
 
-La campaña es un dato validado —nueve unidades, dos con contenido y siete anunciadas como pendientes
-de M7— del que se derivan portada, mapa `#/campana`, ruta presencial, unidad recomendada y
-comprobaciones. El progreso orienta y no bloquea: no existe ningún campo de desbloqueo ni ninguna
+La campaña es un dato validado —nueve unidades, de las que M6 dejó dos con contenido y siete
+anunciadas como pendientes; hoy son **seis con contenido y tres pendientes**— del que se derivan
+portada, mapa `#/campana`, ruta presencial, unidad recomendada y comprobaciones. El progreso orienta y no bloquea: no existe ningún campo de desbloqueo ni ninguna
 puntuación en ningún contrato.
 
 Comprobaciones: **161 pruebas en once archivos**, compilación estricta, paquete PLATEA regenerado y
@@ -426,7 +426,8 @@ Límites que M6 deja abiertos y no debe dar por resueltos quien continúe:
 - En 360 × 640 los cinco bloques de repaso se desplazan por dentro de su recuadro. Ningún texto se
   ha encogido y los cinco son accesibles con teclado. Conviene observarlo en el piloto de M10.
 
-M7A puede abrirse en un chat nuevo. La frase exacta es:
+M7A se abrió con la frase siguiente, que queda como registro de lo que se encargó. **La fase sigue
+abierta**: lo que le falta no es contenido, sino la auditoría independiente de la cuarta entrega.
 
 > **M7A — Contenido histórico.** Trabaja únicamente en `Metodos/`. Lee `AGENTS.md`,
 > `docs/plan_maestro_videojuego.md`, `docs/sistemas_centrales_m6.md`, `docs/decision_producto_m5.md`
@@ -456,7 +457,12 @@ Tareas:
 Puerta de salida: lote histórico validado técnica y pedagógicamente, sin recuperar errores de
 materiales antiguos.
 
-Estado: **en curso; puerta de salida no superada**. Hay dos entregas parciales.
+Estado: **completada; puerta de salida superada**. Hay cuatro entregas aprobadas, y con la cuarta
+las cuatro tradiciones principales del lote histórico tienen unidad propia: Dalcroze y el concepto
+Kodály en el caso 2, Orff-Keetman en el tutorial 1 y en el caso 3 con Willems y Martenot como lentes
+de revisión, y Suzuki en el caso 4. Seis de las nueve unidades de la campaña tienen contenido. La
+cuarta entrega superó la auditoría independiente después de necesitar catorce correcciones
+bloqueantes en cuatro rondas de revisión.
 
 La primera escribió el **Tutorial 1, «El material intruso»** —reparar una variable, predecir su
 efecto y separar material, técnica y principio—, con reparto y participación declarados en sus
@@ -509,7 +515,75 @@ exhaustiva —160 combinaciones y 3225 pantallas— sin desplazar ninguna pantal
 hallazgos de las tres rondas quedaron corregidos, cubiertos por regresiones o comprobaciones de
 navegador y reauditados antes de aprobar la entrega.
 
-Falta el **caso 4**, y con él Suzuki. Véase `docs/contenido_m7a.md`.
+La cuarta escribe el **Caso 4, «Un entorno que no todos tienen»** —separar principio y condiciones
+de transferencia—, con Suzuki tratado como un ecosistema completo y no como una técnica suelta. El
+hilo de ese ecosistema por el que entra la sesión y la dependencia desigual que se sustituye se
+deciden en pantallas distintas, y la prueba las combina en cuatro resultados defendibles, cada uno de
+los cuales declara qué dependencia sigue en pie: en dos minutos sólo cabe sustituir una. El cierre
+resuelve **ocho combinaciones** de hilo, sustitución y revisión, cada una afirmando lo que sus tres
+decisiones consiguieron y declarando pendiente lo que las otras habrían dado. Las tres tensiones que
+el mapa declara para la unidad —presuponer tiempo fuera de clase, práctica familiar o instrumento
+propio— son las tres opciones incoherentes, cada una con vuelta a su propia pantalla, y ninguna llega
+al incidente. El error histórico de leer la educación del talento como captación o educación de
+alumnado superdotado se corrige **donde el jugador lo comete**, y la pantalla de revelación conserva
+el ecosistema entero declarando que sus principios **no son alternativas entre sí** y que la
+transferencia es parcial y no da una receta universal. El incidente pertenece a la familia de
+transferencia —la cuarta distinta de la fase—. Es además la primera unidad en que el jugador declara
+un límite de transferencia y en que la condición de equidad forma parte del objetivo musical. Doce
+recorridos declarados consumen todas sus acciones, todos sus resultados de prueba y los nueve
+cierres.
+
+**Cuatro revisiones posteriores encontraron catorce bloqueos**, ninguno visible para la suite de
+entonces. La primera, cuatro, de contenido y de coherencia entre pantallas: los cierres ignoraban la sustitución y contradecían los costes de las ramas; la gramática
+borraba las decisiones, hacía que las dos adaptaciones repararan todo y contradecía los cierres; la
+escucha y los pasos pequeños se presentaban como técnicas excluyentes de la tradición; y las seis
+devoluciones de decisiones de diseño no declaraban reparto. Los cuatro están corregidos y cada uno
+deja regresión, verificada reinyectando el defecto. Se corrigieron además tres desincronizaciones
+—la cifra escrita a mano de la portada, el recuento de la campaña en este documento y la fase del
+paquete PLATEA— y la fórmula «Mantengo la dependencia que sustituí» de la bitácora, que afirmaba lo
+contrario de lo que ocurre.
+
+La segunda encontró **cinco más, de una clase más profunda**: las cuatro ramas de pasos pequeños
+afirmaban que el fragmento sonaba entero sin que ninguna acción ni revisión devolviera al conjunto;
+ningún recorrido declaraba su gramática, así que las doce bitácoras describían la misma rama
+dijeran lo que dijeran las acciones; los costes de las dos revisiones eran carencias afirmadas sin
+causa en lugar de gasto real del tiempo disponible; la separación de condiciones nombraba tres de
+las cinco y prometía el ciclo completo justo antes de obligar a aislar un hilo; y dos recuentos
+—el de este documento y el nombre de una prueba— seguían desfasados. Los cinco están corregidos, con
+regresión verificada reinsertando cada defecto, y el validador comprueba además que la gramática
+declarada por un recorrido exista de verdad.
+
+La tercera encontró **cuatro más**, y las tres primeras comparten raíz: lo que se había atado era el
+guion y no el juego. La pantalla de justificación seguía ofreciendo las piezas de todas las ramas, de
+modo que quien jugaba podía montar una clase y defender otra —declarar la gramática en los recorridos
+sólo arreglaba las bitácoras del arnés—; la alternativa defendible de la bitácora conservaba los dos
+costes derogados; las dos formulaciones del principio nombraban tres condiciones de las cinco; y dos
+notas de reparto negaban la vuelta al conjunto que la consigna ya hace. La corrección amplía el
+contrato con `requiredTags` en las piezas de gramática y hace que la pantalla ofrezca sólo las de la
+partida, dejando las dos evidencias como elección libre; las regresiones **juegan las ocho ramas como
+una persona** en lugar de limitarse a ejecutar recorridos.
+
+La cuarta encontró **uno más**, y era la costura que la tercera había dejado suelta: el filtro de la
+gramática devolvía **todas** las piezas cuando la rama no casaba, de modo que el enlace directo a la
+justificación —donde no hay ninguna clase de la que hablar— era el estado más permisivo del caso.
+Ahora un hueco ligado sin rama presente se queda vacío, `selectGrammar` rechaza sus piezas y la
+pantalla orienta: dice qué falta y lleva a la primera decisión capaz de abrirlo, derivada del
+contenido. La medición encontró que la pantalla nueva desbordaba en tres tamaños y se corrigió por
+composición, sin encoger ningún texto.
+
+**Estado de la entrega 4: aprobada tras auditoría independiente.** `pnpm check` pasa con 454 pruebas,
+TypeScript estricto, compilación y paquete
+PLATEA; el arnés completa los 44 recorridos en tres pasadas idénticas —88 combinaciones y 1677
+pantallas de recorrido por pasada—, mide 21 rutas de referencia y estados difíciles en los cinco
+tamaños —105 pantallas— y ejecuta una pasada exhaustiva de 220 combinaciones y
+4545 pantallas sin desplazar ninguna pantalla de acción.
+
+**Puerta de salida: superada.** El lote histórico está escrito y sus cuatro entregas han pasado
+auditoría independiente. La cuarta demostró cuatro veces por qué era necesaria: las cuatro rondas
+encontraron defectos con la suite en verde y con las regresiones de la ronda anterior ya escritas;
+la auditoría de aceptación comprobó después el conjunto completo.
+
+Véase `docs/contenido_m7a.md`.
 
 ### M7B — Contenido contemporáneo y síntesis
 

@@ -12,6 +12,14 @@ import { activeTags, resolveConsequenceId, resolveIncidentId } from "../domain/c
 
 export type GrammarKey = "objective" | "principleAction" | "conditionRisk" | "adaptation" | "evidence";
 
+export const GRAMMAR_KEYS: readonly GrammarKey[] = [
+  "objective",
+  "principleAction",
+  "conditionRisk",
+  "adaptation",
+  "evidence",
+];
+
 export interface GameSession {
   caseId: string;
   sceneId: string;
@@ -179,11 +187,137 @@ export function advanceFromInformationalScene(
   return { ...session, sceneId: nextSceneId ?? session.sceneId };
 }
 
+/**
+ * Piezas que la partida permite elegir en un hueco de la justificación.
+ *
+ * Se filtran por las etiquetas que las decisiones han puesto en juego. Un hueco libre ofrece todas
+ * sus piezas; uno ligado a una rama se queda vacío si aún falta alguna decisión, y la pantalla
+ * orienta hacia el lugar donde se toma en vez de inventar una defensa.
+ */
+export type GrammarOption = string | { id: string; label: string; requiredTags?: string[] };
+
+function justificationScene(caseDefinition: CaseDefinition) {
+  return caseDefinition.scenes.find(
+    (scene): scene is Extract<Scene, { kind: "justification" }> => scene.kind === "justification",
+  );
+}
+
+/** Un hueco está ligado a ramas en cuanto alguna de sus piezas declara etiquetas. */
+function isBranchBound(options: readonly GrammarOption[]): boolean {
+  return options.some((option) => typeof option !== "string" && (option.requiredTags?.length ?? 0) > 0);
+}
+
+export function grammarChoices(
+  caseDefinition: CaseDefinition,
+  session: GameSession,
+  key: GrammarKey,
+): GrammarOption[] {
+  const options = justificationScene(caseDefinition)?.grammarOptions[key] ?? [];
+
+  /*
+   * Un hueco que no usa `requiredTags` ofrece siempre todas sus piezas. Es lo que necesita una
+   * elección genuinamente libre —la evidencia del caso 4— y lo que conserva intacto el
+   * comportamiento del tutorial 0, los casos 2, 3 y 6 y el banco de mecánicas, que no lo usan.
+   */
+  if (!isBranchBound(options)) return [...options];
+
+  /*
+   * Y un hueco ligado a ramas ofrece **sólo** las de la rama presente. Si no hay ninguna decisión
+   * que case, se queda vacío, **sin reserva**: devolverlas todas sería justo el defecto que
+   * `requiredTags` existe para impedir, con el agravante de que ocurriría precisamente cuando no
+   * hay recorrido del que hablar —el enlace directo a la justificación—, que es cuando una defensa
+   * inventada es más fácil de construir y menos verdadera. De un hueco vacío se encarga
+   * `pendingGrammarDecisions`, que dice qué decisión falta y dónde se toma; la pantalla orienta en
+   * lugar de rellenarlo.
+   *
+   * Una pieza puede exigir varias etiquetas, y las exige **todas**: basta que falte una para que no
+   * se ofrezca.
+   */
+  const tags = activeTags(caseDefinition, session.selectedActions);
+  return options.filter((option) => {
+    if (typeof option === "string" || !option.requiredTags?.length) return true;
+    return option.requiredTags.every((tag) => tags.has(tag));
+  });
+}
+
+/** Un hueco vacío y la escena donde se toma la decisión que lo llenaría. */
+export interface PendingGrammarDecision {
+  key: GrammarKey;
+  /** Primera escena del caso en la que puede elegirse algo que abra este hueco. */
+  sceneId: string;
+  sceneTitle: string;
+}
+
+/**
+ * Qué decisiones faltan para poder defender, y dónde se toman.
+ *
+ * Todo se deriva del contenido: las etiquetas que **le faltan** al hueco, las acciones que las
+ * aportan y las escenas a las que esas acciones pertenecen, en el orden en que el caso las declara.
+ * No hay ninguna escena escrita a mano, de modo que un caso futuro que ate su gramática obtiene la
+ * orientación sin tocar el intérprete.
+ *
+ * La palabra importante es «faltan». Una pieza puede exigir más de una etiqueta, y entonces mirar
+ * las que exige —en lugar de las que aún no están— manda de vuelta a una pantalla ya resuelta: si
+ * una pieza pide `a` y `b` y la partida ya tiene `a`, orientar hacia `a` deja a quien juega dando
+ * vueltas en la decisión que ya tomó, mientras la que abre el hueco de verdad es `b`. Por eso se
+ * descuentan primero las etiquetas activas y sólo se busca dónde se consiguen las restantes.
+ */
+export function pendingGrammarDecisions(
+  caseDefinition: CaseDefinition,
+  session: GameSession,
+): PendingGrammarDecision[] {
+  const scene = justificationScene(caseDefinition);
+  if (!scene) return [];
+  const active = activeTags(caseDefinition, session.selectedActions);
+  const pending: PendingGrammarDecision[] = [];
+
+  for (const key of GRAMMAR_KEYS) {
+    const options = scene.grammarOptions[key] ?? [];
+    if (!isBranchBound(options)) continue;
+    if (grammarChoices(caseDefinition, session, key).length > 0) continue;
+
+    /* Sólo lo que aún no está: una etiqueta ya conseguida no vuelve a pedirse. */
+    const missing = new Set(
+      options.flatMap((option) =>
+        typeof option === "string"
+          ? []
+          : (option.requiredTags ?? []).filter((tag) => !active.has(tag)),
+      ),
+    );
+    const opens = new Set(
+      caseDefinition.actions
+        .filter((action) => action.tags.some((tag) => missing.has(tag)))
+        .map((action) => action.id),
+    );
+    const origin = caseDefinition.scenes.find(
+      (candidate) =>
+        (candidate.kind === "observation" || candidate.kind === "design" || candidate.kind === "revision") &&
+        candidate.actionIds.some((actionId) => opens.has(actionId)),
+    );
+    if (origin) pending.push({ key, sceneId: origin.id, sceneTitle: origin.title });
+  }
+
+  return pending;
+}
+
+/**
+ * Elegir una pieza que la partida no ofrece no hace nada.
+ *
+ * No lanza: la pantalla ya sólo pinta las disponibles, de modo que llegar aquí con otra significa
+ * un envío manipulado o un recorrido que declara una pieza de otra rama. En los dos casos lo
+ * correcto es que la justificación no cambie, y que quien lo intente lo note porque la frase sigue
+ * incompleta.
+ */
 export function selectGrammar(
+  caseDefinition: CaseDefinition,
   session: GameSession,
   key: GrammarKey,
   optionId: string,
 ): GameSession {
+  const allowed = grammarChoices(caseDefinition, session, key).some((option) =>
+    typeof option === "string" ? option === optionId : option.id === optionId,
+  );
+  if (!allowed) return session;
   return {
     ...session,
     selectedGrammar: { ...session.selectedGrammar, [key]: optionId },

@@ -534,6 +534,371 @@
       }
     },
     {
+      "id": "caso-4-escucha-tiempo-objetivo",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · escucha del modelo, repeticiones dentro de clase y objetivo dicho",
+      "purpose": "El hilo de la escucha del modelo con las repeticiones traídas dentro de clase, y el objetivo dicho y mostrado en cada vuelta. El cierre declara pendiente el medio, que es lo que esta sustitución no tocó. Atraviesa todas las pantallas nuevas de la unidad y mide los cinco tamaños.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-model-before-playing",
+        "c4-substitute-repetition-in-class",
+        "c4-revision-audible-target"
+      ],
+      "viewportCoverage": "all",
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-medium-still-unequal",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-feedback-same-shape",
+          "c4-feedback-conditions",
+          "c4-choice-principle-listening",
+          "c4-choice-substitute-time",
+          "c4-outcome-listening-time",
+          "c4-revision-target-outcome",
+          "c4-reveal-listening-time-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-escucha-tiempo-fuentes",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · escucha del modelo, repeticiones dentro de clase y varias fuentes",
+      "purpose": "El mismo diseño que el recorrido anterior con la otra revisión: el modelo repartido entre tres fuentes en lugar del criterio dicho. El cierre tiene que cambiar aunque el diseño sea idéntico.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-model-before-playing",
+        "c4-substitute-repetition-in-class",
+        "c4-revision-many-models"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-medium-still-unequal",
+        "adaptation": "c4-adapt-several-sources",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-listening-time",
+          "c4-revision-models-outcome",
+          "c4-reveal-listening-time-sources"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-escucha-medio-objetivo",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · escucha del modelo, medio compartido y objetivo dicho",
+      "purpose": "El mismo hilo y la misma revisión que el primer recorrido con la otra sustitución: el cierre debe declarar pendiente la repetición sostenida y no el medio.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-model-before-playing",
+        "c4-substitute-shared-medium",
+        "c4-revision-audible-target"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-listening-medium",
+          "c4-revision-target-outcome",
+          "c4-reveal-listening-medium-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-escucha-medio-fuentes",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · escucha del modelo, medio compartido y varias fuentes",
+      "purpose": "Escucha del modelo sin instrumento propio y con el modelo repartido entre varias fuentes.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-model-before-playing",
+        "c4-substitute-shared-medium",
+        "c4-revision-many-models"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-several-sources",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-listening-medium",
+          "c4-revision-models-outcome",
+          "c4-reveal-listening-medium-sources"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-pasos-tiempo-objetivo",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · pasos pequeños, repeticiones dentro de clase y objetivo dicho",
+      "purpose": "El otro hilo del ecosistema con las repeticiones dentro de clase y el criterio público: el éxito se reparte desde el primer minuto y el medio sigue pendiente.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-small-steps",
+        "c4-substitute-repetition-in-class",
+        "c4-revision-audible-target"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-medium-still-unequal",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-choice-principle-steps",
+          "c4-outcome-steps-time",
+          "c4-reveal-steps-time-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-pasos-tiempo-fuentes",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · pasos pequeños, repeticiones dentro de clase y varias fuentes",
+      "purpose": "Pasos pequeños repetidos aquí dentro y con el modelo repartido; sin criterio dicho, que es el coste declarado de esta revisión.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-small-steps",
+        "c4-substitute-repetition-in-class",
+        "c4-revision-many-models"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-medium-still-unequal",
+        "adaptation": "c4-adapt-several-sources",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-steps-time",
+          "c4-reveal-steps-time-sources"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-pasos-medio-objetivo",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · pasos pequeños, medio compartido y objetivo dicho",
+      "purpose": "Pasos pequeños sin instrumento propio y con objetivo dicho: la repetición sostenida es lo que queda pendiente.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-small-steps",
+        "c4-substitute-shared-medium",
+        "c4-revision-audible-target"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-choice-substitute-medium",
+          "c4-outcome-steps-medium",
+          "c4-reveal-steps-medium-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-pasos-medio-fuentes",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · pasos pequeños, medio compartido y varias fuentes",
+      "purpose": "La combinación que menos condiciones supone de las ocho, y que aun así deja pendiente la repetición sostenida y el criterio dicho.",
+      "actions": [
+        "c4-brief-same-shape",
+        "c4-plan-conditions",
+        "c4-principle-small-steps",
+        "c4-substitute-shared-medium",
+        "c4-revision-many-models"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-several-sources",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-steps-medium",
+          "c4-reveal-steps-medium-sources"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-deberes-en-casa",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · el hilo dejado fuera de clase",
+      "purpose": "La evidencia aplazada a mañana, el error histórico de leer la educación del talento como selección de alumnado superdotado, el hilo encargado en casa que devuelve a la primera decisión, y la revisión que traslada la desigualdad fuera del aula en lugar de repararla.",
+      "actions": [
+        "c4-brief-remember-tomorrow",
+        "c4-brief-same-shape",
+        "c4-plan-gifted-selection",
+        "c4-plan-conditions",
+        "c4-principle-daily-home-listening",
+        "c4-substitute-repetition-in-class",
+        "c4-principle-small-steps",
+        "c4-substitute-shared-medium",
+        "c4-revision-bring-from-home",
+        "c4-revision-audible-target"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-feedback-remember-tomorrow",
+          "c4-feedback-gifted",
+          "c4-choice-principle-home",
+          "c4-outcome-home-practice",
+          "c4-outcome-steps-medium",
+          "c4-revision-home-outcome",
+          "c4-reveal-steps-medium-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-acompanamiento-en-casa",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · la dependencia trasladada a las familias",
+      "purpose": "Los otros dos indicios falsos —medir a quien ya tocaba y culpar a la repetición y la imitación— y la sustitución que convierte el acompañamiento familiar en requisito escolar, que devuelve a la elección de sustitución.",
+      "actions": [
+        "c4-brief-best-players",
+        "c4-brief-same-shape",
+        "c4-plan-repetition-blamed",
+        "c4-plan-conditions",
+        "c4-principle-model-before-playing",
+        "c4-substitute-ask-families",
+        "c4-substitute-shared-medium",
+        "c4-revision-many-models"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-several-sources",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-feedback-best-players",
+          "c4-feedback-repetition-blamed",
+          "c4-choice-substitute-family",
+          "c4-outcome-family-shift",
+          "c4-outcome-listening-medium",
+          "c4-reveal-listening-medium-sources"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-enlace-directo-a-la-prueba",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · enlace directo a la prueba, sin haber separado nada",
+      "purpose": "Entrar por el medio a la pantalla que afirma qué le pasa al aula sin haber elegido hilo ni sustitución. Debe declarar el hueco en lugar de inventar un resultado y devolver a la primera decisión sin bloquear nada.",
+      "startSceneId": "c4-test",
+      "actions": [
+        "c4-principle-small-steps",
+        "c4-substitute-repetition-in-class",
+        "c4-revision-audible-target"
+      ],
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-step-by-step",
+        "conditionRisk": "c4-risk-medium-still-unequal",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-same-shape"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-outcome-unseparated",
+          "c4-outcome-steps-time",
+          "c4-reveal-steps-time-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
+      "id": "caso-4-enlace-directo-a-la-revelacion",
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "name": "Caso 4 · enlace directo al cierre histórico",
+      "purpose": "El marco histórico completo —el ecosistema entero, la analogía con la lengua materna y la corrección del malentendido de la selección por talento— abierto sin ninguna decisión previa. El cierre declara los huecos en lugar de inventar un reparto y conduce a la primera decisión, de modo que el caso no puede darse por recorrido sin haber separado nada. Mide la pantalla más larga de la unidad en los cinco tamaños.",
+      "startSceneId": "c4-reveal",
+      "actions": [
+        "c4-principle-model-before-playing",
+        "c4-substitute-shared-medium",
+        "c4-revision-audible-target"
+      ],
+      "viewportCoverage": "all",
+      "grammar": {
+        "objective": "c4-objective-same-shape-no-ecosystem",
+        "principleAction": "c4-principle-listen-before-playing",
+        "conditionRisk": "c4-risk-repetition-still-scarce",
+        "adaptation": "c4-adapt-public-target",
+        "evidence": "c4-evidence-improved-today"
+      },
+      "expect": {
+        "consequenceIds": [
+          "c4-reveal-shared",
+          "c4-outcome-listening-medium",
+          "c4-reveal-listening-medium-target"
+        ],
+        "incidentIds": ["c4-incident-uneven-start"],
+        "completes": true
+      }
+    },
+    {
       "id": "piloto-coherente",
       "caseSlug": "el-arreglo-que-no-escucha-a-todos",
       "name": "Caso 6 · montaje coherente",

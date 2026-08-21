@@ -7,9 +7,9 @@ El procedimiento y la interpretación están en `docs/comprobaciones_m6.md`.
 Pasadas ejecutadas: 3.
 Resultados idénticos en todas las pasadas: **sí**.
 
-- Recorridos declarados: 32, completados hasta su pantalla de cierre en 68 combinaciones de recorrido y tamaño.
-- Pantallas de recorrido medidas por pasada: 1257, cada una con los desplegables cerrados y abiertos.
-- Páginas de referencia y estados difíciles: 20 rutas × 5 tamaños = 100 pantallas, medidas una vez.
+- Recorridos declarados: 44, completados hasta su pantalla de cierre en 88 combinaciones de recorrido y tamaño.
+- Pantallas de recorrido medidas por pasada: 1677, cada una con los desplegables cerrados y abiertos.
+- Páginas de referencia y estados difíciles: 21 rutas × 5 tamaños = 105 pantallas, medidas una vez.
 - Desbordamiento horizontal: ninguno.
 - Objetivo táctil mínimo: 44 px.
 - Desplazamiento en pantallas de acción · recorridos: **ninguno**, en ningún tamaño ni estado.
@@ -28,6 +28,14 @@ Resultados idénticos en todas las pasadas: **sí**.
 | Reflexión sin montaje: la salida apunta al momento que falta | correcto | href=#/caso/del-modelo-a-una-forma-propia/c3-model |
 | Reflexión sin montaje: la salida se alcanza con el tabulador | correcto | recibe el foco tabulando |
 | Reflexión sin montaje: la salida conduce al momento 1 y se puede decidir | correcto | #/caso/del-modelo-a-una-forma-propia/c3-model · «Momento 1 · cómo conoce el grupo el motivo» · 3 opciones |
+| Defensa sin decisiones: no ofrece ninguna pieza que no pertenezca a una rama | correcto | 0 huecos y 0 piezas en pantalla |
+| Defensa sin decisiones: avisa de qué falta sin hablar de montaje | correcto | «Aquí sólo aparecen las piezas de la clase que hayas decidi…» |
+| Defensa sin decisiones: no ofrece llevar a la bitácora una defensa vacía | correcto | no existe ningún control de cierre |
+| Defensa sin decisiones: la salida es un objetivo táctil suficiente | correcto | lado menor de 48 px |
+| Defensa sin decisiones: la salida apunta a la primera decisión | correcto | href=#/caso/un-entorno-que-no-todos-tienen/c4-principle |
+| Defensa sin decisiones: la salida se alcanza con el tabulador | correcto | recibe el foco tabulando |
+| Defensa sin decisiones: la salida muestra foco visible | correcto | contorno solid de 3 px |
+| Defensa sin decisiones: la salida conduce a la primera decisión y se puede decidir | correcto | #/caso/un-entorno-que-no-todos-tienen/c4-principle · «Elige por dónde entra hoy» · 3 opciones |
 
 | Bloque con desplazamiento interno · 360 × 640 | Resultado | Detalle |
 | --- | --- | --- |

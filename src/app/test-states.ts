@@ -125,6 +125,15 @@ export const TEST_STATES: readonly TestState[] = [
     sceneId: "c3-reflection",
   },
   {
+    id: "defensa-sin-decisiones",
+    name: "Defensa abierta sin ninguna decisión",
+    purpose:
+      "Enlace docente directo a la justificación del caso 4, cuya gramática está ligada a la rama recorrida. Sin decisiones no hay rama, así que los huecos ligados se quedan vacíos en lugar de ofrecer piezas de todas las ramas: la pantalla debe decir qué falta y llevar a donde se decide.",
+    kind: "case",
+    caseSlug: "un-entorno-que-no-todos-tienen",
+    sceneId: "c4-justification",
+  },
+  {
     id: "cierre-de-caso",
     name: "Pantalla de cierre de un caso",
     purpose: "El final del recorrido, con el enlace a la unidad siguiente y la repetición.",

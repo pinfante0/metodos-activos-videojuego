@@ -1095,7 +1095,7 @@
     "eyebrow": "Caso 3 completado",
     "title": "Ya montas tres momentos que llevan de un modelo a una forma propia",
     "body": "Has decidido con qué material entra el motivo, qué tiene que hacer cada pareja con él y dónde se oye lo que haya hecho, y has comprobado que cambiar uno de los tres momentos cambia lo que ocurre en los otros dos. Al revisar has añadido una lente que sostiene ese proceso sin sustituirlo. La campaña conserva aquí lo aprendido.",
-    "nextLabel": "Volver a la campaña",
-    "nextRoute": "#/campana"
+    "nextLabel": "Continuar al caso 4",
+    "nextRoute": "#/caso/un-entorno-que-no-todos-tienen"
   }
 }

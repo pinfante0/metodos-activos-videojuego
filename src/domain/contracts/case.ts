@@ -22,12 +22,29 @@ const FeedbackSchema = z
   })
   .strict();
 
+/**
+ * Pieza de la gramática de justificación.
+ *
+ * `requiredTags` ata la pieza a la partida. Sin él, la pantalla de justificación ofrece siempre
+ * todas las piezas de cada hueco, y quien juega puede defender una clase que no montó: elegir el
+ * principio de una rama, el riesgo de otra y la adaptación de una tercera. Mientras un caso
+ * ofrecía una sola formulación por hueco eso no podía ocurrir; en cuanto un caso deriva sus piezas
+ * de las decisiones —el hilo recorrido, la dependencia sustituida, la revisión elegida— la
+ * justificación tiene que ofrecer sólo las que corresponden a lo que se hizo.
+ *
+ * Es opcional y no cambia nada donde no se declara: un hueco sin `requiredTags` en ninguna de sus
+ * piezas las ofrece todas, que es lo que necesita una elección genuinamente libre como la de la
+ * evidencia, y lo que conserva intacto el comportamiento del tutorial 0, los casos 2, 3 y 6 y el
+ * banco de mecánicas.
+ */
 const GrammarOptionSchema = z.union([
   IdentifierSchema,
   z
     .object({
       id: IdentifierSchema,
       label: z.string().min(1),
+      /** Etiquetas que la partida debe haber puesto en juego para que esta pieza se ofrezca. */
+      requiredTags: z.array(IdentifierSchema).min(1).optional(),
     })
     .strict(),
 ]);

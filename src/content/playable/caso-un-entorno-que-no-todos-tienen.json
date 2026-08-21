@@ -1,0 +1,1100 @@
+{
+  "schemaVersion": 1,
+  "id": "un-entorno-que-no-todos-tienen",
+  "slug": "un-entorno-que-no-todos-tienen",
+  "status": "reviewed",
+  "title": "Un entorno que no todos tienen",
+  "experienceType": "case",
+  "durationMinutes": 9,
+  "modes": ["home"],
+  "learningObjective": "Conseguir que un fragmento de cuatro sonidos suene con el mismo perfil y el mismo final en todo el grupo al terminar los dos minutos, sin que nadie haya necesitado un instrumento propio ni tiempo de práctica fuera de clase.",
+  "approachIds": ["suzuki"],
+  "stableQuestions": [
+    "entry-point",
+    "student-action-agency",
+    "teacher-role",
+    "notation-theory-improvisation-creation",
+    "conditions-limits-adaptations"
+  ],
+  "lenses": ["inclusion-accessibility", "agency-creativity", "evidence-context"],
+  "characterIds": ["ines", "leo", "mara", "oscar", "julia"],
+  "pedagogy": {
+    "allowMultipleDefensible": true,
+    "avoidsUniversalWinner": true,
+    "consequenceClaim": "plausible-possibility"
+  },
+  "entrySceneId": "c4-brief",
+  "scenes": [
+    {
+      "id": "c4-brief",
+      "kind": "observation",
+      "title": "Lee el encargo antes de decidir nada",
+      "introduction": "5.º de Primaria, veinticuatro personas. Hay un altavoz, seis flautas dulces del centro y sillas que se pueden apartar. Nadie tiene instrumento en casa y no puedes contar con tiempo de práctica fuera de clase. El fragmento son cuatro sonidos de una pieza que ya suena estos días: sube, se queda arriba y baja a cerrar. Tienes dos minutos.",
+      "resourceIds": [],
+      "prompt": "¿Qué tendría que poder oírse al terminar los dos minutos para decir que ha funcionado?",
+      "actionIds": ["c4-brief-same-shape", "c4-brief-best-players", "c4-brief-remember-tomorrow"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c4-plan",
+      "kind": "observation",
+      "title": "El plan que llega de la escuela de al lado",
+      "introduction": "Tu compañera de prácticas trae escrito lo que allí funciona: hay continuidad y práctica diaria desde pequeños, cada quien tiene su instrumento, hay enseñanza instrumental individual cada semana, el tiempo fuera de clase está reservado y una familia o persona cuidadora acompaña la práctica. Sobre eso, el fragmento se modela, se imita y se repite en pasos muy pequeños hasta que suena limpio. Funciona, y funciona por algo.",
+      "resourceIds": [],
+      "prompt": "¿Qué parte de ese plan no puedes dar por supuesta aquí?",
+      "actionIds": ["c4-plan-conditions", "c4-plan-gifted-selection", "c4-plan-repetition-blamed"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c4-principle",
+      "kind": "design",
+      "title": "Elige por dónde entra hoy",
+      "introduction": "Allí nada de eso son técnicas sueltas: escuchar mucho, modelar, imitar, repetir y avanzar por pasos pequeños se sostienen unos a otros. Aquí no cabe el ecosistema entero en dos minutos, y por eso hoy hay que decidir por cuál de esos hilos entra la sesión. Separarlos es un efecto del traslado, no una propiedad del enfoque.",
+      "resourceIds": [],
+      "prompt": "¿Por dónde entra hoy la sesión?",
+      "actionIds": ["c4-principle-model-before-playing", "c4-principle-small-steps", "c4-principle-daily-home-listening"],
+      "feedbackMode": "immediate",
+      "slots": ["entry"]
+    },
+    {
+      "id": "c4-substitute",
+      "kind": "design",
+      "title": "Elige qué dependencia sustituyes",
+      "introduction": "El plan prestado se sostenía sobre condiciones que aquí no están repartidas por igual. En dos minutos puedes sustituir una; la otra seguirá pendiente y tendrás que decir cuál.",
+      "resourceIds": [],
+      "prompt": "¿Qué sustituyes?",
+      "actionIds": ["c4-substitute-repetition-in-class", "c4-substitute-shared-medium", "c4-substitute-ask-families"],
+      "feedbackMode": "immediate",
+      "slots": ["mediation-support"]
+    },
+    {
+      "id": "c4-test",
+      "kind": "consequence",
+      "title": "Prueba · dos minutos sin el ecosistema prestado",
+      "introduction": "El resultado combina el hilo por el que entra la sesión con la dependencia que sustituyes: cambiar uno cambia lo que le ocurre al otro. Describe una posibilidad pedagógica, no un diagnóstico del grupo.",
+      "resourceIds": [],
+      "consequenceIds": [
+        "c4-outcome-home-practice",
+        "c4-outcome-family-shift",
+        "c4-outcome-listening-time",
+        "c4-outcome-listening-medium",
+        "c4-outcome-steps-time",
+        "c4-outcome-steps-medium",
+        "c4-outcome-unseparated"
+      ],
+      "rules": [
+        {"requiredTags": ["principle-home"], "consequenceId": "c4-outcome-home-practice"},
+        {"requiredTags": ["substitute-family"], "consequenceId": "c4-outcome-family-shift"},
+        {"requiredTags": ["principle-listening", "substitute-time"], "consequenceId": "c4-outcome-listening-time"},
+        {"requiredTags": ["principle-listening", "substitute-medium"], "consequenceId": "c4-outcome-listening-medium"},
+        {"requiredTags": ["principle-steps", "substitute-time"], "consequenceId": "c4-outcome-steps-time"},
+        {"requiredTags": ["principle-steps", "substitute-medium"], "consequenceId": "c4-outcome-steps-medium"}
+      ],
+      "fallbackConsequenceId": "c4-outcome-unseparated"
+    },
+    {
+      "id": "c4-incident",
+      "kind": "incident",
+      "title": "Incidente · la tercera vuelta no parte de donde parecía",
+      "introduction": "La prueba deja ver una condición que el diseño daba por resuelta: que todo el grupo llegaba al mismo punto de partida. La tensión pertenece al entorno y a la organización de la clase, no a ninguna persona.",
+      "resourceIds": [],
+      "nextSceneId": "c4-revision",
+      "incidentId": "c4-incident-uneven-start"
+    },
+    {
+      "id": "c4-revision",
+      "kind": "revision",
+      "title": "Revisa de dónde sale la referencia",
+      "introduction": "Mantén el hilo por el que entró la sesión y la sustitución que ya hiciste, y cambia solo lo que el incidente ha puesto en duda: contra qué se compara cada vuelta y quién puede decir si ya está.",
+      "resourceIds": [],
+      "prompt": "¿Qué cambias?",
+      "actionIds": ["c4-revision-audible-target", "c4-revision-many-models", "c4-revision-bring-from-home"],
+      "feedbackMode": "immediate"
+    },
+    {
+      "id": "c4-reveal",
+      "kind": "consequence",
+      "title": "Un principio que viaja y un entorno que no",
+      "introduction": "Escuchar muchas veces un repertorio cuidadosamente secuenciado, modelar, imitar, repetir y avanzar en pasos muy pequeños es el núcleo del enfoque que Shinichi Suzuki llamó educación del talento, por analogía con la manera en que se aprende la lengua materna. El nombre engaña si se lee al revés: no era una escuela para alumnado superdotado ni una captación de jóvenes talentos, sino la convicción contraria, que la capacidad se desarrolla en un entorno adecuado y no es privilegio de unos pocos. Allí esos principios no son alternativas entre sí, sino partes de un ecosistema que se sostienen unas a otras: escucha frecuente, modelado, imitación, repetición, pasos pequeños, instrumento propio, clase individual, experiencias de grupo y una familia o persona cuidadora que acompaña la práctica. Aquí no cabe ese ecosistema, y haber tenido que elegir un hilo es un efecto del traslado. La transferencia es parcial y no da una receta universal: qué convenga traerse depende del objetivo, del grupo y de lo que el aula tenga.",
+      "resourceIds": [],
+      "nextSceneId": "c4-justification",
+      "consequenceIds": [
+        "c4-reveal-listening-time-target",
+        "c4-reveal-listening-time-sources",
+        "c4-reveal-listening-medium-target",
+        "c4-reveal-listening-medium-sources",
+        "c4-reveal-steps-time-target",
+        "c4-reveal-steps-time-sources",
+        "c4-reveal-steps-medium-target",
+        "c4-reveal-steps-medium-sources",
+        "c4-reveal-shared"
+      ],
+      "rules": [
+        {"requiredTags": ["principle-listening", "substitute-time", "revision-target"], "consequenceId": "c4-reveal-listening-time-target"},
+        {"requiredTags": ["principle-listening", "substitute-time", "revision-sources"], "consequenceId": "c4-reveal-listening-time-sources"},
+        {"requiredTags": ["principle-listening", "substitute-medium", "revision-target"], "consequenceId": "c4-reveal-listening-medium-target"},
+        {"requiredTags": ["principle-listening", "substitute-medium", "revision-sources"], "consequenceId": "c4-reveal-listening-medium-sources"},
+        {"requiredTags": ["principle-steps", "substitute-time", "revision-target"], "consequenceId": "c4-reveal-steps-time-target"},
+        {"requiredTags": ["principle-steps", "substitute-time", "revision-sources"], "consequenceId": "c4-reveal-steps-time-sources"},
+        {"requiredTags": ["principle-steps", "substitute-medium", "revision-target"], "consequenceId": "c4-reveal-steps-medium-target"},
+        {"requiredTags": ["principle-steps", "substitute-medium", "revision-sources"], "consequenceId": "c4-reveal-steps-medium-sources"}
+      ],
+      "fallbackConsequenceId": "c4-reveal-shared"
+    },
+    {
+      "id": "c4-justification",
+      "kind": "justification",
+      "title": "Construye tu defensa",
+      "introduction": "No hace falta escribir texto libre. En principio, riesgo y adaptación sólo aparecen las piezas de la clase que decidiste: no se puede defender una que no ocurrió. La evidencia sí la eliges: las dos son defendibles y comprueban cosas distintas.",
+      "resourceIds": [],
+      "nextSceneId": "c4-reflection",
+      "grammarOptions": {
+        "objective": [
+          {"id": "c4-objective-same-shape-no-ecosystem", "label": "que el fragmento suene con el mismo perfil y el mismo final en todo el grupo sin que nadie haya necesitado instrumento propio ni tiempo fuera de clase"}
+        ],
+        "principleAction": [
+          {"id": "c4-principle-listen-before-playing", "requiredTags": ["principle-listening"], "label": "entrar por el hilo que sí viaja del ecosistema prestado —que el fragmento se oiga muchas veces antes de producirlo— sin dar por supuestas sus cinco condiciones: continuidad y práctica diaria, enseñanza individual, instrumento, tiempo fuera de clase y apoyo cuidador"},
+          {"id": "c4-principle-step-by-step", "requiredTags": ["principle-steps"], "label": "entrar por el hilo que sí viaja del ecosistema prestado —pasos tan pequeños que cada uno salga hoy, volviendo al conjunto— sin dar por supuestas sus cinco condiciones: continuidad y práctica diaria, enseñanza individual, instrumento, tiempo fuera de clase y apoyo cuidador"}
+        ],
+        "conditionRisk": [
+          {"id": "c4-risk-medium-still-unequal", "requiredTags": ["substitute-time"], "label": "las repeticiones ya ocurren dentro de clase, pero el medio sigue repartiendo quién toca y quién espera: seis flautas no llegan a veinticuatro personas"},
+          {"id": "c4-risk-repetition-still-scarce", "requiredTags": ["substitute-medium"], "label": "ya no hace falta tener instrumento, pero la repetición sostenida sigue cabiendo pocas veces: hay dos minutos y no puedo pedir ninguno fuera de clase"}
+        ],
+        "adaptation": [
+          {"id": "c4-adapt-public-target", "requiredTags": ["revision-target"], "label": "decir y mostrar antes de cada vuelta qué hay que conseguir en ella, anunciar cuántas quedan y dejar que sea el grupo quien diga si ya está, a cambio del tiempo que se va entre vuelta y vuelta en decirlo y juzgarlo, que son vueltas que dejan de sonar"},
+          {"id": "c4-adapt-several-sources", "requiredTags": ["revision-sources"], "label": "hacer llegar la misma vuelta grabada, cantada y mostrada en un orden anunciado y dejar elegir con qué vía se devuelve, a cambio del tiempo que se va en encadenar las tres y del riesgo de que dejen de decir lo mismo"}
+        ],
+        "evidence": [
+          {"id": "c4-evidence-same-shape", "label": "si el grupo produce el fragmento con el mismo perfil y el mismo final cuando el modelo deja de sonar"},
+          {"id": "c4-evidence-improved-today", "label": "si puede verse quién ha mejorado hoy dentro de la clase, y no quién llegaba sabiéndolo de antes"}
+        ]
+      }
+    },
+    {
+      "id": "c4-reflection",
+      "kind": "reflection",
+      "title": "Qué mantuviste y qué cambiaste",
+      "introduction": "La bitácora conserva el razonamiento, no una nota. Revisa por dónde entró la sesión, qué dependencia sustituiste y qué cambiaste después del incidente.",
+      "resourceIds": [],
+      "nextSceneId": null,
+      "journalFields": [
+        "objective",
+        "first-decision",
+        "maintained-decision",
+        "revised-decision",
+        "trigger",
+        "condition-risk",
+        "adaptation",
+        "observable-evidence",
+        "defensible-alternative",
+        "final-grammar"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "c4-brief-same-shape",
+      "label": "Que el fragmento suene con el mismo perfil y el mismo final en todo el grupo, sin que nadie haya practicado fuera de clase.",
+      "principleIds": ["objective-action-evidence", "equity-inside-the-lesson"],
+      "consequenceId": "c4-feedback-same-shape",
+      "tags": ["continue"]
+    },
+    {
+      "id": "c4-brief-best-players",
+      "label": "Que las seis flautas suenen impecables: quien las coge se lo ha trabajado y se nota.",
+      "principleIds": ["measuring-who-arrived-ready"],
+      "consequenceId": "c4-feedback-best-players",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c4-brief-remember-tomorrow",
+      "label": "Que mañana se acuerden y puedan seguir repasándolo cada cual por su cuenta en casa.",
+      "principleIds": ["evidence-moved-out-of-class"],
+      "consequenceId": "c4-feedback-remember-tomorrow",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c4-plan-conditions",
+      "label": "Las cinco condiciones: continuidad y práctica diaria, enseñanza individual, instrumento, tiempo fuera de clase y apoyo cuidador. Sin ellas, hoy solo cabe tirar de un hilo.",
+      "principleIds": ["principle-and-conditions-separated"],
+      "consequenceId": "c4-feedback-conditions",
+      "tags": ["continue"]
+    },
+    {
+      "id": "c4-plan-gifted-selection",
+      "label": "Que ese plan es para alumnado seleccionado por su talento y este grupo es ordinario.",
+      "principleIds": ["talent-as-selection"],
+      "consequenceId": "c4-feedback-gifted",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c4-plan-repetition-blamed",
+      "label": "Que la repetición y la imitación no valen aquí: en un aula ordinaria hay que crear, no copiar.",
+      "principleIds": ["imitation-as-the-defect"],
+      "consequenceId": "c4-feedback-repetition-blamed",
+      "tags": ["retry"]
+    },
+    {
+      "id": "c4-principle-model-before-playing",
+      "label": "Por la escucha del modelo: que el fragmento suene muchas veces antes de que nadie lo produzca, en tomas cortas, hasta que puedan anticiparlo.",
+      "principleIds": ["model-before-production", "sound-before-symbol"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-choice-principle-listening",
+      "tags": ["principle-listening"]
+    },
+    {
+      "id": "c4-principle-small-steps",
+      "label": "Por el paso pequeño: dos sonidos cantados y mostrados con la mano, sin añadir el siguiente hasta que ese se sostenga, y el fragmento entero cada dos pasos.",
+      "principleIds": ["small-accumulative-steps", "modelling-not-explaining"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-choice-principle-steps",
+      "tags": ["principle-steps"]
+    },
+    {
+      "id": "c4-principle-daily-home-listening",
+      "label": "Encargar que escuchen la grabación en casa todos los días de esta semana: así llegarán sabiéndolo.",
+      "principleIds": ["condition-mistaken-for-principle"],
+      "consequenceId": "c4-choice-principle-home",
+      "tags": ["principle-home"]
+    },
+    {
+      "id": "c4-substitute-repetition-in-class",
+      "label": "La práctica en casa: las repeticiones ocurren aquí, en tomas cortas repartidas por la sesión, con el modelo disponible cada vez que haga falta.",
+      "principleIds": ["repetition-inside-the-lesson"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-choice-substitute-time",
+      "tags": ["substitute-time"]
+    },
+    {
+      "id": "c4-substitute-shared-medium",
+      "label": "El instrumento propio: el fragmento vive en la voz y el cuerpo, y las seis flautas rotan con un papel musical declarado para cada vía.",
+      "principleIds": ["shared-medium-with-declared-role"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-choice-substitute-medium",
+      "tags": ["substitute-medium"]
+    },
+    {
+      "id": "c4-substitute-ask-families",
+      "label": "El acompañamiento: pedir a las familias que se sienten cada tarde a repasarlo en casa.",
+      "principleIds": ["unequal-dependency-kept"],
+      "consequenceId": "c4-choice-substitute-family",
+      "tags": ["substitute-family"]
+    },
+    {
+      "id": "c4-revision-audible-target",
+      "label": "Decir y mostrar antes de cada vuelta qué hay que conseguir, anunciar cuántas quedan y que sea el grupo quien diga al terminarla si ya está.",
+      "principleIds": ["public-target", "group-judges-the-take"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-revision-target-outcome",
+      "tags": ["defensible", "revision-target"]
+    },
+    {
+      "id": "c4-revision-many-models",
+      "label": "Que el modelo llegue de varias fuentes en un orden anunciado —grabado, cantado y mostrado— y que cada cual elija con qué vía lo devuelve.",
+      "principleIds": ["several-sources", "equivalent-response-routes"],
+      "approachIds": ["suzuki"],
+      "consequenceId": "c4-revision-models-outcome",
+      "tags": ["defensible", "revision-sources"]
+    },
+    {
+      "id": "c4-revision-bring-from-home",
+      "label": "Pedir que cada cual traiga de casa un instrumento y lo repase por su cuenta hasta la próxima sesión.",
+      "principleIds": ["inequality-moved-outside"],
+      "consequenceId": "c4-revision-home-outcome",
+      "tags": ["incoherent", "retry"]
+    }
+  ],
+  "incidents": [
+    {
+      "id": "c4-incident-uneven-start",
+      "constraintFamily": "transfer",
+      "reveal": "A la tercera vuelta el fragmento ya suena ajustado en una parte del grupo y no en otra, y la diferencia no es de hoy. Óscar lo saca limpio desde el principio porque lleva dos años dando clase fuera del centro, y el aula empieza a mirarle a él: la referencia deja de ser el fragmento y pasa a ser una persona del grupo. Mara oye perfectamente que algo no encaja y no le sirve de nada, porque nadie ha dicho contra qué se compara esta vuelta. Inés puede seguir lo que se muestra, pero lo que hay que corregir de una vuelta a la siguiente solo existe en el aire. Julia ha dejado de intentarlo: nadie ha dicho cuántas vueltas quedan ni qué hay que conseguir en cada una. Leo encuentra una manera de sostener el fragmento desde su sitio y funciona, pero solo llega a quien tiene al lado. Tú repites la vuelta y no puedes distinguir quién está mejorando hoy de quién ya venía sabiéndolo.",
+      "revisionActionIds": ["c4-revision-audible-target", "c4-revision-many-models", "c4-revision-bring-from-home"]
+    }
+  ],
+  "consequences": [
+    {
+      "id": "c4-feedback-same-shape",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Un perfil y un final compartidos son algo que puede oírse y compararse vuelta a vuelta.",
+        "agency": "Cada persona tiene que decidir qué ajusta de lo suyo para llegar ahí.",
+        "barrier": "Si la mejora depende de lo que ocurre fuera, dentro de clase no se puede observar.",
+        "evidence": "Se comprueba al terminar los dos minutos y no la semana que viene."
+      },
+      "feedback": {
+        "supports": "Has elegido una evidencia que junta las dos mitades del encargo: que el fragmento suene igual y que llegar ahí no dependa de lo que nadie tiene en casa.",
+        "tension": "Las dos mitades pueden perderse por separado, y por caminos distintos.",
+        "possibleRepair": "Guarda esa doble exigencia: te hará falta en las dos decisiones que vienen.",
+        "observableEvidence": "Piensa qué tendría que ocurrir en el aula para poder decir las dos cosas a la vez."
+      },
+      "nextSceneId": "c4-plan"
+    },
+    {
+      "id": "c4-feedback-best-players",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Que una flauta suene bien es un logro real y merece oírse.",
+        "agency": "Quien no coge flauta no decide nada sobre lo que va a sonar.",
+        "barrier": "Hay seis flautas y veinticuatro personas: repartirlas ya reparte el acceso.",
+        "evidence": "Lo que se mide es quién llegaba con horas hechas fuera, no qué ha pasado hoy."
+      },
+      "feedback": {
+        "supports": "Buscar calidad de sonido no es un capricho: es central en la tradición de la que viene este plan.",
+        "tension": "Puesta como evidencia de los dos minutos, mide el entorno que ya tenía cada cual.",
+        "possibleRepair": "Busca algo que solo pueda haber ocurrido dentro de esta clase.",
+        "observableEvidence": "Pregúntate qué sabrías de quien nunca ha tenido una flauta en la mano."
+      },
+      "nextSceneId": "c4-brief"
+    },
+    {
+      "id": "c4-feedback-remember-tomorrow",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Que algo quede para mañana es una buena señal y no hay que renunciar a ella.",
+        "agency": "Repasar por su cuenta exige un sitio, un rato y algo con qué hacerlo.",
+        "barrier": "El encargo dice que aquí no puede contarse con tiempo de práctica fuera de clase.",
+        "evidence": "Lo que ocurra en casa no vas a poder observarlo ni repartirlo por igual."
+      },
+      "feedback": {
+        "supports": "La repetición sostenida en el tiempo es justo lo que hace crecer un fragmento, y es el corazón del plan que tienes delante.",
+        "tension": "Colocarla fuera de clase la vuelve desigual: unas casas la sostienen y otras no.",
+        "possibleRepair": "Quédate con la repetición y decide dónde ocurre.",
+        "observableEvidence": "Pregúntate qué podrías observar tú al terminar los dos minutos."
+      },
+      "nextSceneId": "c4-brief"
+    },
+    {
+      "id": "c4-feedback-conditions",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El plan se sostiene sobre dos cosas distintas: cómo se aprende y qué hace falta para poder aprenderlo así.",
+        "agency": "Separarlas es lo que te deja decidir; sin separarlas solo puedes copiarlo o rechazarlo entero.",
+        "barrier": "Ninguna de las cinco condiciones está repartida por igual, y ninguna decisión tuya de dos minutos las reparte.",
+        "evidence": "Se ve en qué se puede empezar hoy y qué habría que garantizar antes."
+      },
+      "feedback": {
+        "supports": "Has separado lo que viaja de lo que hay que tener. Esa es exactamente la operación que este caso pide.",
+        "tension": "Y no viaja entero: sin esas cinco condiciones el ciclo completo no cabe en dos minutos, así que hoy vas a tirar de un hilo y dejar los demás.",
+        "possibleRepair": "Elige por cuál entras hoy y qué pones en el sitio de lo que falta.",
+        "observableEvidence": "Mira cuál de las dos decisiones que vienen sostiene lo que quieres oír."
+      },
+      "nextSceneId": "c4-principle"
+    },
+    {
+      "id": "c4-feedback-gifted",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El nombre del enfoque sugiere selección y dice justo lo contrario.",
+        "agency": "Si el plan fuera para unos pocos, no habría nada que decidir aquí.",
+        "barrier": "Dar por hecho que un grupo ordinario no puede es la barrera, y la pones tú.",
+        "evidence": "La diferencia entre las dos aulas está en el entorno disponible, no en quién las llena."
+      },
+      "feedback": {
+        "supports": "La confusión es antigua y muy extendida: educación del talento suena a captación de jóvenes talentos.",
+        "tension": "La institución que lo desarrolló explica expresamente que no es educación para alumnado superdotado; su punto de partida es el contrario, que la capacidad se desarrolla en un entorno adecuado.",
+        "possibleRepair": "Busca la diferencia en las condiciones y no en las personas.",
+        "observableEvidence": "Mira qué tiene esa escuela cada día que esta aula no tiene."
+      },
+      "nextSceneId": "c4-plan"
+    },
+    {
+      "id": "c4-feedback-repetition-blamed",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Modelar, imitar y repetir es como crece un fragmento en esta tradición y en muchas prácticas musicales, dentro y fuera de la escuela.",
+        "agency": "Repetir sin saber qué se busca no pide ninguna decisión; con un criterio a la vista, sí.",
+        "barrier": "Descartar la repetición deja el fragmento sin manera de mejorar en dos minutos.",
+        "evidence": "Lo que distingue una repetición útil de una mecánica es contra qué se compara."
+      },
+      "feedback": {
+        "supports": "La sospecha tiene fundamento: repetir por repetir llena el tiempo y no mejora nada.",
+        "tension": "El defecto no está en repetir, sino en repetir sin saber qué hay que conseguir. Y no es la receta de cualquier objetivo: aquí encaja porque el de hoy es un ajuste común.",
+        "possibleRepair": "Conserva la repetición y decide qué la orienta.",
+        "observableEvidence": "Mira qué haría falta para que la tercera vuelta sonara mejor que la primera."
+      },
+      "nextSceneId": "c4-plan"
+    },
+    {
+      "id": "c4-choice-principle-listening",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El fragmento entero se instala de oído antes de que nadie lo produzca.",
+        "agency": "Cada persona decide qué ajusta cuando por fin lo produce.",
+        "barrier": "Mientras solo suene, lo que hay que ajustar viaja únicamente por el aire.",
+        "evidence": "Se oye si pueden anticiparlo sin que suene."
+      },
+      "feedback": {
+        "supports": "Conocer entero el sonido al que vas es lo que hace que corregir signifique algo.",
+        "tension": "Si la escucha lo ocupa todo, el fragmento no llega a producirse.",
+        "possibleRepair": "Tomas cortas y muchas, no una escucha larga.",
+        "observableEvidence": "Mira quién lo anticipa antes de que suene."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "Este hilo, por sí solo, deja el modelo en el aire: la decisión de entrar por la escucha no ha previsto ninguna vía para ver o sentir el fragmento, y sin ella no hay nada contra lo que ajustarse."},
+          {"characterId": "leo", "role": "performs", "note": "Escucha y devuelve desde su sitio; lo que se decide aquí es por dónde entra la sesión, no qué hace cada cual con ella."},
+          {"characterId": "mara", "role": "decides", "note": "Retener de oído un fragmento que suena muchas veces es su terreno: decide qué ajusta en cuanto le toca producirlo."},
+          {"characterId": "oscar", "role": "proposes", "note": "Llega con el fragmento hecho de fuera y su versión se oye antes que ninguna; es la decisión de entrar por la escucha la que se la pone delante, no él."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuántas tomas van a sonar, porque esta decisión no fija todavía ningún número."}
+        ]
+      },
+      "nextSceneId": "c4-substitute"
+    },
+    {
+      "id": "c4-choice-principle-steps",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El paso es tan corto que sale hoy, el siguiente se apoya en él y el conjunto vuelve cada dos pasos.",
+        "agency": "El grupo decide cuándo un paso ya se sostiene.",
+        "barrier": "Volver al conjunto cada dos pasos cuesta tiempo: caben menos pasos en los dos minutos.",
+        "evidence": "Se oye cuántos pasos se sostienen y cómo suena el conjunto al volver."
+      },
+      "feedback": {
+        "supports": "Un paso que sale a la primera reparte el éxito desde el principio y no premia a quien llegaba entrenado.",
+        "tension": "La vuelta al conjunto es lo que impide que el fragmento se pierda troceado, y es lo que se come el reloj.",
+        "possibleRepair": "Dos pasos y una vuelta: no más de tres tandas.",
+        "observableEvidence": "Mira cuántas vueltas al conjunto llegan a sonar."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El paso se canta y se muestra con la mano además de sonar: sabe adónde va y decide cuándo lo da por sostenido."},
+          {"characterId": "leo", "role": "decides", "note": "Dos sonidos se cantan y se percuten desde el sitio: decide cuándo pasar al siguiente."},
+          {"characterId": "mara", "role": "proposes", "note": "Ya tiene el fragmento entero de oído, así que el paso de dos sonidos no le pide nada nuevo; donde su oído cuenta es en la vuelta al conjunto, y propone que llegue antes de lo previsto."},
+          {"characterId": "oscar", "role": "proposes", "note": "El paso corto le sale a la primera y el aula se coloca detrás de su versión; es la consigna de sostenerlo hasta que salga lo que le da ese sitio."},
+          {"characterId": "julia", "role": "decides", "note": "El criterio del paso es explícito —hasta que se sostenga—, así que sabe qué hay que conseguir y decide."}
+        ]
+      },
+      "nextSceneId": "c4-substitute"
+    },
+    {
+      "id": "c4-choice-principle-home",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "La escucha frecuente es real y es la que hace el trabajo.",
+        "agency": "Lo que se decide en casa no lo decide el aula.",
+        "barrier": "El encargo dice que aquí no puede contarse con ese tiempo.",
+        "evidence": "No podrás saber quién ha escuchado y quién no."
+      },
+      "feedback": {
+        "supports": "Has elegido un hilo real de la tradición: escuchar mucho antes de producir.",
+        "tension": "Lo has dejado donde no puedes garantizarlo, que es exactamente la condición que aquí falta.",
+        "possibleRepair": "Trae esa escucha dentro de los dos minutos.",
+        "observableEvidence": "Mira qué pasaría con quien no pueda escucharla ninguna tarde."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "La decisión saca el trabajo del aula y lo deja en una escucha doméstica que nadie va a mostrar ni contrastar aquí: no le abre ninguna vía equivalente."},
+          {"characterId": "leo", "role": "performs", "note": "En clase solo queda producir lo que se supone que ya trae oído."},
+          {"characterId": "mara", "role": "performs", "note": "Aprender de oído sería su terreno, pero esta decisión pone la escucha donde el aula no puede garantizarla ni observarla."},
+          {"characterId": "oscar", "role": "decides", "note": "Es quien ya tiene fuera del centro el tiempo y el instrumento que la decisión da por supuestos: encargar la escucha en casa le entrega a él la mejora."},
+          {"characterId": "julia", "role": "supports", "note": "Sostiene la vuelta desde su sitio; nadie ha dicho cuántas veces hay que escucharla ni cómo se sabrá que ya está."}
+        ]
+      },
+      "nextSceneId": "c4-substitute"
+    },
+    {
+      "id": "c4-choice-substitute-time",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Las repeticiones que sostenían la mejora pasan a ocurrir donde puedes verlas.",
+        "agency": "Cada persona decide qué corrige en la siguiente toma.",
+        "barrier": "El instrumento propio sigue sin sustituir: quien coge flauta toca más.",
+        "evidence": "Puedes contar las tomas y ver qué cambia entre una y otra."
+      },
+      "feedback": {
+        "supports": "Has puesto dentro del aula la parte del plan que lo hacía funcionar.",
+        "tension": "Queda pendiente el medio: seis flautas no llegan a veinticuatro personas.",
+        "possibleRepair": "Reparte también qué papel musical tiene cada vía.",
+        "observableEvidence": "Mira quién repite con qué."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Puede repetir con el grupo, pero esta decisión no cambia por dónde llega lo que hay que ajustar: sigue estando solo en el aire."},
+          {"characterId": "leo", "role": "decides", "note": "Las tomas ocurren aquí y no exigen desplazarse: decide qué corrige en la siguiente."},
+          {"characterId": "mara", "role": "decides", "note": "Muchas tomas cortas y de oído es exactamente su manera de trabajar; decide qué ajusta en cada una."},
+          {"characterId": "oscar", "role": "proposes", "note": "Con las flautas sin repartir sigue siendo quien más toca, y su toma se propone sola como referencia."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se anuncie cuántas tomas quedan, porque repartirlas por la sesión no dice todavía cuántas son."}
+        ]
+      },
+      "nextSceneId": "c4-test"
+    },
+    {
+      "id": "c4-choice-substitute-medium",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La voz y el cuerpo llevan el fragmento sin que haga falta poseer nada.",
+        "agency": "Cada persona decide con qué vía lo devuelve.",
+        "barrier": "El tiempo de repetición sigue sin sustituir: solo hay dos minutos.",
+        "evidence": "Puedes oír el fragmento en más de una vía a la vez."
+      },
+      "feedback": {
+        "supports": "Has quitado de en medio la condición más desigual del plan prestado.",
+        "tension": "Queda pendiente la repetición sostenida, que es lo que allí hacía crecer el fragmento.",
+        "possibleRepair": "Decide cuántas vueltas caben de verdad en dos minutos.",
+        "observableEvidence": "Mira si la vía elegida cambia lo que consiguen."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El fragmento pasa por la voz y el cuerpo, así que es visible además de sonoro: decide con qué vía lo devuelve."},
+          {"characterId": "leo", "role": "decides", "note": "La vía vocal y corporal tiene papel declarado y no exige desplazarse: decide con cuál entra."},
+          {"characterId": "mara", "role": "decides", "note": "Nada pasa por un papel escrito ni por tener instrumento: elige su vía y su oído cuenta como conocimiento."},
+          {"characterId": "oscar", "role": "proposes", "note": "La rotación le quita el turno extra que tenía, y aun así su versión sigue siendo la que suena hecha y el aula tiende a seguirla."},
+          {"characterId": "julia", "role": "decides", "note": "El papel de cada vía está dicho de antemano: sabe qué le toca y decide con qué entra."}
+        ]
+      },
+      "nextSceneId": "c4-test"
+    },
+    {
+      "id": "c4-choice-substitute-family",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "El acompañamiento adulto sostiene de verdad la práctica de quien lo tiene.",
+        "agency": "Lo que se decide en las casas no lo decide el aula.",
+        "barrier": "No todas las tardes se parecen, y ninguna decisión tuya las iguala.",
+        "evidence": "Lo que observarías es quién ha podido y quién no."
+      },
+      "feedback": {
+        "supports": "En su origen esa figura era parte del método, y explicarla es más honesto que esconderla.",
+        "tension": "Convertirla en requisito escolar traslada la desigualdad en lugar de sustituirla.",
+        "possibleRepair": "Sustituye algo que esté dentro de tu alcance.",
+        "observableEvidence": "Mira qué le queda a quien nadie pueda acompañar."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Ejecuta lo que se indica en clase; la decisión ha puesto el trabajo en un sitio donde el aula no puede abrirle ninguna vía."},
+          {"characterId": "leo", "role": "performs", "note": "Participa desde su sitio, sin nada que decidir sobre el fragmento: lo decisivo se ha aplazado."},
+          {"characterId": "mara", "role": "performs", "note": "Su manera de aprender, aquí y ahora y de oído, no tiene sitio en un diseño que aplaza el trabajo a un repaso doméstico."},
+          {"characterId": "oscar", "role": "decides", "note": "Es quien ya tiene ese acompañamiento fuera del centro: la decisión le entrega la mejora sin que él la pida."},
+          {"characterId": "julia", "role": "supports", "note": "Acompaña la vuelta; nadie ha dicho cuántas quedan ni qué hay que conseguir, porque eso se ha aplazado a casa."}
+        ]
+      },
+      "nextSceneId": "c4-test"
+    },
+    {
+      "id": "c4-outcome-home-practice",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "La parte que hace crecer el fragmento —oírlo muchas veces— ocurre fuera del aula, así que dentro no se aprende gran cosa en dos minutos.",
+        "agency": "Quien tiene un rato tranquilo y con qué escuchar llega sabiéndolo; quien no, llega igual que salió, y ninguna de las dos cosas la ha decidido nadie aquí.",
+        "barrier": "El encargo decía que no puede contarse con tiempo de práctica fuera de clase, y el diseño lo ha puesto ahí de todos modos.",
+        "evidence": "Al terminar la semana sabrás quién pudo escucharla en casa; no sabrás qué ha aprendido nadie contigo."
+      },
+      "feedback": {
+        "supports": "El hilo es el correcto y es el que sostiene esa tradición: el fragmento tiene que sonar muchas veces antes de producirlo.",
+        "tension": "Lo que no viaja es el sitio donde ocurría esa escucha. Encargarla en casa no traslada el principio: traslada la condición que aquí no está repartida.",
+        "possibleRepair": "El mismo hilo cabe dentro de los dos minutos si las tomas son cortas y muchas.",
+        "observableEvidence": "Vuelve a la primera decisión y busca un hilo que puedas sostener tú en el aula."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "El diseño saca el trabajo del aula y lo deja en una escucha doméstica que nadie va a mostrar ni a contrastar aquí: no le ofrece ninguna vía equivalente para saber qué habría que ajustar."},
+          {"characterId": "leo", "role": "performs", "note": "En clase solo queda producir lo que se supone que ya trae oído; el diseño no le pide ninguna decisión."},
+          {"characterId": "mara", "role": "performs", "note": "Aprender de oído es su terreno y aquí lo sería, pero el diseño ha puesto esa escucha en un sitio que el aula no puede garantizarle ni observar."},
+          {"characterId": "oscar", "role": "decides", "note": "Es quien ya tiene fuera del centro el tiempo y el instrumento que el diseño da por supuestos: la decisión de encargar la escucha en casa le entrega a él la mejora."},
+          {"characterId": "julia", "role": "supports", "note": "Sostiene la vuelta desde su sitio; nadie ha dicho cuántas veces hay que escucharla ni cómo se sabrá que ya está."}
+        ]
+      },
+      "nextSceneId": "c4-principle"
+    },
+    {
+      "id": "c4-outcome-family-shift",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Dentro de los dos minutos apenas ocurre nada: lo decisivo se ha aplazado a un rato que el aula no controla.",
+        "agency": "En clase solo queda ejecutar, porque la parte que mejora el fragmento se ha ido a otro sitio.",
+        "barrier": "Las tardes no se parecen entre sí, y pedir que se parezcan no las iguala: las convierte en requisito.",
+        "evidence": "Lo que podrías observar es quién ha tenido acompañamiento, que es precisamente lo que no querías medir."
+      },
+      "feedback": {
+        "supports": "La figura de la familia o persona cuidadora que acompaña la práctica es parte real de ese plan, y no hay razón para ocultarla al explicarlo.",
+        "tension": "Aquí no es una decisión de aula, es un requisito para las casas. La dependencia desigual no se sustituye: se traslada intacta y con tu firma detrás.",
+        "possibleRepair": "Sustituye una condición que esté dentro de tu alcance, no una que dependa de cada casa.",
+        "observableEvidence": "Vuelve a la sustitución y mira cuál puedes garantizar tú en estos dos minutos."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "Ejecuta lo que se le indica; la parte donde se decidía algo se ha ido de la clase."},
+          {"characterId": "leo", "role": "performs", "note": "Participa con voz y percusión corporal desde su sitio, sin nada que decidir sobre el fragmento."},
+          {"characterId": "mara", "role": "performs", "note": "Su manera de aprender —de oído, aquí y ahora— no tiene sitio en un diseño que aplaza el trabajo a un repaso doméstico."},
+          {"characterId": "oscar", "role": "decides", "note": "Es quien ya tiene ese acompañamiento fuera del centro: como en la propia decisión, el diseño le entrega la mejora sin que él la pida."},
+          {"characterId": "julia", "role": "supports", "note": "Acompaña la vuelta; el diseño no le dice cuántas quedan ni qué hay que conseguir, porque eso se ha aplazado a casa."}
+        ]
+      },
+      "nextSceneId": "c4-substitute"
+    },
+    {
+      "id": "c4-outcome-listening-time",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El fragmento entero se instala de oído dentro del aula: suena en tomas cortas repartidas por la sesión y hacia la tercera ya lo anticipan varias personas.",
+        "agency": "Cada cual decide qué ajusta cuando lo produce, y decide también cuándo pide otra toma.",
+        "barrier": "Todo lo que hay que ajustar viaja por el aire, y las seis flautas siguen repartiendo quién toca y quién espera.",
+        "evidence": "Puedes contar las tomas y oír qué cambia de una a la siguiente."
+      },
+      "feedback": {
+        "supports": "Has traído dentro de clase la escucha frecuente que sostenía el plan prestado, y ya no depende de ninguna casa.",
+        "tension": "Nada dice todavía contra qué se compara cada vuelta, y sin eso repetir mucho no es repetir mejor.",
+        "possibleRepair": "Pon a la vista qué hay que conseguir en cada toma.",
+        "observableEvidence": "Mira si alguien puede decir por qué la tercera fue mejor que la primera."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "El fragmento se repite pero solo suena: esta versión del diseño no ha decidido ninguna vía para ver o sentir qué cambia de una toma a la siguiente, y sin esa comparación no hay nada que ajustar."},
+          {"characterId": "leo", "role": "decides", "note": "Devuelve el fragmento con voz y percusión corporal desde su sitio y decide qué corrige en la toma siguiente."},
+          {"characterId": "mara", "role": "decides", "note": "Retener de oído un fragmento que suena muchas veces es exactamente lo que sabe hacer, y aquí es la tarea principal."},
+          {"characterId": "oscar", "role": "proposes", "note": "Llega con el fragmento hecho de fuera y su toma se convierte en la referencia sin que nadie lo decida; es la ausencia de criterio dicho lo que le pone ahí, no él."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se diga cuántas tomas quedan y qué hay que conseguir en cada una, porque el diseño no lo ha fijado."}
+        ]
+      },
+      "nextSceneId": "c4-incident"
+    },
+    {
+      "id": "c4-outcome-listening-medium",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El fragmento se instala de oído y se devuelve por tres vías, así que nadie se queda mirando cómo lo hacen los demás.",
+        "agency": "Cada cual decide con qué vía lo devuelve y qué ajusta, y el papel de cada vía está dicho.",
+        "barrier": "Solo hay dos minutos: la escucha frecuente cabe pocas veces, y la repetición sostenida sigue sin sustituir.",
+        "evidence": "Puedes oír el fragmento en voz, cuerpo y flauta y comprobar si el perfil es el mismo en las tres."
+      },
+      "feedback": {
+        "supports": "Has quitado la condición más desigual del plan y el fragmento sigue siendo el mismo en las tres vías.",
+        "tension": "Con tan pocas vueltas, la escucha frecuente que sostenía el plan apenas llega a ser frecuente.",
+        "possibleRepair": "Reparte las tomas por la sesión en lugar de agruparlas.",
+        "observableEvidence": "Mira cuántas veces llega a sonar de verdad."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "performs", "note": "El fragmento pasa por la voz y el cuerpo, así que puede seguirlo y devolverlo; lo que sigue viajando solo por el aire es el modelo contra el que hay que ajustarse."},
+          {"characterId": "leo", "role": "decides", "note": "La vía vocal y corporal es una de las tres y no exige desplazarse: decide con cuál entra y qué papel toma."},
+          {"characterId": "mara", "role": "decides", "note": "Todo ocurre de oído y sin nada escrito, que es donde su manera de aprender cuenta como conocimiento."},
+          {"characterId": "oscar", "role": "proposes", "note": "Con las flautas rotando su turno no adelanta a nadie, pero su vuelta sigue siendo la única que suena hecha y el aula tiende a copiarla."},
+          {"characterId": "julia", "role": "proposes", "note": "Propone que se anuncie el número de vueltas y el orden de las vías, porque el diseño reparte los papeles y no los tiempos."}
+        ]
+      },
+      "nextSceneId": "c4-incident"
+    },
+    {
+      "id": "c4-outcome-steps-time",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El primer paso de dos sonidos sale en todo el grupo, las tomas repartidas por la sesión permiten añadir el segundo, y el fragmento entero vuelve cada dos pasos.",
+        "agency": "El grupo decide cuándo un paso ya se sostiene y puede pedir otra toma antes de añadir el siguiente.",
+        "barrier": "Cada vuelta al conjunto se come tiempo de paso, y las seis flautas siguen repartiendo quién toca y quién espera.",
+        "evidence": "Se oye cuántos pasos se sostienen y cuál se cae al volver al conjunto."
+      },
+      "feedback": {
+        "supports": "Empezar por un paso que sale a la primera reparte el éxito desde el principio, y repetirlo dentro de clase no le cuesta a nadie una tarde en casa.",
+        "tension": "Sin decir qué se busca en cada vuelta, el conjunto vuelve pero nadie sabe contra qué compararlo.",
+        "possibleRepair": "Di antes de cada vuelta al conjunto qué tiene que haber cambiado.",
+        "observableEvidence": "Mira si al final saben dónde encaja cada paso dentro del conjunto."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El paso es corto y su perfil se muestra con la mano además de sonar: sabe adónde va y decide cuándo lo da por sostenido."},
+          {"characterId": "leo", "role": "decides", "note": "Un paso de dos sonidos se canta y se percute desde el sitio; decide cuándo pasar al siguiente."},
+          {"characterId": "mara", "role": "proposes", "note": "Ya tiene el fragmento entero de oído y el paso de dos sonidos no le pide nada nuevo; en la vuelta al conjunto sí, y propone adelantarla en lugar de esperar a los dos pasos."},
+          {"characterId": "oscar", "role": "proposes", "note": "El paso corto le sale a la primera y el aula se coloca detrás de su versión; es la consigna de sostenerlo hasta que salga lo que le da ese sitio."},
+          {"characterId": "julia", "role": "decides", "note": "Un paso pequeño con un criterio explícito —hasta que se sostenga— es previsible: sabe qué hay que conseguir y decide."}
+        ]
+      },
+      "nextSceneId": "c4-incident"
+    },
+    {
+      "id": "c4-outcome-steps-medium",
+      "rating": "defensible-needs-revision",
+      "observables": {
+        "learning": "El primer paso sale en todo el grupo, se sostiene en tres vías distintas y el fragmento entero vuelve cada dos pasos, de modo que nadie pierde de vista adónde va.",
+        "agency": "Cada cual decide con qué vía sostiene el paso, y el grupo decide cuándo puede añadirse el siguiente.",
+        "barrier": "Solo hay dos minutos y la repetición sostenida sigue sin sustituir: entre las tres vías y las vueltas al conjunto, caben pocos pasos.",
+        "evidence": "Se oye si el paso conserva el mismo perfil en voz, cuerpo y flauta, y si el conjunto se reconoce al volver."
+      },
+      "feedback": {
+        "supports": "Un paso corto y un medio compartido reparten el éxito por los dos lados: ni hace falta traer horas hechas ni hace falta tener instrumento.",
+        "tension": "El precio es el reloj: tres vías y vueltas al conjunto dejan sitio para pocos pasos.",
+        "possibleRepair": "Dos pasos bien puestos valen más que cuatro a medias.",
+        "observableEvidence": "Mira cuántos pasos entran de verdad en los dos minutos."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El paso es corto, se muestra con la mano y puede devolverlo por la vía que elija: decide cuándo lo da por sostenido."},
+          {"characterId": "leo", "role": "decides", "note": "Sostiene el paso con voz y percusión corporal, con papel musical declarado y sin desplazarse."},
+          {"characterId": "mara", "role": "decides", "note": "Elige la vía con la que devuelve el paso y su oído es lo que dice si ya se sostiene; el diseño lo trata como conocimiento."},
+          {"characterId": "oscar", "role": "proposes", "note": "El paso corto le sale a la primera y la rotación no le da turno extra, pero el aula sigue mirando su versión mientras nadie diga qué hay que conseguir."},
+          {"characterId": "julia", "role": "decides", "note": "El criterio del paso está dicho y el papel de cada vía también: sabe qué va a ocurrir y decide con qué entra."}
+        ]
+      },
+      "nextSceneId": "c4-incident"
+    },
+    {
+      "id": "c4-outcome-unseparated",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "No hay microclase que probar: no se ha separado todavía por dónde entra la sesión ni qué condición se sustituye.",
+        "agency": "Sin esas dos decisiones, esta pantalla no puede decir quién decide qué.",
+        "barrier": "Inventar aquí un resultado sería afirmar algo de un aula que todavía no existe.",
+        "evidence": "La que produzcan las dos decisiones; ahora mismo no hay ninguna."
+      },
+      "feedback": {
+        "supports": "Has entrado directamente a la pantalla que afirma qué le pasa al aula, y eso es un uso previsto: el progreso orienta y no bloquea.",
+        "tension": "Lo que no puede hacerse es dar por probado un plan del que aún no se ha separado nada.",
+        "possibleRepair": "Elige por dónde entra la sesión y qué dependencia sustituyes; el recorrido no ha perdido nada.",
+        "observableEvidence": "Empieza por el hilo que quieres traerte."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "leo", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "mara", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "oscar", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "julia", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que tampoco hay ninguna vía que abrir o cerrar: la ausencia pertenece al recorrido vacío."}
+        ]
+      },
+      "nextSceneId": "c4-principle"
+    },
+    {
+      "id": "c4-revision-target-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada vuelta tiene un objetivo dicho y mostrado antes de empezarla, y al terminarla es el grupo quien dice si ya está o todavía no.",
+        "agency": "Juzgar la vuelta pasa a ser una decisión del aula y no una sentencia tuya ni de quien mejor la toca.",
+        "barrier": "Decir el objetivo y juzgar el resultado ocupa el hueco entre vuelta y vuelta: en los mismos dos minutos suenan menos vueltas.",
+        "evidence": "Puedes contar cuántas vueltas llegaron a sonar y preguntar a cualquiera qué había que conseguir en la última."
+      },
+      "feedback": {
+        "supports": "Un criterio dicho y mostrado devuelve la referencia al fragmento y saca a cualquier persona del sitio de modelo, sin quitarle nada a nadie.",
+        "tension": "Lo paga el reloj: cada vuelta lleva ahora su preámbulo y su juicio, y por eso suenan menos.",
+        "possibleRepair": "Una sola cosa por vuelta, dicha en cinco palabras.",
+        "observableEvidence": "Cuenta las vueltas que sonaron y compáralas con las de la prueba."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Lo que hay que conseguir se dice y se muestra antes de cada vuelta: sabe qué se busca y decide, con el resto, si ya está."},
+          {"characterId": "leo", "role": "decides", "note": "Juzga la vuelta desde su sitio y decide qué ajusta en la siguiente, sin que la vía cambie el criterio."},
+          {"characterId": "mara", "role": "decides", "note": "Decir de oído si una vuelta ya está es exactamente lo que sabe hacer, y aquí el aula lo trata como conocimiento y no como una opinión más."},
+          {"characterId": "oscar", "role": "decides", "note": "El criterio deja de ser su vuelta y pasa a estar dicho y mostrado: decide como el resto y ya no le toca organizar a nadie."},
+          {"characterId": "julia", "role": "decides", "note": "Sabe cuántas vueltas quedan y qué hay que conseguir en cada una: puede prepararse, entrar y decidir."}
+        ]
+      },
+      "nextSceneId": "c4-reveal"
+    },
+    {
+      "id": "c4-revision-models-outcome",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "La misma vuelta llega grabada, cantada y mostrada, en un orden anunciado, y cada cual elige de cuál se agarra y con qué vía la devuelve.",
+        "agency": "Elegir la fuente y la vía es una decisión musical, y no cambia lo que hay que conseguir.",
+        "barrier": "Encadenar las tres fuentes ocupa el arranque de cada vuelta: en los mismos dos minutos suenan menos vueltas, y si las tres dejan de decir lo mismo el grupo se queda con tres objetivos.",
+        "evidence": "Puedes contar cuántas vueltas llegaron a sonar y comprobar si las tres fuentes coinciden."
+      },
+      "feedback": {
+        "supports": "Multiplicar las fuentes quita a una sola persona el sitio de modelo y abre la referencia a quien no puede tomarla del aire.",
+        "tension": "Lo paga el reloj: encadenar las tres al empezar cada vuelta deja menos vueltas dentro de los dos minutos.",
+        "possibleRepair": "Que las tres salgan de la misma toma, y encadenadas sin pausa.",
+        "observableEvidence": "Cuenta las vueltas que sonaron y comprueba si el perfil es el mismo venga por donde venga."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "La vuelta se muestra además de sonar y el orden está anunciado: decide de qué fuente se agarra y con qué vía la devuelve."},
+          {"characterId": "leo", "role": "decides", "note": "Elige la vía vocal o corporal sin que eso rebaje lo que hay que conseguir, y decide desde su sitio."},
+          {"characterId": "mara", "role": "decides", "note": "La fuente grabada y la cantada son su terreno, y elegir entre ellas es una decisión que el diseño le reconoce."},
+          {"characterId": "oscar", "role": "decides", "note": "Su vuelta es una fuente entre varias y deja de ser la única referencia; decide la suya y escucha las otras dos."},
+          {"characterId": "julia", "role": "decides", "note": "El orden de las tres fuentes se anuncia antes: puede anticipar qué llega y cuándo, y decidir con cuál trabaja."}
+        ]
+      },
+      "nextSceneId": "c4-reveal"
+    },
+    {
+      "id": "c4-revision-home-outcome",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Dentro de esta clase no cambia nada: la vuelta siguiente parte del mismo sitio que la anterior.",
+        "agency": "La única decisión que quedaba viva —qué se ajusta hoy— se aplaza a un repaso que cada cual hará como pueda.",
+        "barrier": "Lo que apareció fue que los puntos de partida no eran iguales; pedir que cada cual practique por su cuenta los separa más.",
+        "evidence": "Lo que podrías observar la próxima sesión es quién tenía un instrumento en casa."
+      },
+      "feedback": {
+        "supports": "La práctica individual sostenida existe y es lo que hace crecer un fragmento; no es una idea absurda.",
+        "tension": "El incidente reveló una desigualdad de entorno, y esta revisión no la repara: la traslada fuera del aula, donde ya no puedes hacer nada con ella.",
+        "possibleRepair": "Busca un cambio que ocurra dentro de estos dos minutos.",
+        "observableEvidence": "Vuelve a la revisión y mira cuál toca de verdad la condición que apareció."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "La revisión no cambia nada de lo que ocurre hoy en el aula y aplaza el trabajo a un sitio donde nadie puede garantizarle una vía: lo que había que corregir sigue existiendo solo en el aire."},
+          {"characterId": "leo", "role": "supports", "note": "Acompaña la vuelta desde su sitio; el diseño ha dejado de pedirle ninguna decisión sobre el fragmento."},
+          {"characterId": "mara", "role": "supports", "note": "Lo que oye que no encaja sigue sin poder contrastarlo, y el trabajo se ha ido a un repaso que el aula no verá."},
+          {"characterId": "oscar", "role": "decides", "note": "Es quien ya tiene fuera lo que la revisión pide: la desigualdad que el incidente reveló no se repara, se traslada y se ensancha."},
+          {"characterId": "julia", "role": "supports", "note": "Acompaña; sigue sin saber cuántas vueltas quedan, y ahora tampoco cuándo terminará el repaso."}
+        ]
+      },
+      "nextSceneId": "c4-revision"
+    },
+    {
+      "id": "c4-reveal-listening-time-target",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El fragmento se instaló de oído entero dentro del aula, las repeticiones ocurrieron aquí y cada vuelta tuvo un objetivo dicho: al final suena con el mismo perfil y el mismo final en todo el grupo.",
+        "agency": "Cada cual decidió qué ajustaba y el grupo decidió cuándo una vuelta ya estaba; el criterio no fue de nadie en particular.",
+        "barrier": "El medio sigue repartiendo quién toca y quién espera: seis flautas no llegan a veinticuatro personas, y esa condición sigue intacta.",
+        "evidence": "Puede verse quién ha mejorado hoy comparando sus propias vueltas entre sí, y no comparando a unas personas con otras."
+      },
+      "feedback": {
+        "supports": "Escucha frecuente sin su casa, repetida aquí dentro y con un criterio público: la mejora de hoy es de hoy y no la trae nadie de fuera.",
+        "tension": "El reloj lo paga: decir y juzgar cada vuelta dejó menos vueltas sonando. Y la otra revisión habría repartido el modelo entre varias fuentes.",
+        "possibleRepair": "En otra sesión, haz llegar la misma vuelta grabada, cantada y mostrada.",
+        "observableEvidence": "Comprueba si pueden decir qué buscaban en cada vuelta."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El objetivo de cada vuelta se dijo y se mostró: supo qué se buscaba y decidió con el resto si ya estaba."},
+          {"characterId": "leo", "role": "decides", "note": "Ajustó desde su sitio y su juicio sobre la vuelta valió lo mismo que el de cualquiera."},
+          {"characterId": "mara", "role": "decides", "note": "Su oído fue lo que dijo si la vuelta ya estaba, y el aula lo trató como conocimiento."},
+          {"characterId": "oscar", "role": "decides", "note": "Con el criterio dicho, su versión dejó de ser la referencia; el turno de flauta le sigue tocando más veces, y eso lo repara otra decisión, no esta."},
+          {"characterId": "julia", "role": "decides", "note": "Supo cuántas vueltas quedaban y qué se buscaba en cada una: decidió con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-listening-time-sources",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El fragmento se instaló de oído entero dentro del aula, las repeticiones ocurrieron aquí y la vuelta llegó por tres fuentes: al final suena con el mismo perfil y el mismo final venga por donde venga.",
+        "agency": "Cada cual decidió de qué fuente se agarraba y con qué vía devolvía la vuelta, sin que eso cambiara lo que había que conseguir.",
+        "barrier": "El medio sigue repartiendo quién toca y quién espera: seis flautas no llegan a veinticuatro personas, y esa condición sigue intacta.",
+        "evidence": "Puede verse quién ha mejorado hoy porque cada cual repitió la misma vuelta varias veces por su vía."
+      },
+      "feedback": {
+        "supports": "Escucha frecuente sin su casa, repetida aquí dentro y con el modelo repartido: agarrarse a él dejó de depender de una sola vía.",
+        "tension": "El reloj lo paga: encadenar las tres al empezar dejó menos vueltas sonando. Y la otra revisión habría puesto un objetivo dicho en cada vuelta.",
+        "possibleRepair": "En otra sesión, di y muestra antes de cada vuelta qué hay que conseguir en ella.",
+        "observableEvidence": "Comprueba si el perfil es el mismo saliendo de cualquiera de las tres vías."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Una de las tres fuentes se muestra: pudo agarrarse a ella y decidir con qué vía devolvía la vuelta."},
+          {"characterId": "leo", "role": "decides", "note": "Eligió la vía vocal y corporal desde su sitio, y el objetivo no se rebajó por ello."},
+          {"characterId": "mara", "role": "decides", "note": "Las fuentes grabada y cantada son su terreno; elegir entre ellas fue una decisión musical suya."},
+          {"characterId": "oscar", "role": "decides", "note": "Su vuelta fue una fuente entre varias y dejó de ser la única; el turno de flauta le sigue tocando más veces, y eso lo repara otra decisión."},
+          {"characterId": "julia", "role": "decides", "note": "El orden de las fuentes se anunció antes: pudo anticipar qué llegaba y decidir con cuál trabajaba."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-listening-medium-target",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El fragmento se instaló de oído entero, vivió en la voz y el cuerpo con las flautas rotando por papel declarado y cada vuelta tuvo un objetivo dicho: al final suena con el mismo perfil y el mismo final en todo el grupo.",
+        "agency": "Cada cual decidió con qué vía lo devolvía y qué ajustaba, y el grupo decidió cuándo una vuelta ya estaba.",
+        "barrier": "La repetición sostenida sigue cabiendo pocas veces: dos minutos dan para pocas vueltas y no puedes pedir ninguna fuera de clase.",
+        "evidence": "Puede verse quién ha mejorado hoy comparando sus propias vueltas entre sí, y no comparando a unas personas con otras."
+      },
+      "feedback": {
+        "supports": "Escucha frecuente sin instrumento propio y con un criterio público: nadie necesitó tener nada ni saberlo de antes.",
+        "tension": "El reloj lo paga: decir y juzgar cada vuelta dejó menos vueltas sonando. Y la otra revisión habría repartido el modelo entre varias fuentes.",
+        "possibleRepair": "En otra sesión, haz llegar la misma vuelta grabada, cantada y mostrada.",
+        "observableEvidence": "Comprueba si pueden decir qué buscaban en cada vuelta."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El fragmento vivió en la voz y el cuerpo y el objetivo se mostró: decidió su vía y si la vuelta ya estaba."},
+          {"characterId": "leo", "role": "decides", "note": "Su vía tuvo papel musical declarado y no exigió desplazarse; su juicio sobre la vuelta valió como el de cualquiera."},
+          {"characterId": "mara", "role": "decides", "note": "Nada pasó por un papel escrito: eligió su vía y su oído dijo si la vuelta estaba."},
+          {"characterId": "oscar", "role": "decides", "note": "La rotación le quitó el turno extra y el criterio dicho le quitó el sitio de modelo; decidió como el resto."},
+          {"characterId": "julia", "role": "decides", "note": "Papeles dichos y vueltas anunciadas: decidió sabiendo qué iba a ocurrir."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-listening-medium-sources",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "El fragmento se instaló de oído entero, vivió en la voz y el cuerpo con las flautas rotando por papel declarado y llegó por tres fuentes: al final suena con el mismo perfil y el mismo final venga por donde venga.",
+        "agency": "Cada cual decidió de qué fuente se agarraba y con qué vía devolvía la vuelta, y el papel de cada vía estaba dicho.",
+        "barrier": "La repetición sostenida sigue cabiendo pocas veces: dos minutos dan para pocas vueltas y no puedes pedir ninguna fuera de clase.",
+        "evidence": "Puede verse quién ha mejorado hoy porque cada cual repitió la misma vuelta varias veces por su vía."
+      },
+      "feedback": {
+        "supports": "Ni hizo falta tener instrumento ni agarrarse al modelo por una sola vía: las dos condiciones más desiguales quedaron fuera del camino.",
+        "tension": "El reloj lo paga: encadenar las tres al empezar dejó menos vueltas sonando. Y la otra revisión habría puesto un objetivo dicho en cada vuelta.",
+        "possibleRepair": "En otra sesión, di y muestra antes de cada vuelta qué hay que conseguir en ella.",
+        "observableEvidence": "Comprueba si el perfil es el mismo saliendo de cualquiera de las tres vías."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Una fuente mostrada y una vía visible: decidió por dónde se agarraba y por dónde devolvía."},
+          {"characterId": "leo", "role": "decides", "note": "Eligió fuente y vía desde su sitio, con papel musical declarado."},
+          {"characterId": "mara", "role": "decides", "note": "Fuente grabada, vía de oído y ningún papel escrito: todo el recorrido ocurrió en su terreno."},
+          {"characterId": "oscar", "role": "decides", "note": "Ni turno extra por la rotación ni sitio de modelo por las tres fuentes: decidió la suya y escuchó las otras."},
+          {"characterId": "julia", "role": "decides", "note": "Orden de fuentes y papeles anunciados: pudo anticipar todo lo que iba a pasar y decidir."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-steps-time-target",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada paso salió antes de añadir el siguiente, se repitió dentro de la clase y el conjunto volvió cada dos pasos con un objetivo dicho en cada vuelta: al final el fragmento suena con el mismo perfil y el mismo final en todo el grupo.",
+        "agency": "El grupo decidió cuándo un paso se sostenía, y esa decisión no fue de quien mejor lo tocaba.",
+        "barrier": "El medio sigue repartiendo quién toca y quién espera: seis flautas no llegan a veinticuatro personas, y esa condición sigue intacta.",
+        "evidence": "Puede verse quién ha mejorado hoy contando qué pasos sostiene ahora y no sostenía al empezar."
+      },
+      "feedback": {
+        "supports": "Pasos que salen hoy, repetidos aquí dentro y con un criterio público: el éxito se repartió sin que nadie trajera horas hechas.",
+        "tension": "El reloj lo paga: decir y juzgar cada vuelta dejó menos vueltas sonando. Y la otra revisión habría repartido el modelo entre varias fuentes.",
+        "possibleRepair": "En otra sesión, haz llegar la misma vuelta grabada, cantada y mostrada.",
+        "observableEvidence": "Comprueba si saben dónde encaja cada paso dentro del fragmento."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "El paso es corto, su perfil se muestra y el objetivo de la vuelta se dice: decidió cuándo darlo por sostenido."},
+          {"characterId": "leo", "role": "decides", "note": "Sostuvo cada paso con voz y percusión corporal y decidió cuándo pasar al siguiente."},
+          {"characterId": "mara", "role": "decides", "note": "El objetivo dicho le dio por fin contra qué comparar lo que oía, y su oído decidió si el paso estaba."},
+          {"characterId": "oscar", "role": "decides", "note": "Con el criterio dicho, que el paso le saliera a la primera dejó de convertirle en el modelo; el turno de flauta sigue siendo desigual, y eso lo repara otra decisión."},
+          {"characterId": "julia", "role": "decides", "note": "Pasos cortos, criterio explícito y número de vueltas anunciado: decidió con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-steps-time-sources",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada paso salió antes de añadir el siguiente, se repitió dentro de la clase y el conjunto volvió cada dos pasos, llegando por tres fuentes: al final el fragmento suena con el mismo perfil y el mismo final venga por donde venga.",
+        "agency": "Cada cual decidió de qué fuente se agarraba, y el grupo decidió cuándo podía añadirse el paso siguiente.",
+        "barrier": "El medio sigue repartiendo quién toca y quién espera: seis flautas no llegan a veinticuatro personas, y esa condición sigue intacta.",
+        "evidence": "Puede verse quién ha mejorado hoy contando qué pasos sostiene ahora y no sostenía al empezar."
+      },
+      "feedback": {
+        "supports": "Pasos que salen hoy, repetidos aquí dentro y con el modelo repartido: ni horas hechas fuera ni una única manera de agarrarse a él.",
+        "tension": "El reloj lo paga: encadenar las tres al empezar dejó menos vueltas sonando. Y la otra revisión habría puesto un objetivo dicho en cada vuelta.",
+        "possibleRepair": "En otra sesión, di y muestra antes de cada vuelta qué hay que conseguir en ella.",
+        "observableEvidence": "Comprueba si el paso conserva el perfil en las tres vías."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Una fuente mostrada y un paso corto: decidió de dónde se agarraba y cuándo lo daba por sostenido."},
+          {"characterId": "leo", "role": "decides", "note": "Eligió fuente y sostuvo el paso desde su sitio, con voz y percusión corporal."},
+          {"characterId": "mara", "role": "decides", "note": "La fuente grabada y la cantada son su terreno; eligió entre ellas y decidió si el paso estaba."},
+          {"characterId": "oscar", "role": "decides", "note": "Su versión fue una fuente entre tres y no la referencia; el turno de flauta sigue siendo desigual, y eso lo repara otra decisión."},
+          {"characterId": "julia", "role": "decides", "note": "El orden de las fuentes se anunció y el criterio del paso era explícito: decidió con lo que iba a ocurrir ya dicho."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-steps-medium-target",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada paso salió antes del siguiente, se sostuvo en la voz y el cuerpo con las flautas rotando por papel declarado y el conjunto volvió cada dos pasos con un objetivo dicho en cada vuelta: al final el fragmento suena con el mismo perfil y el mismo final en todo el grupo.",
+        "agency": "Cada cual decidió con qué vía sostenía el paso, y el grupo decidió cuándo una vuelta ya estaba.",
+        "barrier": "La repetición sostenida sigue cabiendo pocas veces: dos minutos dan para pocas vueltas y no puedes pedir ninguna fuera de clase.",
+        "evidence": "Puede verse quién ha mejorado hoy contando qué pasos sostiene ahora y no sostenía al empezar."
+      },
+      "feedback": {
+        "supports": "Pasos que salen hoy, sin instrumento propio y con un criterio público: el éxito se repartió por los dos lados que este aula tenía desiguales.",
+        "tension": "El reloj lo paga: decir y juzgar cada vuelta dejó menos vueltas sonando. Y la otra revisión habría repartido el modelo entre varias fuentes.",
+        "possibleRepair": "En otra sesión, haz llegar la misma vuelta grabada, cantada y mostrada.",
+        "observableEvidence": "Comprueba si saben dónde encaja cada paso dentro del fragmento."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Paso corto, perfil mostrado y objetivo dicho: decidió su vía y cuándo el paso estaba."},
+          {"characterId": "leo", "role": "decides", "note": "Sostuvo el paso desde su sitio con papel musical declarado y juzgó la vuelta como cualquiera."},
+          {"characterId": "mara", "role": "decides", "note": "Eligió su vía y su oído dijo si el paso se sostenía; el objetivo dicho le dio contra qué compararlo."},
+          {"characterId": "oscar", "role": "decides", "note": "Ni turno extra por la rotación ni sitio de modelo por el criterio dicho: decidió como el resto."},
+          {"characterId": "julia", "role": "decides", "note": "Papeles dichos, criterio explícito y vueltas anunciadas: decidió con todo previsto."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-steps-medium-sources",
+      "rating": "coherent-defensible",
+      "observables": {
+        "learning": "Cada paso salió antes del siguiente, se sostuvo en la voz y el cuerpo con las flautas rotando por papel declarado y el conjunto volvió cada dos pasos, llegando por tres fuentes: al final el fragmento suena con el mismo perfil y el mismo final venga por donde venga.",
+        "agency": "Cada cual decidió de qué fuente se agarraba y con qué vía sostenía el paso, y el grupo decidió cuándo añadir el siguiente.",
+        "barrier": "La repetición sostenida sigue cabiendo pocas veces: dos minutos dan para pocas vueltas y no puedes pedir ninguna fuera de clase.",
+        "evidence": "Puede verse quién ha mejorado hoy contando qué pasos sostiene ahora y no sostenía al empezar."
+      },
+      "feedback": {
+        "supports": "Es la combinación que menos supone: ni instrumento propio, ni horas hechas fuera, ni una única vía para agarrarse al modelo.",
+        "tension": "El reloj lo paga: encadenar las tres al empezar dejó menos vueltas sonando. Y la otra revisión habría puesto un objetivo dicho en cada vuelta.",
+        "possibleRepair": "En otra sesión, di y muestra antes de cada vuelta qué hay que conseguir en ella.",
+        "observableEvidence": "Comprueba si el paso conserva el perfil en las tres vías."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "decides", "note": "Fuente mostrada, vía visible y paso corto: decidió por dónde se agarraba y por dónde lo devolvía."},
+          {"characterId": "leo", "role": "decides", "note": "Eligió fuente y vía desde su sitio, con papel musical declarado."},
+          {"characterId": "mara", "role": "decides", "note": "Todo el recorrido ocurrió de oído y sin nada escrito: eligió fuente, vía y momento."},
+          {"characterId": "oscar", "role": "decides", "note": "Ni turno extra ni sitio de modelo: su versión fue una fuente entre tres y decidió la suya."},
+          {"characterId": "julia", "role": "decides", "note": "Orden de fuentes, papeles y criterio del paso, todo anunciado antes: decidió sin sobresaltos."}
+        ]
+      },
+      "nextSceneId": "c4-justification"
+    },
+    {
+      "id": "c4-reveal-shared",
+      "rating": "incoherent-with-brief",
+      "observables": {
+        "learning": "Separar un principio de sus condiciones exige haber elegido las dos cosas: por dónde entra la sesión y qué pones en el sitio de lo que falta. Aquí todavía no hay ninguna de las dos.",
+        "agency": "Sin esas decisiones, esta pantalla no puede decir quién decide qué en tu clase.",
+        "barrier": "Inventar aquí un reparto sería afirmar algo de un aula que no ha ocurrido.",
+        "evidence": "La que produzca el diseño: un perfil compartido al terminar, o una mejora que pueda señalarse dentro de la clase."
+      },
+      "feedback": {
+        "supports": "Has entrado directamente al cierre histórico, y eso es un uso previsto: el progreso orienta y no bloquea, y el marco de arriba es cierto siempre.",
+        "tension": "Lo que no puede hacerse es dar por separado un principio de unas condiciones que nadie ha llegado a distinguir. Este cierre habla del enfoque, no de tu clase, y por eso lleva a la primera decisión.",
+        "possibleRepair": "Elige por dónde entra la sesión y qué dependencia sustituyes; el recorrido no ha perdido nada.",
+        "observableEvidence": "Empieza por el hilo que quieres traerte."
+      },
+      "participation": {
+        "roles": [
+          {"characterId": "ines", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "leo", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "mara", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "oscar", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."},
+          {"characterId": "julia", "role": "no-route", "note": "No hay ninguna decisión de diseño todavía, así que no hay ninguna vía que abrir ni que cerrar: la ausencia pertenece al recorrido vacío."}
+        ]
+      },
+      "nextSceneId": "c4-principle"
+    }
+  ],
+  "journalFields": [
+    "objective",
+    "first-decision",
+    "maintained-decision",
+    "revised-decision",
+    "trigger",
+    "condition-risk",
+    "adaptation",
+    "observable-evidence",
+    "defensible-alternative",
+    "final-grammar"
+  ],
+  "journalTemplate": {
+    "objective": "Conseguir que un fragmento de cuatro sonidos suene con el mismo perfil y el mismo final en todo el grupo al terminar los dos minutos, sin que nadie haya necesitado un instrumento propio ni tiempo de práctica fuera de clase.",
+    "first-decision": "Evidencia elegida en el encargo: {{action:c4-brief}} · Lo que este aula no puede dar por supuesto: {{action:c4-plan}} · Hilo del ecosistema por el que entró la sesión: {{action:c4-principle}}",
+    "maintained-decision": "Mantengo la sustitución que hice: {{action:c4-substitute}} La conservo porque el incidente cambió de dónde salía la referencia y quién llegaba con el entorno ya hecho, no cuál era la condición desigual que este diseño podía quitar de en medio.",
+    "revised-decision": "Tras el incidente reviso contra qué se compara cada vuelta: {{action:c4-revision}}",
+    "trigger": "A la tercera vuelta el fragmento sonaba ajustado en una parte del grupo y no en otra, y la diferencia venía de fuera: la referencia dejó de ser el fragmento y pasó a ser una persona del grupo.",
+    "condition-risk": "{{grammar:conditionRisk}}",
+    "adaptation": "{{grammar:adaptation}}",
+    "observable-evidence": "{{grammar:evidence}}",
+    "defensible-alternative": "La otra revisión repara lo mismo y lo paga en el mismo sitio: los dos minutos. Decir y mostrar qué hay que conseguir ocupa el hueco entre vuelta y vuelta; encadenar las tres fuentes ocupa el arranque de cada una. Las dos dejan menos vueltas sonando, y cuál compensa se decide contando las que quedan y mirando quién se queda fuera sin ellas. Y el otro hilo del ecosistema —oír mucho antes de producir, o avanzar por pasos que salgan hoy volviendo al conjunto— habría trabajado la otra mitad con el mismo reloj en contra. Allí no eran alternativas: se sostenían unos a otros dentro de un entorno completo, y elegir uno solo es el precio de traerlos sin ese entorno.",
+    "final-grammar": "Para {{grammar:objective}}, uso {{grammar:principleAction}} porque {{grammar:conditionRisk}}; incorporo {{grammar:adaptation}} y comprobaré {{grammar:evidence}}."
+  },
+  "completion": {
+    "eyebrow": "Caso 4 completado",
+    "title": "Ya separas un principio de las condiciones que lo sostenían",
+    "body": "Has distinguido qué parte de un plan prestado puede entrar en un aula generalista y qué parte es un entorno que no todo el mundo tiene, has sustituido una dependencia desigual y has dicho cuál quedaba pendiente. Al revisar has devuelto la referencia al fragmento en lugar de dejarla en una persona. La campaña conserva aquí lo aprendido.",
+    "nextLabel": "Volver a la campaña",
+    "nextRoute": "#/campana"
+  }
+}

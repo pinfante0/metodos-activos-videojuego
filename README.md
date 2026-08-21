@@ -60,29 +60,48 @@ no ha empezado.
 - Medición de los cinco tamaños objetivo: `pnpm measure:viewports`. Requiere Chrome o Edge
   instalados; su salida verificada de M6 está en `docs/medicion_tamanos_m6_salida.md`.
 
-M7A está **en curso**, con tres entregas parciales. La primera escribe el Tutorial 1, «El material
-intruso»: reparar una variable, predecir su efecto y comprobar que un material o una técnica aislada
-no son un enfoque. La segunda escribe el Caso 2, «Una frase, dos entradas»: comparar dos soluciones
-defendibles para un mismo objetivo musical, con Dalcroze y el concepto Kodály como dos puertas a la
-misma relación que no se funden. La tercera escribe el Caso 3, «Del modelo a una forma propia»:
-montar tres momentos —modelo, exploración y forma— y comprobar que cambiar uno cambia lo que ocurre
-en los otros dos. Es la primera unidad de la campaña que usa el montador de microclases; el proceso
-es el de Orff-Schulwerk, elaborado con Gunild Keetman, y Willems y Martenot entran sólo al revisar,
-como lentes que lo sostienen sin sustituirlo. Con ellas son cinco de las nueve unidades con
-contenido, y la ruta presencial tiene sus tres tramos jugables. Falta el caso 4 —Suzuki— y todo M7B.
+M7A está **completada**, con sus cuatro entregas aprobadas y la puerta de salida superada. La primera
+escribe el Tutorial 1, «El material intruso»: reparar una variable, predecir su efecto y comprobar
+que un material o una técnica aislada no son un enfoque. La segunda escribe el Caso 2, «Una frase,
+dos entradas»: comparar dos soluciones defendibles para un mismo objetivo musical, con Dalcroze y el
+concepto Kodály como dos puertas a la misma relación que no se funden. La tercera escribe el Caso 3,
+«Del modelo a una forma propia»: montar tres momentos —modelo, exploración y forma— y comprobar que
+cambiar uno cambia lo que ocurre en los otros dos. Es la primera unidad de la campaña que usa el
+montador de microclases; el proceso es el de Orff-Schulwerk, elaborado con Gunild Keetman, y Willems
+y Martenot entran sólo al revisar, como lentes que lo sostienen sin sustituirlo.
+
+La cuarta escribe el Caso 4, «Un entorno que no todos tienen»: separar el principio que sí puede
+viajar a un aula generalista de las condiciones que allí no pueden darse por supuestas. Suzuki
+aparece como un ecosistema completo —escucha frecuente, imitación, repetición, pasos pequeños,
+instrumento propio, clase individual y una familia o persona cuidadora que acompaña la práctica—, y
+el caso pide conservar un principio y sustituir una dependencia desigual, diciendo cuál queda
+pendiente. La lectura del enfoque como captación o educación de alumnado superdotado es una de las
+opciones, y se corrige por consecuencia y no como pregunta de examen. Con ella son **seis de las
+nueve unidades con contenido** y las cuatro tradiciones principales del lote histórico tienen unidad
+propia. Falta todo M7B.
 
 - Registro de la fase, decisiones y límites: `docs/contenido_m7a.md`.
 - Contenido de las unidades: `src/content/playable/tutorial-material-intruso.json`,
-  `src/content/playable/caso-una-frase-dos-entradas.json` y
-  `src/content/playable/caso-del-modelo-a-una-forma-propia.json`.
-- Medición verificada de las tres entregas: `docs/medicion_tamanos_m7a_salida.md`.
-- **La tercera entrega está aprobada tras auditoría independiente.** `pnpm check` pasa con 331
-  pruebas, TypeScript estricto y paquete PLATEA; los 32 recorridos declarados pasan en tres pasadas
-  idénticas y en una pasada exhaustiva de los cinco tamaños —160 combinaciones y 3225 pantallas— sin
-  desplazar ninguna pantalla de acción. El arnés mide además 20 rutas de referencia y estados
-  difíciles en los cinco tamaños. Tres rondas de auditoría encontraron nueve hallazgos de contenido,
-  contrato y cobertura; todos quedaron corregidos, cubiertos por regresiones o comprobaciones de
-  navegador y verificados de nuevo antes de aprobar la entrega.
+  `src/content/playable/caso-una-frase-dos-entradas.json`,
+  `src/content/playable/caso-del-modelo-a-una-forma-propia.json` y
+  `src/content/playable/caso-un-entorno-que-no-todos-tienen.json`.
+- Medición verificada de las cuatro entregas: `docs/medicion_tamanos_m7a_salida.md`.
+- **Las cuatro entregas están aprobadas tras auditoría independiente.** En conjunto, tres
+  rondas de auditoría sobre la tercera encontraron nueve hallazgos de contenido, contrato y
+  cobertura; todos quedaron corregidos, cubiertos por regresiones o comprobaciones de navegador y
+  verificados de nuevo antes de aprobarla.
+- **La cuarta entrega quedó aprobada tras auditoría independiente y con ello se abrió la puerta de
+  salida de M7A.** Cuatro revisiones encontraron **catorce bloqueos**: la primera, cuatro de coherencia entre pantallas;
+  la segunda, cinco de coherencia causal —ramas que afirmaban un objetivo que su cadena de decisiones
+  no producía, costes sin causa, condiciones incompletas—; la tercera, cuatro con una raíz común, que
+  lo atado era el guion y no el juego; y la cuarta, el camino de reserva que dejaba abierta la
+  defensa completa al entrar por enlace directo, sin ninguna decisión tomada. Los catorce están
+  corregidos y cada uno deja regresión, verificada reinsertando el defecto; las de las dos últimas
+  rondas **juegan las ocho ramas como lo haría una persona**. `pnpm check` pasa con 454 pruebas,
+  TypeScript estricto, compilación y paquete PLATEA; los 44 recorridos declarados se completan en
+  tres pasadas idénticas —88 combinaciones y 1677 pantallas de recorrido por pasada— y en una pasada
+  exhaustiva de los cinco tamaños —220 combinaciones y 4545 pantallas— sin desplazar ninguna pantalla
+  de acción y con un objetivo táctil mínimo de 44 px.
 
 - Repositorio: <https://github.com/pinfante0/metodos-activos-videojuego>.
 - Prueba pública: <https://pinfante0.github.io/metodos-activos-videojuego/>.

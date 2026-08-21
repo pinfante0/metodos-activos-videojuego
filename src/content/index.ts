@@ -1,5 +1,6 @@
 import campaignData from "./campaign/campaign.json";
 import castData from "./campaign/cast.json";
+import caseEnvironmentData from "./playable/caso-un-entorno-que-no-todos-tienen.json";
 import caseFormData from "./playable/caso-del-modelo-a-una-forma-propia.json";
 import casePhraseData from "./playable/caso-una-frase-dos-entradas.json";
 import pilotCaseData from "./playable/pilot-case.json";
@@ -59,14 +60,16 @@ export function findCharacter(id: string): Character | undefined {
  * `banco-de-mecanicas` es contenido provisional de M6: ejercita el sistema completo —montador de
  * cuatro huecos, etiquetas excluidas, dos incidentes— y **no forma parte de la campaña**. Se llega
  * a él desde las rutas de prueba. M7A y M7B escriben el contenido real de las unidades pendientes;
- * `el-material-intruso` fue la primera, `una-frase-dos-entradas` la segunda y
- * `del-modelo-a-una-forma-propia` la tercera.
+ * `el-material-intruso` fue la primera, `una-frase-dos-entradas` la segunda,
+ * `del-modelo-a-una-forma-propia` la tercera y `un-entorno-que-no-todos-tienen` la cuarta, con la
+ * que se completa el lote histórico de M7A.
  */
 export const playableCases: CaseDefinition[] = [
   unwrap(validateCaseDefinition(tutorialData, new Set(), castIds), "Tutorial 0"),
   unwrap(validateCaseDefinition(tutorialMaterialData, new Set(), castIds), "Tutorial 1"),
   unwrap(validateCaseDefinition(casePhraseData, new Set(), castIds), "Caso 2"),
   unwrap(validateCaseDefinition(caseFormData, new Set(), castIds), "Caso 3"),
+  unwrap(validateCaseDefinition(caseEnvironmentData, new Set(), castIds), "Caso 4"),
   unwrap(validateCaseDefinition(pilotCaseData, new Set(), castIds), "Caso piloto"),
   unwrap(validateCaseDefinition(probeCaseData, new Set(), castIds), "Banco de mecánicas"),
 ];

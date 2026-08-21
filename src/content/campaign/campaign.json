@@ -61,8 +61,8 @@
       "operation": "Separar principio y condiciones de transferencia.",
       "minutes": 9,
       "approachIds": ["suzuki"],
-      "caseSlug": null,
-      "status": "planned"
+      "caseSlug": "un-entorno-que-no-todos-tienen",
+      "status": "playable"
     },
     {
       "id": "caso-5",

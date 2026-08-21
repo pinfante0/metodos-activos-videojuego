@@ -10,6 +10,7 @@ import {
   type Cast,
   type Consequence,
   type Resource,
+  type Scene,
   type ResourceInventory,
   type WalkthroughCatalogue,
 } from "./contracts";
@@ -94,6 +95,31 @@ function outcomeConsequenceIds(value: CaseDefinition): Set<string> {
 }
 
 /**
+ * Consecuencias que el juego muestra como devolución inmediata de una **decisión de diseño**.
+ *
+ * No estaban entre las que exigen reparto, y hasta M7A-3 eso bastaba: los casos anteriores no lo
+ * declaraban en ninguna, de modo que no había nada que pudiera quedar a medias. En cuanto un caso
+ * empieza a declararlo en algunas de sus pantallas de diseño, la omisión en las demás deja de ser
+ * una ausencia y pasa a ser una incoherencia: el jugador ve a quién favorece una decisión de diseño
+ * en unas pantallas y no en otras, y no hay ninguna razón de contenido que lo justifique.
+ *
+ * La regla, por eso, es de coherencia interna y no de obligación universal: **o todas, o ninguna**.
+ * No exige nada a los casos que no lo declaran —el tutorial 0, el caso 2, el caso piloto y el banco
+ * de mecánicas siguen validando sin tocar una coma— y hace imposible el caso a medias.
+ */
+function designChoiceConsequenceIds(value: CaseDefinition): Set<string> {
+  const ids = new Set<string>();
+  for (const scene of value.scenes) {
+    if (scene.kind !== "design") continue;
+    for (const actionId of scene.actionIds) {
+      const action = value.actions.find((candidate) => candidate.id === actionId);
+      if (action) ids.add(action.consequenceId);
+    }
+  }
+  return ids;
+}
+
+/**
  * Salvaguardas de M2 convertidas en comprobaciones. Aquí es donde la ampliación del contrato deja
  * de ser una promesa: si el reparto declarado convierte a alguien en la barrera permanente del
  * caso, o en decorado permanente, el contenido no valida.
@@ -115,7 +141,28 @@ function participationIssues(value: CaseDefinition, castIds?: ReadonlySet<string
   }
 
   const outcomes = outcomeConsequenceIds(value);
+  const designChoices = designChoiceConsequenceIds(value);
+  const declaredDesignChoices = value.consequences.filter(
+    (consequence) => designChoices.has(consequence.id) && consequence.participation,
+  );
   const declared: Consequence[] = [];
+
+  /*
+   * O todas las devoluciones de diseño declaran reparto, o ninguna. Un caso que lo declara sólo en
+   * algunas muestra a quién favorece una decisión en unas pantallas y lo calla en otras.
+   */
+  if (declaredDesignChoices.length > 0) {
+    value.consequences.forEach((consequence, index) => {
+      if (!designChoices.has(consequence.id) || consequence.participation) return;
+      issues.push({
+        code: "partial-design-participation",
+        path: `consequences.${index}.participation`,
+        message:
+          `La consecuencia ${consequence.id} es la devolución de una decisión de diseño y este caso ` +
+          "ya declara reparto en otras; declararlo sólo en algunas deja el resto a deducir",
+      });
+    });
+  }
 
   value.consequences.forEach((consequence, index) => {
     const path = `consequences.${index}.participation`;
@@ -409,6 +456,60 @@ function consequenceEngineIssues(value: CaseDefinition): ValidationIssue[] {
   return issues;
 }
 
+/**
+ * Piezas de gramática atadas a una rama.
+ *
+ * `requiredTags` decide qué se ofrece en la pantalla de justificación. Dos maneras de romperlo no
+ * se ven leyendo el archivo:
+ *
+ * 1. **Un hueco a medias.** Si unas piezas del mismo hueco declaran etiquetas y otras no, las que
+ *    no las declaran se ofrecen siempre, incluidas las de otras ramas: el filtro parece puesto y no
+ *    filtra nada. O todas, o ninguna.
+ * 2. **Una etiqueta que nadie aporta.** Una pieza cuyas etiquetas ninguna acción pone en juego no
+ *    se ofrecería nunca. Desde que el hueco vacío dejó de tener reserva, el efecto es peor y más
+ *    silencioso: la pantalla orientaría para siempre hacia una decisión que no existe, porque
+ *    ninguna acción puede aportar esa etiqueta, y la defensa quedaría inalcanzable sin que ningún
+ *    recorrido lo delate.
+ */
+function grammarBranchIssues(value: CaseDefinition): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const declaredTags = new Set(value.actions.flatMap((action) => action.tags));
+
+  for (const scene of value.scenes) {
+    if (scene.kind !== "justification") continue;
+    for (const [key, options] of Object.entries(scene.grammarOptions)) {
+      const atadas = options.filter(
+        (option) => typeof option !== "string" && (option.requiredTags?.length ?? 0) > 0,
+      );
+      if (atadas.length === 0) continue;
+      if (atadas.length !== options.length) {
+        issues.push({
+          code: "partial-grammar-branch",
+          path: `scenes.${scene.id}.grammarOptions.${key}`,
+          message:
+            `El hueco ${key} ata unas piezas a su rama y otras no. Las que no la declaran se ` +
+            "ofrecerían en todas las ramas, de modo que el filtro no filtraría nada",
+        });
+      }
+      for (const option of options) {
+        if (typeof option === "string") continue;
+        for (const tag of option.requiredTags ?? []) {
+          if (declaredTags.has(tag)) continue;
+          issues.push({
+            code: "unknown-tag",
+            path: `scenes.${scene.id}.grammarOptions.${key}`,
+            message:
+              `La pieza ${option.id} exige la etiqueta ${tag}, que ninguna acción de este caso ` +
+              "pone en juego: no se ofrecería nunca",
+          });
+        }
+      }
+    }
+  }
+
+  return issues;
+}
+
 export function validateCaseDefinition(
   input: unknown,
   resourceIds: ReadonlySet<string> = new Set(),
@@ -645,6 +746,7 @@ export function validateCaseDefinition(
     ...assemblyIssues(value),
     ...consequenceEngineIssues(value),
     ...participationIssues(value, castIds),
+    ...grammarBranchIssues(value),
   );
 
   return issues.length === 0 ? { ok: true, value, issues: [] } : { ok: false, issues };
@@ -811,6 +913,54 @@ export function validateWalkthroughCatalogue(
         code: "broken-reference",
         path: `walkthroughs.${index}.startSceneId`,
         message: `El recorrido ${walk.id} arranca en una escena inexistente: ${walk.startSceneId}`,
+      });
+    }
+
+    /*
+     * Piezas de gramática declaradas por el recorrido.
+     *
+     * Mientras ningún recorrido las declaraba, el arnés tomaba siempre la primera opción de cada
+     * hueco y no había nada que comprobar. En cuanto un caso ata la justificación a la partida
+     * —cada pieza corresponde a una decisión concreta del recorrido— una errata deja de ser
+     * inofensiva: `optionLabel` devuelve el identificador tal cual y la bitácora sale escrita en
+     * jerga, con la frase entera apuntando a una rama que nadie recorrió. No se ve hasta leer una
+     * entrada guardada, que es exactamente la clase de defecto que este validador existe para
+     * impedir.
+     */
+    const justification = target.scenes.find(
+      (scene): scene is Extract<Scene, { kind: "justification" }> => scene.kind === "justification",
+    );
+    for (const [key, optionId] of Object.entries(walk.grammar ?? {})) {
+      const path = `walkthroughs.${index}.grammar.${key}`;
+      if (!justification) {
+        issues.push({
+          code: "grammar-without-justification",
+          path,
+          message:
+            `El recorrido ${walk.id} declara gramática, pero ${walk.caseSlug} no tiene pantalla de ` +
+            "justificación en la que elegirla",
+        });
+        continue;
+      }
+      const options = justification.grammarOptions[key as keyof typeof justification.grammarOptions];
+      if (!options) {
+        issues.push({
+          code: "unknown-grammar-key",
+          path,
+          message: `El recorrido ${walk.id} declara el hueco ${key}, que la gramática no tiene`,
+        });
+        continue;
+      }
+      const exists = options.some((option) =>
+        typeof option === "string" ? option === optionId : option.id === optionId,
+      );
+      if (exists) continue;
+      issues.push({
+        code: "broken-reference",
+        path,
+        message:
+          `El recorrido ${walk.id} declara la pieza ${optionId} para ${key}, que no existe en la ` +
+          "gramática del caso; la bitácora saldría con el identificador en crudo",
       });
     }
   });

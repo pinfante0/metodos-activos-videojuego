@@ -155,9 +155,9 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - `docs/comprobaciones_m6.md`: qué demuestra cada comprobación y cómo se ejecuta. Sustituye, para el
   arnés de navegador, al procedimiento de `docs/medicion_tamanos_m5.md`, que se conserva como
   registro histórico.
-- `docs/contenido_m7a.md`: **registro en curso de M7A**. Recoge cada entrega parcial del lote
-  histórico, sus decisiones pedagógicas, sus comprobaciones y sus límites. No declara la fase
-  cerrada.
+- `docs/contenido_m7a.md`: **registro completo de M7A**. Recoge las cuatro entregas del lote
+  histórico, sus decisiones pedagógicas, sus comprobaciones, sus límites y la auditoría que permitió
+  superar la puerta de salida.
 - `scripts/measure-viewports.mjs`: arnés reproducible de los cinco tamaños objetivo, generalizado en
   M6 a los recorridos declarados y a las rutas de prueba. Se ejecuta con `pnpm measure:viewports` y
   requiere Chrome o Edge instalados. Debe conservarse.
@@ -173,6 +173,11 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Caso 3, «Del modelo a una forma propia»: montar tres momentos con Orff-Schulwerk y Gunild Keetman
   como proceso, y Willems y Martenot como lentes que sólo entran al revisar. Comprobado con las
   herramientas reales del proyecto.
+- `src/content/playable/caso-un-entorno-que-no-todos-tienen.json`: cuarta unidad escrita en M7A.
+  Caso 4, «Un entorno que no todos tienen»: separar el principio que viaja de las condiciones de
+  transferencia que un aula generalista no puede suponer, con Suzuki tratado como ecosistema
+  completo. Corregido tras catorce bloqueos en cuatro rondas y aprobado después mediante auditoría
+  independiente.
 - `src/content/playable/walkthroughs.json`: recorridos declarados. Los ejecutan las pruebas sobre la
   sesión pura y el arnés sobre Chrome real, desde una sola fuente.
 - `README.md`: resumen breve del estado.
@@ -219,8 +224,8 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   Cualquier unidad con contenido se abre por enlace directo, incluida una escena concreta mediante
   `#/caso/<slug>/<escena>`.
 - La regla de ausencia de desplazamiento en pantallas de acción se cumple en los cinco tamaños, con
-  los desplegables cerrados y abiertos, en los treinta y dos recorridos declarados y en las catorce
-  rutas de prueba. Los seis bloques que pueden desplazarse por dentro son accesibles con teclado.
+  los desplegables cerrados y abiertos, en los cuarenta y cuatro recorridos declarados y en las
+  veintiuna rutas de prueba. Los seis bloques que pueden desplazarse por dentro son accesibles con teclado.
   `pnpm measure:viewports` falla con código 1 si la regla se rompe, si un recorrido no termina, si
   algo se bloquea o si las pasadas no coinciden.
 - **El encabezado y el pie restan altura a todas las pantallas.** Alargar su texto una línea rompió
@@ -231,22 +236,65 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
   campos no. Un «Sostiene» largo desborda la pantalla de acción sin que se note al leer el archivo, y
   fue lo que rompió la regla 6 en el caso 3. Es el primer sitio donde mirar cuando una pantalla se
   desplaza y acortar los rótulos no cambia la cifra.
-- **M7A está en curso, no completada.** Tres entregas parciales: el Tutorial 1, «El material
-  intruso», el Caso 2, «Una frase, dos entradas», y el Caso 3, «Del modelo a una forma propia», que
-  son hoy la tercera, la cuarta y la quinta de las nueve unidades con contenido. **Falta el caso 4**,
-  con Suzuki y sus condiciones de transferencia; sin él la puerta de salida de M7A no se supera.
-  El Caso 3 está **aprobado tras auditoría independiente**: 331 pruebas, TypeScript estricto,
-  compilación y paquete PLATEA; tres pasadas idénticas de 32 recorridos en 68 combinaciones de
-  recorrido y tamaño; 20 rutas de referencia y estados difíciles medidas en los cinco tamaños; y
-  una pasada exhaustiva con 160 combinaciones y 3225 pantallas. Tres rondas de auditoría encontraron
-  nueve hallazgos de contenido, contrato y cobertura; todos quedaron corregidos, cubiertos por
-  regresiones o comprobaciones de navegador y reauditados. Véase
-  `docs/contenido_m7a.md`, apartados 3 y 4.3.
-- **La siguiente tarea es M7A-4, Caso 4, «Un entorno que no todos tienen».** Debe tratar Suzuki como
-  un ecosistema de escucha, imitación, repetición y pasos pequeños, separar el principio aprovechable
-  de las condiciones que no pueden suponerse en el aula generalista y cerrar M7A sin anticipar M7B,
-  M7C ni M8. El comportamiento heredado del enlace directo del Caso 6 sigue documentado como deuda
-  previa y no debe mezclarse con esa entrega.
+- **M7A está completada y su puerta de salida está superada.** Sus cuatro entregas son el
+  Tutorial 1, el Caso 2, el Caso 3 y el Caso 4, «Un entorno que no todos tienen». Con ellas hay
+  **seis de las nueve unidades con contenido** y las cuatro tradiciones principales del lote
+  histórico tienen unidad propia. Véase `docs/contenido_m7a.md`.
+- **Las cuatro entregas están aprobadas tras auditoría independiente.** No fue una formalidad: cuatro
+  revisiones del Caso 4 encontraron **catorce bloqueos**, y las cuatro los
+  encontraron **con la suite en verde y con las regresiones de la ronda anterior ya escritas**. La
+  progresión dice qué faltaba cada vez: que las pantallas se dijeran lo mismo entre sí; que la cadena
+  de decisiones produjera lo que el cierre afirma; que el juego impidiera a quien juega lo que el
+  contenido daba por imposible; y que lo impidiera también **en el estado en que no se ha jugado
+  nada**. La auditoría de aceptación comprobó después el árbol completo y abrió la puerta de M7A.
+- **Desconfíe de los caminos de reserva.** El último bloqueo fue un «si no hay nada que ofrecer,
+  ofrécelo todo» en el filtro de la gramática: parecía la opción amable y era la puerta trasera de la
+  regla entera, precisamente en el estado —enlace directo, sin decisiones— donde una defensa
+  inventada es más fácil de construir. Un hueco ligado sin rama presente se queda **vacío**, y la
+  pantalla orienta hacia donde se decide en lugar de rellenarlo.
+- **Una prueba que sólo lee el contenido no comprueba el juego.** Es la lección de las cuatro rondas.
+  Después de leer, recorra la rama y pregunte qué acción produjo cada cosa que se afirma; y después,
+  siéntese en la pantalla y pregunte qué **más** le deja hacer el juego a quien no sigue el guion.
+  Las regresiones del caso 4 juegan las ocho ramas como una persona, no sólo ejecutan recorridos.
+- **La gramática de justificación puede atarse a la rama.** `requiredTags` en una pieza hace que la
+  pantalla sólo la ofrezca cuando la partida ha puesto esas etiquetas en juego, y `selectGrammar`
+  rechaza las demás. Es opcional: un hueco sin etiquetas las ofrece todas, que es lo que necesita una
+  elección genuina —las dos evidencias del caso 4— y lo que conserva intacto el resto de unidades.
+  Dentro de un hueco es **todas o ninguna**: atarlo a medias no filtra nada y el validador lo
+  rechaza.
+- **Una rama no puede afirmar lo que su cadena de decisiones no produce.** Fue el defecto más grave
+  del caso 4: cuatro ramas daban por sonado el fragmento entero mientras su consigna lo troceaba y
+  ninguna revisión devolvía al conjunto. Comprobar que cada pantalla es coherente consigo misma no
+  basta: hay que recorrer la rama y preguntar **qué acción produjo cada cosa que el cierre afirma**.
+- **La gramática se declara en los recorridos.** Si un recorrido no la declara, el arnés toma la
+  primera opción de cada hueco y la bitácora describe una rama que nadie jugó, con la suite en
+  verde. El validador rechaza además una pieza declarada que no exista en la gramática del caso.
+- **Un coste tiene que tener causa.** Dos alternativas que se estorban «porque sí» vacían la
+  elección: en el caso 4 las dos revisiones gastan el mismo recurso escaso —los dos minutos— en
+  sitios distintos y contables, y cobran en vueltas que dejan de sonar.
+- **El caso 4 fija cómo se transfiere una tradición sin su ecosistema.** El hilo por el que entra la
+  sesión y la dependencia desigual que se sustituye se deciden en pantallas distintas, y cada rama
+  declara **qué dependencia sigue en pie**: en dos minutos sólo cabe sustituir una. El cierre
+  resuelve **ocho combinaciones** de hilo, sustitución y revisión.
+- **Un cierre no puede ignorar ninguna de las decisiones que lo producen.** La primera versión del
+  caso 4 resolvía el cierre por hilo y revisión, ignoraba la sustitución y afirmaba de la clase cosas
+  que esa sustitución había hecho imposibles. Tres regresiones semánticas comprueban ahora que cada
+  cierre afirma la huella de sus tres decisiones, que su barrera nombra la dependencia que su propia
+  sustitución dejó en pie y no la de la otra, y que su tensión declara pendiente lo que aporta la
+  otra revisión y nunca lo que aporta la suya.
+- **La gramática tiene que hablar de la partida que se jugó.** Cada hueco corresponde a una decisión
+  real —hilo, sustitución y revisión—, cada adaptación declara **un coste propio y distinto**, y cada
+  una de las dieciséis frases nombra una de las ocho ramas y se contrasta contra el cierre que esa
+  rama produce en el motor. Que las dos adaptaciones «reparen todo» es un defecto, no una virtud:
+  vacía la elección.
+- **Los principios de un ecosistema no son técnicas alternativas.** Escucha, modelado, imitación,
+  repetición y pasos pequeños se sostienen unos a otros en su entorno; hacer elegir entre ellos es un
+  efecto del traslado y el juego lo dice antes de que nadie elija. Tampoco se universaliza la
+  repetición en sentido contrario: se defiende acotada al objetivo de la escena.
+- **Toda devolución de una decisión de diseño declara reparto, o ninguna lo hace.** Es una de las
+  dos ampliaciones acotadas de M7A-4: `partial-design-participation` impide el caso a medias sin
+  exigir nada a las unidades que no lo declaran. La otra es `requiredTags` en la gramática.
+
 - **El caso 3 fija cómo se reparte el peso entre tradiciones.** Orff-Keetman es el proceso que ocupa
   los tres momentos del montador; Willems y Martenot son lentes que sólo entran al revisar. Una
   prueba impide que una lente ocupe uno de los tres momentos, y los nombres de autor no aparecen en
@@ -260,6 +308,10 @@ el alumnado. Esta estructura es una candidata natural para el núcleo jugable.
 - **La bitácora anota los enfoques del recorrido, no los del encabezado del caso.** `approachIds` en
   una acción es opcional; cuando ninguna acción del caso lo declara, el comportamiento anterior
   queda intacto. Sirve para no atribuir una lente que nadie eligió.
+- **La siguiente tarea es M7B-1, Caso 5, «Escuchar también el contexto».** Debe trabajar
+  Campbell/WMP como música culturalmente situada: mediar repertorio, fuente y adaptación; relacionar
+  sonido, función, personas y contexto; y evitar exotización, descontextualización y falsas promesas
+  de autenticidad. No debe anticipar el Caso 6, el Caso 7, el final, M7C ni M8.
 - Cada chat debe limitarse a su fase y detenerse en la puerta de salida indicada en el plan
   maestro.
 

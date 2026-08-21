@@ -700,6 +700,92 @@ async function verifyInteraction(base, cdp) {
     });
   }
 
+  /*
+   * Defensa abierta sin ninguna decisión.
+   *
+   * La gramática del caso 4 está ligada a la rama recorrida, así que sin decisiones los huecos de
+   * principio, riesgo y adaptación se quedan **vacíos**: ofrecerlos todos dejaría construir la
+   * defensa de una clase que nadie montó, y es justo el estado en que eso resulta más fácil. La
+   * regresión pura demuestra que no hay piezas; que la pantalla resultante se pueda manejar —que
+   * diga qué falta, que la salida se alcance con el tabulador y lleve a donde se decide— sólo se
+   * demuestra en navegador real.
+   */
+  await load("#/prueba/defensa-sin-decisiones");
+  const defence = JSON.parse(await evaluate(`(() => {
+    const link = document.querySelector('.scene-actions a.button');
+    const rect = link ? link.getBoundingClientRect() : null;
+    return JSON.stringify({
+      notice: (document.querySelector('.notice') || {}).textContent?.trim() ?? '',
+      href: link ? link.getAttribute('href') : '',
+      side: rect ? Math.round(Math.min(rect.width, rect.height)) : 0,
+      huecos: document.querySelectorAll('[data-grammar-key]').length,
+      piezas: document.querySelectorAll('[data-grammar-key] option[value]:not([value=""])').length,
+      advance: !!document.querySelector('[data-advance-justification]'),
+    });
+  })()`));
+  checks.push({
+    name: "Defensa sin decisiones: no ofrece ninguna pieza que no pertenezca a una rama",
+    ok: defence.huecos === 0 && defence.piezas === 0,
+    detail: `${defence.huecos} huecos y ${defence.piezas} piezas en pantalla`,
+  });
+  checks.push({
+    name: "Defensa sin decisiones: avisa de qué falta sin hablar de montaje",
+    ok: defence.notice.length > 40 && /decisi[oó]n/i.test(defence.notice) && !/mont/i.test(defence.notice),
+    detail: defence.notice ? `«${defence.notice.slice(0, 58)}…»` : "no aparece ningún aviso",
+  });
+  checks.push({
+    name: "Defensa sin decisiones: no ofrece llevar a la bitácora una defensa vacía",
+    ok: !defence.advance,
+    detail: defence.advance ? "sigue habiendo botón de bitácora" : "no existe ningún control de cierre",
+  });
+  checks.push({
+    name: "Defensa sin decisiones: la salida es un objetivo táctil suficiente",
+    ok: defence.side >= 44,
+    detail: `lado menor de ${defence.side} px`,
+  });
+  checks.push({
+    name: "Defensa sin decisiones: la salida apunta a la primera decisión",
+    ok: defence.href.endsWith("/c4-principle"),
+    detail: defence.href ? `href=${defence.href}` : "no hay ningún enlace",
+  });
+
+  await evaluate(`document.body.focus(); document.activeElement === document.body`);
+  let reachedDefence = false;
+  for (let press = 0; press < 40 && !reachedDefence; press += 1) {
+    await key("Tab", "Tab", 9);
+    reachedDefence = await evaluate(`document.activeElement === document.querySelector('.scene-actions a.button')`);
+  }
+  checks.push({
+    name: "Defensa sin decisiones: la salida se alcanza con el tabulador",
+    ok: reachedDefence,
+    detail: reachedDefence ? "recibe el foco tabulando" : "no se alcanzó en 40 pulsaciones",
+  });
+  if (reachedDefence) {
+    const outline = await evaluate(`(() => {
+      const link = document.querySelector('.scene-actions a.button');
+      const style = getComputedStyle(link);
+      return `+"`${style.outlineStyle} ${Math.round(parseFloat(style.outlineWidth) || 0)}`"+`;
+    })()`);
+    const [outlineStyle, outlineWidth] = outline.split(" ");
+    checks.push({
+      name: "Defensa sin decisiones: la salida muestra foco visible",
+      ok: outlineStyle !== "none" && Number(outlineWidth) >= 2,
+      detail: `contorno ${outlineStyle} de ${outlineWidth} px`,
+    });
+    await key("Enter", "Enter", 13);
+    await new Promise((done) => setTimeout(done, 120));
+    const landedDefence = JSON.parse(await evaluate(`JSON.stringify({
+      hash: location.hash,
+      title: (document.querySelector('main h1') || {}).textContent?.trim() ?? '',
+      choices: document.querySelectorAll('.choice').length,
+    })`));
+    checks.push({
+      name: "Defensa sin decisiones: la salida conduce a la primera decisión y se puede decidir",
+      ok: landedDefence.hash.endsWith("/c4-principle") && landedDefence.choices > 0,
+      detail: `${landedDefence.hash} · «${landedDefence.title}» · ${landedDefence.choices} opciones`,
+    });
+  }
+
   return checks;
 }
 
